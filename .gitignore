@@ -1,0 +1,8 @@
+.settings
+.project
+yarn-error.log
+yarn.lock
+node_modules
+dist
+storybook-static
+.vscode

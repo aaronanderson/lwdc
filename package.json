@@ -1,0 +1,48 @@
+{
+  "name": "@aaronanderson/lwdc",
+  "version": "1.0.0",
+  "description": "Workday Canvas Kit Workday CanWeb Components",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "lib/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aaronanderson/lwdc.git"
+  },
+  "scripts": {
+    "wca": "wca analyze --outFiles .storybook/custom-elements.json",
+    "build": "webpack",
+    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -p 9001"
+  },
+  "author": "Aaron Anderson",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@workday/canvas-kit-css": "^3.2.0",
+    "@workday/canvas-kit-react-common": "^3.2.0",
+    "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.13",
+    "@storybook/addon-docs": "^5.3.13",
+    "@storybook/addon-knobs": "^5.3.13",
+    "@storybook/addon-links": "^5.3.13",
+    "@storybook/addon-options": "^5.3.13",
+    "@storybook/addon-storysource": "^5.3.13",
+    "@storybook/addon-viewport": "^5.3.13",
+    "@storybook/web-components": "^5.3.13",
+    "@types/events": "^3.0.0",
+    "babel-loader": "^8.0.5",
+    "node-sass": "^4.13.1",
+    "raw-loader": "^4.0.0",
+    "sass-loader": "^8.0.2",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.7.5",
+    "typescript-lit-html-plugin": "^0.9.0",
+    "web-component-analyzer": "^1.0.3",
+    "webpack-cli": "^3.3.11"
+  }
+}

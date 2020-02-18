@@ -1,0 +1,23 @@
+@import '~@workday/canvas-kit-css-core/lib/colors.scss';
+
+.lwdc-env-dev {
+	color: #fff;
+	background-color: $wdc-color-watermelon-500;
+	padding: 3px;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 20px;
+
+}
+
+.lwdc-env-qa {
+	color: #fff;
+	background-color: $wdc-color-cantaloupe-500;
+	padding: 3px;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 20px;
+
+}

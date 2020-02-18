@@ -1,0 +1,25 @@
+@import "@workday/canvas-kit-css-icon";
+@import "@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+
+.lwdc-icon {
+	display: inline-block;
+}
+
+.lwdc-icon>svg {
+	display: block;
+}
+
+:host-context(li.wdc-menu-item-focused) .wd-icon-accent,
+:host-context(li.wdc-menu-item-focused) .wd-icon-fill {
+	fill: $wdc-color-french-vanilla-100;
+}
+
+:host-context(li.wdc-menu-item-disabled) .wd-icon-accent,
+:host-context(li.wdc-menu-item-disabled) .wd-icon-fill {
+	fill: $wdc-color-soap-600;
+}
+
+:host-context(li:hover:not(.wdc-menu-item-disabled):not(.wdc-menu-item-focused)) .wd-icon-accent,
+:host-context(li:hover:not(.wdc-menu-item-disabled):not(.wdc-menu-item-focused)) .wd-icon-fill {
+	fill: $wdc-color-licorice-500;
+}

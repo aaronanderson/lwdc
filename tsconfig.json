@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["dom", "esnext"],
+    "strict": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+
+    "declaration": true,
+    "outDir": "dist"
+
+  },
+
+  "include": ["lib"],
+
+  "exclude": ["node_modules", "web_modules"],
+
+  "plugins": [{
+    "name": "typescript-lit-html-plugin"
+  }]
+
+
+}

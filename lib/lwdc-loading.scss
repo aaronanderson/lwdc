@@ -1,0 +1,13 @@
+@import "@workday/canvas-kit-css-loading-animation";
+
+:host {
+	display: none;
+	margin: 50px 0 50px 0;
+	font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+
+}
+
+:host([loading]) {
+	display: flex;
+}
