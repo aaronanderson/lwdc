@@ -19,12 +19,12 @@ export class MenuElement extends LitElement {
 
 	//TODO investigate how Canvas Kit CSS could be modified to handle menu item slots/parts fully in the ShadowDOM 
 	@property({ type: Array })
-	elementChildren: Array<Element> = [];
+	elementChildNodes: Array<ChildNode> = [];
 
 
 	connectedCallback() {
 		//Maybe need a mutation observer here in case child menu items change
-		this.elementChildren = Array.from(this.children);
+		this.elementChildNodes = Array.from(this.childNodes);
 		super.connectedCallback();
 	}
 
@@ -32,7 +32,7 @@ export class MenuElement extends LitElement {
 		return [style];
 	}
 
-	render() {		
+	render() {
 		let classes = {
 			'wdc-menu': true,
 			'wdc-menu-grow': this.grow
@@ -43,7 +43,7 @@ export class MenuElement extends LitElement {
 		return html`
 		<div class="${classMap(classes)}" role="menu" aria-label="Menu" style="${styleMap(this.width ? style : {})}">
 			<ul>
-				 ${this.elementChildren}
+				 ${this.elementChildNodes}
 			</ul>
 		</div>
 		 

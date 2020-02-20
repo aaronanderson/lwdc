@@ -41,6 +41,14 @@ export class TextElement extends LitElement {
 		return this;
 	}
 
+	connectedCallback() {
+		if (this.getRootNode()) {
+			const rootNode = this.getRootNode() as any;
+			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
+		}
+		super.connectedCallback();
+	}
+
 	firstUpdated() {
 		this.internals = (this as any).attachInternals();
 		if (!this.getAttribute("tabindex")) {
@@ -77,7 +85,7 @@ export class TextElement extends LitElement {
 	}
 
 
-	checkValidity() {		
+	checkValidity() {
 		let minLength = this.hasAttribute('required') ? 1 : 0;
 		let minLengthAttr = this.getAttribute('minlength');
 		minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;

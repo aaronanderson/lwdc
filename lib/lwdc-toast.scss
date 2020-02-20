@@ -1,6 +1,12 @@
+@import '~@workday/canvas-kit-css-core/lib/colors.scss';
+@import '~@workday/canvas-kit-css-core/lib/type.scss';
+
+
 .lwdc-toast-container {
+	@include wdc-type();
 	display: flex;
 	align-items: center;
+	width: 208px;
 }
 
 .lwdc-toast-icon {

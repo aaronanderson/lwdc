@@ -26,6 +26,10 @@ export class MenuItemElement extends LitElement {
 
 
 	connectedCallback() {
+		if (this.getRootNode()) {
+			const rootNode = this.getRootNode() as any;
+			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
+		}
 		this.elementChildNodes = Array.from(this.childNodes);
 		super.connectedCallback();
 	}
@@ -54,13 +58,13 @@ export class MenuItemElement extends LitElement {
 
 
 
-	render() {		
+	render() {
 		let classes = {
 			'wdc-menu-item-disabled': this.disabled,
 			'wdc-menu-item-focused': this.selected,
 		}
 
-		
+
 
 		return html`		
 		<li role="menuitem" class=${classMap(classes)}>
@@ -72,7 +76,7 @@ export class MenuItemElement extends LitElement {
 		`;
 	}
 
-	updated(changedProperties: Map<string, any>) {		
+	updated(changedProperties: Map<string, any>) {
 		if (changedProperties.has("selected") && !this.selected && this.focused) {
 			console.log("updated", this.selected, this.focused);
 			//this.blur(); //blur bubbles up even though it is not supposed to.

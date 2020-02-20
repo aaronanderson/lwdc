@@ -25,6 +25,20 @@ export class IconElement extends LitElement {
 		return [style];
 	}
 
+
+	connectedCallback() {
+		if (this.getRootNode()) {
+			const rootNode = this.getRootNode() as any;
+			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
+		}
+		super.connectedCallback();
+	}
+
+	//Render in the light DOM due to multiple CSS rules
+	createRenderRoot() {
+		return this;
+	}
+
 	render() {
 		let ico = this.icon as any;
 		let base = document.createElement("span");

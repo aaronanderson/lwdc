@@ -25,8 +25,8 @@ export default {
 
 
 export const textStory = () => {
-	return html`<lwdc-form-field label="Selection">
-						<lwdc-text name="selection" required></lwdc-text>
+	return html`<lwdc-form-field label="Text">
+						<lwdc-text name="text" required></lwdc-text>
 					</lwdc-form-field>
 				`;
 }

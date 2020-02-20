@@ -23,7 +23,6 @@ export class FormFieldElement extends LitElement {
 
 	elementChildren: Array<Element> = [];
 
-	//only used with shadow DOM
 	static get styles() {
 		return [style];
 	}
@@ -37,6 +36,11 @@ export class FormFieldElement extends LitElement {
 	}
 
 	connectedCallback() {
+		if (this.getRootNode()) {
+			const rootNode = this.getRootNode() as any;
+			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
+		}
+
 		this.elementChildren = Array.from(this.children);
 		super.connectedCallback();
 	}

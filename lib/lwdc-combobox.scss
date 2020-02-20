@@ -1,4 +1,6 @@
-@import "@workday/canvas-kit-css-select";
+@import '~@workday/canvas-kit-css-text-input';
+@import '~@workday/canvas-kit-css-card';
+@import "~@workday/canvas-kit-css-menu";
 
 .lwdc-combobox-container {
 	display: inline-block;
@@ -52,6 +54,10 @@
 	overflow: auto;
 	max-height: 200px;
 	max-width: 280px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 
