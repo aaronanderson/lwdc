@@ -43,6 +43,7 @@ export class ButtonElement extends LitElement {
 		let formTextClass = {
 			'wdc-btn': this.type != ButtonType.plain,
 			'wdc-btn-icon-plain': this.type == ButtonType.plain,
+			'wdc-btn-icon-circle': this.type == ButtonType.iconCircle,
 			'wdc-btn-primary': this.type == ButtonType.primary,
 			'wdc-btn-delete': this.type == ButtonType.delete,
 			'wdc-btn-size-l': this.size == ButtonSize.large,
@@ -59,7 +60,8 @@ export enum ButtonType {
 	primary,
 	secondary,
 	delete,
-	plain
+	plain,
+	iconCircle
 }
 
 export enum ButtonSize {

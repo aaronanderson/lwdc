@@ -3,11 +3,11 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import FormFieldElement from './lwdc-form-field';
 import {styleLightDOM} from './util';
-const style = css(<any>[require('./lwdc-text.scss').default]);
+const style = css(<any>[require('./lwdc-textarea.scss').default]);
 
 
-@customElement('lwdc-text')
-export class TextElement extends LitElement {
+@customElement('lwdc-textarea')
+export class TextAreaElement extends LitElement {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: String;
@@ -42,7 +42,7 @@ export class TextElement extends LitElement {
 	}
 
 	connectedCallback() {
-		styleLightDOM(this,style,'lwdc-text');		
+		styleLightDOM(this,style,'lwdc-textarea');		
 		super.connectedCallback();
 	}
 
@@ -59,13 +59,13 @@ export class TextElement extends LitElement {
 
 	render() {
 
-		let formTextClass = {
-			'wdc-form-textinput': true,
+		let formTextAreaClass = {
+			'wdc-form-textarea': true,
 			'wdc-form-disabled': this.disabled
 		};
 
-		return html`<div class="${classMap(formTextClass)}">
-						<input formnovalidate type="${this.password ? 'password' : 'text'}" .value="${ifDefined(this.value)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange}></input>
+		return html`<div class="${classMap(formTextAreaClass)}">
+						<textarea formnovalidate .value="${ifDefined(this.value)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange}></textarea>
 					</div>
 					`;
 	}
@@ -104,7 +104,7 @@ export class TextElement extends LitElement {
 
 }
 
-export default TextElement;
+export default TextAreaElement;
 
 
 

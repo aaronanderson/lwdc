@@ -4,6 +4,7 @@ import canvasColors from '@workday/canvas-colors-web';
 
 // @ts-ignore
 import { getColor } from '@workday/canvas-kit-css-icon/lib/utils.js';
+import { styleLightDOM } from './util';
 
 //@workday/canvas-kit-react-common can be removed as a NPM dependency after the next canvas kit release
 const style = css(<any>[require('./lwdc-icon.scss').default]);
@@ -27,10 +28,7 @@ export class IconElement extends LitElement {
 
 
 	connectedCallback() {
-		if (this.getRootNode()) {
-			const rootNode = this.getRootNode() as any;
-			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
-		}
+		styleLightDOM(this,style,'lwdc-icon');
 		super.connectedCallback();
 	}
 

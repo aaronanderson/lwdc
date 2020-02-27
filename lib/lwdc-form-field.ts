@@ -1,12 +1,19 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
+import { styleLightDOM } from './util';
 
 const style = css(<any>[require('./lwdc-form-field.scss').default]);
 
 
 @customElement('lwdc-form-field')
 export class FormFieldElement extends LitElement {
+
+	@property({ type: Boolean, attribute: true, reflect: true })
+	group = false;
+
+	@property({ type: Boolean, attribute: true, reflect: true })
+	disabled = false;
 
 	@property({ type: String, attribute: true, reflect: true })
 	label?: String;
@@ -36,18 +43,21 @@ export class FormFieldElement extends LitElement {
 	}
 
 	connectedCallback() {
-		if (this.getRootNode()) {
-			const rootNode = this.getRootNode() as any;
-			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
-		}
+		styleLightDOM(this, style, 'lwdc-form-field');
 
 		this.elementChildren = Array.from(this.children);
 		super.connectedCallback();
 	}
 
 	render() {
+		return this.group ? this.groupTemplate : this.defaultTemplate;
+	}
+
+	get defaultTemplate() {
+
 		let fieldClass = {
 			'wdc-form-field-wrapper': true,
+			'wdc-form-group': this.group,
 			'wdc-form-field-error': (this.errorType == ErrorType.error) && !!this.hintText,
 			'wdc-form-field-alert': (this.errorType == ErrorType.alert) && !!this.hintText
 		};
@@ -71,6 +81,35 @@ export class FormFieldElement extends LitElement {
 					`;
 	}
 
+	get groupTemplate() {
+		let fieldClass = {
+			'wdc-form-field-wrapper': true,
+			'wdc-form-group': this.group,
+			'wdc-form-field-error': (this.errorType == ErrorType.error) && !!this.hintText,
+			'wdc-form-field-alert': (this.errorType == ErrorType.alert) && !!this.hintText
+		};
+		let formClass = {
+			'wdc-form-field': true,
+			'wdc-form-error': (this.errorType == ErrorType.error) && !!this.hintText,
+			'wdc-form-alert': (this.errorType == ErrorType.alert) && !!this.hintText
+		};
+
+
+		return html`<fieldset class="${classMap(fieldClass)}"> 
+						<legend class="wdc-form-label">
+							${ifDefined(this.label)}
+							${this.requiredTemplate}		
+						</legend>
+						 <div class="wdc-form-group-fields">
+
+							${this.elementChildren.map((e: Element) => {
+			return html`<div class="${classMap(formClass)}">${e}</div>`;
+		})}
+								${this.hintTemplate}
+							</div>
+					</fieldset>
+					`;
+	}
 
 	get hintTemplate() {
 		if (this.hintText) {

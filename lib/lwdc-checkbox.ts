@@ -2,27 +2,25 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import FormFieldElement from './lwdc-form-field';
-import {styleLightDOM} from './util';
-const style = css(<any>[require('./lwdc-text.scss').default]);
+import { styleLightDOM } from './util';
+const style = css(<any>[require('./lwdc-checkbox.scss').default]);
 
 
-@customElement('lwdc-text')
-export class TextElement extends LitElement {
+@customElement('lwdc-checkbox')
+export class CheckboxElement extends LitElement {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: String;
 
 	@property({ type: String, attribute: true, reflect: true })
+	label?: String;
+
+	@property({ type: String, attribute: true, reflect: true })
 	value?: String;
 
-	@property({ type: Boolean, attribute: true, reflect: true })
-	password = false;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
-
-	@property({ type: String, attribute: true, reflect: true })
-	placeholder?: String;
 
 
 
@@ -42,7 +40,7 @@ export class TextElement extends LitElement {
 	}
 
 	connectedCallback() {
-		styleLightDOM(this,style,'lwdc-text');		
+		styleLightDOM(this, style, 'lwdc-checkbox');
 		super.connectedCallback();
 	}
 
@@ -60,12 +58,13 @@ export class TextElement extends LitElement {
 	render() {
 
 		let formTextClass = {
-			'wdc-form-textinput': true,
+			'wdc-form-checkbox': true,
 			'wdc-form-disabled': this.disabled
 		};
 
 		return html`<div class="${classMap(formTextClass)}">
-						<input formnovalidate type="${this.password ? 'password' : 'text'}" .value="${ifDefined(this.value)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange}></input>
+						  <input type="checkbox" id="checkbox" .value="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
+        				  <label htmlFor="checkbox">${this.label}</label>							
 					</div>
 					`;
 	}
@@ -83,11 +82,8 @@ export class TextElement extends LitElement {
 
 
 	checkValidity() {
-		let minLength = this.hasAttribute('required') ? 1 : 0;
-		let minLengthAttr = this.getAttribute('minlength');
-		minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;
-		if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value || this.value.length < minLength))) {
-			this.internals.setValidity({ customError: true }, !this.value ? `${this.formField.label} is required` : `${minLength} characters are required`);
+		if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value))) {
+			this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
 			this.formField.hintText = this.internals.validationMessage;
 		} else {
 			this.internals.setValidity({ customError: false }, undefined);
@@ -104,7 +100,7 @@ export class TextElement extends LitElement {
 
 }
 
-export default TextElement;
+export default CheckboxElement;
 
 
 

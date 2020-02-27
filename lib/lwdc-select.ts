@@ -1,5 +1,6 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import FormFieldElement from './lwdc-form-field';
+import { styleLightDOM } from './util';
 
 const style = css(<any>[require('./lwdc-select.scss').default]);
 
@@ -64,10 +65,7 @@ export class SelectElement<T> extends LitElement {
 	//disable shadow DOM so containing wdc-form class relative css can be applied.	
 	//https://github.com/Polymer/lit-element/issues/824#issuecomment-536093753
 	createRenderRoot() {
-		if (this.getRootNode()) {
-			const rootNode = this.getRootNode() as any;
-			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
-		}
+		styleLightDOM(this,style,'lwdc-select');
 		return this;
 	}
 
