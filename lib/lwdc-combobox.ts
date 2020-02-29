@@ -58,6 +58,7 @@ export class ComboboxElement<T> extends LitElement {
 		});
 		this.addEventListener('blur', () => {
 			this.calculateMenu();
+			this.checkValidity();
 			this.searchInput.value = '';
 			this.filtered = this.options;
 		});

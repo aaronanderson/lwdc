@@ -70,31 +70,35 @@ export class TableElement<E> extends LitElement {
 	// 					</div>
 	get entriesTemplate() {
 		return html`
-				<div class="wdc-table-meta">
-					<div class="wdc-table-info">
-						<span class="wdc-table-name">${this.name}</span>
-						<span class="wdc-table-row-count">${this.entries.length} Items</span>
-					</div>
 
-					<div class="wdc-icon-list">
-						
-						<div class="wdc-icon-list-icon">
-							<lwdc-icon .icon=${sortIcon}></lwdc-icon>
-							<lwdc-icon .icon=${filterIcon}></lwdc-icon>
-						</div>										
+					<div class="wdc-table-meta">
+						<div class="wdc-table-info">
+							<span class="wdc-table-name">${this.name}</span>
+							<span class="wdc-table-row-count">${this.entries.length} Items</span>
+						</div>
+
+						<div class="wdc-icon-list">
+							
+							<div class="wdc-icon-list-icon" role="button" tabIndex="0">
+								<lwdc-icon .icon=${sortIcon}></lwdc-icon>
+							</div>	
+							<div class="wdc-icon-list-icon" role="button" tabIndex="0">
+								<lwdc-icon .icon=${filterIcon}></lwdc-icon>
+							</div>
+						</div>
 					</div>
-				</div>
-			
-				<table class="wdc-table">
-					<thead>
-						<tr>
-							${this.rows.map((r: TableRowElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)}
-						</tr>
-					</thead>
-					<tbody>
-						${this.entries.map((e: E) => this.entryRow(e))}               
-					</tbody>
-				</table>
+				
+					<table class="wdc-table">
+						<thead>
+							<tr>
+								${this.rows.map((r: TableRowElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)}
+							</tr>
+						</thead>
+						<tbody>
+							${this.entries.map((e: E) => this.entryRow(e))}               
+						</tbody>
+					</table>
+	
 			`
 	}
 

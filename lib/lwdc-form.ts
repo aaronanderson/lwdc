@@ -1,4 +1,6 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
+import { FormFieldLabelPosition } from './lwdc-form-field';
+import { classMap } from 'lit-html/directives/class-map';
 
 const style = css(<any>[require('./lwdc-form-field.scss').default]);
 
@@ -8,22 +10,31 @@ const style = css(<any>[require('./lwdc-form-field.scss').default]);
 @customElement('lwdc-form')
 export class FormElement extends LitElement {
 
+	@property({ type: Number })
+	labelPosition: FormFieldLabelPosition = FormFieldLabelPosition.Left;
+
+
 	@property({ type: Array })
-	elementChildren: Array<Element> = [];
+	elementChildNodes: Array<ChildNode> = [];
 
 	static get styles() {
 		return [style];
 	}
 
 	connectedCallback() {
-		this.elementChildren = Array.from(this.children);
+		this.elementChildNodes = Array.from(this.childNodes);
 		super.connectedCallback();
 	}
 
 	render() {
+		let formClass = {
+			'wdc-form': true,
+			'wdc-form-label-position-left': (this.labelPosition == FormFieldLabelPosition.Left),
+		};
+
 		return html`
-		<form class="wdc-form"> 
-			${this.elementChildren}
+		<form class="${classMap(formClass)}"> 
+			${this.elementChildNodes}
 		</form>	
 		`;
 	}

@@ -18,9 +18,6 @@ export class FormFieldElement extends LitElement {
 	@property({ type: String, attribute: true, reflect: true })
 	label?: String;
 
-	@property({ type: Number })
-	labelPosition: FormFieldLabelPosition = FormFieldLabelPosition.Top;
-
 	@property({ type: String, attribute: true, reflect: true })
 	hintText?: String;
 

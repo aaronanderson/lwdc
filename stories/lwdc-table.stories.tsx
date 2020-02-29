@@ -25,7 +25,7 @@ export default {
 
 const entries = [{ 'id': '1', 'name': 'Entry 1', 'description': 'Description 1' }, { 'id': '2', 'name': 'Entry 2', 'description': 'Description 2' }, { 'id': '3', 'name': 'Entry 3', 'description': 'Description 3' }];
 export const tableStory = () => {
-	return html`<lwdc-table .entries=${entries}>
+	return html`<lwdc-table .entries=${entries} style="width: 400px;">
 						<lwdc-row key="id" header="ID"></lwdc-row>
 						<lwdc-row key="name" header="Name"></lwdc-row>
 						<lwdc-row key="description" header="Description"></lwdc-row>

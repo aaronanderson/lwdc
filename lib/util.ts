@@ -36,3 +36,14 @@ export const styleLightDOM = (target: Element, styles: CSSResult, styleID: strin
 	}
 
 }
+
+
+const __closestFrom = (selector: string, el: any): Element | null => {
+	if (!el || el === document || el === window) return null;
+	let found = el.closest(selector);
+	return found ? found : __closestFrom(selector, el.getRootNode().host);
+}
+
+export const closestElement = (selector: string, base: Element) => {
+	return __closestFrom(selector, base);
+}

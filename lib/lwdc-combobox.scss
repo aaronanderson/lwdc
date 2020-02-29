@@ -1,15 +1,24 @@
 @import '~@workday/canvas-kit-css-text-input';
 @import '~@workday/canvas-kit-css-card';
 @import "~@workday/canvas-kit-css-menu";
+
 @import '~@workday/canvas-kit-css-core/lib/colors';
 @import "~@workday/canvas-kit-css-core/lib/mixins/type";
+@import '~@workday/canvas-kit-css-core/lib/variables/spacing';
+@import '~@workday/canvas-kit-css-core/lib/variables/assets';
+@import '~@workday/canvas-kit-css-core/lib/variables/border-radius';
+
+@import '~@workday/canvas-kit-css-common/lib/variables';
+@import "~@workday/canvas-kit-css-common/lib/errors";
+
+
 
 .lwdc-combobox-container {
 	display: inline-block;
 	width: auto;
 
 	@include wdc-type();
-  	@include wdc-type-body-1();
+	@include wdc-type-body-1();
 }
 
 .lwdc-combobox-input-container {
@@ -52,21 +61,19 @@
 ul {
 	display: flex;
 	flex-direction: column;
-		
+
 	list-style: none;
-    padding: 0px;
-    margin: 8px 0px;
+	padding: 0px;
+	margin: 8px 0px;
 }
 
 li {
 	padding: 8px 16px;
 	height: 24px;
 	box-sizing: border-box;
-	color: #494949;
-	/*blackPepper300*/
+	color: $wdc-color-black-pepper-300;	
 	display: flex;
-	flex-direction: row;
-	align-items: center;
+	
 	transition: background-color 80ms, color 80ms;
 
 
@@ -79,4 +86,13 @@ li {
 
 
 
+}
+
+
+:host-context(.wdc-form-error) input[type="search"] {
+	@include wdc-form-error();
+}
+
+:host-context(.wdc-form-alert) input[type="search"] {
+	@include wdc-form-alert();
 }

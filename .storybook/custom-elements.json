@@ -6,13 +6,18 @@
       "path": "./../lib/lwdc-form-field.ts",
       "attributes": [
         {
-          "name": "label",
-          "type": "String | undefined"
+          "name": "group",
+          "type": "boolean",
+          "default": "false"
         },
         {
-          "name": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Top\""
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "label",
+          "type": "String | undefined"
         },
         {
           "name": "hintText",
@@ -26,15 +31,21 @@
       ],
       "properties": [
         {
+          "name": "group",
+          "attribute": "group",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
           "name": "label",
           "attribute": "label",
           "type": "String | undefined"
-        },
-        {
-          "name": "labelPosition",
-          "attribute": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Top\""
         },
         {
           "name": "hintText",
@@ -51,6 +62,14 @@
           "name": "elementChildren",
           "type": "Element[]",
           "default": "[]"
+        },
+        {
+          "name": "defaultTemplate",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "groupTemplate",
+          "type": "TemplateResult"
         },
         {
           "name": "hintTemplate",
@@ -76,11 +95,6 @@
         },
         {
           "name": "selected",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "divider",
           "type": "boolean",
           "default": "false"
         },
@@ -113,12 +127,6 @@
           "default": "false"
         },
         {
-          "name": "divider",
-          "attribute": "divider",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
           "name": "disabled",
           "attribute": "disabled",
           "type": "boolean",
@@ -129,6 +137,11 @@
           "attribute": "focused",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
         }
       ]
     },
@@ -323,26 +336,78 @@
       "path": "./../lib/lwdc-menu.ts",
       "attributes": [
         {
-          "name": "name",
-          "type": "String | undefined"
+          "name": "width",
+          "type": "string | undefined"
         },
         {
-          "name": "disabled",
+          "name": "grow",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
         }
       ],
       "properties": [
         {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
+          "name": "width",
+          "attribute": "width",
+          "type": "string | undefined"
         },
+        {
+          "name": "grow",
+          "attribute": "grow",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-button",
+      "path": "./../lib/lwdc-button.ts",
+      "attributes": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "type",
+          "type": "ButtonType",
+          "default": "\"ButtonType.primary\""
+        },
+        {
+          "name": "size",
+          "type": "ButtonSize",
+          "default": "\"ButtonSize.medium\""
+        }
+      ],
+      "properties": [
         {
           "name": "disabled",
           "attribute": "disabled",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "type",
+          "attribute": "type",
+          "type": "ButtonType",
+          "default": "\"ButtonType.primary\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "ButtonSize",
+          "default": "\"ButtonSize.medium\""
         }
       ]
     },
@@ -650,8 +715,8 @@
       "attributes": [
         {
           "name": "icon",
-          "type": "string",
-          "default": "\"check\""
+          "type": "CanvasIcon",
+          "default": "\"checkIcon\""
         },
         {
           "name": "iconColor",
@@ -673,8 +738,8 @@
         {
           "name": "icon",
           "attribute": "icon",
-          "type": "string",
-          "default": "\"check\""
+          "type": "CanvasIcon",
+          "default": "\"checkIcon\""
         },
         {
           "name": "iconColor",
@@ -710,6 +775,59 @@
       ]
     },
     {
+      "name": "lwdc-checkbox",
+      "path": "./../lib/lwdc-checkbox.ts",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "internals"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
       "name": "lwdc-fonts",
       "path": "./../lib/lwdc-fonts.ts"
     },
@@ -719,16 +837,27 @@
       "description": "Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.\nBecause of this no shadowDOM styles will be imported.",
       "attributes": [
         {
-          "name": "elementChildren",
-          "type": "Element[]",
+          "name": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
           "default": "[]"
         }
       ],
       "properties": [
         {
-          "name": "elementChildren",
-          "attribute": "elementChildren",
-          "type": "Element[]",
+          "name": "labelPosition",
+          "attribute": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
           "default": "[]"
         }
       ]
@@ -737,6 +866,181 @@
       "name": "lwdc-icon-inject",
       "path": "./../lib/lwdc-icon-inject.ts",
       "description": "This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. \nIt is slower due to the icon svg files being downloaded from a CDN and the Javascript function executions that convert the the <i> tags to the target icon SVG."
+    },
+    {
+      "name": "lwdc-modal",
+      "path": "./../lib/lwdc-modal.ts",
+      "attributes": [
+        {
+          "name": "closeEnabled",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "isOpen",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "closeEnabled",
+          "attribute": "closeEnabled",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "isOpen",
+          "attribute": "isOpen",
+          "type": "boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-radio",
+      "path": "./../lib/lwdc-radio.ts",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "internals"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-textarea",
+      "path": "./../lib/lwdc-textarea.ts",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "password",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "type": "String | undefined"
+        }
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "password",
+          "attribute": "password",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
+          "type": "String | undefined"
+        },
+        {
+          "name": "internals"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-tooltip",
+      "path": "./../lib/lwdc-tooltip.ts",
+      "attributes": [
+        {
+          "name": "message",
+          "type": "string | undefined"
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ],
+      "properties": [
+        {
+          "name": "message",
+          "attribute": "message",
+          "type": "string | undefined"
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ]
     }
   ]
 }
