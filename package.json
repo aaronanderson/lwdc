@@ -21,8 +21,8 @@
   "author": "Aaron Anderson",
   "license": "Apache-2.0",
   "dependencies": {
-    "@workday/canvas-kit-css": "^3.4.0",
-
+    "@workday/canvas-kit-css": "^3.5.0",
+    "@workday/canvas-kit-css-fonts": "^3.5.0",
     "lit-element": "^2.2.1"
   },
   "devDependencies": {

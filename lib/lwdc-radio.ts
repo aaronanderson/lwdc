@@ -16,8 +16,13 @@ export class RadioElement extends LitElement {
 	label?: String;
 
 	@property({ type: String, attribute: true, reflect: true })
+	group?: String;
+
+	@property({ type: String, attribute: true, reflect: true })
 	value?: String;
 
+	@property({ type: Boolean, attribute: true, reflect: true })
+	checked = false;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
@@ -63,7 +68,7 @@ export class RadioElement extends LitElement {
 		};
 
 		return html`<div class="${classMap(formTextClass)}">
-						  <input type="radio" id="radio" .value="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
+						  <input type="radio" name="${ifDefined(this.formField.group)}" ?checked=${this.checked} .value="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
         				  <label htmlFor="radio">${this.label}</label>							
 					</div>
 					`;

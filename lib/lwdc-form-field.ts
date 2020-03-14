@@ -9,8 +9,8 @@ const style = css(<any>[require('./lwdc-form-field.scss').default]);
 @customElement('lwdc-form-field')
 export class FormFieldElement extends LitElement {
 
-	@property({ type: Boolean, attribute: true, reflect: true })
-	group = false;
+	@property({ type: String, attribute: true, reflect: true })
+	group = undefined;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
@@ -54,7 +54,7 @@ export class FormFieldElement extends LitElement {
 
 		let fieldClass = {
 			'wdc-form-field-wrapper': true,
-			'wdc-form-group': this.group,
+			'wdc-form-group': !!this.group,
 			'wdc-form-field-error': (this.errorType == ErrorType.error) && !!this.hintText,
 			'wdc-form-field-alert': (this.errorType == ErrorType.alert) && !!this.hintText
 		};
@@ -81,7 +81,7 @@ export class FormFieldElement extends LitElement {
 	get groupTemplate() {
 		let fieldClass = {
 			'wdc-form-field-wrapper': true,
-			'wdc-form-group': this.group,
+			'wdc-form-group': !!this.group,
 			'wdc-form-field-error': (this.errorType == ErrorType.error) && !!this.hintText,
 			'wdc-form-field-alert': (this.errorType == ErrorType.alert) && !!this.hintText
 		};

@@ -4,8 +4,6 @@ import { html } from 'lit-html';
 import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
 
-import { setupIcon, uploadCloudIcon, extLinkIcon, userIcon } from '@workday/canvas-system-icons-web';
-
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 
 import '../lib/lwdc-button';

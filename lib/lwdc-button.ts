@@ -44,6 +44,7 @@ export class ButtonElement extends LitElement {
 			'wdc-btn': this.type != ButtonType.plain,
 			'wdc-btn-icon-plain': this.type == ButtonType.plain,
 			'wdc-btn-icon-circle': this.type == ButtonType.iconCircle,
+			'wdc-btn-icon-circle-filled': this.type == ButtonType.iconCircleFilled,
 			'wdc-btn-primary': this.type == ButtonType.primary,
 			'wdc-btn-delete': this.type == ButtonType.delete,
 			'wdc-btn-size-l': this.size == ButtonSize.large,
@@ -61,7 +62,8 @@ export enum ButtonType {
 	secondary,
 	delete,
 	plain,
-	iconCircle
+	iconCircle,
+	iconCircleFilled
 }
 
 export enum ButtonSize {

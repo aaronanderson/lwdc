@@ -2,8 +2,16 @@ import { LitElement, html, css, customElement, property, TemplateResult } from '
 import { ifDefined } from 'lit-html/directives/if-defined';
 
 import './lwdc-icon';
+import './lwdc-modal';
+import './lwdc-form';
+import './lwdc-form-field';
+import './lwdc-select';
+import './lwdc-button';
 
 import { filterIcon, sortIcon } from '@workday/canvas-system-icons-web';
+import ModalElement from './lwdc-modal';
+import { FormFieldLabelPosition } from './lwdc-form-field';
+import { closestElement } from './util';
 
 const style = css(<any>[require('./lwdc-table.scss').default]);
 
@@ -26,7 +34,9 @@ export class TableElement<E> extends LitElement {
 	//@property({ type: Object })
 	//pendingChanges: Set<E> = new Set();
 
-	_entries: E[] = []
+	_entries: E[] = [];
+
+	_view: E[] = [];
 
 	rows: TableRowElement[] = [];
 
@@ -39,6 +49,7 @@ export class TableElement<E> extends LitElement {
 	public set entries(value: E[]) {
 		const oldValue = this._entries;
 		this._entries = [...value];
+		this.resetView();
 		this.requestUpdate('entries', oldValue);
 	}
 
@@ -70,24 +81,8 @@ export class TableElement<E> extends LitElement {
 	// 					</div>
 	get entriesTemplate() {
 		return html`
+					${this.headerTemplate}
 
-					<div class="wdc-table-meta">
-						<div class="wdc-table-info">
-							<span class="wdc-table-name">${this.name}</span>
-							<span class="wdc-table-row-count">${this.entries.length} Items</span>
-						</div>
-
-						<div class="wdc-icon-list">
-							
-							<div class="wdc-icon-list-icon" role="button" tabIndex="0">
-								<lwdc-icon .icon=${sortIcon}></lwdc-icon>
-							</div>	
-							<div class="wdc-icon-list-icon" role="button" tabIndex="0">
-								<lwdc-icon .icon=${filterIcon}></lwdc-icon>
-							</div>
-						</div>
-					</div>
-				
 					<table class="wdc-table">
 						<thead>
 							<tr>
@@ -95,7 +90,7 @@ export class TableElement<E> extends LitElement {
 							</tr>
 						</thead>
 						<tbody>
-							${this.entries.map((e: E) => this.entryRow(e))}               
+							${this._view.map((e: E) => this.entryRow(e))}               
 						</tbody>
 					</table>
 	
@@ -106,21 +101,8 @@ export class TableElement<E> extends LitElement {
 	// 						<i class="wdc-icon" data-icon="sort-up" data-category="system"></i>
 	// 					</div>
 	get editEntriesTemplate() {
-		return html`			
-				<div class="wdc-table-meta">
-					<div class="wdc-table-info">
-						<span class="wdc-table-name">${this.name}</span>
-						<span class="wdc-table-row-count">${this.entries.length} Items</span>
-					</div>
-
-					<div class="wdc-icon-list">
-						
-						<div class="wdc-icon-list-icon">
-							<lwdc-icon .icon=${sortIcon}></lwdc-icon>
-							<lwdc-icon .icon=${filterIcon}></lwdc-icon>
-						</div>										
-					</div>
-				</div>
+		return html`						
+				${this.headerTemplate}
 				
 				<table class="wdc-table">
 					<thead>
@@ -134,14 +116,95 @@ export class TableElement<E> extends LitElement {
 						</tr>
 					</thead>
 					<tbody>
-						${this.entries.map((e: E) => this.entryEditRow(e))}               
+						${this._view.map((e: E) => this.entryEditRow(e))}               
 					</tbody>
 				</table>
 				
-				${this.additionalEditRenderer ? this.additionalEditRenderer(this._entries) : null}
+				${this.additionalEditRenderer ? this.additionalEditRenderer(this._view) : null}
 			
 			`
 
+
+	}
+
+	get headerTemplate() {
+		return html`
+							
+					<lwdc-modal title="Sort" id="sort">		
+						<lwdc-form .labelPosition=${FormFieldLabelPosition.Top}>
+							<lwdc-form-field label="Row">
+								<lwdc-select name="sortRow" required .options=${this.rowNames}></lwdc-select>								
+							</lwdc-form-field>	
+							<lwdc-form-field group="order" label="Order">
+
+								<lwdc-radio  name="order" label="Ascending" checked></lwdc-radio>
+								<lwdc-radio  name="order" label="Descending"></lwdc-radio>
+
+							</lwdc-form-field>
+							<lwdc-button  @click=${this.performSort}>Sort</lwdc-button>
+						</<lwdc-form>
+						
+								
+					</lwdc-modal>								
+					<lwdc-modal title="Filter" id="filter">		
+						<div style="margin-bottom: 24px;">
+						</div>
+						<lwdc-button  @click=${(e: Event) => { ((e.target as HTMLElement).closest("lwdc-modal") as any).close(); }}>Filter</lwdc-button>								
+					</lwdc-modal>
+					
+					
+					<div class="wdc-table-meta">
+						<div class="wdc-table-info">
+							<span class="wdc-table-name">${this.name}</span>
+							<span class="wdc-table-row-count">${this._view.length} Items</span>
+						</div>
+
+						<div class="wdc-icon-list">
+							
+							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${this.handleSort.bind(this)}>
+								<lwdc-icon .icon=${sortIcon}></lwdc-icon>
+							</div>	
+							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${this.handleFilter.bind(this)}>
+								<lwdc-icon .icon=${filterIcon}></lwdc-icon>
+							</div>
+						</div>
+					</div>	
+		
+		`;
+	}
+
+	get rowNames() {
+		return this.rows.map((r: TableRowElement, i: number) => <any>{ 'id': i, 'name': r.header });
+	}
+
+	resetView() {
+		this._view = Array.from(this._entries);
+	}
+
+	handleSort() {
+		this.sortDialog!.open();
+	}
+
+	performSort(e: Event) {
+		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
+		let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
+		if (form.validate()) {
+			
+			dialog.close();
+		}
+
+	}
+
+	handleFilter() {
+		this.filterDialog!.open();
+	}
+
+	performFilter(e: Event) {
+		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
+		let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
+		if (form.validate()) {
+			dialog.close();
+		}
 
 	}
 
@@ -164,8 +227,7 @@ export class TableElement<E> extends LitElement {
 									<span @click="${(m: MouseEvent) => this.editEntry(e)}">
 										<i class="wdc-icon" data-icon="edit" data-category="system" data-size="20"></i>
 									</span>
-								</div>`: null
-			}																
+								</div>`: null}																
 								<div class="wdc-icon-list-icon">
 									<span @click="${(m: MouseEvent) => this.removeEntry(e)}">
 										<i class="wdc-icon" data-icon="minus" data-category="system" data-size="20"></i>
@@ -225,6 +287,7 @@ export class TableElement<E> extends LitElement {
 		if (this.inlineEditMode) {
 			let entry = <any>{};
 			this.entries.push(entry);
+			this.resetView();
 			this.requestUpdate();
 			this.fireEvent('add', entry);
 		} else {
@@ -245,11 +308,22 @@ export class TableElement<E> extends LitElement {
 			if (index > -1) {
 				this.entries.splice(index, 1);
 			}
+			this.resetView();
 			this.requestUpdate();
 		}
 
 		this.fireEvent('remove', e);
 	}
+
+
+	get sortDialog() {
+		return this.shadowRoot!.getElementById("sort") as ModalElement;
+	}
+
+	get filterDialog() {
+		return this.shadowRoot!.getElementById("filter") as ModalElement;
+	}
+
 
 
 

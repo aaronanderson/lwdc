@@ -37,12 +37,12 @@ radioStory.story = {
 
 export const radioGroupStory = () => {
 	return html`<div class="wdc-form wdc-form-label-position-left">
-					<lwdc-form-field group label="Radio Group">
+					<lwdc-form-field group="contact" label="Radio Group">
 
-							<lwdc-radio name="email" label="E-Mail"></lwdc-radio>
-							<lwdc-radio name="phone" label="Phone"></lwdc-radio>
-							<lwdc-radio disabled name="fax" label="Fax"></lwdc-radio>
-							<lwdc-radio name="mail" label="Mail"></lwdc-radio>
+							<lwdc-radio  name="email" label="E-Mail" checked></lwdc-radio>
+							<lwdc-radio  name="phone" label="Phone"></lwdc-radio>
+							<lwdc-radio  name="fax"   label="Fax" disabled></lwdc-radio>
+							<lwdc-radio  name="mail" label="Mail"></lwdc-radio>
 
 					</lwdc-form-field>
 				</div>
