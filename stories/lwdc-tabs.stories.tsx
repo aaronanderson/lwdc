@@ -22,13 +22,11 @@ export default {
 };
 
 const tabActivated = (e: CustomEvent) => {
-	console.log('Tab Activated', e.detail.index, e.target);
 	render(html`<span>Content ${e.detail.index + 1}</span>`, e.target as HTMLElement);
  }
 
 export const tabsStory = () => {
-	return html`<lwdc-tabs style="width: 75%;" .tabs=${['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4']} @lwdc-tab-activated=${tabActivated}></lwdc-tabs>
-				`;
+	return html`<lwdc-tabs style="width: 75%;" .tabs=${['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4']} @lwdc-tab-activated=${tabActivated}></lwdc-tabs>`;
 }
 tabsStory.story = {
 	name: 'Tabs'

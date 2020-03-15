@@ -1,24 +1,14 @@
 @import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
-
-
+@import "~@workday/canvas-kit-css-core/lib/mixins/type";
 
 header {
+	@include wdc-type();
+	@include wdc-type-body-1();
+
 	display: flex;
 	align-items: center;
-	box-sizing: border-box;
-	font-size: 14px;
-	line-height: 20px;
-	font-weight: 400;
-	color: $wdc-color-black-pepper-300;
-	font-family: "Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif;
-	/*typeColors.body,*/
-	/*WebkitFontSmoothing: antialiased;
-    MozOsxFontSmoothing: grayscale;*/
+	box-sizing: border-box;		
 	position: relative;
-
-	/*	background: themes[themeColor].background,
-		...themes[themeColor].depth,
-		color: themes[themeColor].color,*/
 }
 
 .lwdc-large {

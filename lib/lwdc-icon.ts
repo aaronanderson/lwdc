@@ -22,13 +22,16 @@ export class IconElement extends LitElement {
 	@property({ type: String })
 	color = "licorice200";
 
+	@property({ type: String })
+	background = "transparent";
+
 	static get styles() {
 		return [style];
 	}
 
 
 	connectedCallback() {
-		styleLightDOM(this,style,'lwdc-icon');
+		styleLightDOM(this, style, 'lwdc-icon');
 		super.connectedCallback();
 	}
 
@@ -50,6 +53,11 @@ export class IconElement extends LitElement {
 		let fillColor = getColor(this.color);
 		svg.querySelectorAll(".wd-icon-fill").forEach(f => {
 			f.setAttribute('fill', fillColor);
+		});
+
+		let backgroundColor = getColor(this.background);
+		svg.querySelectorAll(".wd-icon-background").forEach(f => {
+			f.setAttribute('fill', backgroundColor);
 		});
 
 

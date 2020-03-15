@@ -1,0 +1,59 @@
+@import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+@import "~@workday/canvas-kit-css-core/lib/mixins/type";
+
+aside {
+	overflow: hidden;
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	transition: width 200ms ease;
+	position: absolute;
+}
+
+aside.lwdc-open {
+	background-color: $wdc-color-soap-100;
+	padding: 24px;
+	left: 0px;
+}
+
+.lwdc-open {
+	width: var(--sidbar-open-width, 300px);
+}
+
+aside.lwdc-close {
+	align-items: center;
+	box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.16);
+	background-color: $wdc-color-french-vanilla-100;
+	padding: 16px 0;
+	left: 0px;
+}
+
+.lwdc-close {
+	width: var(--sidbar-close-width, 64px);
+}
+
+.header {
+	@include wdc-type();
+	@include wdc-type-h2();
+	margin-top: 0px;
+}
+
+.container {
+	transition: none;
+	z-index: 1;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	height: 120px;
+	left: 0;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.0001) 0%, #FFFFFF 100%);
+}
+
+.footer>lwdc-button {
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+}
