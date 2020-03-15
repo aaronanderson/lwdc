@@ -7,8 +7,8 @@
       "attributes": [
         {
           "name": "group",
-          "type": "boolean",
-          "default": "false"
+          "type": "undefined",
+          "default": "\"undefined\""
         },
         {
           "name": "disabled",
@@ -33,8 +33,8 @@
         {
           "name": "group",
           "attribute": "group",
-          "type": "boolean",
-          "default": "false"
+          "type": "undefined",
+          "default": "\"undefined\""
         },
         {
           "name": "disabled",
@@ -279,6 +279,11 @@
           "name": "color",
           "type": "string",
           "default": "\"licorice200\""
+        },
+        {
+          "name": "background",
+          "type": "string",
+          "default": "\"transparent\""
         }
       ],
       "properties": [
@@ -298,6 +303,12 @@
           "attribute": "color",
           "type": "string",
           "default": "\"licorice200\""
+        },
+        {
+          "name": "background",
+          "attribute": "background",
+          "type": "string",
+          "default": "\"transparent\""
         }
       ]
     },
@@ -532,6 +543,67 @@
       ]
     },
     {
+      "name": "lwdc-modal",
+      "path": "./../lib/lwdc-modal.ts",
+      "attributes": [
+        {
+          "name": "closeEnabled",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "isOpen",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "closeEnabled",
+          "attribute": "closeEnabled",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "isOpen",
+          "attribute": "isOpen",
+          "type": "boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-form",
+      "path": "./../lib/lwdc-form.ts",
+      "description": "Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.\nBecause of this no shadowDOM styles will be imported.",
+      "attributes": [
+        {
+          "name": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ],
+      "properties": [
+        {
+          "name": "labelPosition",
+          "attribute": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ]
+    },
+    {
       "name": "lwdc-table",
       "path": "./../lib/lwdc-table.ts",
       "attributes": [
@@ -593,6 +665,22 @@
         {
           "name": "editEntriesTemplate",
           "type": "TemplateResult"
+        },
+        {
+          "name": "headerTemplate",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "rowNames",
+          "type": "array"
+        },
+        {
+          "name": "sortDialog",
+          "type": "ModalElement"
+        },
+        {
+          "name": "filterDialog",
+          "type": "ModalElement"
         },
         {
           "name": "rows",
@@ -832,33 +920,62 @@
       "path": "./../lib/lwdc-fonts.ts"
     },
     {
-      "name": "lwdc-form",
-      "path": "./../lib/lwdc-form.ts",
-      "description": "Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.\nBecause of this no shadowDOM styles will be imported.",
+      "name": "lwdc-header",
+      "path": "./../lib/lwdc-header.ts",
       "attributes": [
         {
-          "name": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Left\""
+          "name": "title",
+          "type": "string",
+          "default": "\"\""
         },
         {
-          "name": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
+          "name": "imgURL",
+          "type": "string",
+          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
+        },
+        {
+          "name": "variant",
+          "type": "Variant",
+          "default": "\"Variant.full\""
+        },
+        {
+          "name": "theme",
+          "type": "Theme",
+          "default": "\"Theme.blue\""
         }
       ],
       "properties": [
         {
-          "name": "labelPosition",
-          "attribute": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Left\""
+          "name": "title",
+          "attribute": "title",
+          "type": "string",
+          "default": "\"\""
         },
         {
-          "name": "elementChildNodes",
-          "attribute": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
+          "name": "imgURL",
+          "attribute": "imgURL",
+          "type": "string",
+          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
+        },
+        {
+          "name": "variant",
+          "attribute": "variant",
+          "type": "Variant",
+          "default": "\"Variant.full\""
+        },
+        {
+          "name": "theme",
+          "attribute": "theme",
+          "type": "Theme",
+          "default": "\"Theme.blue\""
+        },
+        {
+          "name": "fullLogoTitle",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "dubLogoTitle",
+          "type": "TemplateResult"
         }
       ]
     },
@@ -866,36 +983,6 @@
       "name": "lwdc-icon-inject",
       "path": "./../lib/lwdc-icon-inject.ts",
       "description": "This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. \nIt is slower due to the icon svg files being downloaded from a CDN and the Javascript function executions that convert the the <i> tags to the target icon SVG."
-    },
-    {
-      "name": "lwdc-modal",
-      "path": "./../lib/lwdc-modal.ts",
-      "attributes": [
-        {
-          "name": "closeEnabled",
-          "type": "boolean",
-          "default": "true"
-        },
-        {
-          "name": "isOpen",
-          "type": "boolean",
-          "default": "false"
-        }
-      ],
-      "properties": [
-        {
-          "name": "closeEnabled",
-          "attribute": "closeEnabled",
-          "type": "boolean",
-          "default": "true"
-        },
-        {
-          "name": "isOpen",
-          "attribute": "isOpen",
-          "type": "boolean",
-          "default": "false"
-        }
-      ]
     },
     {
       "name": "lwdc-radio",
@@ -910,8 +997,17 @@
           "type": "String | undefined"
         },
         {
+          "name": "group",
+          "type": "String | undefined"
+        },
+        {
           "name": "value",
           "type": "String | undefined"
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "disabled",
@@ -931,9 +1027,20 @@
           "type": "String | undefined"
         },
         {
+          "name": "group",
+          "attribute": "group",
+          "type": "String | undefined"
+        },
+        {
           "name": "value",
           "attribute": "value",
           "type": "String | undefined"
+        },
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "disabled",
@@ -947,6 +1054,98 @@
         {
           "name": "formField",
           "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-side-panel",
+      "path": "./../lib/lwdc-side-panel.ts",
+      "attributes": [
+        {
+          "name": "header",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "isOpen",
+          "type": "boolean",
+          "default": "true"
+        }
+      ],
+      "properties": [
+        {
+          "name": "header",
+          "attribute": "header",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "isOpen",
+          "attribute": "isOpen",
+          "type": "boolean",
+          "default": "true"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-side-panel-toggle"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-tabs",
+      "path": "./../lib/lwdc-tabs.ts",
+      "attributes": [
+        {
+          "name": "theme",
+          "type": "Theme",
+          "default": "\"Theme.white\""
+        },
+        {
+          "name": "nameSelector",
+          "type": "TabNameSelector<T>",
+          "default": "\"defaultNameSelector\""
+        },
+        {
+          "name": "tabs",
+          "type": "T[]",
+          "default": "[]"
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "default": "0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "theme",
+          "attribute": "theme",
+          "type": "Theme",
+          "default": "\"Theme.white\""
+        },
+        {
+          "name": "nameSelector",
+          "attribute": "nameSelector",
+          "type": "TabNameSelector<T>",
+          "default": "\"defaultNameSelector\""
+        },
+        {
+          "name": "tabs",
+          "attribute": "tabs",
+          "type": "T[]",
+          "default": "[]"
+        },
+        {
+          "name": "index",
+          "attribute": "index",
+          "type": "number",
+          "default": "0"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-tab-activated"
         }
       ]
     },
@@ -1039,6 +1238,29 @@
           "attribute": "elementChildNodes",
           "type": "ChildNode[]",
           "default": "[]"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-side-panel-example",
+      "path": "./../stories/lwdc-side-panel.stories.tsx",
+      "attributes": [
+        {
+          "name": "opened",
+          "type": "boolean",
+          "default": "true"
+        }
+      ],
+      "properties": [
+        {
+          "name": "opened",
+          "attribute": "opened",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "sidePanelContent",
+          "type": "TemplateResult"
         }
       ]
     }
