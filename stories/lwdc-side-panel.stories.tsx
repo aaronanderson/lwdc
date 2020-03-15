@@ -45,7 +45,7 @@ sidepanelStory.story = {
 }
 
 @customElement('lwdc-side-panel-example')
-export class SidePanelElement extends LitElement {
+class SidePanelElement extends LitElement {
 
 
 	@property({ type: Boolean })
