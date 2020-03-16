@@ -3,12 +3,13 @@
 
 aside {
 	overflow: hidden;
-	height: 100%;
+	height: 90vh;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	transition: width 200ms ease;
-	position: absolute;
+	//position: absolute;
+	position: relative;
 }
 
 aside.lwdc-open {

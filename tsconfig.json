@@ -14,7 +14,7 @@
     "jsxFactory": "h",
 
     "declaration": true,
-    "outDir": "dist"
+    "outDir": "wc"
 
   },
 

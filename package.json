@@ -2,10 +2,10 @@
   "name": "@aaronanderson/lwdc",
   "version": "1.0.0",
   "description": "Workday Canvas Kit Workday CanWeb Components",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "wc/index.js",
+  "types": "wc/index.d.ts",
   "files": [
-    "dist/",
+    "wc/",
     "lib/"
   ],
   "repository": {

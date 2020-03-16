@@ -73,17 +73,11 @@ export class SidePanelElement extends LitElement {
 }
 
 
-export enum Variant {
-	full,
-	dub,
-	global
+export enum SidePanelDirection {
+	left,
+	right
 }
 
-export enum Theme {
-	white,
-	blue,
-	transparent
-}
 
 export default SidePanelElement;
 

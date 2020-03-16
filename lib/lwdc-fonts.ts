@@ -22,7 +22,7 @@ export const loadWDCFonts = () => {
 }
 
 
-export default FontElement;
+export default { loadWDCFonts, FontElement };
 
 
 

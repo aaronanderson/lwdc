@@ -14,10 +14,10 @@ export class HeaderElement extends LitElement {
 	imgURL: string = '//design.workday.com/images/ck-wday-logo-white.svg';
 
 	@property({ type: Object })
-	variant: Variant = Variant.full;
+	variant: HeaderVariant = HeaderVariant.full;
 
 	@property({ type: Object })
-	theme: Theme = Theme.blue;
+	theme: HeaderTheme = HeaderTheme.blue;
 
 	static get styles() {
 		return [style];
@@ -25,15 +25,15 @@ export class HeaderElement extends LitElement {
 
 	render() {
 		let headerClass = {
-			'lwdc-large': this.variant == Variant.full,
-			'lwdc-small': this.variant != Variant.full,
-			'lwdc-blue': this.theme == Theme.blue
+			'lwdc-large': this.variant == HeaderVariant.full,
+			'lwdc-small': this.variant != HeaderVariant.full,
+			'lwdc-blue': this.theme == HeaderTheme.blue
 
 		};
 		return html`<header class="${classMap(headerClass)}">
 			<slot name="brand">
 				<a href="#" class="brandLink">
-					${this.variant == Variant.full ? this.fullLogoTitle : this.dubLogoTitle}
+					${this.variant == HeaderVariant.full ? this.fullLogoTitle : this.dubLogoTitle}
 				</a>
 			</slot>
 			<slot id="children"></slot>
@@ -45,13 +45,13 @@ export class HeaderElement extends LitElement {
 	get fullLogoTitle() {
 		let lockupClass = {
 			'lockup': true,
-			'lwdc-large': this.variant == Variant.full,
-			'lwdc-small': this.variant != Variant.full,
+			'lwdc-large': this.variant == HeaderVariant.full,
+			'lwdc-small': this.variant != HeaderVariant.full,
 
 		};
 		let titleClass = {
 			'logoTitle': true,
-			'lwdc-blue': this.theme == Theme.blue
+			'lwdc-blue': this.theme == HeaderTheme.blue
 
 		};
 
@@ -76,13 +76,13 @@ export class HeaderElement extends LitElement {
 }
 
 
-export enum Variant {
+export enum HeaderVariant {
 	full,
 	dub,
 	global
 }
 
-export enum Theme {
+export enum HeaderTheme {
 	white,
 	blue,
 	transparent

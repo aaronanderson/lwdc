@@ -32,7 +32,7 @@ module.exports = {
 	},
 
 	output : {
-		path : path.resolve('dist'),
+		path : path.resolve('wc'),
 		filename : '[name].js',
 	},
 

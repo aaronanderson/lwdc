@@ -18,7 +18,7 @@ import { ButtonType, ButtonSize } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; flex-flow: column; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
+const center = (storyFn: () => unknown) => html`<div style="  ">${storyFn()}</div>`;
 
 
 export default {
@@ -53,6 +53,14 @@ class SidePanelElement extends LitElement {
 
 	static get styles() {
 		return [css`
+					:host {
+						display: flex; 
+					}
+
+					section {
+						margin-left: 16px;
+					}
+
 					.listTitle {
 						/*@include wdc-type();
 						@include wdc-type-h4();*/
@@ -108,9 +116,13 @@ class SidePanelElement extends LitElement {
 
 	render() {
 		return html`
+		
 			<lwdc-side-panel header="Side Panel Header"  @lwdc-side-panel-toggle=${(e: CustomEvent) => { this.opened = e.detail.opened; }}>
 					${this.sidePanelContent}
 			</lwdc-side-panel>
+			<section>Main Content</section>
+			
+			
 		
 		`;
 	}

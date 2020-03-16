@@ -12,10 +12,10 @@ export const styleDocument = (styles: string, styleID: string) => {
 		documentExt.adoptedStyleSheets = !!documentExt.adoptedStyleSheets ? [...documentExt.adoptedStyleSheets, sheet] : [sheet];
 	} else {
 		if (!document.head.querySelector('#' + styleID)) {
-			const fontStyleNode = document.createElement('style');
-			fontStyleNode.id = styleID;
-			fontStyleNode.innerHTML = styles;
-			document.head.appendChild(fontStyleNode);
+			const styleNode = document.createElement('style');
+			styleNode.id = styleID;
+			styleNode.innerHTML = styles;
+			document.head.appendChild(styleNode);
 		}
 	}
 
@@ -28,10 +28,10 @@ export const styleLightDOM = (target: Element, styles: CSSResult, styleID: strin
 		rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, styles.styleSheet] : [styles.styleSheet];
 	} else {
 		if (!document.head.querySelector('#' + styleID)) {
-			const fontStyleNode = document.createElement('style');
-			fontStyleNode.id = styleID;
-			fontStyleNode.innerHTML = styles.cssText;
-			document.head.appendChild(fontStyleNode);
+			const styleNode = document.createElement('style');
+			styleNode.id = styleID;
+			styleNode.innerHTML = styles.cssText;
+			document.head.appendChild(styleNode);
 		}
 	}
 

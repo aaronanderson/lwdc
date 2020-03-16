@@ -4,5 +4,7 @@ yarn-error.log
 yarn.lock
 node_modules
 dist
+wc
+aaronanderson-lwdc-*.tgz
 storybook-static
 .vscode
