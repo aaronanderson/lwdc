@@ -2,6 +2,47 @@
   "version": "experimental",
   "tags": [
     {
+      "name": "lwdc-button",
+      "path": "./../lib/lwdc-button.ts",
+      "attributes": [
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "type",
+          "type": "ButtonType",
+          "default": "\"ButtonType.primary\""
+        },
+        {
+          "name": "size",
+          "type": "ButtonSize",
+          "default": "\"ButtonSize.medium\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "type",
+          "attribute": "type",
+          "type": "ButtonType",
+          "default": "\"ButtonType.primary\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "ButtonSize",
+          "default": "\"ButtonSize.medium\""
+        }
+      ]
+    },
+    {
       "name": "lwdc-form-field",
       "path": "./../lib/lwdc-form-field.ts",
       "attributes": [
@@ -80,6 +121,93 @@
           "type": "TemplateResult | undefined"
         }
       ]
+    },
+    {
+      "name": "lwdc-checkbox",
+      "path": "./../lib/lwdc-checkbox.ts",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "internals"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-card",
+      "path": "./../lib/lwdc-card.ts",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "type": "number | undefined",
+          "default": "\"undefined\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "title",
+          "attribute": "title",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "size",
+          "attribute": "size",
+          "type": "number | undefined",
+          "default": "\"undefined\""
+        }
+      ]
+    },
+    {
+      "name": "lwdc-card-container",
+      "path": "./../lib/lwdc-card.ts"
     },
     {
       "name": "lwdc-menu-item",
@@ -263,6 +391,70 @@
       ]
     },
     {
+      "name": "lwdc-fonts",
+      "path": "./../lib/lwdc-fonts.ts"
+    },
+    {
+      "name": "lwdc-header",
+      "path": "./../lib/lwdc-header.ts",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "imgURL",
+          "type": "string",
+          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
+        },
+        {
+          "name": "variant",
+          "type": "HeaderVariant",
+          "default": "\"HeaderVariant.full\""
+        },
+        {
+          "name": "theme",
+          "type": "HeaderTheme",
+          "default": "\"HeaderTheme.blue\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "title",
+          "attribute": "title",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "imgURL",
+          "attribute": "imgURL",
+          "type": "string",
+          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
+        },
+        {
+          "name": "variant",
+          "attribute": "variant",
+          "type": "HeaderVariant",
+          "default": "\"HeaderVariant.full\""
+        },
+        {
+          "name": "theme",
+          "attribute": "theme",
+          "type": "HeaderTheme",
+          "default": "\"HeaderTheme.blue\""
+        },
+        {
+          "name": "fullLogoTitle",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "dubLogoTitle",
+          "type": "TemplateResult"
+        }
+      ]
+    },
+    {
       "name": "lwdc-icon",
       "path": "./../lib/lwdc-icon.ts",
       "attributes": [
@@ -311,6 +503,11 @@
           "default": "\"transparent\""
         }
       ]
+    },
+    {
+      "name": "lwdc-icon-inject",
+      "path": "./../lib/lwdc-icon-inject.ts",
+      "description": "This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. \nIt is slower due to the icon svg files being downloaded from a CDN and the Javascript function executions that convert the the <i> tags to the target icon SVG."
     },
     {
       "name": "lwdc-loading",
@@ -382,43 +579,66 @@
       ]
     },
     {
-      "name": "lwdc-button",
-      "path": "./../lib/lwdc-button.ts",
+      "name": "lwdc-modal",
+      "path": "./../lib/lwdc-modal.ts",
       "attributes": [
         {
-          "name": "disabled",
+          "name": "closeEnabled",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "isOpen",
           "type": "boolean",
           "default": "false"
-        },
-        {
-          "name": "type",
-          "type": "ButtonType",
-          "default": "\"ButtonType.primary\""
-        },
-        {
-          "name": "size",
-          "type": "ButtonSize",
-          "default": "\"ButtonSize.medium\""
         }
       ],
       "properties": [
         {
-          "name": "disabled",
-          "attribute": "disabled",
+          "name": "closeEnabled",
+          "attribute": "closeEnabled",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "isOpen",
+          "attribute": "isOpen",
           "type": "boolean",
           "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-page-header",
+      "path": "./../lib/lwdc-page-header.ts",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "\"\""
         },
         {
-          "name": "type",
-          "attribute": "type",
-          "type": "ButtonType",
-          "default": "\"ButtonType.primary\""
+          "name": "sub-title",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "title",
+          "attribute": "title",
+          "type": "string",
+          "default": "\"\""
         },
         {
-          "name": "size",
-          "attribute": "size",
-          "type": "ButtonSize",
-          "default": "\"ButtonSize.medium\""
+          "name": "subTitle",
+          "attribute": "sub-title",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "titles",
+          "type": "TemplateResult"
         }
       ]
     },
@@ -449,6 +669,79 @@
           "attribute": "isOpen",
           "type": "boolean",
           "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-radio",
+      "path": "./../lib/lwdc-radio.ts",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "group",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "group",
+          "attribute": "group",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "internals"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
         }
       ]
     },
@@ -543,32 +836,37 @@
       ]
     },
     {
-      "name": "lwdc-modal",
-      "path": "./../lib/lwdc-modal.ts",
+      "name": "lwdc-side-panel",
+      "path": "./../lib/lwdc-side-panel.ts",
       "attributes": [
         {
-          "name": "closeEnabled",
-          "type": "boolean",
-          "default": "true"
+          "name": "header",
+          "type": "string",
+          "default": "\"\""
         },
         {
           "name": "isOpen",
           "type": "boolean",
-          "default": "false"
+          "default": "true"
         }
       ],
       "properties": [
         {
-          "name": "closeEnabled",
-          "attribute": "closeEnabled",
-          "type": "boolean",
-          "default": "true"
+          "name": "header",
+          "attribute": "header",
+          "type": "string",
+          "default": "\"\""
         },
         {
           "name": "isOpen",
           "attribute": "isOpen",
           "type": "boolean",
-          "default": "false"
+          "default": "true"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-side-panel-toggle"
         }
       ]
     },
@@ -734,8 +1032,129 @@
       ]
     },
     {
+      "name": "lwdc-tabs",
+      "path": "./../lib/lwdc-tabs.ts",
+      "attributes": [
+        {
+          "name": "theme",
+          "type": "Theme",
+          "default": "\"Theme.white\""
+        },
+        {
+          "name": "nameSelector",
+          "type": "TabNameSelector<T>",
+          "default": "\"defaultNameSelector\""
+        },
+        {
+          "name": "tabs",
+          "type": "T[]",
+          "default": "[]"
+        },
+        {
+          "name": "index",
+          "type": "number",
+          "default": "0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "theme",
+          "attribute": "theme",
+          "type": "Theme",
+          "default": "\"Theme.white\""
+        },
+        {
+          "name": "nameSelector",
+          "attribute": "nameSelector",
+          "type": "TabNameSelector<T>",
+          "default": "\"defaultNameSelector\""
+        },
+        {
+          "name": "tabs",
+          "attribute": "tabs",
+          "type": "T[]",
+          "default": "[]"
+        },
+        {
+          "name": "index",
+          "attribute": "index",
+          "type": "number",
+          "default": "0"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-tab-activated"
+        }
+      ]
+    },
+    {
       "name": "lwdc-text",
       "path": "./../lib/lwdc-text.ts",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "password",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "type": "String | undefined"
+        }
+      ],
+      "properties": [
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "String | undefined"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "String | undefined"
+        },
+        {
+          "name": "password",
+          "attribute": "password",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
+          "type": "String | undefined"
+        },
+        {
+          "name": "internals"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-textarea",
+      "path": "./../lib/lwdc-textarea.ts",
       "attributes": [
         {
           "name": "name",
@@ -859,357 +1278,6 @@
       "events": [
         {
           "name": "lwdc-toast-action"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-checkbox",
-      "path": "./../lib/lwdc-checkbox.ts",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "String | undefined"
-        },
-        {
-          "name": "label",
-          "type": "String | undefined"
-        },
-        {
-          "name": "value",
-          "type": "String | undefined"
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": "false"
-        }
-      ],
-      "properties": [
-        {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
-        {
-          "name": "label",
-          "attribute": "label",
-          "type": "String | undefined"
-        },
-        {
-          "name": "value",
-          "attribute": "value",
-          "type": "String | undefined"
-        },
-        {
-          "name": "disabled",
-          "attribute": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "internals"
-        },
-        {
-          "name": "formField",
-          "type": "FormFieldElement"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-fonts",
-      "path": "./../lib/lwdc-fonts.ts"
-    },
-    {
-      "name": "lwdc-header",
-      "path": "./../lib/lwdc-header.ts",
-      "attributes": [
-        {
-          "name": "title",
-          "type": "string",
-          "default": "\"\""
-        },
-        {
-          "name": "imgURL",
-          "type": "string",
-          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
-        },
-        {
-          "name": "variant",
-          "type": "Variant",
-          "default": "\"Variant.full\""
-        },
-        {
-          "name": "theme",
-          "type": "Theme",
-          "default": "\"Theme.blue\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "title",
-          "attribute": "title",
-          "type": "string",
-          "default": "\"\""
-        },
-        {
-          "name": "imgURL",
-          "attribute": "imgURL",
-          "type": "string",
-          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
-        },
-        {
-          "name": "variant",
-          "attribute": "variant",
-          "type": "Variant",
-          "default": "\"Variant.full\""
-        },
-        {
-          "name": "theme",
-          "attribute": "theme",
-          "type": "Theme",
-          "default": "\"Theme.blue\""
-        },
-        {
-          "name": "fullLogoTitle",
-          "type": "TemplateResult"
-        },
-        {
-          "name": "dubLogoTitle",
-          "type": "TemplateResult"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-icon-inject",
-      "path": "./../lib/lwdc-icon-inject.ts",
-      "description": "This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. \nIt is slower due to the icon svg files being downloaded from a CDN and the Javascript function executions that convert the the <i> tags to the target icon SVG."
-    },
-    {
-      "name": "lwdc-radio",
-      "path": "./../lib/lwdc-radio.ts",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "String | undefined"
-        },
-        {
-          "name": "label",
-          "type": "String | undefined"
-        },
-        {
-          "name": "group",
-          "type": "String | undefined"
-        },
-        {
-          "name": "value",
-          "type": "String | undefined"
-        },
-        {
-          "name": "checked",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": "false"
-        }
-      ],
-      "properties": [
-        {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
-        {
-          "name": "label",
-          "attribute": "label",
-          "type": "String | undefined"
-        },
-        {
-          "name": "group",
-          "attribute": "group",
-          "type": "String | undefined"
-        },
-        {
-          "name": "value",
-          "attribute": "value",
-          "type": "String | undefined"
-        },
-        {
-          "name": "checked",
-          "attribute": "checked",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "attribute": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "internals"
-        },
-        {
-          "name": "formField",
-          "type": "FormFieldElement"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-side-panel",
-      "path": "./../lib/lwdc-side-panel.ts",
-      "attributes": [
-        {
-          "name": "header",
-          "type": "string",
-          "default": "\"\""
-        },
-        {
-          "name": "isOpen",
-          "type": "boolean",
-          "default": "true"
-        }
-      ],
-      "properties": [
-        {
-          "name": "header",
-          "attribute": "header",
-          "type": "string",
-          "default": "\"\""
-        },
-        {
-          "name": "isOpen",
-          "attribute": "isOpen",
-          "type": "boolean",
-          "default": "true"
-        }
-      ],
-      "events": [
-        {
-          "name": "lwdc-side-panel-toggle"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-tabs",
-      "path": "./../lib/lwdc-tabs.ts",
-      "attributes": [
-        {
-          "name": "theme",
-          "type": "Theme",
-          "default": "\"Theme.white\""
-        },
-        {
-          "name": "nameSelector",
-          "type": "TabNameSelector<T>",
-          "default": "\"defaultNameSelector\""
-        },
-        {
-          "name": "tabs",
-          "type": "T[]",
-          "default": "[]"
-        },
-        {
-          "name": "index",
-          "type": "number",
-          "default": "0"
-        }
-      ],
-      "properties": [
-        {
-          "name": "theme",
-          "attribute": "theme",
-          "type": "Theme",
-          "default": "\"Theme.white\""
-        },
-        {
-          "name": "nameSelector",
-          "attribute": "nameSelector",
-          "type": "TabNameSelector<T>",
-          "default": "\"defaultNameSelector\""
-        },
-        {
-          "name": "tabs",
-          "attribute": "tabs",
-          "type": "T[]",
-          "default": "[]"
-        },
-        {
-          "name": "index",
-          "attribute": "index",
-          "type": "number",
-          "default": "0"
-        }
-      ],
-      "events": [
-        {
-          "name": "lwdc-tab-activated"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-textarea",
-      "path": "./../lib/lwdc-textarea.ts",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "String | undefined"
-        },
-        {
-          "name": "value",
-          "type": "String | undefined"
-        },
-        {
-          "name": "password",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "placeholder",
-          "type": "String | undefined"
-        }
-      ],
-      "properties": [
-        {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
-        {
-          "name": "value",
-          "attribute": "value",
-          "type": "String | undefined"
-        },
-        {
-          "name": "password",
-          "attribute": "password",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "attribute": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "placeholder",
-          "attribute": "placeholder",
-          "type": "String | undefined"
-        },
-        {
-          "name": "internals"
-        },
-        {
-          "name": "formField",
-          "type": "FormFieldElement"
         }
       ]
     },

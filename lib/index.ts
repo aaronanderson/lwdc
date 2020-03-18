@@ -1,5 +1,6 @@
 export * from './lwdc-button';
 export * from './lwdc-checkbox';
+export * from './lwdc-card';
 export * from './lwdc-combobox';
 export * from './lwdc-env-label';
 export * from './lwdc-fonts';
@@ -11,6 +12,7 @@ export * from './lwdc-loading';
 export * from './lwdc-menu-item';
 export * from './lwdc-menu';
 export * from './lwdc-modal';
+export * from './lwdc-page-header';
 export * from './lwdc-popper';
 export * from './lwdc-radio';
 export * from './lwdc-select';

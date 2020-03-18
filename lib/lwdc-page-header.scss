@@ -1,0 +1,19 @@
+@import '~@workday/canvas-kit-css-page-header';
+@import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+@import "~@workday/canvas-kit-css-core/lib/mixins/type";
+
+.lwdc-page-sub-header-title {
+	@include wdc-type();
+	@include wdc-type-h3();
+	color: $wdc-color-french-vanilla-100;
+	padding: 6px 0;
+	margin: 0;
+}
+
+.wdc-page-header .wdc-page-header-title  {
+	line-height: 16px;
+}
+
+.lwdc-page-sub-header-container {
+	display: table-cell;
+}

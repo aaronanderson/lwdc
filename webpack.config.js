@@ -6,6 +6,7 @@ module.exports = {
 	entry : {
 		index : './lib/index.ts',
 		'lwdc-button' : './lib/lwdc-button.ts',
+		'lwdc-card' : './lib/lwdc-card.ts',
 		'lwdc-checkbox' : './lib/lwdc-checkbox.ts',
 		'lwdc-combobox' : './lib/lwdc-combobox.ts',
 		'lwdc-env-label' : './lib/lwdc-env-label.ts',
@@ -16,6 +17,7 @@ module.exports = {
 		'lwdc-icon-inject' : './lib/lwdc-icon-inject.ts',
 		'lwdc-loading' : './lib/lwdc-loading.ts',
 		'lwdc-menu' : './lib/lwdc-menu.ts',
+		'lwdc-page-header' : './lib/lwdc-page-header.ts',
 		'lwdc-popper' : './lib/lwdc-popper.ts',
 		'lwdc-radio' : './lib/lwdc-radio.ts',
 		'lwdc-select' : './lib/lwdc-select.ts',
