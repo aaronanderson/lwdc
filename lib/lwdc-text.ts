@@ -2,8 +2,10 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import FormFieldElement from './lwdc-form-field';
-import {styleLightDOM} from './util';
-const style = css(<any>[require('./lwdc-text.scss').default]);
+import { styleLightDOM } from './util';
+
+import styleCSS from './lwdc-text.scss';
+const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-text')
@@ -42,7 +44,7 @@ export class TextElement extends LitElement {
 	}
 
 	connectedCallback() {
-		styleLightDOM(this,style,'lwdc-text');		
+		styleLightDOM(this, style, 'lwdc-text');
 		super.connectedCallback();
 	}
 

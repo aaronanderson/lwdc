@@ -6,7 +6,9 @@ import { ButtonType } from './lwdc-button';
 
 import './lwdc-button';
 
-const style = css(<any>[require('./lwdc-side-panel.scss').default]);
+import styleCSS from './lwdc-side-panel.scss';
+const style = css([`${styleCSS}`] as any)
+
 
 @customElement('lwdc-side-panel')
 export class SidePanelElement extends LitElement {

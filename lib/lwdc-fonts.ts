@@ -2,7 +2,8 @@ import { LitElement, customElement } from 'lit-element';
 
 import { styleDocument } from './util';
 //Will not work in Firefox until this is addressed: https://bugzilla.mozilla.org/show_bug.cgi?id=1520690
-const fonts = require('./lwdc-fonts.scss').default;
+import fonts from './lwdc-fonts.scss';
+
 
 @customElement('lwdc-fonts')
 export class FontElement extends LitElement {

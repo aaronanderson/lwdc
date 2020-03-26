@@ -3,7 +3,8 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleLightDOM } from './util';
 
-const style = css(<any>[require('./lwdc-form-field.scss').default]);
+import styleCSS from './lwdc-form-field.scss';
+const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-form-field')

@@ -1,11 +1,12 @@
 const path = require('path');
 module.exports = ({ config }) => {
 	config.devtool = "source-maps";
+
 	config.module.rules.push({
 		test: /\.(ts|tsx)$/,
 		use: [
 			{
-				loader: require.resolve('ts-loader')
+				loader: 'ts-loader'
 			}
 		],
 	});
@@ -13,14 +14,13 @@ module.exports = ({ config }) => {
 		test: /\.scss$/,
 		use: [
 			{
-				loader: require.resolve('raw-loader')
+				loader: 'raw-loader',
 			},
 			{
-				loader: require.resolve('sass-loader'),
-				options: {
-					sassOptions: { includePaths: ['../node_modules'] }
-				}
-			}],
+				loader: 'sass-loader',
+			}, 
+
+		],
 
 	});
 	config.resolve.extensions.push('.ts', '.tsx', '.js');

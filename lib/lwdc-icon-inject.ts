@@ -4,9 +4,9 @@ import { CanvasIcon, CanvasIconTypes } from '@workday/design-assets-types';
 // @ts-ignore
 import initializeIcons from '@workday/canvas-kit-css-icon/lib/canvas-kit-css-icon.js';
 
+import styleCSS from './lwdc-icon-inject.scss';
+const style = css([`${styleCSS}`] as any)
 
-//@workday/canvas-kit-react-common can be removed as a NPM dependency after the next canvas kit release
-const style = css(<any>[require('./lwdc-icon-inject.scss').default]);
 
 /** This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. 
  * It is slower due to the icon svg files being downloaded from a CDN and the Javascript function executions that convert the the <i> tags to the target icon SVG. */
@@ -49,7 +49,7 @@ export class IconInjectElement extends LitElement {
 	}
 
 	updated(changedProperties: Map<string, any>) {
-		console.log("updated",changedProperties);
+		console.log("updated", changedProperties);
 		initializeIcons(null, '.wdc-icon', this.shadowRoot);
 	}
 

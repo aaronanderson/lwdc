@@ -1,7 +1,9 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
-const style = css(<any>[require('./lwdc-card.scss').default]);
+import styleCSS from './lwdc-card.scss';
+const style = css([`${styleCSS}`] as any)
+
 
 @customElement('lwdc-card')
 export class CardElement extends LitElement {

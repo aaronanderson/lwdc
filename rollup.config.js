@@ -1,14 +1,14 @@
 // rollup.config.js
 //import typescript from '@rollup/plugin-typescript';
 import typescript from 'rollup-plugin-typescript2';
-import nodeResolve from "@rollup/plugin-node-resolve";
+//import nodeResolve from "@rollup/plugin-node-resolve";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 
 
 export default {
-    external: ['react', 'react-dom'],
+    external: ['lit-element','lit-html/directives/class-map','lit-html/directives/if-defined', 'lit-html/directives/style-map'],
     input: {
         'index': 'lib/index.ts',
         'lwdc-button': 'lib/lwdc-button.ts',
@@ -38,7 +38,6 @@ export default {
         'lwdc-toast': 'lib/lwdc-toast.ts',
         'lwdc-tooltip': 'lib/lwdc-tooltip.ts',
     },
-    //input: ['lib/lwdc-card.ts', 'lib/lwdc-button.ts'],
     //preserveModules: true,
     output: {
         dir: "wc",
@@ -61,8 +60,8 @@ export default {
 
         resolve(),
         postcss({
-            extract: false,
-            modules: true,
+            inject: false,
+            modules: false,
             use: ['sass'],
         }),
 

@@ -1,7 +1,8 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { styleLightDOM } from './util';
 
-const style = css(<any>[require('./lwdc-tooltip.scss').default]);
+import styleCSS from './lwdc-tooltip.scss';
+const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-tooltip')

@@ -13,7 +13,8 @@ import ModalElement from './lwdc-modal';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement } from './util';
 
-const style = css(<any>[require('./lwdc-table.scss').default]);
+import styleCSS from './lwdc-table.scss';
+const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-table')
@@ -189,7 +190,7 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			
+
 			dialog.close();
 		}
 

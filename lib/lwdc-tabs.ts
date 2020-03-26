@@ -1,7 +1,9 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
-const style = css(<any>[require('./lwdc-tabs.scss').default]);
+import styleCSS from './lwdc-tabs.scss';
+const style = css([`${styleCSS}`] as any)
+
 
 @customElement('lwdc-tabs')
 export class TabsElement<T> extends LitElement {

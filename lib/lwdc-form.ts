@@ -2,7 +2,9 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { classMap } from 'lit-html/directives/class-map';
 
-const style = css(<any>[require('./lwdc-form-field.scss').default]);
+import styleCSS from './lwdc-form-field.scss';
+const style = css([`${styleCSS}`] as any)
+
 
 /** Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.
  * Because of this no shadowDOM styles will be imported. 

@@ -1,6 +1,7 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 
-const style = css(<any>[require('./lwdc-loading.scss').default]);
+import styleCSS from './lwdc-loading.scss';
+const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-loading')

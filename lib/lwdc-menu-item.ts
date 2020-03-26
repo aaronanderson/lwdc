@@ -2,7 +2,9 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { CanvasIcon } from '@workday/design-assets-types';
 import { classMap } from 'lit-html/directives/class-map';
 
-const style = css(<any>[require('./lwdc-menu-item.scss').default]);
+import styleCSS from './lwdc-menu-item.scss';
+const style = css([`${styleCSS}`] as any)
+
 
 @customElement('lwdc-menu-item')
 export class MenuItemElement extends LitElement {

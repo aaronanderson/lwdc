@@ -5,7 +5,9 @@ import './lwdc-icon';
 import { ButtonType } from './lwdc-button';
 import { xIcon } from '@workday/canvas-system-icons-web';
 
-const style = css(<any>[require('./lwdc-modal.scss').default]);
+import styleCSS from './lwdc-modal.scss';
+const style = css([`${styleCSS}`] as any)
+
 
 @customElement('lwdc-modal')
 export class ModalElement extends LitElement {

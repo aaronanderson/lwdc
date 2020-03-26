@@ -1,7 +1,9 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
-const style = css(<any>[require('./lwdc-page-header.scss').default]);
+import styleCSS from './lwdc-page-header.scss';
+const style = css([`${styleCSS}`] as any)
+
 
 @customElement('lwdc-page-header')
 export class PageHeaderElement extends LitElement {

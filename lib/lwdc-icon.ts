@@ -6,8 +6,8 @@ import canvasColors from '@workday/canvas-colors-web';
 import { getColor } from '@workday/canvas-kit-css-icon/lib/utils.js';
 import { styleLightDOM } from './util';
 
-//@workday/canvas-kit-react-common can be removed as a NPM dependency after the next canvas kit release
-const style = css(<any>[require('./lwdc-icon.scss').default]);
+import styleCSS from './lwdc-icon.scss';
+const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-icon')

@@ -4,8 +4,8 @@ import { classMap } from 'lit-html/directives/class-map';
 import { styleMap, StyleInfo } from 'lit-html/directives/style-map';
 import { styleLightDOM } from './util';
 
-
-const style = css(<any>[require('./lwdc-menu.scss').default]);
+import styleCSS from './lwdc-menu.scss';
+const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-menu')
@@ -23,7 +23,7 @@ export class MenuElement extends LitElement {
 
 
 	connectedCallback() {
-		styleLightDOM(this,style,'lwdc-menu');
+		styleLightDOM(this, style, 'lwdc-menu');
 		//Maybe need a mutation observer here in case child menu items change
 		this.elementChildNodes = Array.from(this.childNodes);
 		super.connectedCallback();
