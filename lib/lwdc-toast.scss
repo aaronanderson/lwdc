@@ -1,6 +1,9 @@
 @import '~@workday/canvas-kit-css-core/lib/colors.scss';
 @import '~@workday/canvas-kit-css-core/lib/type.scss';
 
+:host {
+	display: contents;
+}
 
 .lwdc-toast-container {
 	@include wdc-type();

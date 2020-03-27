@@ -1,0 +1,22 @@
+:host {
+	display: contents;
+}
+
+.layoutContainer {
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.columnContainer {
+	flex: 1
+}
+
+.columnContainer:first-child {
+	padding-left: 0;
+
+}
+
+.columnContainer:last-child {
+	padding-right: 0;
+}

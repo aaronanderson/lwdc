@@ -6,7 +6,7 @@ const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-box-row')
-export class LayoutRowElement extends LitElement {
+export class LayoutBoxRowElement extends LitElement {
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	start: boolean = false;
@@ -61,7 +61,7 @@ export class LayoutRowElement extends LitElement {
 
 
 @customElement('lwdc-box-col')
-export class LayoutColumnElement extends LitElement {
+export class LayoutBoxColumnElement extends LitElement {
 
 	@property({ type: Number, attribute: true, reflect: true })
 	sm?: number = undefined;
@@ -118,12 +118,14 @@ export class LayoutColumnElement extends LitElement {
 		}
 
 		return html`
-			<div class="${classMap(colClass)}"><slot></slot></div>`;
+			<div class="${classMap(colClass)}">
+				<slot></slot>
+			</div>`;
 	}
 
 }
 
-export default { LayoutRowElement, LayoutColumnElement };
+export default { LayoutBoxRowElement, LayoutBoxColumnElement };
 
 
 

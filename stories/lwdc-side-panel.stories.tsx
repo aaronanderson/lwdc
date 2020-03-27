@@ -116,11 +116,12 @@ class SidePanelElement extends LitElement {
 
 	render() {
 		return html`
-		
-			<lwdc-side-panel header="Side Panel Header"  @lwdc-side-panel-toggle=${(e: CustomEvent) => { this.opened = e.detail.opened; }}>
-					${this.sidePanelContent}
-			</lwdc-side-panel>
-			<section>Main Content</section>
+			 <main style="display: flex;flex-direction: row;">
+				<lwdc-side-panel header="Side Panel Header"  @lwdc-side-panel-toggle=${(e: CustomEvent) => { this.opened = e.detail.opened; }}>
+						${this.sidePanelContent}
+				</lwdc-side-panel>
+				<section>Main Content</section>
+			</main>	
 			
 			
 		
