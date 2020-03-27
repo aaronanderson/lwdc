@@ -6,6 +6,7 @@ import { action } from '@storybook/addon-actions';
 
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 
+import '../lib/lwdc-action-bar';
 import '../lib/lwdc-button';
 import { ButtonSize, ButtonType } from '../lib/lwdc-button';
 
@@ -13,7 +14,7 @@ import { ButtonSize, ButtonType } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
+const center = (storyFn: () => unknown) => html`<div style="  margin: 64px;">${storyFn()}</div>`;
 
 
 export default {
@@ -35,7 +36,9 @@ const typeMap = new Map([['primary', ButtonType.primary], ['secondary', ButtonTy
 
 
 export const buttonStory = () => {
-	return html`<lwdc-button .type=${typeMap.get(typesRadioKnob())} .size=${sizeMap.get(sizesRadioKnob())} @click=${() => { console.log("clicked"); action("Element Button Clicked"); }}>Click Me</lwdc-button>`;
+	return html`<lwdc-action-bar>
+					<lwdc-button .type=${typeMap.get(typesRadioKnob())} .size=${sizeMap.get(sizesRadioKnob())} @click=${() => { console.log("clicked"); action("Element Button Clicked"); }}>Click Me</lwdc-button>
+				</lwdc-action-bar>`;
 }
 buttonStory.story = {
 	name: 'Button'

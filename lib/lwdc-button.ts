@@ -41,7 +41,7 @@ export class ButtonElement extends LitElement {
 
 	render() {
 
-		let formTextClass = {
+		let buttonClass = {
 			'wdc-btn': this.type != ButtonType.plain,
 			'wdc-btn-icon-plain': this.type == ButtonType.plain,
 			'wdc-btn-icon-circle': this.type == ButtonType.iconCircle,
@@ -53,7 +53,7 @@ export class ButtonElement extends LitElement {
 			'wdc-btn-size-s': this.size == ButtonSize.small
 		};
 
-		return html`<button class="${classMap(formTextClass)}"><slot></slot></button>`;
+		return html`<button class="${classMap(buttonClass)}"><slot></slot></button>`;
 
 	}
 

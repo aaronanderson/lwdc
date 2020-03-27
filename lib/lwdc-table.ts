@@ -331,7 +331,7 @@ export class TableElement<E> extends LitElement {
 }
 
 
-@customElement('lwdc-row')
+@customElement('lwdc-table-row')
 export class TableRowElement extends LitElement {
 
 	@property({ type: String, attribute: true })

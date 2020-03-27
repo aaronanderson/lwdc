@@ -12,15 +12,9 @@ export class EnvLabelElement extends LitElement {
 	@property({ type: String })
 	env?: string;
 
-
-
 	static get styles() {
 		return [style];
 	}
-
-
-
-
 
 	render() {
 		if (this.env && this.env != "prod") {
