@@ -8,7 +8,7 @@ import './lwdc-form-field';
 import './lwdc-select';
 import './lwdc-button';
 
-import { filterIcon, sortIcon } from '@workday/canvas-system-icons-web';
+import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon } from '@workday/canvas-system-icons-web';
 import ModalElement from './lwdc-modal';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement } from './util';
@@ -23,11 +23,15 @@ export class TableElement<E> extends LitElement {
 	@property({ type: String, attribute: true })
 	name?: string;
 
-	@property({ type: Boolean })
+	@property({ type: Boolean, attribute: 'edit', reflect: true })
 	editMode: boolean = false;
 
-	@property({ type: Boolean })
+	@property({ type: Boolean, attribute: 'inline', reflect: true })
 	inlineEditMode: boolean = false;
+
+	@property({ type: Boolean, attribute: 'select', reflect: true })
+	selectMode: boolean = false;
+
 
 	@property({ type: Object })
 	additionalEditRenderer?: Function;
@@ -38,6 +42,8 @@ export class TableElement<E> extends LitElement {
 	_entries: E[] = [];
 
 	_view: E[] = [];
+
+	selections: Set<E> = new Set();
 
 	rows: TableRowElement[] = [];
 
@@ -53,7 +59,6 @@ export class TableElement<E> extends LitElement {
 		this.resetView();
 		this.requestUpdate('entries', oldValue);
 	}
-
 
 	static get styles() {
 		return [style];
@@ -76,10 +81,6 @@ export class TableElement<E> extends LitElement {
 		}
 	}
 
-
-	// <div class="wdc-icon-list-icon">
-	// 						<i class="wdc-icon" data-icon="sort" data-category="system"></i>
-	// 					</div>
 	get entriesTemplate() {
 		return html`
 					${this.headerTemplate}
@@ -98,9 +99,6 @@ export class TableElement<E> extends LitElement {
 			`
 	}
 
-	// <div class="wdc-icon-list-icon">
-	// 						<i class="wdc-icon" data-icon="sort-up" data-category="system"></i>
-	// 					</div>
 	get editEntriesTemplate() {
 		return html`						
 				${this.headerTemplate}
@@ -110,7 +108,7 @@ export class TableElement<E> extends LitElement {
 						<tr>
 							<th scope="col" style="width: 100px">
 								<span @click="${(m: MouseEvent) => this.addEntry()}">	
-									<i class="wdc-icon" data-icon="plus" data-category="system" data-size="20"></i>
+									<lwdc-icon .icon=${plusIcon}></lwdc-icon>
 								</span>	
 							</th>
 							${this.rows.map((r: TableRowElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)} 
@@ -180,6 +178,7 @@ export class TableElement<E> extends LitElement {
 
 	resetView() {
 		this._view = Array.from(this._entries);
+		this.selections.clear();
 	}
 
 	handleSort() {
@@ -214,8 +213,22 @@ export class TableElement<E> extends LitElement {
 		this.rows.forEach((row: TableRowElement) => {
 			body.push(this.renderCell(e, row));
 		});
-		return html`<tr>${body}</tr>`;
+		if (this.selectMode) {
+			return html`<tr @click=${(m: MouseEvent) => this.entryClick(e, m.currentTarget as HTMLTableRowElement)}>${body}</tr>`;
+		} else {
+			return html`<tr>${body}</tr>`;
+		}
 
+	}
+
+	entryClick(e: E, r: HTMLTableRowElement) {
+		if (this.selections.has(e)) {
+			this.selections.delete(e);
+			r.classList.remove('wdc-table-row-selected');
+		} else {
+			this.selections.add(e);
+			r.classList.add('wdc-table-row-selected');
+		}
 	}
 
 	entryEditRow(e: E) {
@@ -226,12 +239,12 @@ export class TableElement<E> extends LitElement {
 								${!this.inlineEditMode ? html`
 								<div class="wdc-icon-list-icon">
 									<span @click="${(m: MouseEvent) => this.editEntry(e)}">
-										<i class="wdc-icon" data-icon="edit" data-category="system" data-size="20"></i>
+										<lwdc-icon .icon=${editIcon}></lwdc-icon>
 									</span>
 								</div>`: null}																
 								<div class="wdc-icon-list-icon">
 									<span @click="${(m: MouseEvent) => this.removeEntry(e)}">
-										<i class="wdc-icon" data-icon="minus" data-category="system" data-size="20"></i>
+										<lwdc-icon .icon=${minusIcon}></lwdc-icon>
 									</span>
 								</div>										
 							</div>
