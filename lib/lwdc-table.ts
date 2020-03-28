@@ -7,6 +7,7 @@ import './lwdc-form';
 import './lwdc-form-field';
 import './lwdc-select';
 import './lwdc-button';
+import './lwdc-text';
 
 import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon } from '@workday/canvas-system-icons-web';
 import ModalElement from './lwdc-modal';
@@ -43,7 +44,7 @@ export class TableElement<E> extends LitElement {
 
 	selections: Set<E> = new Set();
 
-	rows: TableRowElement[] = [];
+	cols: TableColumnElement[] = [];
 
 	sort: Set<SortEntry> = new Set();
 
@@ -64,7 +65,48 @@ export class TableElement<E> extends LitElement {
 
 	@property({ type: Array })
 	public get view(): E[] {
-		const viewEntries = Array.from(this._entries);
+		let viewEntries = Array.from(this._entries);
+
+		for (let filterEntry of this.filter) {
+			const col = this.cols.find((r: TableColumnElement) => r.key === filterEntry.key);
+			if (col && col.key) {
+				let k: string = col.key;
+				let val = filterEntry.value.toLocaleLowerCase();
+				viewEntries = viewEntries.filter((e: any) => {
+					let valE = e[k] ? e[k].toLocaleLowerCase() : '';
+					if (filterEntry.by === 'Contains') {
+						return valE.includes(val);
+					} else if (filterEntry.by === 'Begins-With') {
+						return valE.startWith(val);
+					} else if (filterEntry.by === 'Ends-With') {
+						return valE.endsWith(val);
+					} else if (filterEntry.by === 'RegExp') {
+						console.log(new RegExp(val, 'g').test(valE));
+						return new RegExp(val, 'g').test(valE);
+					}
+					return false;
+
+				});
+			}
+		}
+
+
+		for (let sortEntry of this.sort) {
+			const col = this.cols.find((r: TableColumnElement) => r.key === sortEntry.key);
+			if (col && col.key) {
+				let k: string = col.key;
+				viewEntries.sort((a: any, b: any) => {
+					let valA = a[k] ? a[k] : '';
+					let valB = b[k] ? b[k] : '';
+					if (sortEntry.direction === 'Ascending') {
+						return valA.localeCompare(valB, undefined, { numeric: true });
+					} else {
+						return valB.localeCompare(valA, undefined, { numeric: true });
+					}
+
+				});
+			}
+		}
 		return viewEntries;
 	}
 
@@ -74,7 +116,7 @@ export class TableElement<E> extends LitElement {
 
 	constructor() {
 		super();
-		this.rows = Array.from(this.children) as TableRowElement[];
+		this.cols = Array.from(this.children) as TableColumnElement[];
 	}
 
 	firstUpdated() {
@@ -96,7 +138,7 @@ export class TableElement<E> extends LitElement {
 					<table class="wdc-table">
 						<thead>
 							<tr>
-								${this.rows.map((r: TableRowElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)}
+								${this.cols.map((r: TableColumnElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)}
 							</tr>
 						</thead>
 						<tbody>
@@ -119,7 +161,7 @@ export class TableElement<E> extends LitElement {
 									<lwdc-icon .icon=${plusIcon}></lwdc-icon>
 								</span>	
 							</th>
-							${this.rows.map((r: TableRowElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)} 
+							${this.cols.map((r: TableColumnElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)} 
 						</tr>
 					</thead>
 					<tbody>
@@ -139,30 +181,63 @@ export class TableElement<E> extends LitElement {
 							
 					<lwdc-modal title="Sort" id="sort">		
 						<lwdc-form .labelPosition=${FormFieldLabelPosition.Top}>
-							<lwdc-form-field label="Row">
-								<lwdc-select name="sortRow" placeholder required .options=${this.rowNames}></lwdc-select>								
+							<lwdc-form-field label="Column">
+								<lwdc-select name="sortColumn" placeholder required .options=${this.rowNames} .valueSelector=${(r: any) => r.key} ></lwdc-select>								
 							</lwdc-form-field>	
 							<lwdc-form-field group="order" label="Order">
-								<lwdc-radio  name="order" label="Ascending" checked value="ascending"></lwdc-radio>
-								<lwdc-radio  name="order" label="Descending" value="descending"></lwdc-radio>
+								<lwdc-radio  name="order" label="Ascending" checked value="Ascending"></lwdc-radio>
+								<lwdc-radio  name="order" label="Descending" value="Descending"></lwdc-radio>
 							</lwdc-form-field>
+							<table class="lwdc-table-entries">							
+								${[...this.sort].map((e: SortEntry) => html`
+									<tr>
+										<td @click="${(m: MouseEvent) => { this.sort.delete(e); this.requestUpdate(); }}"><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
+										<td>${e.header}</td>
+										<td>${e.direction}</td>
+									</tr>	
+								`)}
+							</table>
+
 							<lwdc-button  @click=${this.sortAdd}>Add</lwdc-button>
 						</<lwdc-form>
-					</lwdc-modal>								
-					<lwdc-modal title="Filter" id="filter">		
-						<div style="margin-bottom: 24px;">
-						</div>
-						<lwdc-button  @click=${(e: Event) => { ((e.target as HTMLElement).closest("lwdc-modal") as any).close(); }}>Filter</lwdc-button>								
 					</lwdc-modal>
-					
+
+
+					<lwdc-modal title="Filter" id="filter">		
+						<lwdc-form .labelPosition=${FormFieldLabelPosition.Top}>
+							<lwdc-form-field label="Column">
+								<lwdc-select name="filterColumn" placeholder required .options=${this.rowNames} .valueSelector=${(r: any) => r.key} ></lwdc-select>								
+							</lwdc-form-field>	
+							<lwdc-form-field group="by" label="By">
+								<lwdc-radio  name="by" label="Contains" checked value="Contains"></lwdc-radio>
+								<lwdc-radio  name="by" label="Begins-With" value="Begins-With"></lwdc-radio>
+								<lwdc-radio  name="by" label="Ends-With" value="Ends-With"></lwdc-radio>
+								<lwdc-radio  name="by" label="RegExp" value="RegExp"></lwdc-radio>
+							</lwdc-form-field>
+							<lwdc-form-field label="Value">
+								<lwdc-text name="value" required></lwdc-text>
+							</lwdc-form-field>
+							<table class="lwdc-table-entries">							
+								${[...this.filter].map((e: FilterEntry) => html`
+									<tr>
+										<td @click="${(m: MouseEvent) => { this.filter.delete(e); this.requestUpdate(); }}"><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
+										<td>${e.header}</td>
+										<td>${e.by}</td>
+										<td>${e.value}</td>
+									</tr>	
+								`)}
+							</table>
+
+							<lwdc-button  @click=${this.filterAdd}>Add</lwdc-button>
+						</<lwdc-form>
+					</lwdc-modal>
 					
 					<div class="wdc-table-meta">
 						<div class="wdc-table-info">
 							<span class="wdc-table-name">${this.name}</span>
 							<span class="wdc-table-row-count">${this.view.length} Items</span>
 						</div>
-						${[...this.sort].map((e: SortEntry) => html`<div>${e.header}</div>`)}
-
+						
 						<div class="wdc-icon-list">
 							
 							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${this.handleSort.bind(this)}>
@@ -178,7 +253,7 @@ export class TableElement<E> extends LitElement {
 	}
 
 	get rowNames() {
-		return this.rows.map((r: TableRowElement, i: number) => <any>{ 'id': i, 'name': r.header });
+		return this.cols.filter((r: TableColumnElement) => r.key).map((r: TableColumnElement) => <any>{ 'key': r.key, 'name': r.header });
 	}
 
 	resetView() {
@@ -193,33 +268,45 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			console.log('add', form.item("order")!.value, form.item("sortRow"));
-			//dialog.close();
+			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("sortColumn").valueId);
+			if (col && ![...this.sort].find((e: SortEntry) => e.key === col.key)) {
+				this.sort.add(<SortEntry>{
+					key: col.key,
+					header: col.header,
+					direction: form.item("order")!.value
+				});
+				this.requestUpdate();
+				//dialog.close();
+			}
 		}
-
 	}
 
-	sortRemove(e: SortEntry) {
-
-
-	}
 
 	handleFilter() {
 		this.filterDialog!.open();
 	}
 
-	performFilter(e: Event) {
+	filterAdd(e: Event) {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
-		let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
+		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			dialog.close();
+			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("filterColumn").valueId);
+			if (col && ![...this.filter].find((e: FilterEntry) => e.key === col.key)) {
+				this.filter.add(<FilterEntry>{
+					key: col.key,
+					header: col.header,
+					by: form.item("by")!.value,
+					value: form.item("value")!.value
+				});
+				this.requestUpdate();
+				//dialog.close();
+			}
 		}
-
 	}
 
 	entryRow(e: E) {
 		let body: TemplateResult[] = [];
-		this.rows.forEach((row: TableRowElement) => {
+		this.cols.forEach((row: TableColumnElement) => {
 			body.push(this.renderCell(e, row));
 		});
 		if (this.selectMode) {
@@ -259,7 +346,7 @@ export class TableElement<E> extends LitElement {
 							</div>
 						</td>
 		`);
-		this.rows.forEach((row: TableRowElement) => {
+		this.cols.forEach((row: TableColumnElement) => {
 			if (this.inlineEditMode) {
 				if (row.key) {
 					let obj = e as any;
@@ -282,11 +369,11 @@ export class TableElement<E> extends LitElement {
 
 	}
 
-	cellWidth(row: TableRowElement) {
+	cellWidth(row: TableColumnElement) {
 		return ifDefined(row.width ? 'width: ' + row.width : undefined);
 	}
 
-	renderCell(e: E, row: TableRowElement): TemplateResult {
+	renderCell(e: E, row: TableColumnElement): TemplateResult {
 		if (row.key) {
 			let obj = e as any;
 			return html`<td style="${this.cellWidth(row)}">${obj[row.key]}</td>`;
@@ -361,12 +448,13 @@ interface SortEntry {
 interface FilterEntry {
 	header: string;
 	key: string;
-	contains: string;
+	by: string;
+	value: string;
 }
 
 
-@customElement('lwdc-table-row')
-export class TableRowElement extends LitElement {
+@customElement('lwdc-table-col')
+export class TableColumnElement extends LitElement {
 
 	@property({ type: String, attribute: true })
 	key?: string;
@@ -383,7 +471,7 @@ export class TableRowElement extends LitElement {
 
 }
 
-export default { TableElement, TableRowElement };
+export default { TableElement, TableColumnElement };
 
 
 
