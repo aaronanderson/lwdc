@@ -3,6 +3,7 @@ import { CanvasIcon } from '@workday/design-assets-types';
 import { classMap } from 'lit-html/directives/class-map';
 
 import styleCSS from './lwdc-menu-item.scss';
+import { styleLightDOM } from './util';
 const style = css([`${styleCSS}`] as any)
 
 
@@ -28,10 +29,7 @@ export class MenuItemElement extends LitElement {
 
 
 	connectedCallback() {
-		if (this.getRootNode()) {
-			const rootNode = this.getRootNode() as any;
-			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
-		}
+		styleLightDOM(this, style, 'lwdc-menu-item');		
 		this.elementChildNodes = Array.from(this.childNodes);
 		super.connectedCallback();
 	}

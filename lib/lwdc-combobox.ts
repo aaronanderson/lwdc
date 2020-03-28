@@ -182,6 +182,9 @@ export class ComboboxElement<T> extends LitElement {
 
 	formResetCallback() {
 		this.selected.clear();
+		this.internals.setValidity({ customError: false });
+		this.formField.hintText = undefined;
+		this.requestUpdate();
 	}
 
 

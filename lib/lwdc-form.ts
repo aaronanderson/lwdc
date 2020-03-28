@@ -19,13 +19,18 @@ export class FormElement extends LitElement {
 	@property({ type: Array })
 	elementChildNodes: Array<ChildNode> = [];
 
-	static get styles() {
-		return [style];
-	}
 
 	connectedCallback() {
 		this.elementChildNodes = Array.from(this.childNodes);
 		super.connectedCallback();
+	}
+
+	createRenderRoot() {
+		return this;
+	}
+
+	static get styles() {
+		return [style];
 	}
 
 	render() {
@@ -42,7 +47,7 @@ export class FormElement extends LitElement {
 	}
 
 	validate() {
-		let form = this.shadowRoot!.querySelector("form") as HTMLFormElement;
+		let form = this.querySelector("form") as HTMLFormElement;
 		if (form) {
 			//further research needed to see why custom element form validate is not triggered the same way as a native component is triggered
 			for (let element of Array.from(form.elements)) {
@@ -52,6 +57,27 @@ export class FormElement extends LitElement {
 			return form.checkValidity();
 		}
 		return false;
+	}
+
+	reset() {
+		let form = this.querySelector("form") as HTMLFormElement;
+		if (form) {
+			//further research needed to see why custom element form validate is not triggered the same way as a native component is triggered
+			// for (let element of Array.from(form.elements)) {
+			// 	(<any>element).reset && (<any>element).reset();
+			// }
+
+			return form.reset();
+		}
+		return false;
+	}
+
+	item(name: string) {
+		let form = this.querySelector("form") as HTMLFormElement;
+		if (form) {
+			return form.elements.namedItem(name);
+		}
+
 	}
 
 

@@ -41,11 +41,13 @@ export class TableElement<E> extends LitElement {
 
 	_entries: E[] = [];
 
-	_view: E[] = [];
-
 	selections: Set<E> = new Set();
 
 	rows: TableRowElement[] = [];
+
+	sort: Set<SortEntry> = new Set();
+
+	filter: Set<FilterEntry> = new Set();
 
 
 	@property({ type: Array })
@@ -58,6 +60,12 @@ export class TableElement<E> extends LitElement {
 		this._entries = [...value];
 		this.resetView();
 		this.requestUpdate('entries', oldValue);
+	}
+
+	@property({ type: Array })
+	public get view(): E[] {
+		const viewEntries = Array.from(this._entries);
+		return viewEntries;
 	}
 
 	static get styles() {
@@ -92,7 +100,7 @@ export class TableElement<E> extends LitElement {
 							</tr>
 						</thead>
 						<tbody>
-							${this._view.map((e: E) => this.entryRow(e))}               
+							${this.view.map((e: E) => this.entryRow(e))}               
 						</tbody>
 					</table>
 	
@@ -115,11 +123,11 @@ export class TableElement<E> extends LitElement {
 						</tr>
 					</thead>
 					<tbody>
-						${this._view.map((e: E) => this.entryEditRow(e))}               
+						${this.view.map((e: E) => this.entryEditRow(e))}               
 					</tbody>
 				</table>
 				
-				${this.additionalEditRenderer ? this.additionalEditRenderer(this._view) : null}
+				${this.additionalEditRenderer ? this.additionalEditRenderer(this.view) : null}
 			
 			`
 
@@ -132,18 +140,14 @@ export class TableElement<E> extends LitElement {
 					<lwdc-modal title="Sort" id="sort">		
 						<lwdc-form .labelPosition=${FormFieldLabelPosition.Top}>
 							<lwdc-form-field label="Row">
-								<lwdc-select name="sortRow" required .options=${this.rowNames}></lwdc-select>								
+								<lwdc-select name="sortRow" placeholder required .options=${this.rowNames}></lwdc-select>								
 							</lwdc-form-field>	
 							<lwdc-form-field group="order" label="Order">
-
-								<lwdc-radio  name="order" label="Ascending" checked></lwdc-radio>
-								<lwdc-radio  name="order" label="Descending"></lwdc-radio>
-
+								<lwdc-radio  name="order" label="Ascending" checked value="ascending"></lwdc-radio>
+								<lwdc-radio  name="order" label="Descending" value="descending"></lwdc-radio>
 							</lwdc-form-field>
-							<lwdc-button  @click=${this.performSort}>Sort</lwdc-button>
+							<lwdc-button  @click=${this.sortAdd}>Add</lwdc-button>
 						</<lwdc-form>
-						
-								
 					</lwdc-modal>								
 					<lwdc-modal title="Filter" id="filter">		
 						<div style="margin-bottom: 24px;">
@@ -155,8 +159,9 @@ export class TableElement<E> extends LitElement {
 					<div class="wdc-table-meta">
 						<div class="wdc-table-info">
 							<span class="wdc-table-name">${this.name}</span>
-							<span class="wdc-table-row-count">${this._view.length} Items</span>
+							<span class="wdc-table-row-count">${this.view.length} Items</span>
 						</div>
+						${[...this.sort].map((e: SortEntry) => html`<div>${e.header}</div>`)}
 
 						<div class="wdc-icon-list">
 							
@@ -177,7 +182,6 @@ export class TableElement<E> extends LitElement {
 	}
 
 	resetView() {
-		this._view = Array.from(this._entries);
 		this.selections.clear();
 	}
 
@@ -185,13 +189,18 @@ export class TableElement<E> extends LitElement {
 		this.sortDialog!.open();
 	}
 
-	performSort(e: Event) {
+	sortAdd(e: Event) {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
-		let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
+		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-
-			dialog.close();
+			console.log('add', form.item("order")!.value, form.item("sortRow"));
+			//dialog.close();
 		}
+
+	}
+
+	sortRemove(e: SortEntry) {
+
 
 	}
 
@@ -341,6 +350,18 @@ export class TableElement<E> extends LitElement {
 
 
 
+}
+
+interface SortEntry {
+	header: string;
+	key: string;
+	direction: string;
+}
+
+interface FilterEntry {
+	header: string;
+	key: string;
+	contains: string;
 }
 
 

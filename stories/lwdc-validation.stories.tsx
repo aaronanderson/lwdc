@@ -7,6 +7,7 @@ import { action } from '@storybook/addon-actions';
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 import { closestElement } from '../lib/util';
 
+import '../lib/lwdc-action-bar';
 import '../lib/lwdc-form';
 import '../lib/lwdc-form-field';
 import '../lib/lwdc-combobox';
@@ -56,7 +57,10 @@ export const validationStory = () => {
 						<lwdc-checkbox name="checkbox" label="E-Mail" required></lwdc-checkbox>
 					</lwdc-form-field>
 
-					<lwdc-button  @click=${(e: Event) => { (closestElement('lwdc-form', (e.target as HTMLElement)) as any).validate(); }}>Validate</lwdc-button>
+					<lwdc-action-bar>
+						<lwdc-button  @click=${validate}>Validate</lwdc-button>
+						<lwdc-button  @click=${reset}>Rest</lwdc-button>
+					</lwdc-action-bar>
 				</lwdc-form>
 				`;
 }
@@ -64,3 +68,14 @@ validationStory.story = {
 	name: 'Validation'
 }
 
+const validate = (e: Event) => {
+	const form = (closestElement('lwdc-form', (e.target as HTMLElement)) as any);
+	if (form.validate()) {
+		console.log('Text: ', form.item('text')!.value);
+	}
+}
+
+const reset = (e: Event) => {
+	const form = (closestElement('lwdc-form', (e.target as HTMLElement)) as any);
+	form.reset();
+}

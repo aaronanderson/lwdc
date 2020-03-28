@@ -2,7 +2,7 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import FormFieldElement from './lwdc-form-field';
-import {styleLightDOM} from './util';
+import { styleLightDOM } from './util';
 
 import styleCSS from './lwdc-textarea.scss';
 const style = css([`${styleCSS}`] as any)
@@ -44,7 +44,7 @@ export class TextAreaElement extends LitElement {
 	}
 
 	connectedCallback() {
-		styleLightDOM(this,style,'lwdc-textarea');		
+		styleLightDOM(this, style, 'lwdc-textarea');
 		super.connectedCallback();
 	}
 
@@ -101,6 +101,8 @@ export class TextAreaElement extends LitElement {
 	formResetCallback() {
 		this.value = undefined;
 		this.internals.setFormValue(this.value);
+		this.internals.setValidity({ customError: false }, undefined);
+		this.formField.hintText = undefined;
 	}
 
 

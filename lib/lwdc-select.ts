@@ -10,16 +10,16 @@ const style = css([`${styleCSS}`] as any)
 export class SelectElement<T> extends LitElement {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name?: String;
+	name?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
-	valueId?: String;
+	valueId?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
 
 	@property({ type: String, attribute: true, reflect: true })
-	placeholder?: String;
+	placeholder?: string = ' ';
 
 	@property({ type: Object })
 	nameSelector: SelectNameSelector<T> = defaultNameSelector;
@@ -56,6 +56,10 @@ export class SelectElement<T> extends LitElement {
 
 
 	firstUpdated() {
+
+		if (!this.placeholder && this.options.length) {
+			this.valueId = this.valueSelector(this.options[0]);
+		}
 		this.internals = (this as any).attachInternals();
 		if (!this.getAttribute("tabindex")) {
 			this.setAttribute("tabindex", "-1");
@@ -81,8 +85,8 @@ export class SelectElement<T> extends LitElement {
 	render() {
 		return html`<div class="wdc-form-select">
 						<select formnovalidate autocomplete="on" @change=${this.handleChange}>
-							<option ?selected=${!this.valueId} disabled hidden style='display: none' value=""></option>
-			${this.options.map((e: T) => {
+							${this.placeholder ? html`<option ?selected=${!this.valueId} disabled hidden style='display: none' value="">${this.placeholder}</option>` : undefined} 
+			${this.options.map((e: T, i: number) => {
 			let name = this.nameSelector(e);
 			let value = this.valueSelector(e);
 			let selected = value && (value === this.valueId);
@@ -109,7 +113,7 @@ export class SelectElement<T> extends LitElement {
 	}
 
 	checkValidity() {
-		if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.valueId))) {
+		if (!this.matches(':disabled') && (this.hasAttribute('required') && (this.valueId === undefined))) {
 			this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
 			this.formField.hintText = this.internals.validationMessage;
 		} else {
@@ -121,6 +125,8 @@ export class SelectElement<T> extends LitElement {
 
 	formResetCallback() {
 		this.valueId = undefined;
+		this.internals.setValidity({ customError: false });
+		this.formField.hintText = undefined;
 	}
 
 
