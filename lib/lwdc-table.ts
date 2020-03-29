@@ -9,7 +9,7 @@ import './lwdc-select';
 import './lwdc-button';
 import './lwdc-text';
 
-import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon } from '@workday/canvas-system-icons-web';
+import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon, arrowUpIcon, arrowDownIcon } from '@workday/canvas-system-icons-web';
 import ModalElement from './lwdc-modal';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement } from './util';
@@ -90,7 +90,6 @@ export class TableElement<E> extends LitElement {
 			}
 		}
 
-
 		for (let sortEntry of this.sort) {
 			const col = this.cols.find((r: TableColumnElement) => r.key === sortEntry.key);
 			if (col && col.key) {
@@ -109,6 +108,11 @@ export class TableElement<E> extends LitElement {
 		}
 		return viewEntries;
 	}
+
+	resetView() {
+		this.selections.clear();
+	}
+
 
 	static get styles() {
 		return [style];
@@ -138,7 +142,7 @@ export class TableElement<E> extends LitElement {
 					<table class="wdc-table">
 						<thead>
 							<tr>
-								${this.cols.map((r: TableColumnElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)}
+								${this.cols.map((r: TableColumnElement) => this.renderHeader(r))}
 							</tr>
 						</thead>
 						<tbody>
@@ -161,7 +165,7 @@ export class TableElement<E> extends LitElement {
 									<lwdc-icon .icon=${plusIcon}></lwdc-icon>
 								</span>	
 							</th>
-							${this.cols.map((r: TableColumnElement) => html`<th scope="col" style="${this.cellWidth(r)}">${r.header}</th>`)} 
+							${this.cols.map((r: TableColumnElement) => this.renderHeader(r))} 
 						</tr>
 					</thead>
 					<tbody>
@@ -240,10 +244,10 @@ export class TableElement<E> extends LitElement {
 						
 						<div class="wdc-icon-list">
 							
-							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${this.handleSort.bind(this)}>
+							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${() => this.sortDialog!.open()}>
 								<lwdc-icon .icon=${sortIcon}></lwdc-icon>
 							</div>	
-							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${this.handleFilter.bind(this)}>
+							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${() => this.filterDialog!.open()}>
 								<lwdc-icon .icon=${filterIcon}></lwdc-icon>
 							</div>
 						</div>
@@ -252,17 +256,40 @@ export class TableElement<E> extends LitElement {
 		`;
 	}
 
+	renderHeader(r: TableColumnElement): TemplateResult {
+		let contents = html`${r.header}`;
+		for (let sortEntry of this.sort) {
+			if (sortEntry.key === r.key) {
+				let icon = sortEntry.direction === 'Ascending' ? arrowDownIcon : arrowUpIcon;
+				contents = html`${contents}<lwdc-icon .icon=${icon} .color=${'blueberry500'} .size=${16} ></lwdc-icon>`;
+			}
+		}
+		for (let filterEntry of this.filter) {
+			if (filterEntry.key === r.key) {
+				contents = html`${contents}<lwdc-icon .icon=${filterIcon} .color=${'blueberry500'} .size=${16} ></lwdc-icon>`;
+			}
+		}
+		return html`<th scope="col" style="${this.cellWidth(r)}">${contents}</th>`;
+	}
+
+
+	renderCell(e: E, row: TableColumnElement): TemplateResult {
+		let contents = undefined;
+		if (row.renderer) {
+			contents = html`${row.renderer(e)}`;
+		} else if (row.key) {
+			let obj = e as any;
+			contents = html`${obj[row.key]}</td>`;
+		}
+		return html`<td style="${this.cellWidth(row)}">${contents}</td>`;
+	}
+
+
 	get rowNames() {
 		return this.cols.filter((r: TableColumnElement) => r.key).map((r: TableColumnElement) => <any>{ 'key': r.key, 'name': r.header });
 	}
 
-	resetView() {
-		this.selections.clear();
-	}
 
-	handleSort() {
-		this.sortDialog!.open();
-	}
 
 	sortAdd(e: Event) {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
@@ -279,11 +306,6 @@ export class TableElement<E> extends LitElement {
 				//dialog.close();
 			}
 		}
-	}
-
-
-	handleFilter() {
-		this.filterDialog!.open();
 	}
 
 	filterAdd(e: Event) {
@@ -348,18 +370,20 @@ export class TableElement<E> extends LitElement {
 		`);
 		this.cols.forEach((row: TableColumnElement) => {
 			if (this.inlineEditMode) {
-				if (row.key) {
+				if (row.renderer) {
+					body.push(html`<td style="${this.cellWidth(row)}">${row.renderer(e)}</td>`);
+				} else if (row.key) {
 					let obj = e as any;
 					let k: string = row.key;
 					body.push(html`
 						<td style="${this.cellWidth(row)}">
-							<div class="wdc-form-textinput">
-									<input type="text" class="wdc-form-textinput" .value="${obj.hasOwnProperty(k) ? obj[k] : null}" @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}/>
-							</div>
+							<lwdc-form-field label=${row.header} .showLabel=${undefined}>
+								<lwdc-text ?required=${ifDefined(row.required)} .value="${obj.hasOwnProperty(k) ? obj[k] : null}" @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
+							</lwdc-form-field>		
 						</td>								
 					`);
-				} else if (row.renderer) {
-					body.push(html`<td style="${this.cellWidth(row)}">${row.renderer(e)}</td>`);
+				} else {
+					return html``;
 				}
 			} else {
 				body.push(this.renderCell(e, row));
@@ -373,16 +397,6 @@ export class TableElement<E> extends LitElement {
 		return ifDefined(row.width ? 'width: ' + row.width : undefined);
 	}
 
-	renderCell(e: E, row: TableColumnElement): TemplateResult {
-		if (row.key) {
-			let obj = e as any;
-			return html`<td style="${this.cellWidth(row)}">${obj[row.key]}</td>`;
-		} else if (row.renderer) {
-			return html`<td style="${this.cellWidth(row)}">${row.renderer(e)}</td>`;
-		} else {
-			return html``;
-		}
-	}
 
 	fireEvent(type: string, e?: E) {
 		this.dispatchEvent(new CustomEvent(`lwdc-table-${type}`, e ? {
@@ -464,6 +478,9 @@ export class TableColumnElement extends LitElement {
 
 	@property({ type: String, attribute: true })
 	width?: string;
+
+	@property({ type: Boolean, attribute: true })
+	required: boolean = false;
 
 	@property({ type: Object })
 	renderer?: Function;

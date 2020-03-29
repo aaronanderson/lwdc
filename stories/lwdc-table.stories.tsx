@@ -5,16 +5,17 @@ import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
 
 import { loadWDCFonts } from '../lib/lwdc-fonts';
-
+import { closestElement } from '../lib/util';
 import '../lib/lwdc-table';
 import '../lib/lwdc-text';
+import { TableElement } from '../lib/lwdc-table';
 
 
 
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="width: 600px; margin: 64px 64px; ">${storyFn()}</div>`;
+const center = (storyFn: () => unknown) => html`<div style="width: 70%; margin: 64px 64px; ">${storyFn()}</div>`;
 
 
 export default {
@@ -45,7 +46,7 @@ export const tableStory = () => {
 					<div>
 						<h3>Inline Edit</h3>
 						<lwdc-table edit inline .entries=${entries} @lwdc-table-add=${add} @lwdc-table-edit=${edit} @lwdc-table-remove=${remove}} .additionalEditRenderer=${dataList.bind(this)}>
-							<lwdc-table-col key="id" header="ID"></lwdc-table-col>
+							<lwdc-table-col key="id" header="ID" ?required=${true}></lwdc-table-col>
 							<lwdc-table-col key="name" .renderer=${nameRenderer} header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
 						</lwdc-table>
@@ -70,15 +71,18 @@ const remove = (e: CustomEvent) => {
 
 const nameRenderer = (e: any) => {
 	return html`
-					`;
+		<lwdc-form-field label="Name" .showLabel=${undefined}>
+			<lwdc-text required .value="${e.name}" @change=${(c: Event) => { let t = (c.target as any); let table = closestElement('lwdc-table', t) as TableElement<any>; e.name = t.value; table.fireEvent('edit', e); table.requestUpdate(); }} list="names"></lwdc-text>
+		</lwdc-form-field>
+	`;
 }
 
 const dataList = () => {
 	return html`
 					<datalist id="names">	
-						<option label="Entry 1" >Entry 1</option>
-						<option label="Entry 2" >Entry 2</option>
-						<option label="Entry 2" >Entry 3</option>
+						<option label="First" >Entry 1</option>
+						<option>Entry 2</option>
+						<option label="Final" >Entry 3</option>
 					</datalist>`;
 }
 

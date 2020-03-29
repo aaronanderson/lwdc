@@ -19,8 +19,11 @@ export class FormFieldElement extends LitElement {
 	@property({ type: String, attribute: true, reflect: true })
 	label?: String;
 
-	@property({ type: String, attribute: true, reflect: true })
+	@property({ type: String, attribute: 'hint-text', reflect: true })
 	hintText?: String;
+
+	@property({ type: Boolean })
+	showLabel = true;
 
 
 	@property({ type: Number })
@@ -32,8 +35,6 @@ export class FormFieldElement extends LitElement {
 		return [style];
 	}
 
-
-
 	//disable shadow DOM so containing wdc-form class relative css can be applied
 	//https://github.com/Polymer/lit-element/issues/824#issuecomment-536093753
 	createRenderRoot() {
@@ -42,7 +43,6 @@ export class FormFieldElement extends LitElement {
 
 	connectedCallback() {
 		styleLightDOM(this, style, 'lwdc-form-field');
-
 		this.elementChildren = Array.from(this.children);
 		super.connectedCallback();
 	}
@@ -54,7 +54,7 @@ export class FormFieldElement extends LitElement {
 	get defaultTemplate() {
 
 		let fieldClass = {
-			'wdc-form-field-wrapper': true,
+			'wdc-form-field-wrapper': this.showLabel,
 			'wdc-form-group': !!this.group,
 			'wdc-form-field-error': (this.errorType == ErrorType.error) && !!this.hintText,
 			'wdc-form-field-alert': (this.errorType == ErrorType.alert) && !!this.hintText
@@ -67,10 +67,11 @@ export class FormFieldElement extends LitElement {
 
 
 		return html`<div class="${classMap(fieldClass)}">
-						<label class="wdc-form-label">
-						${ifDefined(this.label)}
-						${this.requiredTemplate}
-						</label>
+						${this.showLabel ?
+				html`<label class="wdc-form-label">
+									${ifDefined(this.label)}
+									${this.requiredTemplate}
+								</label>`: undefined}
 						<div class="${classMap(formClass)}">
 							${this.elementChildren}
 							${this.hintTemplate}
@@ -81,7 +82,7 @@ export class FormFieldElement extends LitElement {
 
 	get groupTemplate() {
 		let fieldClass = {
-			'wdc-form-field-wrapper': true,
+			'wdc-form-field-wrapper': this.showLabel,
 			'wdc-form-group': !!this.group,
 			'wdc-form-field-error': (this.errorType == ErrorType.error) && !!this.hintText,
 			'wdc-form-field-alert': (this.errorType == ErrorType.alert) && !!this.hintText
@@ -94,15 +95,16 @@ export class FormFieldElement extends LitElement {
 
 
 		return html`<fieldset class="${classMap(fieldClass)}"> 
-						<legend class="wdc-form-label">
+						${this.showLabel ?
+				html`<legend class="wdc-form-label">
 							${ifDefined(this.label)}
 							${this.requiredTemplate}		
-						</legend>
+						</legend>`: undefined}
 						 <div class="wdc-form-group-fields">
 
 							${this.elementChildren.map((e: Element) => {
-			return html`<div class="${classMap(formClass)}">${e}</div>`;
-		})}
+					return html`<div class="${classMap(formClass)}">${e}</div>`;
+				})}
 								${this.hintTemplate}
 							</div>
 					</fieldset>
