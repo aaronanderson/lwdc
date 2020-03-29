@@ -14,6 +14,8 @@ The purpose of these components are:
 
 [React](https://reactjs.org/) based applications would benefit from the direct usage of the React components included in Canvas Kit. Web Component based applications can easily include these components or wrap the React components using [PReact](https://preactjs.com/) as demonstrated [here](https://github.com/aaronanderson/lit-react).
 
+New contributors are welcome.
+
 ## Styling
 
 Logically each Canvas Kit component should be wrapped as a LitElement web component. However some of the Canvas Kit component utilize descendant CSS selectors that are unable to pierce web component shadow DOMs.  For example, [error.scss](https://github.com/Workday/canvas-kit/blob/master/modules/common/css/lib/errors.scss) defines `wdc-form-error` at the form field level and has descendant selectors for text and select inputs. There are three potential solutions to this issues:
@@ -24,7 +26,7 @@ Logically each Canvas Kit component should be wrapped as a LitElement web compon
 
 * Forego the use of the Shadow DOM and create elements in the Light DOM.
 
-The Light DOM option was used for select components. The ::slotted and ::part solution would require upstream changes to Canvas Kit SCSS or a large amount of forked SCSS to replicate [SCSS parent selectors](https://sass-lang.com/documentation/style-rules/parent-selector). Likewise the :host-context() solution would require advanced introspection of the SCSS and targeted CSS for child components.Due to the complex nature of the comobox component it does use the Shadow DOM and has [CSS selectors](lib/lwdc-combobox.scss) specifically for error highlighting.  
+The Light DOM option was used for select components. The ::slotted and ::part solution would require upstream changes to Canvas Kit SCSS or a large amount of forked SCSS to replicate [SCSS parent selectors](https://sass-lang.com/documentation/style-rules/parent-selector). Likewise the :host-context() solution would require advanced introspection of the SCSS and targeted CSS for child components. Due to the complex nature of the comobox component it does use the Shadow DOM and has [CSS selectors](lib/lwdc-combobox.scss) specifically for error highlighting.  
 
 The form related web components are added to the Light DOM and their styles are individually added to the closest shadow DOM or document. Typically form components will be wrapped by another custom element or the provided [lwdc-form](lib/lwdc-form.ts) element so the styles will have some isolation and not excessive duplication. 
 
@@ -56,5 +58,6 @@ Run the Storybook: `yarn storybook`
 
 This library has not been published to the NPM registry yet. It can be included in package by checking this project out, running `npm link` in the checked out directory, and then running `npm link @aaronanderson/lwdc` in the target project.
 
-Alternatively run `npm pack` in the checked out directory and then run `npm install <path to source>/aaronanderson-lwdc-1.0.0.tgz` in the target project to install it.
+Alternatively run `yarn pack` in the checked out directory and then run `yarn add file:aaronanderson-lwdc-1.0.0.tgz` in the target project to install it.
+
 
