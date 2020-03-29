@@ -11,6 +11,7 @@ export default {
     external: ['lit-element','lit-html/directives/class-map','lit-html/directives/if-defined', 'lit-html/directives/style-map'],
     input: {
         'index': 'lib/index.ts',
+        'lwdc-action-bar': 'lib/lwdc-action-bar.ts',
         'lwdc-button': 'lib/lwdc-button.ts',
         'lwdc-card': 'lib/lwdc-card.ts',
         'lwdc-checkbox': 'lib/lwdc-checkbox.ts',
@@ -22,6 +23,8 @@ export default {
         'lwdc-header': 'lib/lwdc-header.ts',
         'lwdc-icon': 'lib/lwdc-icon.ts',
         'lwdc-icon-inject': 'lib/lwdc-icon-inject.ts',
+        'lwdc-layout-box': 'lib/lwdc-layout-box.ts',
+        'lwdc-layout-page': 'lib/lwdc-layout-page.ts',
         'lwdc-loading': 'lib/lwdc-loading.ts',
         'lwdc-menu-item': 'lib/lwdc-menu-item.ts',
         'lwdc-menu': 'lib/lwdc-menu.ts',
