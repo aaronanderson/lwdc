@@ -1,3 +1,4 @@
+export * from './lwdc-action-bar';
 export * from './lwdc-button';
 export * from './lwdc-card';
 export * from './lwdc-checkbox';
@@ -9,6 +10,8 @@ export * from './lwdc-form';
 export * from './lwdc-header';
 export * from './lwdc-icon';
 export * from './lwdc-icon-inject';
+export * from './lwdc-layout-box';
+export * from './lwdc-layout-section';
 export * from './lwdc-loading';
 export * from './lwdc-menu-item';
 export * from './lwdc-menu';

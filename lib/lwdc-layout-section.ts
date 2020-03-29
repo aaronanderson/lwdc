@@ -2,12 +2,12 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap, StyleInfo } from 'lit-html/directives/style-map';
 
-import styleCSS from './lwdc-layout-page.scss';
+import styleCSS from './lwdc-layout-section.scss';
 const style = css([`${styleCSS}`] as any)
 
 
-@customElement('lwdc-layout-page')
-export class LayoutPageElement extends LitElement {
+@customElement('lwdc-section-row')
+export class LayoutSectionElement extends LitElement {
 
 	@property({ type: Number, attribute: true, reflect: true })
 	spacing?: number = 12;
@@ -46,8 +46,8 @@ export class LayoutPageElement extends LitElement {
 			let slot = e.target as HTMLSlotElement;
 			let elements = slot.assignedElements();
 			for (const element of elements) {
-				if (element instanceof LayoutPageColumnElement) {
-					const column = element as LayoutPageColumnElement;
+				if (element instanceof LayoutSectionColumnElement) {
+					const column = element as LayoutSectionColumnElement;
 					if (!column.spacing && column.spacing !== 0) {
 						column.spacing = this.spacing;
 
@@ -62,8 +62,8 @@ export class LayoutPageElement extends LitElement {
 }
 
 
-@customElement('lwdc-layout-col')
-export class LayoutPageColumnElement extends LitElement {
+@customElement('lwdc-section-col')
+export class LayoutSectionColumnElement extends LitElement {
 
 	@property({ type: Number, attribute: true, reflect: true })
 	spacing?: number;
@@ -104,7 +104,7 @@ export class LayoutPageColumnElement extends LitElement {
 
 }
 
-export default { LayoutPageElement, LayoutPageColumnElement };
+export default { LayoutSectionElement, LayoutSectionColumnElement };
 
 
 

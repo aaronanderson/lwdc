@@ -7,6 +7,7 @@ import './lwdc-form';
 import './lwdc-form-field';
 import './lwdc-select';
 import './lwdc-button';
+import './lwdc-radio';
 import './lwdc-text';
 
 import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon, arrowUpIcon, arrowDownIcon } from '@workday/canvas-system-icons-web';

@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 
 import '../lib/lwdc-layout-box';
-import '../lib/lwdc-layout-page';
+import '../lib/lwdc-layout-section';
 import '../lib/lwdc-card';
 
 import { customElement, LitElement, property, css } from 'lit-element';
@@ -277,116 +277,116 @@ boxLayoutStory.story = {
 	name: 'Box Layout'
 }
 
-export const pageLayoutStory = () => {
+export const sectionLayoutStory = () => {
 	return html`
 				<div style="display: block; max-width: 1400px; width: 100%;">
 					<h3>Full Page</h3>
-					<lwdc-layout-page gutter="0">
-						<lwdc-layout-col spacing="0">
+					<lwdc-section-row gutter="0">
+						<lwdc-section-col spacing="0">
 							<lwdc-card title="Full Page Layout with no gutter & spacing"></lwdc-card>
-						</lwdc-layout-col>	
-					</lwdc-layout-page>
+						</lwdc-section-col>	
+					</lwdc-section-row>
 
 					<h3>Full Page with gutter and spacing</h3>
-					<lwdc-layout-page>
-						<lwdc-layout-col>
+					<lwdc-section-row>
+						<lwdc-section-col>
 							<lwdc-card title="Full Page Layout with gutter & spacing"></lwdc-card>
-						</lwdc-layout-col>	
-					</lwdc-layout-page>
+						</lwdc-section-col>	
+					</lwdc-section-row>
 
 					<h3>Full Page with a max width</h3>
-					<lwdc-layout-page capWidth>
-						<lwdc-layout-col spacing="0">
+					<lwdc-section-row capWidth>
+						<lwdc-section-col spacing="0">
 							<lwdc-card title="Full Page Layout with max width"></lwdc-card>
-						</lwdc-layout-col>	
-					</lwdc-layout-page>
+						</lwdc-section-col>	
+					</lwdc-section-row>
 				</div>
 				
 				<div style="display: block; max-width: 1400px; width: 100%;">
 					<h3>12 Columns</h3>
 					<div>
-					<lwdc-layout-page>
-						<lwdc-layout-col>
+					<lwdc-section-row>
+						<lwdc-section-col>
 						<lwdc-card title="Column 1" />
-						</lwdc-layout-col>
-					</lwdc-layout-page>
-					<lwdc-layout-page>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+					</lwdc-section-row>
+					<lwdc-section-row>
+						<lwdc-section-col>
 						<lwdc-card title="Column 1" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Column 2" />
-						</lwdc-layout-col>
-					</lwdc-layout-page>
-					<lwdc-layout-page>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+					</lwdc-section-row>
+					<lwdc-section-row>
+						<lwdc-section-col>
 						<lwdc-card title="Column 1" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Column 2" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Column 3" />
-						</lwdc-layout-col>
-					</lwdc-layout-page>
-					<lwdc-layout-page>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+					</lwdc-section-row>
+					<lwdc-section-row>
+						<lwdc-section-col>
 						<lwdc-card title="Column 1" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Column 2" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Column 3" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Column 4" />
-						</lwdc-layout-col>
-					</lwdc-layout-page>
+						</lwdc-section-col>
+					</lwdc-section-row>
 					</div>
 					<h3>12 Column Grid Widths</h3>
 					<div>
-					<lwdc-layout-page>
-						<lwdc-layout-col columns="4">
+					<lwdc-section-row>
+						<lwdc-section-col columns="4">
 						<lwdc-card title="4 Columns" />
-						</lwdc-layout-col>
-						<lwdc-layout-col columns="8">
+						</lwdc-section-col>
+						<lwdc-section-col columns="8">
 						<lwdc-card title="8 Columns" />
-						</lwdc-layout-col>
-					</lwdc-layout-page>
+						</lwdc-section-col>
+					</lwdc-section-row>
 					</div>
 					<h3>Fixed Column Widths</h3>
 					<div>
-					<lwdc-layout-page>
-						<lwdc-layout-col width="400px">
+					<lwdc-section-row>
+						<lwdc-section-col width="400px">
 						<lwdc-card title="400px Fixed Width" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Responsive Column" />
-						</lwdc-layout-col>
-					</lwdc-layout-page>
+						</lwdc-section-col>
+					</lwdc-section-row>
 					</div>
 					<h3>Custom Spacing</h3>
 					<div>
-					<lwdc-layout-page spacing="60">
-						<lwdc-layout-col spacing="0">
+					<lwdc-section-row spacing="60">
+						<lwdc-section-col spacing="0">
 						<lwdc-card title="Custom Spacing (0px)" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Custom Spacing (60px)" />
-						</lwdc-layout-col>
-						<lwdc-layout-col>
+						</lwdc-section-col>
+						<lwdc-section-col>
 						<lwdc-card title="Custom Spacing (60px)" />
-						</lwdc-layout-col>
-					</lwdc-layout-page>
+						</lwdc-section-col>
+					</lwdc-section-row>
 					</div>
 				</div>
 				
 				`;
 }
 
-pageLayoutStory.story = {
-	name: 'Page Layout'
+sectionLayoutStory.story = {
+	name: 'Section Layout'
 }
 
 

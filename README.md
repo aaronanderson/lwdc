@@ -58,6 +58,6 @@ Run the Storybook: `yarn storybook`
 
 This library has not been published to the NPM registry yet. It can be included in package by checking this project out, running `npm link` in the checked out directory, and then running `npm link @aaronanderson/lwdc` in the target project.
 
-Alternatively run `yarn pack` in the checked out directory and then run `yarn add file:aaronanderson-lwdc-1.0.0.tgz` in the target project to install it.
+Alternatively run `yarn pack` in the checked out directory and then run `yarn remove @aaronanderson/lwdc`, `yarn cache clean`, `yarn add file:aaronanderson-lwdc-v1.0.0.tgz`  in the target project to install the latest version.
 
 

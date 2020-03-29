@@ -1,7 +1,6 @@
 // rollup.config.js
 //import typescript from '@rollup/plugin-typescript';
 import typescript from 'rollup-plugin-typescript2';
-//import nodeResolve from "@rollup/plugin-node-resolve";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
@@ -24,7 +23,7 @@ export default {
         'lwdc-icon': 'lib/lwdc-icon.ts',
         'lwdc-icon-inject': 'lib/lwdc-icon-inject.ts',
         'lwdc-layout-box': 'lib/lwdc-layout-box.ts',
-        'lwdc-layout-page': 'lib/lwdc-layout-page.ts',
+        'lwdc-layout-section': 'lib/lwdc-layout-section.ts',
         'lwdc-loading': 'lib/lwdc-loading.ts',
         'lwdc-menu-item': 'lib/lwdc-menu-item.ts',
         'lwdc-menu': 'lib/lwdc-menu.ts',

@@ -61,7 +61,7 @@ export class ButtonElement extends LitElement {
 
 export enum ButtonType {
 	primary,
-	secondary,
+	default,
 	delete,
 	plain,
 	iconCircle,

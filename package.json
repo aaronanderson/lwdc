@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Workday Canvas Kit Workday CanWeb Components",
   "main": "wc/index.js",
+  "module": "wc/index.js",
   "types": "wc/index.d.ts",
   "files": [
     "wc/",
@@ -14,7 +15,7 @@
   },
   "scripts": {
     "wca": "wca analyze --outFiles .storybook/custom-elements.json",
-    "clean": "rm -rf wc",
+    "clean": "rm -rf wc aaronanderson-lwdc*.tgz",
     "build": "rollup -c",
     "build-storybook": "build-storybook",
     "storybook": "start-storybook -p 9001"

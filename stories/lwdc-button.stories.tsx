@@ -29,10 +29,10 @@ const sizeOptions: Record<string, string> = size.reduce((r: Record<string, strin
 const sizesRadioKnob = () => radios("Size", sizeOptions, 'medium') as any;
 const sizeMap = new Map([['small', ButtonSize.small], ['medium', ButtonSize.medium], ['large', ButtonSize.large]]);
 
-const type = ['primary', 'secondary', 'delete'];
+const type = ['primary', 'default', 'delete'];
 const typeOptions: Record<string, string> = type.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
 const typesRadioKnob = () => radios("Type", typeOptions, 'primary') as any;
-const typeMap = new Map([['primary', ButtonType.primary], ['secondary', ButtonType.secondary], ['delete', ButtonType.delete]]);
+const typeMap = new Map([['primary', ButtonType.primary], ['default', ButtonType.default], ['delete', ButtonType.delete]]);
 
 
 export const buttonStory = () => {
