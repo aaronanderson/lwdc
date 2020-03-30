@@ -52,7 +52,7 @@ However the implementation is limited and full form validation is not currently 
 
 ## Storybook
 
-Build the components: `yarn install`
+Build the components: `yarn install` then `yarn build`
 
 Build the Storybook: `yarn build-storybook`
 
