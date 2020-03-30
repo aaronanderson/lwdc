@@ -37,7 +37,7 @@
 	padding: 0;
 	margin: 8px 0;
 
-	flex: 1;
+	//flex: 1;
 	display: inline-block;
 	//display: flex;
 	//min-width: #{'var(--lwdc-combobox-autocomplete-width, 280px)'};
@@ -46,7 +46,7 @@
 	//max-width: #{'var(--lwdc-combobox-autocomplete-width, 280px)'};
 	overflow-y: auto;
 	overflow-x: hidden;
-	overflow-wrap: break-word;
+	min-width: 280px;
 	max-height: #{'var(--lwdc-combobox-height, 400px)'};
 	max-width: #{'var(--lwdc-combobox-width, 280px)'};
 
@@ -59,7 +59,7 @@
 	border: none;
 	margin-top: 4px;
 	//width: 100%;
-	min-width: 0;
+	//min-width: 0;
 
 	padding: 0;
 
@@ -72,6 +72,7 @@
 	// max-width: #{'var(--lwdc-combobox-selected-width, 280px)'};
 	overflow-y: auto;
 	overflow-x: hidden;
+	min-width: 280px;
 	max-height: #{'var(--lwdc-combobox-selected-height, var(--lwdc-combobox-height, 400px))'};
 	max-width: #{'var(--lwdc-combobox-selected-width, var(--lwdc-combobox-width, 280px))'};
 
