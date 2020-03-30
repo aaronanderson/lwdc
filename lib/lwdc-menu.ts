@@ -37,16 +37,22 @@ export class MenuElement extends LitElement {
 		return [style];
 	}
 
+	updated(changedProperties: Map<string, any>) {
+		if (changedProperties.has("width") && this.width) {
+			this.style.setProperty('--lwdc-menu-width', this.width);
+		}
+	}
+
 	render() {
 		let classes = {
+			'lwdc-menu': !!this.width,
 			'wdc-menu': true,
-			'wdc-menu-grow': this.grow
+			'wdc-menu-grow': this.grow,			
 		}
 
-		let style = <StyleInfo>{ width: this.width };
 
 		return html`
-		<div class="${classMap(classes)}" role="menu" aria-label="Menu" style="${styleMap(this.width ? style : {})}">
+		<div class="${classMap(classes)}" role="menu" aria-label="Menu">
 			<ul>
 				 ${this.elementChildNodes}
 			</ul>

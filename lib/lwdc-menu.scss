@@ -1,5 +1,11 @@
-@import "~@workday/canvas-kit-css-menu";
+@import "~@workday/canvas-kit-css-menu/index.scss";
 
-/*:host,*/ lwdc-menu{
+/*:host,*/lwdc-menu {
 	display: contents;
+
 }
+
+.lwdc-menu {
+	width: #{'var(--lwdc-menu-width, inherit)'} !important;
+}
+

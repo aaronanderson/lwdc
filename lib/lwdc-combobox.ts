@@ -4,6 +4,7 @@ import FormFieldElement from './lwdc-form-field';
 import './lwdc-menu-item';
 
 import styleCSS from './lwdc-combobox.scss';
+import { classMap } from 'lit-html/directives/class-map';
 const style = css([`${styleCSS}`] as any)
 
 
@@ -29,6 +30,9 @@ export class ComboboxElement<T> extends LitElement {
 	@property({ type: String, attribute: true, reflect: true })
 	height?: string;
 
+	@property({ type: Boolean, attribute: true, reflect: true })
+	wrap?: boolean = false;
+
 
 	@property({ type: String, attribute: true, reflect: true })
 	selectedWidth?: string;
@@ -37,7 +41,7 @@ export class ComboboxElement<T> extends LitElement {
 	selectedHeight?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
-	selectedNoWrap: boolean = true;
+	selectedWrap?: boolean = false;
 
 
 	@property({ type: Object })
@@ -92,21 +96,17 @@ export class ComboboxElement<T> extends LitElement {
 			this.requestUpdate();
 		}
 		if (changedProperties.has("width") && this.width) {
-			this.style.setProperty('--lwdc-combobox-autocomplete-width', this.width);
-			this.requestUpdate();
+			this.style.setProperty('--lwdc-combobox-width', this.width);
 		}
 		if (changedProperties.has("width") && this.height) {
-			this.style.setProperty('--lwdc-combobox-autocomplete-height', this.height);
-			this.requestUpdate();
+			this.style.setProperty('--lwdc-combobox-height', this.height);
 		}
 		if (changedProperties.has("selectedWidth") && this.selectedWidth) {
 			this.style.setProperty('--lwdc-combobox-selected-width', this.selectedWidth);
-			this.requestUpdate();
 		}
 		if (changedProperties.has("selectedHeight") && this.selectedHeight) {
 			console.log('setting selected height', this.selectedHeight);
 			this.style.setProperty('--lwdc-combobox-selected-height', this.selectedHeight);
-			this.requestUpdate();
 		}
 	}
 
@@ -144,8 +144,12 @@ export class ComboboxElement<T> extends LitElement {
 
 	get menuTemplate() {
 		if (this.displayMenu && this.filtered.length > 0) {
+			let menuClass = {
+				'lwdc-combobox-autocomplete-list': true,
+				'lwdc-combobox-wrap': !!this.wrap
+			}
 			return html`
-							<lwdc-menu id="selections" tabindex="0" class="lwdc-combobox-autocomplete-list" grow>
+							<lwdc-menu id="selections" tabindex="0" class="${classMap(menuClass)}" width="${this.width ? this.width : '280px'}">
 								${this.filtered.map((o: T) => {
 				return html`<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`;
 			})}
@@ -156,12 +160,18 @@ export class ComboboxElement<T> extends LitElement {
 
 	get selectedTemplate() {
 		if (!this.displayMenu && this.selected.size > 0) {
-			return html`<div class="wdc-card lwdc-combobox-selected-container">
+
+			let menuClass = {
+				'wdc-card': true,
+				'lwdc-combobox-selected-container': true,
+				'lwdc-combobox-wrap': !!this.wrap || !!this.selectedWrap
+			}
+			return html`<div class="${classMap(menuClass)}">
 							<div class="wdc-card-body">
 								<ul id="selected" role="listbox" tabindex="0"  tabIndex="0">
 								${this.options.map((o: T) => {
 
-				return this.selected.has(o) ? html`<li class="${ifDefined(this.selectedNoWrap ? 'lwdc-combobox-nowrap' : undefined)}">${this.nameSelector(o)}</li>` : null;
+				return this.selected.has(o) ? html`<li><span class="wdc-menu-item-label">${this.nameSelector(o)}</span></li>` : null;
 			})}
 								</ul>
 							</div>		
