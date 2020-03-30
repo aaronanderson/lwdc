@@ -42,21 +42,8 @@ export class SelectElement<T> extends LitElement {
 		return [style];
 	}
 
-	static loadStyles() {
-		//Custom fonts cannot be loaded in the ShadowDOM 
-		//https://blog.webf.zone/on-styling-web-components-b74b8c70c492
-		if (!document.head.querySelector('#lwdc-select')) {
-			const fontStyleNode = document.createElement('style');
-			fontStyleNode.id = "lwdc-select";
-			fontStyleNode.innerHTML = style.cssText;
-			document.head.appendChild(fontStyleNode);
-		}
-
-	}
-
-
 	firstUpdated() {
-
+		styleLightDOM(this, style, 'lwdc-select');	
 		if (!this.placeholder && this.options.length) {
 			this.valueId = this.valueSelector(this.options[0]);
 		}
@@ -64,13 +51,11 @@ export class SelectElement<T> extends LitElement {
 		if (!this.getAttribute("tabindex")) {
 			this.setAttribute("tabindex", "-1");
 		}
-		SelectElement.loadStyles();
 	}
 
 	//disable shadow DOM so containing wdc-form class relative css can be applied.	
 	//https://github.com/Polymer/lit-element/issues/824#issuecomment-536093753
-	createRenderRoot() {
-		styleLightDOM(this, style, 'lwdc-select');
+	createRenderRoot() {		
 		return this;
 	}
 

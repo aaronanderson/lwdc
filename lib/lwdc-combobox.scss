@@ -11,7 +11,9 @@
 @import '~@workday/canvas-kit-css-common/lib/variables';
 @import "~@workday/canvas-kit-css-common/lib/errors";
 
-
+:host {
+	display: contents;
+}
 
 .lwdc-combobox-container {
 	display: inline-block;
@@ -71,9 +73,9 @@ li {
 	padding: 8px 16px;
 	height: 24px;
 	box-sizing: border-box;
-	color: $wdc-color-black-pepper-300;	
+	color: $wdc-color-black-pepper-300;
 	display: flex;
-	
+
 	transition: background-color 80ms, color 80ms;
 
 

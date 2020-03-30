@@ -8,13 +8,15 @@ The purpose of these components are:
 
 * Wrap the Canvas Kit CSS components to reduce boilerplate code and typos
 
+* Offer alternatives to Canvas Kit React components that do not have CSS equivalents
+
 * Provide Javascript functionality such as dynamic styling and selection
 
 * Plug into HTML form validation
 
 [React](https://reactjs.org/) based applications would benefit from the direct usage of the React components included in Canvas Kit. Web Component based applications can easily include these components or wrap the React components using [PReact](https://preactjs.com/) as demonstrated [here](https://github.com/aaronanderson/lit-react).
 
-New contributors are welcome.
+New collaborators or contributors are welcome.
 
 ## Styling
 
@@ -44,7 +46,9 @@ The current version of Chrome supports both of these features without any extra 
 
 * [constructable style sheets issue](https://bugzilla.mozilla.org/show_bug.cgi?id=1520690)
 
-Partial form associated custom elements can be activated in the latest version of Firefox via the  `dom.webcomponents.elementInternals.enabled` setting in `about:config`
+Partial form associated custom element support can be activated in the latest version of Firefox via the  `dom.webcomponents.elementInternals.enabled` setting in `about:config`
+
+However the implementation is limited and full form validation is not currently functional in Firefox. If immediate Firefox support is needed please contact me and I will make an effort to polyfill or workaround this limitation.
 
 ## Storybook
 

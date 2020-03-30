@@ -1,5 +1,9 @@
 @import '~@workday/canvas-kit-css-radio';
 
+:host, lwdc-radio {
+	display: contents;
+}
+
 input[type="radio"] {
 	z-index: 1;
 }
