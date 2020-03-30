@@ -22,6 +22,24 @@ export class ComboboxElement<T> extends LitElement {
 	@property({ type: String, attribute: true, reflect: true })
 	placeholder?: String;
 
+
+	@property({ type: String, attribute: true, reflect: true })
+	width?: string;
+
+	@property({ type: String, attribute: true, reflect: true })
+	height?: string;
+
+
+	@property({ type: String, attribute: true, reflect: true })
+	selectedWidth?: string;
+
+	@property({ type: String, attribute: true, reflect: true })
+	selectedHeight?: string;
+
+	@property({ type: Boolean, attribute: true, reflect: true })
+	selectedNoWrap: boolean = true;
+
+
 	@property({ type: Object })
 	nameSelector: ComboboxNameSelector<T> = defaultNameSelector;
 
@@ -65,6 +83,7 @@ export class ComboboxElement<T> extends LitElement {
 		});
 		this.filtered = this.options;
 		this.selected.clear();
+
 	}
 
 	updated(changedProperties: Map<string, any>) {
@@ -72,11 +91,27 @@ export class ComboboxElement<T> extends LitElement {
 			this.selected.clear();
 			this.requestUpdate();
 		}
+		if (changedProperties.has("width") && this.width) {
+			this.style.setProperty('--lwdc-combobox-autocomplete-width', this.width);
+			this.requestUpdate();
+		}
+		if (changedProperties.has("width") && this.height) {
+			this.style.setProperty('--lwdc-combobox-autocomplete-height', this.height);
+			this.requestUpdate();
+		}
+		if (changedProperties.has("selectedWidth") && this.selectedWidth) {
+			this.style.setProperty('--lwdc-combobox-selected-width', this.selectedWidth);
+			this.requestUpdate();
+		}
+		if (changedProperties.has("selectedHeight") && this.selectedHeight) {
+			console.log('setting selected height', this.selectedHeight);
+			this.style.setProperty('--lwdc-combobox-selected-height', this.selectedHeight);
+			this.requestUpdate();
+		}
 	}
 
 
 	render() {
-
 		return html`
 			
 			<div class="lwdc-combobox-container">
@@ -126,7 +161,7 @@ export class ComboboxElement<T> extends LitElement {
 								<ul id="selected" role="listbox" tabindex="0"  tabIndex="0">
 								${this.options.map((o: T) => {
 
-				return this.selected.has(o) ? html`<li>${this.nameSelector(o)}</li>` : null;
+				return this.selected.has(o) ? html`<li class="${ifDefined(this.selectedNoWrap ? 'lwdc-combobox-nowrap' : undefined)}">${this.nameSelector(o)}</li>` : null;
 			})}
 								</ul>
 							</div>		
@@ -135,7 +170,6 @@ export class ComboboxElement<T> extends LitElement {
 	}
 
 	handleClick(o: T) {
-		console.log(o);
 		if (this.selected.has(o)) {
 			this.selected.delete(o);
 		} else {

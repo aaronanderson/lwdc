@@ -22,6 +22,10 @@ export class MenuElement extends LitElement {
 	elementChildNodes: Array<ChildNode> = [];
 
 
+	createRenderRoot() {
+		return this;
+	}
+
 	connectedCallback() {
 		styleLightDOM(this, style, 'lwdc-menu');
 		//Maybe need a mutation observer here in case child menu items change

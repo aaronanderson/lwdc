@@ -58,9 +58,9 @@ export class TextElement extends LitElement {
 		}
 	}
 
-	static get styles() {
-		return [style];
-	}
+	// static get styles() {		
+	// 	return [style];
+	// }
 
 	render() {
 

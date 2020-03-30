@@ -1,6 +1,10 @@
 @import "~@workday/canvas-kit-css-form-field";
 @import '~@workday/canvas-kit-css-core/lib/colors.scss';
 
+/*:host,*/ lwdc-form-field {
+	display: contents;
+}
+
 .lwdc-required-astrisk {
 	color: $wdc-color-cinnamon-300;
 	font-size: 16px;

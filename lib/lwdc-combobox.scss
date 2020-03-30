@@ -1,6 +1,6 @@
-@import '~@workday/canvas-kit-css-text-input';
-@import '~@workday/canvas-kit-css-card';
-@import "~@workday/canvas-kit-css-menu";
+@import '~@workday/canvas-kit-css-text-input/index.scss';
+@import '~@workday/canvas-kit-css-card/index.scss';
+@import "~@workday/canvas-kit-css-menu/index.scss";
 
 @import '~@workday/canvas-kit-css-core/lib/colors';
 @import "~@workday/canvas-kit-css-core/lib/mixins/type";
@@ -18,19 +18,32 @@
 .lwdc-combobox-container {
 	display: inline-block;
 	width: auto;
-
 	@include wdc-type();
 	@include wdc-type-body-1();
 }
 
 .lwdc-combobox-input-container {
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	position: relative;
 
+	flex-direction: column;
+
 }
 
+
+.lwdc-combobox-autocomplete-list {
+	padding: 0;
+	margin: 8px 0;
+
+	flex: 1;
+	display: inline-block;
+	min-width: #{'var(--lwdc-combobox-autocomplete-width, 280px)'};
+	overflow: auto;
+	max-height: #{'var(--lwdc-combobox-autocomplete-height, 200px)'};
+	max-width: #{'var(--lwdc-combobox-autocomplete-width, 280px)'};
+
+}
 
 .lwdc-combobox-selected-container {
 	top: 100%;
@@ -43,30 +56,22 @@
 
 	padding: 0;
 
-
-}
-
-.lwdc-combobox-autocomplete-list {
-	padding: 0;
-	margin: 8px 0;
-
-	min-width: 280px;
+	flex: 1;
+	display: inline-block;
+	min-width: #{'var(--lwdc-combobox-selected-width, 280px)'};
 	overflow: auto;
-	max-height: 200px;
-	max-width: 280px;
-
-
-
+	max-height: #{'var(--lwdc-combobox-selected-height, 200px)'};
+	max-width: #{'var(--lwdc-combobox-selected-width, 280px)'};
 
 }
+
 
 ul {
-	display: flex;
-	flex-direction: column;
-
 	list-style: none;
 	padding: 0px;
 	margin: 8px 0px;
+
+	display: block;
 }
 
 li {
@@ -74,22 +79,25 @@ li {
 	height: 24px;
 	box-sizing: border-box;
 	color: $wdc-color-black-pepper-300;
-	display: flex;
+	//display: flex;
 
 	transition: background-color 80ms, color 80ms;
 
-
 	display: inline-block;
-	word-break: break-word;
+
+
 
 	/*text-overflow: ellipsis;
 			overflow: hidden;	
 			white-space: nowrap;*/
-
-
-
 }
 
+.lwdc-combobox-nowrap {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
 :host-context(.wdc-form-error) input[type="search"] {
 	@include wdc-form-error();

@@ -33,7 +33,7 @@ formFieldNormalStory.story = {
 }
 
 export const formFieldLeftlStory = () => {
-	return html`<lwdc-form><lwdc-form-field label="Label" .errorType=${ErrorType.alert} hintText="Check Value"><div>Value</div></lwdc-form-field></lwdc-form>`;
+	return html`<lwdc-form><lwdc-form-field label="Label" .errorType=${ErrorType.alert} hint-text="Check Value"><div>Value</div></lwdc-form-field></lwdc-form>`;
 }
 formFieldLeftlStory.story = {
 	name: 'Hint'

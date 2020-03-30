@@ -24,10 +24,12 @@ export default {
 };
 
 
-const options = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
+//const options = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
+const options: Array<any> = Array.from(Array(100)).map((_, i) => { return { name: `Entry ${i} XXXXXXXXX XXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXXXX XXXXXXXXXX`, id: i } });
+
 export const comboboxStory = () => {
 	return html`<lwdc-form-field label="Selection">
-						<lwdc-combobox name="selection" required  .options=${options}></lwdc-combobox>
+						<lwdc-combobox name="selection" required  .options=${options} .selectedWidth=${'400px'} .selectedNoWrap=${false}></lwdc-combobox>
 					</lwdc-form-field>
 				`;
 }
