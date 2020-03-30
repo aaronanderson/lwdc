@@ -27,6 +27,21 @@ export class ButtonElement extends LitElement {
 	@property({ type: Boolean, attribute: true, reflect: true })
 	inverse = false;
 
+
+	connectedCallback() {
+		super.connectedCallback();
+		this.shadowRoot!.addEventListener('click', evt => {
+			if (this.hasAttribute('disabled')) {
+				evt.preventDefault();
+				evt.stopImmediatePropagation();
+			}
+		}, true);
+	}
+
+
+
+
+
 	firstUpdated() {
 		if (!this.getAttribute("tabindex")) {
 			this.setAttribute("tabindex", "-1");
