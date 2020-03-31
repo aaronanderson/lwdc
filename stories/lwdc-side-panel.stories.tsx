@@ -117,7 +117,7 @@ class SidePanelElement extends LitElement {
 	render() {
 		return html`
 			 <main style="display: flex;flex-direction: row;">
-				<lwdc-side-panel header="Side Panel Header"  @lwdc-side-panel-toggle=${(e: CustomEvent) => { this.opened = e.detail.opened; }}>
+				<lwdc-side-panel header="Side Panel Header"  @lwdc-side-panel-toggle=${(e: CustomEvent) => { this.opened = e.detail.opened; }} style="--lwdc-sidebar-height: 50vh">
 						${this.sidePanelContent}
 				</lwdc-side-panel>
 				<section>Main Content</section>

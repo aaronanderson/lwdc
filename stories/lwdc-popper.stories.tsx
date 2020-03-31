@@ -15,7 +15,7 @@ import '../lib/lwdc-button';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; flex-flow: column; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
+const center = (storyFn: () => unknown) => html`<div style="height: 200px; position: relative; display: flex; flex-flow: column; align-items: center;  margin: 64px;">${storyFn()}</div>`;
 
 
 export default {
@@ -27,10 +27,10 @@ export default {
 
 
 export const popperStory = () => {
-	return html`<lwdc-popper style="margin: 16px;">		
+	return html`<lwdc-popper style="position:absolute; top: 10px;">		
 					<h3>Welcome to your popup positioned by Popper!</h3>
 				</lwdc-popper>
-				<lwdc-button @click=${(e: Event) => { ((e.target as HTMLElement).parentElement.querySelector("lwdc-popper") as any).open(); }}>Open</lwdc-button>
+				<lwdc-button @click=${(e: Event) => { ((e.target as HTMLElement).parentElement.querySelector("lwdc-popper") as any).open(); }} style="margin-top: auto;">Open</lwdc-button>
 				`;
 }
 popperStory.story = {

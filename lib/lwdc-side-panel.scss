@@ -7,7 +7,7 @@
 
 aside {
 	overflow: hidden;
-	height: 90vh;
+	height: #{'var(--lwdc-sidebar-height, 90vh)'};
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -23,7 +23,7 @@ aside.lwdc-open {
 }
 
 .lwdc-open {
-	width: var(--sidbar-open-width, 300px);
+	width: #{'var(--lwdc-sidebar-open-width, 300px)'};
 }
 
 aside.lwdc-close {
@@ -35,7 +35,7 @@ aside.lwdc-close {
 }
 
 .lwdc-close {
-	width: var(--sidbar-close-width, 64px);
+	width: #{'var(--lwdc-sidebar-close-width, 64px)'};
 }
 
 .header {
