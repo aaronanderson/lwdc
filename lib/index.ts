@@ -3,7 +3,8 @@ export * from './lwdc-button';
 export * from './lwdc-card';
 export * from './lwdc-checkbox';
 export * from './lwdc-combobox';
-export * from './lwdc-env-label';
+export * from './lwdc-env-label'
+export * from './lwdc-core';
 export * from './lwdc-fonts';
 export * from './lwdc-form-field';
 export * from './lwdc-form';

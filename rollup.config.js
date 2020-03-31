@@ -15,6 +15,7 @@ export default {
         'lwdc-card': 'lib/lwdc-card.ts',
         'lwdc-checkbox': 'lib/lwdc-checkbox.ts',
         'lwdc-combobox': 'lib/lwdc-combobox.ts',
+        'lwdc-core': 'lib/lwdc-core.ts',
         'lwdc-env-label': 'lib/lwdc-env-label.ts',
         'lwdc-fonts': 'lib/lwdc-fonts.ts',
         'lwdc-form': 'lib/lwdc-form.ts',
