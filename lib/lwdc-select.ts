@@ -43,7 +43,7 @@ export class SelectElement<T> extends LitElement {
 	}
 
 	firstUpdated() {
-		styleLightDOM(this, style, 'lwdc-select');	
+		styleLightDOM(this, style, 'lwdc-select');
 		if (!this.placeholder && this.options.length) {
 			this.valueId = this.valueSelector(this.options[0]);
 		}
@@ -55,7 +55,7 @@ export class SelectElement<T> extends LitElement {
 
 	//disable shadow DOM so containing wdc-form class relative css can be applied.	
 	//https://github.com/Polymer/lit-element/issues/824#issuecomment-536093753
-	createRenderRoot() {		
+	createRenderRoot() {
 		return this;
 	}
 
@@ -69,7 +69,7 @@ export class SelectElement<T> extends LitElement {
 
 	render() {
 		return html`<div class="wdc-form-select">
-						<select formnovalidate autocomplete="on" @change=${this.handleChange}>
+						<select formnovalidate ?disabled=${this.disabled} autocomplete="on" @change=${this.handleChange}>
 							${this.placeholder ? html`<option ?selected=${!this.valueId} disabled hidden style='display: none' value="">${this.placeholder}</option>` : undefined} 
 			${this.options.map((e: T, i: number) => {
 			let name = this.nameSelector(e);

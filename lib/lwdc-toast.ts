@@ -56,7 +56,6 @@ export class ToastElement extends LitElement {
 	}
 
 	get action() {
-		console.log(this.actionText);
 		if (!!this.actionText) {
 			return html`<button class="wdc-type-body-2 wdc-type-variant-link lwdc-toast-button" @onclick=${this.actionHandler}>${this.actionText}</button>`;
 		} else {
