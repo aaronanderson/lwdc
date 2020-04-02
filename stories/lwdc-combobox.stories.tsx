@@ -26,6 +26,8 @@ export default {
 
 //const options = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
 const options: Array<any> = Array.from(Array(100)).map((_, i) => { let sp = i % 2 == 0 ? ' ' : ''; return { name: `Entry ${i} XXXXXXXXX${sp}XXXXXXXXXXXXXXXXXXX${sp}XXXXXXXXXXXXXXXXXXXX${sp}XXXXXXXXXX`, id: i } });
+const selected = new Set();
+selected.add(options[1]); 
 
 const width = ['default', '500px', '100%'];
 const widthOptions: Record<string, string> = width.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
@@ -36,7 +38,7 @@ const wrapBox = () => boolean("Wrap", false);
 
 export const comboboxStory = () => {
 	return html`<lwdc-form-field label="Selection">
-						<lwdc-combobox name="selection" required  .options=${options} .selectedWidth=${widthMap.get(widthsRadioKnob())} ?wrap=${wrapBox()}></lwdc-combobox>
+						<lwdc-combobox name="selection" required  .options=${options} .selected=${selected} .selectedWidth=${widthMap.get(widthsRadioKnob())} ?wrap=${wrapBox()}></lwdc-combobox>
 					</lwdc-form-field>
 				`;
 }

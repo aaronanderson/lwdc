@@ -33,7 +33,6 @@ export class ComboboxElement<T> extends LitElement {
 	@property({ type: Boolean, attribute: true, reflect: true })
 	wrap?: boolean = false;
 
-
 	@property({ type: String, attribute: true, reflect: true })
 	selectedWidth?: string;
 
@@ -43,14 +42,13 @@ export class ComboboxElement<T> extends LitElement {
 	@property({ type: Boolean, attribute: true, reflect: true })
 	selectedWrap?: boolean = false;
 
-
 	@property({ type: Object })
 	nameSelector: ComboboxNameSelector<T> = defaultNameSelector;
 
 	@property({ type: Array })
 	options: Array<T> = [];
 
-
+	@property({ type: Array })
 	selected: Set<T> = new Set();
 
 	filtered: Array<T> = [];
@@ -85,14 +83,15 @@ export class ComboboxElement<T> extends LitElement {
 			this.searchInput.value = '';
 			this.filtered = this.options;
 		});
-		this.filtered = this.options;
-		this.selected.clear();
 
 	}
 
 	updated(changedProperties: Map<string, any>) {
 		if (changedProperties.has("options")) {
-			this.selected.clear();
+			this.filtered = this.options;
+			if (!changedProperties.has("selected")) {
+				this.selected.clear();
+			}
 			this.requestUpdate();
 		}
 		if (changedProperties.has("width") && this.width) {
@@ -105,7 +104,6 @@ export class ComboboxElement<T> extends LitElement {
 			this.style.setProperty('--lwdc-combobox-selected-width', this.selectedWidth);
 		}
 		if (changedProperties.has("selectedHeight") && this.selectedHeight) {
-			console.log('setting selected height', this.selectedHeight);
 			this.style.setProperty('--lwdc-combobox-selected-height', this.selectedHeight);
 		}
 	}
