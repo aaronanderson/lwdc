@@ -1,15 +1,14 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
-import FormFieldElement from './lwdc-form-field';
-import { styleLightDOM } from './util';
+import { styleLightDOM, formElement } from './util';
 
 import styleCSS from './lwdc-checkbox.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-checkbox')
-export class CheckboxElement extends LitElement {
+export class CheckboxElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: String;
@@ -18,19 +17,11 @@ export class CheckboxElement extends LitElement {
 	label?: String;
 
 	@property({ type: String, attribute: true, reflect: true })
-	value?: String;
+	value: Boolean = false;
 
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
-
-
-
-	static formAssociated = true;
-
-	//https://web.dev/more-capable-form-controls/#event-based-api
-	//https://github.com/microsoft/TypeScript/issues/33218
-	internals?: any;
 
 
 	//disable shadow DOM so containing wdc-form class relative css can be applied.
@@ -47,7 +38,6 @@ export class CheckboxElement extends LitElement {
 	}
 
 	firstUpdated() {
-		this.internals = (this as any).attachInternals();
 		if (!this.getAttribute("tabindex")) {
 			this.setAttribute("tabindex", "-1");
 		}
@@ -69,38 +59,14 @@ export class CheckboxElement extends LitElement {
         				  <label htmlFor="checkbox">${this.label}</label>							
 					</div>
 					`;
-	}
 
-
-	get formField() {
-		return this.closest('lwdc-form-field') as FormFieldElement;
 	}
 
 	handleChange(e: any) {
-		this.value = e.target.value;
+		this.value = e.target.checked;
 		this.internals.setFormValue(this.value);
 		this.checkValidity();
 	}
-
-
-	checkValidity() {
-		if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value))) {
-			this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
-			this.formField.hintText = this.internals.validationMessage;
-		} else {
-			this.internals.setValidity({ customError: false }, undefined);
-			this.formField.hintText = undefined;
-		}
-		return this.internals.checkValidity();
-	}
-
-	formResetCallback() {
-		this.value = undefined;
-		this.internals.setFormValue(this.value);
-		this.internals.setValidity({ customError: false }, undefined);
-		this.formField.hintText = undefined;
-	}
-
 
 }
 

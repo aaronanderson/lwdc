@@ -1,13 +1,12 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
-import FormFieldElement from './lwdc-form-field';
-import { styleLightDOM } from './util';
+import { styleLightDOM, formElement } from './util';
 
 import styleCSS from './lwdc-select.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-select')
-export class SelectElement<T> extends LitElement {
+export class SelectElement<T> extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: string;
@@ -31,12 +30,7 @@ export class SelectElement<T> extends LitElement {
 	options: Array<T> = [];
 
 
-	static formAssociated = true;
-
-	//https://web.dev/more-capable-form-controls/#event-based-api
-	//https://github.com/microsoft/TypeScript/issues/33218
-	internals?: any;
-
+	
 
 	static get styles() {
 		return [style];
@@ -47,7 +41,7 @@ export class SelectElement<T> extends LitElement {
 		if (!this.placeholder && this.options.length) {
 			this.valueId = this.valueSelector(this.options[0]);
 		}
-		this.internals = (this as any).attachInternals();
+
 		if (!this.getAttribute("tabindex")) {
 			this.setAttribute("tabindex", "-1");
 		}
@@ -88,32 +82,11 @@ export class SelectElement<T> extends LitElement {
 		return this.options.find((e: T) => this.valueSelector(e) === this.valueId);
 	}
 
-	get formField() {
-		return this.closest('lwdc-form-field') as FormFieldElement;
-	}
-
+	
 	handleChange(e: Event) {
 		this.valueId = (<HTMLSelectElement>e.target).value;
 		this.checkValidity();
 	}
-
-	checkValidity() {
-		if (!this.matches(':disabled') && (this.hasAttribute('required') && (this.valueId === undefined))) {
-			this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
-			this.formField.hintText = this.internals.validationMessage;
-		} else {
-			this.internals.setValidity({ customError: false });
-			this.formField.hintText = undefined;
-		}
-		return this.internals.checkValidity();
-	}
-
-	formResetCallback() {
-		this.valueId = undefined;
-		this.internals.setValidity({ customError: false });
-		this.formField.hintText = undefined;
-	}
-
 
 }
 

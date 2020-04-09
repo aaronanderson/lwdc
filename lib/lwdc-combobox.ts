@@ -1,15 +1,15 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import FormFieldElement from './lwdc-form-field';
 import './lwdc-menu-item';
 
 import styleCSS from './lwdc-combobox.scss';
 import { classMap } from 'lit-html/directives/class-map';
+import { formElement } from './util';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-combobox')
-export class ComboboxElement<T> extends LitElement {
+export class ComboboxElement<T> extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: String;
@@ -53,21 +53,12 @@ export class ComboboxElement<T> extends LitElement {
 
 	filtered: Array<T> = [];
 
-
-
-	static formAssociated = true;
-
-	//https://web.dev/more-capable-form-controls/#event-based-api
-	//https://github.com/microsoft/TypeScript/issues/33218
-	internals?: any;
-
 	static get styles() {
 		return [style];
 	}
 
 
 	firstUpdated() {
-		this.internals = (this as any).attachInternals();
 		if (!this.getAttribute("tabindex")) {
 			this.setAttribute("tabindex", "-1");
 		}
@@ -190,11 +181,6 @@ export class ComboboxElement<T> extends LitElement {
 
 	}
 
-
-	get formField() {
-		return this.closest('lwdc-form-field') as FormFieldElement;
-	}
-
 	handleInput(e: Event) {
 		let filterValue = (e.target as HTMLInputElement).value;
 		if (filterValue) {
@@ -213,11 +199,17 @@ export class ComboboxElement<T> extends LitElement {
 
 	checkValidity() {
 		if (!this.matches(':disabled') && (this.hasAttribute('required') && this.selected.size == 0)) {
-			this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
-			this.formField.hintText = this.internals.validationMessage;
+			if (this.formField) {
+				this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
+				this.formField.hintText = this.internals.validationMessage;
+			} else {
+				this.internals.setValidity({ customError: true }, `Required`);
+			}
 		} else {
 			this.internals.setValidity({ customError: false });
-			this.formField.hintText = undefined;
+			if (this.formField) {
+				this.formField.hintText = undefined;
+			}
 		}
 		return this.internals.checkValidity();
 	}
@@ -225,7 +217,9 @@ export class ComboboxElement<T> extends LitElement {
 	formResetCallback() {
 		this.selected.clear();
 		this.internals.setValidity({ customError: false });
-		this.formField.hintText = undefined;
+		if (this.formField) {
+			this.formField.hintText = undefined;
+		}
 		this.requestUpdate();
 	}
 
