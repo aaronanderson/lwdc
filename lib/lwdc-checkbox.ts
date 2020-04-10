@@ -16,7 +16,7 @@ export class CheckboxElement extends formElement(LitElement, false) {
 	@property({ type: String, attribute: true, reflect: true })
 	label?: String;
 
-	@property({ type: String, attribute: true, reflect: true })
+	@property({ type: Boolean, attribute: true, reflect: true })
 	checked = false;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
@@ -47,14 +47,13 @@ export class CheckboxElement extends formElement(LitElement, false) {
 	}
 
 	render() {
-
 		let formTextClass = {
 			'wdc-form-checkbox': true,
 			'wdc-form-disabled': this.disabled
 		};
 		//https://bugzilla.mozilla.org/show_bug.cgi?id=1459865 - for firefox set autocomplete="off" so checkbox reset is applied
 		return html`<div class="${classMap(formTextClass)}">
-						  <input type="checkbox" id="checkbox" ?checked="${this.checked}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
+						  <input type="checkbox" id="checkbox" ?checked="${ifDefined(this.checked)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
         				  <label htmlFor="checkbox">${this.label}</label>							
 					</div>
 					`;

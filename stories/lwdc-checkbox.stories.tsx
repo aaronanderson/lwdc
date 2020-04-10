@@ -42,7 +42,7 @@ export const checkboxGroupStory = () => {
 							<lwdc-checkbox name="email" label="E-Mail"></lwdc-checkbox>
 							<lwdc-checkbox name="phone" label="Phone"></lwdc-checkbox>
 							<lwdc-checkbox disabled name="fax" label="Fax"></lwdc-checkbox>
-							<lwdc-checkbox name="mail" label="Mail"></lwdc-checkbox>
+							<lwdc-checkbox name="mail" label="Mail" checked></lwdc-checkbox>
 
 					</lwdc-form-field>
 				</div>
