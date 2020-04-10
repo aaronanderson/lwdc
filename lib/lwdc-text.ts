@@ -61,7 +61,7 @@ export class TextElement extends formElement(LitElement) {
 		};
 
 		return html`<div class="${classMap(formTextClass)}">
-						<input formnovalidate type="${this.password ? 'password' : 'text'}" .value="${ifDefined(this.value)}" list="${ifDefined(this.list)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange}></input>
+						<input formnovalidate type="${this.password ? 'password' : 'text'}" .value="${ifDefined(this.value)}" list="${ifDefined(this.list)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></input>
 					</div>
 					`;
 	}

@@ -3,6 +3,7 @@ import { FormFieldLabelPosition } from './lwdc-form-field';
 import { classMap } from 'lit-html/directives/class-map';
 
 import styleCSS from './lwdc-form-field.scss';
+import { formElements, formAssociatedCustomElementsSupported } from './util';
 const style = css([`${styleCSS}`] as any)
 
 
@@ -62,7 +63,7 @@ export class FormElement extends LitElement {
 	reset() {
 		let form = this.querySelector("form") as HTMLFormElement;
 		if (form) {
-			//further research needed to see why custom element form validate is not triggered the same way as a native component is triggered
+			//form.rest() works on form associated custom elements in Chrome but it is easier to 
 			// for (let element of Array.from(form.elements)) {
 			// 	(<any>element).reset && (<any>element).reset();
 			// }
@@ -75,7 +76,11 @@ export class FormElement extends LitElement {
 	item(name: string) {
 		let form = this.querySelector("form") as HTMLFormElement;
 		if (form) {
-			return form.elements.namedItem(name);
+			if (formAssociatedCustomElementsSupported) {
+				return form.elements.namedItem(name);
+			} else {
+				return formElements(form).find((e: Element) => (e as any).name === name);
+			}
 		}
 
 	}

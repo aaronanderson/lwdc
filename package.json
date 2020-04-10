@@ -18,7 +18,7 @@
     "clean": "rm -rf wc aaronanderson-lwdc*.tgz",
     "build": "rollup -c",
     "build-storybook": "build-storybook",
-    "storybook": "start-storybook -p 9001"
+    "start": "start-storybook -p 9001"
   },
   "author": "Aaron Anderson",
   "license": "Apache-2.0",

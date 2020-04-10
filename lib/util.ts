@@ -1,6 +1,8 @@
-import { CSSResult, Constructor } from "lit-element";
+import { CSSResult, Constructor, LitElement } from "lit-element";
 import FormFieldElement from './lwdc-form-field';
 
+
+export const formAssociatedCustomElementsSupported = ('attachInternals' in HTMLElement.prototype);
 
 export const constructableStylesheetsSupported = ('adoptedStyleSheets' in Document.prototype) && ('replace' in CSSStyleSheet.prototype);
 
@@ -50,6 +52,96 @@ export const closestElement = (selector: string, base: Element) => {
 }
 
 
+//For Firefox. Mininimal form associated custom element support for only functions used by this library that are supported in Chrome. 
+//Form associated custom elements are not necessary since checkValidity logic below manages the Canvas Kit form-field hintText values that are displayed in the UI. 
+//However plugging into the browser's HTML form lifecycle management is a standards compliant approach and may provide additional benefits in the futures. 
+export const formAssociatedElementPolyfill = (element: HTMLElement) => {
+
+	// if (!HTMLElement.prototype.attachInternals) {
+	// 	HTMLElement.prototype.attachInternals = () => {		
+	if (!formAssociatedCustomElementsSupported) {
+
+		element.attachInternals = function () {
+
+			const ElementInternals = class {
+
+				isValid: boolean = true;
+				validationMessage?: string;
+
+				checkValidity() { return this.isValid; }
+
+				reportValidity() { return this.isValid; }
+
+				setFormValue(value: any, state?: any): void { }
+
+				setValidity(flags: any, message?: string, anchor?: HTMLElement): void {
+					this.isValid = !flags.customError;
+					this.validationMessage = message;
+				}
+
+			};
+			return new ElementInternals();
+		};
+
+		//const origFormElements = Object.getOwnPropertyDescriptor(HTMLFormElement.prototype, 'elements')!.get;
+		//const origFormCheckValidity = HTMLFormElement.prototype.checkValidity;
+		//const origFormReset = HTMLFormElement.prototype.reset;
+
+
+
+
+		//decided not to polyfill elements. It is a core feature HTML and forms and not really new functionality to be polyfilled.
+		/*
+		
+		const elementHandler = {
+			get: function (target: any, key: any, receiver: any) {
+				console.log('proxy', target, key, receiver);
+			}
+		};
+
+		Object.defineProperty(HTMLFormElement.prototype, "elements", {
+			get: function elements() {
+				if (origFormElements) {
+					console.log('elements', origFormElements.call(this));
+					//new Proxy(origElements,handler);
+					return origFormElements.call(this);
+				}
+			}
+		});
+		
+		*/
+
+
+		HTMLFormElement.prototype.checkValidity = function () {
+			let valid = true;
+			for (let element of formElements(this)) {
+				if (!element.hasAttribute('formnovalidate') && (<any>element).checkValidity) {
+					let elementValid = (<any>element).checkValidity();
+					valid = valid && elementValid;
+				}
+			}
+			return valid;// && origFormCheckValidity.call(this);
+		}
+
+		HTMLFormElement.prototype.reset = function () {
+			for (let element of formElements(this)) {
+				if ((<any>element).formResetCallback) {
+					(<any>element).formResetCallback();
+				}
+			}
+			//origFormReset.call(this);
+		}
+	}
+}
+
+export const formElements = (form: HTMLFormElement): Array<Element> => {
+	return Array.from(form.querySelectorAll("*")).filter((n: Element) => {
+		const el = n as any;
+		return el.constructor.formAssociated || el.form;
+	});
+
+}
+
 //exporting LitElement with it's private/protected members generates a 'TS4094 exported class expression may not be private or protected' error so define a limited interface
 interface FormLitElement extends HTMLElement {
 	connectedCallback?(): void;
@@ -57,7 +149,7 @@ interface FormLitElement extends HTMLElement {
 }
 
 export const formElement =
-	<V, T extends Constructor<FormLitElement>>(baseElement: T) =>
+	<V, T extends Constructor<FormLitElement>>(baseElement: T, isValue = true) =>
 		class extends baseElement {
 
 			static formAssociated = true;
@@ -68,8 +160,11 @@ export const formElement =
 
 			value?: V;
 
+			checked = false;
+
 			constructor(...args: any[]) {
 				super(args);
+				formAssociatedElementPolyfill(this);
 				this.internals = (this as any).attachInternals();
 			}
 
@@ -79,53 +174,61 @@ export const formElement =
 			}
 
 			checkValidity() {
-				if (this.value instanceof String && this.hasAttribute('minlength')) {
-					let minLength = this.hasAttribute('required') ? 1 : 0;
-					let minLengthAttr = this.getAttribute('minlength');
-					minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;
-					if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value || this.value.length < minLength))) {
-						if (this.formField) {
-							this.internals.setValidity({ customError: true }, !this.value ? `${this.formField.label} is required` : `${minLength} characters are required`);
-							this.formField.hintText = this.internals.validationMessage;
+				if (isValue) {
+					if (this.hasAttribute('minlength') && this.value instanceof String) {
+						let minLength = this.hasAttribute('required') ? 1 : 0;
+						let minLengthAttr = this.getAttribute('minlength');
+						minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;
+						if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value || this.value.length < minLength))) {
+							this.setInternals(true, () => !this.value ? `${this.formField.label} is required` : `${minLength} characters are required`);
 						} else {
-							this.internals.setValidity({ customError: true }, !this.value ? `Required` : `${minLength} characters are required`);
+							this.setInternals(false);
 						}
+					} else if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value))) {
+						this.setInternals(true, () => `${this.formField.label} is required`);
 					} else {
-						this.internals.setValidity({ customError: false }, undefined);
-						if (this.formField) {
-							this.formField.hintText = undefined;
-						}
+						this.setInternals(false);
 					}
 				} else {
-					if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value))) {
-						if (this.formField) {
-							this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
-							this.formField.hintText = this.internals.validationMessage;
-						} else {
-							this.internals.setValidity({ customError: true }, `Required`);
-						}
+					if (!this.matches(':disabled') && (this.hasAttribute('required') && !this.checked)) {
+						this.setInternals(true, () => `${this.formField.label} is required`);
 					} else {
-						this.internals.setValidity({ customError: false }, undefined);
-						if (this.formField) {
-							this.formField.hintText = undefined;
-						}
+						this.setInternals(false);
 					}
 				}
 				return this.internals.checkValidity();
-
 			}
 
-
-			lengthValidity() {
-
-				return this.internals.checkValidity();
+			setInternals(isError: boolean, formMessage?: Function) {
+				if (isError) {
+					if (this.formField && formMessage) {
+						this.internals.setValidity({ customError: true }, formMessage.call(this));
+						this.formField.hintText = this.internals.validationMessage;
+					} else {
+						this.internals.setValidity({ customError: true }, `Required`);
+					}
+				} else {
+					this.internals.setValidity({ customError: false }, undefined);
+					if (this.formField) {
+						this.formField.hintText = undefined;
+					}
+				}
 			}
+
 
 			formResetCallback() {
-				this.value = undefined;
-				this.internals.setFormValue(this.value);
 				this.internals.setValidity({ customError: false }, undefined);
 				this.formField.hintText = undefined;
+				if (isValue) {
+					this.value = undefined;
+					this.internals.setFormValue(undefined);
+				} else {
+					this.checked = false;
+					this.internals.setFormValue(false);
+					if (this instanceof LitElement) {
+						this.requestUpdate();
+					}
+				}
 			}
 
 		};

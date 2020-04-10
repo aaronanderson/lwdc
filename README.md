@@ -48,7 +48,7 @@ The current version of Chrome supports both of these features without any extra 
 
 Partial form associated custom element support can be activated in the latest version of Firefox via the  `dom.webcomponents.elementInternals.enabled` setting in `about:config`
 
-However the implementation is limited and full form validation is not currently functional in Firefox. If immediate Firefox support is needed please contact me and I will make an effort to polyfill or workaround this limitation.
+A minimal pollyfill is used to provide the missing form associated element features in Firefox in order to perform full form validation.
 
 ## Storybook
 
@@ -56,7 +56,7 @@ Build the components: `yarn install` then `yarn build`
 
 Build the Storybook: `yarn build-storybook`
 
-Run the Storybook: `yarn storybook`
+Run the Storybook: `yarn start`
 
 ## Usage
 

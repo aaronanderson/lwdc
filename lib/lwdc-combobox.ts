@@ -5,6 +5,8 @@ import './lwdc-menu-item';
 import styleCSS from './lwdc-combobox.scss';
 import { classMap } from 'lit-html/directives/class-map';
 import { formElement } from './util';
+import { MenuElement } from './lwdc-menu';
+import { ErrorType } from './lwdc-form-field';
 const style = css([`${styleCSS}`] as any)
 
 
@@ -107,7 +109,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 				<div class="lwdc-combobox-input-container">
 				    
 					<div class="wdc-form-textinput">
-						<input formnovalidate type="search" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @input=${this.handleInput}></input>
+						<input formnovalidate type="search" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @input=${this.handleInput} @keydown=${this.handleKeydown}></input>
 					</div>
 					${this.menuTemplate}
 					${this.selectedTemplate}
@@ -138,7 +140,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 				'lwdc-combobox-wrap': !!this.wrap
 			}
 			return html`
-							<lwdc-menu id="selections" tabindex="0" class="${classMap(menuClass)}" width="${this.width ? this.width : '280px'}">
+							<lwdc-menu id="selections" tabindex="0" class="${classMap(menuClass)}" width="${this.width ? this.width : '280px'}" @keydown=${this.handleKeydown}>
 								${this.filtered.map((o: T) => {
 				return html`<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`;
 			})}
@@ -177,8 +179,43 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 		this.requestUpdate();
 	}
 
-	handleKeydown() {
 
+	handleKeydown(e: KeyboardEvent) {
+		//console.log(e, e.target);		
+		if (e.keyCode === 13) {
+			this.displayMenu = false;
+			this.searchInput.blur();
+		} else if (e.ctrlKey && e.key.toLowerCase() === 'a') {
+			console.log('CTRL A', this.filtered);
+			const selected = new Set();
+			const unselected = new Set();
+			for (const option of this.filtered) {
+				if (this.selected.has(option)) {
+					selected.add(option);
+				} else {
+					unselected.add(option);
+				}
+			}
+			if (selected.size > 0 && unselected.size == 0) {
+				for (const option of selected) {
+					this.selected.delete(option as T);
+				}
+			} else {
+				for (const option of unselected) {
+					this.selected.add(option as T);
+				}
+			}
+			this.requestUpdate();
+
+
+		}
+
+		// if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'd') {
+		// 				this.trace = !this.trace;
+		// 				const message = `trace ${this.trace ? 'enabled' : 'disabled'}`;
+		// 				console.log(message);
+		// 				openToast(message, false, this.shadowRoot);
+		// 			}
 	}
 
 	handleInput(e: Event) {
@@ -199,26 +236,29 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 
 	checkValidity() {
 		if (!this.matches(':disabled') && (this.hasAttribute('required') && this.selected.size == 0)) {
+			this.setInternals(true, () => `${this.formField.label} is required`);
 			if (this.formField) {
-				this.internals.setValidity({ customError: true }, `${this.formField.label} is required`);
-				this.formField.hintText = this.internals.validationMessage;
-			} else {
-				this.internals.setValidity({ customError: true }, `Required`);
+				if (this.formField.errorType == ErrorType.alert) {
+					this.searchInput.classList.add('lwdc-combobox-alert');
+				} else {
+					this.searchInput.classList.add('lwdc-combobox-error');
+				}
 			}
 		} else {
-			this.internals.setValidity({ customError: false });
+			this.setInternals(false);
 			if (this.formField) {
-				this.formField.hintText = undefined;
+				this.searchInput.setAttribute("class", "");
 			}
 		}
 		return this.internals.checkValidity();
 	}
 
+
 	formResetCallback() {
+		super.formResetCallback();
 		this.selected.clear();
-		this.internals.setValidity({ customError: false });
 		if (this.formField) {
-			this.formField.hintText = undefined;
+			this.searchInput.setAttribute("class", "");
 		}
 		this.requestUpdate();
 	}

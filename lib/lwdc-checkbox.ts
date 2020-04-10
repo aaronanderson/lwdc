@@ -8,7 +8,7 @@ const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-checkbox')
-export class CheckboxElement extends formElement(LitElement) {
+export class CheckboxElement extends formElement(LitElement, false) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: String;
@@ -17,8 +17,7 @@ export class CheckboxElement extends formElement(LitElement) {
 	label?: String;
 
 	@property({ type: String, attribute: true, reflect: true })
-	value: Boolean = false;
-
+	checked = false;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
@@ -53,9 +52,9 @@ export class CheckboxElement extends formElement(LitElement) {
 			'wdc-form-checkbox': true,
 			'wdc-form-disabled': this.disabled
 		};
-
+		//https://bugzilla.mozilla.org/show_bug.cgi?id=1459865 - for firefox set autocomplete="off" so checkbox reset is applied
 		return html`<div class="${classMap(formTextClass)}">
-						  <input type="checkbox" id="checkbox" .value="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
+						  <input type="checkbox" id="checkbox" ?checked="${this.checked}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
         				  <label htmlFor="checkbox">${this.label}</label>							
 					</div>
 					`;
@@ -63,8 +62,8 @@ export class CheckboxElement extends formElement(LitElement) {
 	}
 
 	handleChange(e: any) {
-		this.value = e.target.checked;
-		this.internals.setFormValue(this.value);
+		this.checked = e.target.checked;
+		this.internals.setFormValue(this.checked);
 		this.checkValidity();
 	}
 

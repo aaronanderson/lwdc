@@ -37,7 +37,7 @@
 	padding: 0;
 	margin: 8px 0;
 
-	position:absolute;
+	position: absolute;
 	z-index: 1;
 
 	//flex: 1;
@@ -124,10 +124,20 @@ ul li .wdc-menu-item-label {
 	word-wrap: break-word;
 }
 
-:host-context(.wdc-form-error) input[type="search"] {
+.lwdc-combobox-error {
+	@include wdc-form-error();
+}
+
+.lwdc-combobox-alert {
+	@include wdc-form-alert();
+}
+
+//https://bugzilla.mozilla.org/show_bug.cgi?id=1082060
+// not supported by firefox https://github.com/w3c/csswg-drafts/issues/1914
+/*:host-context(.wdc-form-error) input[type="search"] {
 	@include wdc-form-error();
 }
 
 :host-context(.wdc-form-alert) input[type="search"] {
 	@include wdc-form-alert();
-}
+}*/

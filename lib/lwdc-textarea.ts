@@ -59,7 +59,7 @@ export class TextAreaElement extends formElement(LitElement) {
 		};
 
 		return html`<div class="${classMap(formTextAreaClass)}">
-						<textarea formnovalidate .value="${ifDefined(this.value)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange}></textarea>
+						<textarea formnovalidate .value="${ifDefined(this.value)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></textarea>
 					</div>
 					`;
 	}
@@ -68,21 +68,6 @@ export class TextAreaElement extends formElement(LitElement) {
 		this.value = e.target.value;
 		this.internals.setFormValue(this.value);
 		this.checkValidity();
-	}
-
-
-	checkValidity() {
-		let minLength = this.hasAttribute('required') ? 1 : 0;
-		let minLengthAttr = this.getAttribute('minlength');
-		minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;
-		if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value || this.value.length < minLength))) {
-			this.internals.setValidity({ customError: true }, !this.value ? `${this.formField.label} is required` : `${minLength} characters are required`);
-			this.formField.hintText = this.internals.validationMessage;
-		} else {
-			this.internals.setValidity({ customError: false }, undefined);
-			this.formField.hintText = undefined;
-		}
-		return this.internals.checkValidity();
 	}
 
 
