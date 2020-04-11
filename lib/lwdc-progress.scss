@@ -1,0 +1,41 @@
+@import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+@import "~@workday/canvas-kit-css-core/lib/type.scss";
+
+.lwdc-progress-container {
+	display: flex;
+	align-items: center;
+	margin: 16px;
+}
+
+.lwdc-progress-container>* {
+	margin: 8px;
+}
+
+progress {
+	/* RESETS */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+
+	min-width: 280px;
+	height: 16px;
+	border-radius: 20px;
+}
+
+
+
+::-webkit-progress-bar {
+	background-color: $wdc-color-french-vanilla-200;
+	border-radius: 20px;
+}
+
+::-webkit-progress-value {
+	background-color: $wdc-color-blueberry-500;
+	border-radius: 20px;
+}
+
+::-moz-progress-bar {
+	background-color: $wdc-color-blueberry-500;
+	border-radius: 20px;
+}

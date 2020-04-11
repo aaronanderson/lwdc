@@ -149,7 +149,7 @@ interface FormLitElement extends HTMLElement {
 }
 
 export const formElement =
-	<V, T extends Constructor<FormLitElement>>(baseElement: T, isValue = true) =>
+	<V, T extends Constructor<FormLitElement>>(baseElement: T) =>
 		class extends baseElement {
 
 			static formAssociated = true;
@@ -174,27 +174,19 @@ export const formElement =
 			}
 
 			checkValidity() {
-				if (isValue) {
-					if (this.hasAttribute('minlength') && this.value instanceof String) {
-						let minLength = this.hasAttribute('required') ? 1 : 0;
-						let minLengthAttr = this.getAttribute('minlength');
-						minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;
-						if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value || this.value.length < minLength))) {
-							this.setInternals(true, () => !this.value ? `${this.formField.label} is required` : `${minLength} characters are required`);
-						} else {
-							this.setInternals(false);
-						}
-					} else if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value))) {
-						this.setInternals(true, () => `${this.formField.label} is required`);
+				if (this.hasAttribute('minlength') && this.value instanceof String) {
+					let minLength = this.hasAttribute('required') ? 1 : 0;
+					let minLengthAttr = this.getAttribute('minlength');
+					minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;
+					if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value || this.value.length < minLength))) {
+						this.setInternals(true, () => !this.value ? `${this.formField.label} is required` : `${minLength} characters are required`);
 					} else {
 						this.setInternals(false);
 					}
+				} else if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value))) {
+					this.setInternals(true, () => `${this.formField.label} is required`);
 				} else {
-					if (!this.matches(':disabled') && (this.hasAttribute('required') && !this.checked)) {
-						this.setInternals(true, () => `${this.formField.label} is required`);
-					} else {
-						this.setInternals(false);
-					}
+					this.setInternals(false);
 				}
 				return this.internals.checkValidity();
 			}
@@ -219,16 +211,8 @@ export const formElement =
 			formResetCallback() {
 				this.internals.setValidity({ customError: false }, undefined);
 				this.formField.hintText = undefined;
-				if (isValue) {
-					this.value = undefined;
-					this.internals.setFormValue(undefined);
-				} else {
-					this.checked = false;
-					this.internals.setFormValue(false);
-					if (this instanceof LitElement) {
-						this.requestUpdate();
-					}
-				}
+				this.value = undefined;
+				this.internals.setFormValue(undefined);
 			}
 
 		};

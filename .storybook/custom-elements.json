@@ -1064,8 +1064,8 @@
       ]
     },
     {
-      "name": "lwdc-popper",
-      "path": "./../lib/lwdc-popper.ts",
+      "name": "lwdc-popup",
+      "path": "./../lib/lwdc-popup.ts",
       "attributes": [
         {
           "name": "closeEnabled",
@@ -1094,6 +1094,58 @@
       ]
     },
     {
+      "name": "lwdc-progress",
+      "path": "./../lib/lwdc-progress.ts",
+      "attributes": [
+        {
+          "name": "title",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "default": "100"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "default": "true"
+        }
+      ],
+      "properties": [
+        {
+          "name": "title",
+          "attribute": "title",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "attribute": "max",
+          "type": "number",
+          "default": "100"
+        },
+        {
+          "name": "showLabel",
+          "attribute": "showLabel",
+          "type": "boolean",
+          "default": "true"
+        }
+      ]
+    },
+    {
       "name": "lwdc-radio",
       "path": "./../lib/lwdc-radio.ts",
       "attributes": [
@@ -1113,6 +1165,10 @@
           "name": "disabled",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "value",
+          "type": "String | undefined"
         },
         {
           "name": "checked",
@@ -1144,7 +1200,8 @@
         },
         {
           "name": "value",
-          "type": "V | undefined"
+          "attribute": "value",
+          "type": "String | undefined"
         },
         {
           "name": "checked",
@@ -1724,8 +1781,8 @@
           "default": "\"\""
         },
         {
-          "name": "popper",
-          "type": "PopperElement | null"
+          "name": "popup",
+          "type": "PopupElement | null"
         },
         {
           "name": "action",

@@ -5,12 +5,12 @@ import './lwdc-icon';
 import { ButtonType } from './lwdc-button';
 import { xIcon } from '@workday/canvas-system-icons-web';
 
-import styleCSS from './lwdc-popper.scss';
+import styleCSS from './lwdc-popup.scss';
 const style = css([`${styleCSS}`] as any)
 
 
-@customElement('lwdc-popper')
-export class PopperElement extends LitElement {
+@customElement('lwdc-popup')
+export class PopupElement extends LitElement {
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	closeEnabled = true;
@@ -53,7 +53,7 @@ export class PopperElement extends LitElement {
 
 }
 
-export default PopperElement;
+export default PopupElement;
 
 
 

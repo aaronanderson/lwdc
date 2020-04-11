@@ -9,7 +9,7 @@ const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-radio')
-export class RadioElement extends formElement(LitElement, false) {
+export class RadioElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: String;

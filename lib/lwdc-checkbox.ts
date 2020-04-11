@@ -8,7 +8,7 @@ const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-checkbox')
-export class CheckboxElement extends formElement(LitElement, false) {
+export class CheckboxElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	name?: String;
@@ -64,6 +64,25 @@ export class CheckboxElement extends formElement(LitElement, false) {
 		this.checked = e.target.checked;
 		this.internals.setFormValue(this.checked);
 		this.checkValidity();
+	}
+
+	checkValidity() {
+		if (!this.matches(':disabled') && (this.hasAttribute('required') && !this.checked)) {
+			this.setInternals(true, () => `${this.formField.label} is required`);
+		} else {
+			this.setInternals(false);
+		}
+		return this.internals.checkValidity();
+	}
+
+	formResetCallback() {
+		this.internals.setValidity({ customError: false }, undefined);
+		this.formField.hintText = undefined;
+		this.checked = false;
+		this.internals.setFormValue(false);
+		// if (this instanceof LitElement) {
+		// 	this.requestUpdate();
+		// }
 	}
 
 }
