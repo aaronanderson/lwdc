@@ -32,7 +32,7 @@ export class PopupElement extends LitElement {
 						<lwdc-icon .icon=${xIcon}></lwdc-icon>
 					</lwdc-button>
 				</div>`: null}
-				${this.title ? html`<div class="wdc-popup-heading" id="popup-heading">${this.title}</div>` : null}
+				${this.title ? html`<div class="wdc-popup-heading">${this.title}</div>` : null}
 				<div class="wdc-popup-body">
 					<slot></slot>
 				</div>				

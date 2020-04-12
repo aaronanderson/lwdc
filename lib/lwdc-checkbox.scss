@@ -1,9 +1,26 @@
 @import '~@workday/canvas-kit-css-checkbox';
 
-/*:host,*/ lwdc-checkbox {
+/*:host,*/
+lwdc-checkbox {
 	display: contents;
 }
 
 input[type="checkbox"] {
 	z-index: 1;
 }
+
+.wdc-form-checkbox {
+	position: relative;	
+}
+
+
+/*
+.wdc-form-checkbox input {
+	position: relative;
+}
+
+.wdc-form-checkbox input+label::before {
+	position: relative;
+
+}
+*/

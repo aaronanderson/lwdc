@@ -33,7 +33,7 @@ export class TooltipElement extends LitElement {
 		return html`		
 		<div class="wdc-tooltip-container">		
 			   ${this.elementChildNodes}
-			   <div class="wdc-tooltip wdc-tooltip-top" id="tooltip">${this.message}</div>
+			   <div class="wdc-tooltip wdc-tooltip-top">${this.message}</div>
 		</div>
 		`;
 	}

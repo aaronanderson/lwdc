@@ -40,7 +40,7 @@ export class ToastElement extends LitElement {
 				
 				<div class="lwdc-toast-container wdc-type-body-2">
 
-					<span id="toast-icon" class="lwdc-toast-icon">
+					<span class="lwdc-toast-icon">
 						<lwdc-icon .icon=${this.icon} .color=${this.iconColor}></lwdc-icon>
 					</span>
 					<div class="lwdc-toast-message">${this.message}${this.action}</div>

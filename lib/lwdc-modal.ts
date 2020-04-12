@@ -34,7 +34,7 @@ export class ModalElement extends LitElement {
 							</lwdc-button>
 						</div>
 					</div>`: null}
-					${this.title ? html`<div class="wdc-modal-heading" id="modal-heading">${this.title}</div>` : null}
+					${this.title ? html`<div class="wdc-modal-heading">${this.title}</div>` : null}
 					<div class="wdc-modal-body">
 						<slot></slot>
 					</div>

@@ -26,7 +26,7 @@ export default {
 
 export const checkboxStory = () => {
 	return html`<lwdc-form-field label="Checkbox">
-						<lwdc-checkbox name="checkbox" label="E-Mail"></lwdc-checkbox>
+						<lwdc-checkbox name="checkbox" label="E-Mail" @change=${(e: Event) => console.log(e.target)}></lwdc-checkbox>
 					</lwdc-form-field>
 				`;
 }
