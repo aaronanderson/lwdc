@@ -59,7 +59,7 @@ export const validationStory = () => {
 
 					<lwdc-action-bar>
 						<lwdc-button  @click=${validate}>Validate</lwdc-button>
-						<lwdc-button  @click=${reset}>Rest</lwdc-button>
+						<lwdc-button  @click=${reset}>Reset</lwdc-button>
 					</lwdc-action-bar>
 				</lwdc-form>
 				`;

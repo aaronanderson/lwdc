@@ -51,6 +51,52 @@ export const closestElement = (selector: string, base: Element) => {
 	return __closestFrom(selector, base);
 }
 
+//Ensure server sends the following HTTP headers:
+//Content-Disposition: attachment;filename="somefilename.txt"
+//Access-Control-Expose-Headers: Content-Disposition
+export const fileDownload = async (endpoint: string, fileName?: string) => {
+	const response: Response = await fetch(endpoint, {
+		method: 'GET'
+	});
+
+	if (response.ok) {
+
+		if (!fileName) {
+			let dispositionHeader = response.headers.get("content-disposition");
+			if (dispositionHeader) {
+				let fileNameRegEx = dispositionHeader.match("attachment;filename=\"(.*)\"");
+				if (fileNameRegEx) {
+					fileName = fileNameRegEx[1];
+				}
+			}
+		}
+		if (!fileName) {
+			throw new DownloadError('Filename is unavailable', response);
+		}
+
+		const result = await response.blob();
+
+		let link = document.createElement('a');
+		link.download = fileName;
+		link.href = URL.createObjectURL(result);
+		link.click();
+		URL.revokeObjectURL(link.href);
+	} else {
+		throw new DownloadError('Service is unavailable', response);
+	}
+
+
+}
+
+export class DownloadError extends Error {
+
+	response: Response;
+
+	constructor(message: string, response: Response) {
+		super(message);
+		this.response = response;
+	}
+}
 
 //For Firefox. Mininimal form associated custom element support for only functions used by this library that are supported in Chrome. 
 //Form associated custom elements are not necessary since checkValidity logic below manages the Canvas Kit form-field hintText values that are displayed in the UI. 

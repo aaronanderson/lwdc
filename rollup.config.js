@@ -17,6 +17,7 @@ export default {
         'lwdc-combobox': 'lib/lwdc-combobox.ts',
         'lwdc-core': 'lib/lwdc-core.ts',
         'lwdc-env-label': 'lib/lwdc-env-label.ts',
+        'lwdc-file-upload': 'lib/lwdc-file-upload.ts',
         'lwdc-fonts': 'lib/lwdc-fonts.ts',
         'lwdc-form': 'lib/lwdc-form.ts',
         'lwdc-form-field': 'lib/lwdc-form-field.ts',

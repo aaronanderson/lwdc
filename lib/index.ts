@@ -5,6 +5,7 @@ export * from './lwdc-checkbox';
 export * from './lwdc-combobox';
 export * from './lwdc-env-label'
 export * from './lwdc-core';
+export * from './lwdc-file-upload';
 export * from './lwdc-fonts';
 export * from './lwdc-form-field';
 export * from './lwdc-form';

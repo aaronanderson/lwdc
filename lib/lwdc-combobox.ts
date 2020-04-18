@@ -182,7 +182,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 
 	handleKeydown(e: KeyboardEvent) {
 		//console.log(e, e.target);		
-		if (e.keyCode === 13 || e.keyCode === 32) {
+		if (e.keyCode === 13 || (e.shiftKey && e.keyCode === 32)) {
 			this.displayMenu = false;
 			this.searchInput.blur();
 		} else if (e.ctrlKey && e.key.toLowerCase() === 'a') {

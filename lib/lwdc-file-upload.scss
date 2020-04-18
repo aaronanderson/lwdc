@@ -1,0 +1,13 @@
+.lwdc-upload-wrapper {
+	position: relative;
+}
+
+.lwdc-upload-wrapper input[type=file] {
+	font-size: 42px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+	height: 0;
+	width: 0;
+}

@@ -583,6 +583,38 @@
       ]
     },
     {
+      "name": "lwdc-file-upload",
+      "path": "./../lib/lwdc-file-upload.ts",
+      "attributes": [
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "multiple",
+          "attribute": "multiple",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "fileInput",
+          "type": "HTMLInputElement"
+        },
+        {
+          "name": "files",
+          "type": "File[]"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-file-upload-selected"
+        }
+      ]
+    },
+    {
       "name": "lwdc-fonts",
       "path": "./../lib/lwdc-fonts.ts"
     },
@@ -1820,6 +1852,29 @@
           "attribute": "elementChildNodes",
           "type": "ChildNode[]",
           "default": "[]"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-file-upload-example",
+      "path": "./../stories/lwdc-file.stories.tsx",
+      "attributes": [
+        {
+          "name": "files",
+          "type": "File[]",
+          "default": "[]"
+        }
+      ],
+      "properties": [
+        {
+          "name": "files",
+          "attribute": "files",
+          "type": "File[]",
+          "default": "[]"
+        },
+        {
+          "name": "fileUpload",
+          "type": "FileUploadElement"
         }
       ]
     },
