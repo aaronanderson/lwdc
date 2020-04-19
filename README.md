@@ -4,7 +4,7 @@
 
 Provides [LitElement](https://lit-element.polymer-project.org/) web components for [Workday Canvas Kit](https://github.com/Workday/canvas-kit) UI components. 
 
-The purpose of these components are:
+The purposes of these components are:
 
 * Fully leverage the modern native web platform including [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [HTML Templates](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) via LitElement eliminating the need for complicated and archaic VDOM frameworks
 
@@ -22,7 +22,7 @@ New collaborators or contributors are welcome.
 
 ## Styling
 
-Logically each Canvas Kit component should be wrapped as a LitElement web component. However some of the Canvas Kit component utilize descendant CSS selectors that are unable to pierce web component shadow DOMs.  For example, [error.scss](https://github.com/Workday/canvas-kit/blob/master/modules/common/css/lib/errors.scss) defines `wdc-form-error` at the form field level and has descendant selectors for text and select inputs. There are three potential solutions to this issues:
+Logically each Canvas Kit component should be wrapped as a LitElement web component. However some of the Canvas Kit component utilize descendant CSS selectors that are unable to pierce web component shadow DOMs.  For example, [error.scss](https://github.com/Workday/canvas-kit/blob/master/modules/common/css/lib/errors.scss) defines `wdc-form-error` at the form field level and has descendant selectors for text and select inputs. There are three potential solutions to this issue:
 
 * Add CSS selectors to parent elements for [::slotted](https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted) and [::part](https://developer.mozilla.org/en-US/docs/Web/CSS/::part)
 
@@ -30,7 +30,7 @@ Logically each Canvas Kit component should be wrapped as a LitElement web compon
 
 * Forego the use of the Shadow DOM and create elements in the Light DOM.
 
-The Light DOM option was used for select components. The ::slotted and ::part solution would require upstream changes to Canvas Kit SCSS or a large amount of forked SCSS to replicate [SCSS parent selectors](https://sass-lang.com/documentation/style-rules/parent-selector). Likewise the :host-context() solution would require advanced introspection of the SCSS and targeted CSS for child components. Due to the complex nature of the comobox component it does use the Shadow DOM and has [CSS selectors](lib/lwdc-combobox.scss) specifically for error highlighting.  
+The Light DOM option was used for select components. The ::slotted and ::part solution would require upstream changes to Canvas Kit SCSS or a large amount of forked SCSS to replicate [SCSS parent selectors](https://sass-lang.com/documentation/style-rules/parent-selector). Likewise the :host-context() solution would require advanced introspection of the SCSS and targeted CSS for child components. Also FireFox does not support complex :host CSS selectors. Due to the complex nature of the comobox component it does use the Shadow DOM and has [CSS selectors](lib/lwdc-combobox.scss) specifically for error highlighting.  
 
 The form related web components are added to the Light DOM and their styles are individually added to the closest shadow DOM or document. Typically form components will be wrapped by another custom element or the provided [lwdc-form](lib/lwdc-form.ts) element so the styles will have some isolation and not excessive duplication. 
 
@@ -50,7 +50,7 @@ The current version of Chrome supports both of these features without any extra 
 
 Partial form associated custom element support can be activated in the latest version of Firefox via the  `dom.webcomponents.elementInternals.enabled` setting in `about:config`
 
-A minimal pollyfill is used to provide the missing form associated element features in Firefox in order to perform full form validation.
+A minimal pollyfill is used to provide the missing form associated element features in Firefox in order to provide full form validation.
 
 ## Storybook
 
