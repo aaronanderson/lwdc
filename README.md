@@ -1,3 +1,5 @@
+**Workday® is the registered trademark of Workday, Inc. This project is not affiliated with Workday, Inc. and Workday, Inc. does not endorse this project.**
+
 # lwdc
 
 Provides [LitElement](https://lit-element.polymer-project.org/) web components for [Workday Canvas Kit](https://github.com/Workday/canvas-kit) UI components. 
@@ -60,7 +62,11 @@ Run the Storybook: `yarn start`
 
 ## Usage
 
-This library has not been published to the NPM registry yet. It can be included in package by checking this project out, running `npm link` in the checked out directory, and then running `npm link @aaronanderson/lwdc` in the target project.
+`yarn add @aaronanderson/lwdc`
+
+
+## Development
+Local testing can be performed by checking this project out, running `npm link` in the checked out directory, and then running `npm link @aaronanderson/lwdc` in the target project.
 
 Alternatively run `yarn pack` in the checked out directory and then run `yarn remove @aaronanderson/lwdc`, `yarn cache clean`, `yarn add file:aaronanderson-lwdc-v1.0.0.tgz`  in the target project to install the latest version.
 
