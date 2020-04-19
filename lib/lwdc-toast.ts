@@ -9,6 +9,7 @@ import './lwdc-icon';
 import styleCSS from './lwdc-toast.scss';
 const style = css([`${styleCSS}`] as any)
 
+//git diff HEAD 'HEAD@{2020-04-18}' -- modules/toast/react/lib
 
 @customElement('lwdc-toast')
 export class ToastElement extends LitElement {

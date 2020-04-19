@@ -1,0 +1,39 @@
+@import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+@import '~@workday/canvas-kit-css-core/lib/type';
+@import '~@workday/canvas-kit-css-core/lib/variables/spacing';
+
+:host {
+	display: contents;
+}
+
+lwdc-icon {
+	display: flex !important;
+	padding-right: 4px;
+}
+
+.lwdc-status-indicator-container {
+	@include wdc-type();
+	@include wdc-type-small();
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
+	max-width: 150px;
+	height: $wdc-spacing-s;
+	padding: 1px $wdc-spacing-xxxs;
+	border-radius: 2px; //borderRadius.s
+	box-sizing: border-box;
+
+	color: #{'var(--lwdc-status-indicator-color, #ffffff)'};
+	background: #{'var(--lwdc-status-indicator-background, #5e6a75)'};
+
+
+}
+
+.lwdc-status-indicator-label {
+	font-weight: bold;
+	-webkit-font-smoothing: antialiased;
+	text-transform: uppercase;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

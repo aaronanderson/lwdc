@@ -9,6 +9,7 @@ import './lwdc-button';
 import styleCSS from './lwdc-side-panel.scss';
 const style = css([`${styleCSS}`] as any)
 
+//git diff HEAD 'HEAD@{2020-04-18}' -- modules/side-panel/react/lib
 
 @customElement('lwdc-side-panel')
 export class SidePanelElement extends LitElement {

@@ -5,6 +5,7 @@ import { styleMap, StyleInfo } from 'lit-html/directives/style-map';
 import styleCSS from './lwdc-layout-section.scss';
 const style = css([`${styleCSS}`] as any)
 
+//git diff HEAD 'HEAD@{2020-04-18}' -- modules/layout/react/lib
 
 @customElement('lwdc-section-row')
 export class LayoutSectionElement extends LitElement {

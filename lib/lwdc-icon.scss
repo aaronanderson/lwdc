@@ -1,6 +1,11 @@
 @import "~@workday/canvas-kit-css-icon/index.scss";
 @import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
 
+//:host,
+lwdc-icon {
+	display: contents;
+}
+
 .lwdc-icon {
 	display: inline-block;
 }
@@ -8,6 +13,35 @@
 .lwdc-icon>svg {
 	display: block;
 }
+
+//since lwdc-icon is renders in the lightDOM the parent selector is necessary.
+.lwdc-icon .wd-icon-fill {
+	fill: #{'var(--lwdc-icon-fill, var(--lwdc-icon-color))'};
+}
+
+.lwdc-icon:hover .wd-icon-fill {
+	fill: #{'var(--lwdc-icon-fill-hover, var(--lwdc-icon-color-hover))'};
+}
+
+.lwdc-icon .wd-icon-accent,
+.lwdc-icon .wd-icon-accent2 {
+	fill: #{'var(--lwdc-icon-accent, var(--lwdc-icon-color))'};
+}
+
+.lwdc-icon:hover .wd-icon-accent,
+.lwdc-icon:hover .wd-icon-accent2 {
+	fill: #{'var(--lwdc-icon-accent-hover, var(--lwdc-icon-color-hover))'};
+}
+
+
+.lwdc-icon .wd-icon-background {
+	fill: #{'var(--lwdc-icon-background)'};
+}
+
+.lwdc-icon:hover .wd-icon-background {
+	fill: #{'var(--lwdc-icon-background-hover)'};
+}
+
 /*
 :host-context(li.wdc-menu-item-focused) .wd-icon-accent,
 :host-context(li.wdc-menu-item-focused) .wd-icon-fill {

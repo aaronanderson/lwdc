@@ -9,6 +9,7 @@ import { MenuElement } from './lwdc-menu';
 import { ErrorType } from './lwdc-form-field';
 const style = css([`${styleCSS}`] as any)
 
+//git diff HEAD 'HEAD@{2020-03-01}' -- modules/_labs/combobox/react/lib
 
 @customElement('lwdc-combobox')
 export class ComboboxElement<T> extends formElement(LitElement) {

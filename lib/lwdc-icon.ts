@@ -20,10 +20,28 @@ export class IconElement extends LitElement {
 	size = 24;
 
 	@property({ type: String })
-	color = "licorice200";
+	accent?: string;
+
+	@property({ type: String })
+	accentHover?: string;
 
 	@property({ type: String })
 	background = "transparent";
+
+	@property({ type: String })
+	backgroundHover?: string;
+
+	@property({ type: String })
+	color = "licorice200";
+
+	@property({ type: String })
+	colorHover = "licorice500";
+
+	@property({ type: String })
+	fill?: string;
+
+	@property({ type: String })
+	fillHover?: string;
 
 	static get styles() {
 		return [style];
@@ -50,15 +68,31 @@ export class IconElement extends LitElement {
 		svg.style.height = this.size + 'px';
 		svg.style.width = this.size + 'px';
 
-		let fillColor = getColor(this.color);
-		svg.querySelectorAll(".wd-icon-fill").forEach(f => {
-			f.setAttribute('fill', fillColor);
-		});
+		let accentColor = this.accent ? getColor(this.accent) : '';
+		this.style.setProperty('--lwdc-icon-accent', accentColor);
+
+		let accentHoverColor = this.accentHover ? getColor(this.accentHover) : '';
+		this.style.setProperty('--lwdc-icon-accent-hover', accentHoverColor);
 
 		let backgroundColor = getColor(this.background);
-		svg.querySelectorAll(".wd-icon-background").forEach(f => {
-			f.setAttribute('fill', backgroundColor);
-		});
+		this.style.setProperty('--lwdc-icon-background', backgroundColor);
+
+		let backgroundHoverColor = this.backgroundHover ? getColor(this.backgroundHover) : '';
+		this.style.setProperty('--lwdc-icon-background-hover', backgroundHoverColor);
+
+		let colorColor = getColor(this.color);
+		this.style.setProperty('--lwdc-icon-color', colorColor);
+
+		let colorHoverColor = this.colorHover ? getColor(this.colorHover) : '';
+		this.style.setProperty('--lwdc-icon-color-hover', colorHoverColor);
+
+		let fillColor = this.fill ? getColor(this.fill) : '';
+		this.style.setProperty('--lwdc-icon-fill', fillColor);
+
+		let fillHoverColor = this.fillHover ? getColor(this.fillHover) : '';
+		this.style.setProperty('--lwdc-icon-fill-hover', fillHoverColor);
+
+
 
 
 		return html`${base}`;
