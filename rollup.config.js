@@ -36,6 +36,7 @@ export default {
         'lwdc-radio': 'lib/lwdc-radio.ts',
         'lwdc-select': 'lib/lwdc-select.ts',
         'lwdc-side-panel': 'lib/lwdc-side-panel.ts',
+        'lwdc-status-indicator': 'lib/lwdc-status-indicator.ts',
         'lwdc-table': 'lib/lwdc-table.ts',
         'lwdc-tabs': 'lib/lwdc-tabs.ts',
         'lwdc-text': 'lib/lwdc-text.ts',

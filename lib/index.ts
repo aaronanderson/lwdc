@@ -24,6 +24,7 @@ export * from './lwdc-progress';
 export * from './lwdc-radio';
 export * from './lwdc-select';
 export * from './lwdc-side-panel';
+export * from './lwdc-status-indicator';
 export * from './lwdc-table';
 export * from './lwdc-tabs';
 export * from './lwdc-text';

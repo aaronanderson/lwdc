@@ -723,14 +723,39 @@
           "default": "24"
         },
         {
-          "name": "color",
-          "type": "string",
-          "default": "\"licorice200\""
+          "name": "accent",
+          "type": "string | undefined"
+        },
+        {
+          "name": "accentHover",
+          "type": "string | undefined"
         },
         {
           "name": "background",
           "type": "string",
           "default": "\"transparent\""
+        },
+        {
+          "name": "backgroundHover",
+          "type": "string | undefined"
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "default": "\"licorice200\""
+        },
+        {
+          "name": "colorHover",
+          "type": "string",
+          "default": "\"licorice500\""
+        },
+        {
+          "name": "fill",
+          "type": "string | undefined"
+        },
+        {
+          "name": "fillHover",
+          "type": "string | undefined"
         }
       ],
       "properties": [
@@ -746,16 +771,47 @@
           "default": "24"
         },
         {
-          "name": "color",
-          "attribute": "color",
-          "type": "string",
-          "default": "\"licorice200\""
+          "name": "accent",
+          "attribute": "accent",
+          "type": "string | undefined"
+        },
+        {
+          "name": "accentHover",
+          "attribute": "accentHover",
+          "type": "string | undefined"
         },
         {
           "name": "background",
           "attribute": "background",
           "type": "string",
           "default": "\"transparent\""
+        },
+        {
+          "name": "backgroundHover",
+          "attribute": "backgroundHover",
+          "type": "string | undefined"
+        },
+        {
+          "name": "color",
+          "attribute": "color",
+          "type": "string",
+          "default": "\"licorice200\""
+        },
+        {
+          "name": "colorHover",
+          "attribute": "colorHover",
+          "type": "string",
+          "default": "\"licorice500\""
+        },
+        {
+          "name": "fill",
+          "attribute": "fill",
+          "type": "string | undefined"
+        },
+        {
+          "name": "fillHover",
+          "attribute": "fillHover",
+          "type": "string | undefined"
         }
       ]
     },
@@ -1379,6 +1435,56 @@
       "events": [
         {
           "name": "lwdc-side-panel-toggle"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-status-indicator",
+      "path": "./../lib/lwdc-status-indicator.ts",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "StatusIndicatorType",
+          "default": "\"gray\""
+        },
+        {
+          "name": "emphasis",
+          "type": "StatusIndicatorEmphasis",
+          "default": "\"high\""
+        },
+        {
+          "name": "icon",
+          "type": "CanvasIcon | undefined"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "\"\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "type",
+          "attribute": "type",
+          "type": "StatusIndicatorType",
+          "default": "\"gray\""
+        },
+        {
+          "name": "emphasis",
+          "attribute": "emphasis",
+          "type": "StatusIndicatorEmphasis",
+          "default": "\"high\""
+        },
+        {
+          "name": "icon",
+          "attribute": "icon",
+          "type": "CanvasIcon | undefined"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "string",
+          "default": "\"\""
         }
       ]
     },
