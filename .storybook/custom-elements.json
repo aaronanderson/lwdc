@@ -93,6 +93,37 @@
       ]
     },
     {
+      "name": "lwdc-form",
+      "path": "./../lib/lwdc-form.ts",
+      "description": "Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.\nBecause of this no shadowDOM styles will be imported.",
+      "attributes": [
+        {
+          "name": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ],
+      "properties": [
+        {
+          "name": "labelPosition",
+          "attribute": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ]
+    },
+    {
       "name": "lwdc-action-bar",
       "path": "./../lib/lwdc-action-bar.ts",
       "attributes": [
@@ -235,12 +266,13 @@
       "path": "./../lib/lwdc-checkbox.ts",
       "attributes": [
         {
-          "name": "name",
+          "name": "label",
           "type": "String | undefined"
         },
         {
-          "name": "label",
-          "type": "String | undefined"
+          "name": "checked",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "disabled",
@@ -248,21 +280,21 @@
           "default": "false"
         },
         {
-          "name": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "name",
+          "type": "string | null"
         }
       ],
       "properties": [
         {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
-        {
           "name": "label",
           "attribute": "label",
           "type": "String | undefined"
+        },
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "disabled",
@@ -272,20 +304,32 @@
         },
         {
           "name": "value",
-          "type": "V | undefined"
+          "type": "string | File | FormData | undefined"
         },
         {
-          "name": "checked",
-          "attribute": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
         },
         {
           "name": "formField",
           "type": "FormFieldElement"
-        },
-        {
-          "name": "internals"
         }
       ]
     },
@@ -397,10 +441,6 @@
       "path": "./../lib/lwdc-combobox.ts",
       "attributes": [
         {
-          "name": "name",
-          "type": "String | undefined"
-        },
-        {
           "name": "disabled",
           "type": "boolean",
           "default": "false"
@@ -454,14 +494,13 @@
           "name": "selected",
           "type": "Set<T>",
           "default": "\"new Set()\""
+        },
+        {
+          "name": "name",
+          "type": "string | null"
         }
       ],
       "properties": [
-        {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
         {
           "name": "disabled",
           "attribute": "disabled",
@@ -548,19 +587,32 @@
         },
         {
           "name": "value",
-          "type": "V | undefined"
+          "type": "string | File | FormData | undefined"
         },
         {
-          "name": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
         },
         {
           "name": "formField",
           "type": "FormFieldElement"
-        },
-        {
-          "name": "internals"
         }
       ]
     },
@@ -590,6 +642,15 @@
           "name": "multiple",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "picker",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "name",
+          "type": "string | null"
         }
       ],
       "properties": [
@@ -600,12 +661,59 @@
           "default": "false"
         },
         {
+          "name": "picker",
+          "attribute": "picker",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
           "name": "fileInput",
           "type": "HTMLInputElement"
         },
         {
           "name": "files",
           "type": "File[]"
+        },
+        {
+          "name": "pickerTemplate",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "defaultTemplate",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "filePicker",
+          "type": "HTMLDivElement"
+        },
+        {
+          "name": "value",
+          "type": "string | File | FormData | undefined"
+        },
+        {
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
         }
       ],
       "events": [
@@ -617,37 +725,6 @@
     {
       "name": "lwdc-fonts",
       "path": "./../lib/lwdc-fonts.ts"
-    },
-    {
-      "name": "lwdc-form",
-      "path": "./../lib/lwdc-form.ts",
-      "description": "Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.\nBecause of this no shadowDOM styles will be imported.",
-      "attributes": [
-        {
-          "name": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Left\""
-        },
-        {
-          "name": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
-        }
-      ],
-      "properties": [
-        {
-          "name": "labelPosition",
-          "attribute": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Left\""
-        },
-        {
-          "name": "elementChildNodes",
-          "attribute": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
-        }
-      ]
     },
     {
       "name": "lwdc-header",
@@ -1238,16 +1315,17 @@
       "path": "./../lib/lwdc-radio.ts",
       "attributes": [
         {
-          "name": "name",
-          "type": "String | undefined"
-        },
-        {
           "name": "label",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "group",
-          "type": "String | undefined"
+          "type": "string | undefined"
+        },
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "disabled",
@@ -1256,29 +1334,29 @@
         },
         {
           "name": "value",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
-          "name": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "name",
+          "type": "string | null"
         }
       ],
       "properties": [
         {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
-        {
           "name": "label",
           "attribute": "label",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "group",
           "attribute": "group",
-          "type": "String | undefined"
+          "type": "string | undefined"
+        },
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean",
+          "default": "false"
         },
         {
           "name": "disabled",
@@ -1289,20 +1367,32 @@
         {
           "name": "value",
           "attribute": "value",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
-          "name": "checked",
-          "attribute": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
         },
         {
           "name": "formField",
           "type": "FormFieldElement"
-        },
-        {
-          "name": "internals"
         }
       ]
     },
@@ -1310,10 +1400,6 @@
       "name": "lwdc-select",
       "path": "./../lib/lwdc-select.ts",
       "attributes": [
-        {
-          "name": "name",
-          "type": "string | undefined"
-        },
         {
           "name": "valueId",
           "type": "string | undefined"
@@ -1342,14 +1428,13 @@
           "name": "options",
           "type": "T[]",
           "default": "[]"
+        },
+        {
+          "name": "name",
+          "type": "string | null"
         }
       ],
       "properties": [
-        {
-          "name": "name",
-          "attribute": "name",
-          "type": "string | undefined"
-        },
         {
           "name": "valueId",
           "attribute": "valueId",
@@ -1386,20 +1471,37 @@
           "default": "[]"
         },
         {
-          "name": "value",
+          "name": "selected",
           "type": "T | undefined"
         },
         {
-          "name": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "value",
+          "type": "string | File | FormData | undefined"
+        },
+        {
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
         },
         {
           "name": "formField",
           "type": "FormFieldElement"
-        },
-        {
-          "name": "internals"
         }
       ]
     },
@@ -1493,12 +1595,8 @@
       "path": "./../lib/lwdc-text.ts",
       "attributes": [
         {
-          "name": "name",
-          "type": "String | undefined"
-        },
-        {
           "name": "list",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "password",
@@ -1512,23 +1610,22 @@
         },
         {
           "name": "placeholder",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "value",
-          "type": "String | undefined"
+          "type": "string | undefined"
+        },
+        {
+          "name": "name",
+          "type": "string | null"
         }
       ],
       "properties": [
         {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
-        {
           "name": "list",
           "attribute": "list",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "password",
@@ -1545,24 +1642,37 @@
         {
           "name": "placeholder",
           "attribute": "placeholder",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "value",
           "attribute": "value",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
-          "name": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
         },
         {
           "name": "formField",
           "type": "FormFieldElement"
-        },
-        {
-          "name": "internals"
         }
       ]
     },
@@ -1804,10 +1914,6 @@
       "path": "./../lib/lwdc-textarea.ts",
       "attributes": [
         {
-          "name": "name",
-          "type": "String | undefined"
-        },
-        {
           "name": "password",
           "type": "boolean",
           "default": "false"
@@ -1819,19 +1925,18 @@
         },
         {
           "name": "placeholder",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "value",
-          "type": "String | undefined"
+          "type": "string | undefined"
+        },
+        {
+          "name": "name",
+          "type": "string | null"
         }
       ],
       "properties": [
-        {
-          "name": "name",
-          "attribute": "name",
-          "type": "String | undefined"
-        },
         {
           "name": "password",
           "attribute": "password",
@@ -1847,24 +1952,37 @@
         {
           "name": "placeholder",
           "attribute": "placeholder",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
           "name": "value",
           "attribute": "value",
-          "type": "String | undefined"
+          "type": "string | undefined"
         },
         {
-          "name": "checked",
-          "type": "boolean",
-          "default": "false"
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
         },
         {
           "name": "formField",
           "type": "FormFieldElement"
-        },
-        {
-          "name": "internals"
         }
       ]
     },
