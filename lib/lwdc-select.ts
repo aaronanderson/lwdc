@@ -12,7 +12,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 	name: string | null = null;
 
 	@property({ type: String, attribute: true, reflect: true })
-	valueId?: string;
+	value?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
@@ -39,7 +39,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 	firstUpdated() {
 		styleLightDOM(this, style, 'lwdc-select');
 		if (!this.placeholder && this.options.length) {
-			this.valueId = this.valueSelector(this.options[0]);
+			this.value = this.valueSelector(this.options[0]);
 		}
 
 		if (!this.getAttribute("tabindex")) {
@@ -64,11 +64,11 @@ export class SelectElement<T> extends formElement(LitElement) {
 	render() {
 		return html`<div class="wdc-form-select">
 						<select formnovalidate ?disabled=${this.disabled} autocomplete="on" @change=${this.handleChange}>
-							${this.placeholder ? html`<option ?selected=${!this.valueId} disabled hidden style='display: none' value="">${this.placeholder}</option>` : undefined} 
+							${this.placeholder ? html`<option ?selected=${!this.value} disabled hidden style='display: none' value="">${this.placeholder}</option>` : undefined} 
 			${this.options.map((e: T, i: number) => {
 			let name = this.nameSelector(e);
 			let value = this.valueSelector(e);
-			let selected = value && (value === this.valueId);
+			let selected = value && (value === this.value);
 			return html`<option ?selected=${selected} label="${name}">${value}</option>`;
 
 		})}								
@@ -79,12 +79,12 @@ export class SelectElement<T> extends formElement(LitElement) {
 
 
 	get selected() {
-		return this.options.find((e: T) => this.valueSelector(e) === this.valueId);
+		return this.options.find((e: T) => this.valueSelector(e) === this.value);
 	}
 
 	
 	handleChange(e: Event) {
-		this.valueId = (<HTMLSelectElement>e.target).value;
+		this.value = (<HTMLSelectElement>e.target).value;
 		this.checkValidity();
 	}
 

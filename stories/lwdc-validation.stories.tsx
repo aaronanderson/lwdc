@@ -10,6 +10,7 @@ import { closestElement } from '../lib/util';
 import '../lib/lwdc-action-bar';
 import '../lib/lwdc-form';
 import '../lib/lwdc-form-field';
+import '../lib/lwdc-select';
 import '../lib/lwdc-combobox';
 import '../lib/lwdc-text';
 import '../lib/lwdc-textarea';
@@ -38,9 +39,13 @@ export default {
 
 const options = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
 export const validationStory = () => {
-	return html`<lwdc-form>
-					<lwdc-form-field label="Selection"  .errorType=${ErrorType.alert}>
-						<lwdc-combobox name="selection" required  .options=${options}></lwdc-combobox>
+	return html`<lwdc-form>					
+					<lwdc-form-field label="Combo box"  .errorType=${ErrorType.alert}>
+						<lwdc-combobox name="combobox" required  .options=${options}></lwdc-combobox>
+					</lwdc-form-field>
+
+					<lwdc-form-field label="Selection">
+						<lwdc-select name="selection" required  .options=${options}></lwdc-select>
 					</lwdc-form-field>
 
 					<lwdc-form-field label="Text">
