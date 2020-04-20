@@ -15,8 +15,10 @@ import '../lib/lwdc-text';
 import '../lib/lwdc-textarea';
 import '../lib/lwdc-radio';
 import '../lib/lwdc-checkbox';
+import '../lib/lwdc-file-upload';
 
 import { ErrorType } from '../lib/lwdc-form-field';
+
 
 
 
@@ -42,7 +44,7 @@ export const validationStory = () => {
 					</lwdc-form-field>
 
 					<lwdc-form-field label="Text">
-							<lwdc-text name="text" required></lwdc-text>
+							<lwdc-text name="text" required @change=${customTextValidation}></lwdc-text>
 					</lwdc-form-field>
 
 					<lwdc-form-field label="Text Area">
@@ -55,6 +57,10 @@ export const validationStory = () => {
 
 					<lwdc-form-field label="Checkbox">
 						<lwdc-checkbox name="checkbox" label="E-Mail" required></lwdc-checkbox>
+					</lwdc-form-field>
+
+					<lwdc-form-field label="File">
+						<lwdc-file-upload name="file" required></lwdc-file-upload>
 					</lwdc-form-field>
 
 					<lwdc-action-bar>
@@ -78,4 +84,14 @@ const validate = (e: Event) => {
 const reset = (e: Event) => {
 	const form = (closestElement('lwdc-form', (e.target as HTMLElement)) as any);
 	form.reset();
+}
+
+const customTextValidation = (e: Event) => {
+	//const target = (e.target as HTMLElement) as any;
+	const target = (e.currentTarget as HTMLElement) as any;
+	if ("test" !== target.value) {
+		target.setCustomValidity("text value should be test");
+	} else {
+		target.setCustomValidity("");
+	}
 }

@@ -1,15 +1,25 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
-import { styleLightDOM } from './util';
+import { formElement } from './util';
+
+import './lwdc-button';
 
 import styleCSS from './lwdc-file-upload.scss';
+import { ErrorType } from './lwdc-form-field';
+import { ButtonSize, ButtonType } from './lwdc-button';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-file-upload')
-export class FileUploadElement extends LitElement {
+export class FileUploadElement extends formElement(LitElement) {
+
+	@property({ type: String, attribute: true, reflect: true })
+	name: string | null = null;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	multiple = false;
+
+	@property({ type: Boolean })
+	picker = true;
 
 	static get styles() {
 		return [style];
@@ -30,10 +40,28 @@ export class FileUploadElement extends LitElement {
 	}
 
 	render() {
+		return this.picker ? this.pickerTemplate : this.defaultTemplate;
+	}
+
+	get pickerTemplate() {
+		return html`				
+				<div class="lwdc-file-upload-wrapper">
+					 	<input type="file" ?multiple=${this.multiple} @change="${(e: Event) => { this.checkValidity(); this.requestUpdate() }}"/>
+				</div>
+				<div class="lwdc-file-upload-picker">
+					<lwdc-button .size=${ButtonSize.small} .type=${ButtonType.default} @click=${(e: MouseEvent) => this.select()}>Choose</lwdc-button>
+					<div class="lwdc-file-upload-picker-list">
+						${this.files.map((e: File) => html`<span>${e.name}</span>`)}
+					</div>
+				</div> 
+		`;
+	}
+
+	get defaultTemplate() {
 		return html`		
-					<div class="lwdc-upload-wrapper">
+				<div class="lwdc-file-upload-wrapper">
 					 	<input type="file" ?multiple=${this.multiple} @change="${this.handleFileSelected}"/>
-					</div> 
+				</div> 
 		`;
 	}
 
@@ -43,6 +71,40 @@ export class FileUploadElement extends LitElement {
 				files: this.files
 			}
 		}));
+	}
+
+	get filePicker() {
+		return this.shadowRoot!.querySelector(".lwdc-file-upload-picker-list") as HTMLDivElement;
+	}
+
+	checkValidity() {
+		if (!this.matches(':disabled') && (this.hasAttribute('required') && this.files.length == 0)) {
+			let message = this.formField ? `${this.formField.label} is required` : 'Required';
+			this.setInternals(true, () => message);
+			if (this.picker && this.formField) {
+				if (this.formField.errorType == ErrorType.alert) {
+					this.filePicker.classList.add('lwdc-file-upload-alert');
+				} else {
+					this.filePicker.classList.add('lwdc-file-upload-error');
+				}
+			}
+		} else {
+			this.setInternals(false);
+			if (this.picker && this.formField) {
+				this.filePicker.classList.remove('lwdc-file-upload-alert', 'lwdc-file-upload-error');
+			}
+		}
+		return this._internals.checkValidity();
+	}
+
+
+	formResetCallback() {
+		this.fileInput.value = '';
+		super.formResetCallback();
+		if (this.picker && this.formField) {
+			this.filePicker.classList.remove('lwdc-file-upload-alert', 'lwdc-file-upload-error');
+		}
+		this.requestUpdate();
 	}
 
 }

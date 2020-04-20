@@ -15,7 +15,7 @@ const style = css([`${styleCSS}`] as any)
 export class ComboboxElement<T> extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name?: String;
+	name: string | null = null;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
@@ -235,22 +235,27 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 	}
 
 	checkValidity() {
+		if (this._customValidity) {
+			return false;
+		}
 		if (!this.matches(':disabled') && (this.hasAttribute('required') && this.selected.size == 0)) {
-			this.setInternals(true, () => `${this.formField.label} is required`);
 			if (this.formField) {
+				this.setInternals(true, () => `${this.formField.label} is required`);
 				if (this.formField.errorType == ErrorType.alert) {
-					this.searchInput.classList.add('lwdc-combobox-alert');
+					this.searchInput.parentElement!.classList.add('lwdc-combobox-alert');
 				} else {
-					this.searchInput.classList.add('lwdc-combobox-error');
+					this.searchInput.parentElement!.classList.add('lwdc-combobox-error');
 				}
+			} else {
+				this.setInternals(true, () => `Required`);
 			}
 		} else {
 			this.setInternals(false);
 			if (this.formField) {
-				this.searchInput.setAttribute("class", "");
+				this.searchInput.parentElement!.classList.remove('lwdc-combobox-error', 'lwdc-combobox-alert');
 			}
 		}
-		return this.internals.checkValidity();
+		return this._internals.checkValidity();
 	}
 
 
@@ -258,7 +263,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 		super.formResetCallback();
 		this.selected.clear();
 		if (this.formField) {
-			this.searchInput.setAttribute("class", "");
+			this.searchInput.parentElement!.classList.remove('lwdc-combobox-error', 'lwdc-combobox-alert');
 		}
 		this.requestUpdate();
 	}

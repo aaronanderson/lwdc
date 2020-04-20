@@ -124,11 +124,11 @@ ul li .wdc-menu-item-label {
 	word-wrap: break-word;
 }
 
-.lwdc-combobox-error {
+.lwdc-combobox-error input{
 	@include wdc-form-error();
 }
 
-.lwdc-combobox-alert {
+.lwdc-combobox-alert input{
 	@include wdc-form-alert();
 }
 

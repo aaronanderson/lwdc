@@ -1,8 +1,9 @@
 import { CSSResult, Constructor, LitElement } from "lit-element";
 import FormFieldElement from './lwdc-form-field';
+import FormElement from "./lwdc-form";
 
 
-export const formAssociatedCustomElementsSupported = ('attachInternals' in HTMLElement.prototype);
+export const formAssociatedCustomElementsSupported = 'ElementInternals' in window && 'setFormData' in (window as any).ElementInternals;
 
 export const constructableStylesheetsSupported = ('adoptedStyleSheets' in Document.prototype) && ('replace' in CSSStyleSheet.prototype);
 
@@ -136,7 +137,7 @@ export const formAssociatedElementPolyfill = (element: HTMLElement) => {
 
 
 
-		//decided not to polyfill elements. It is a core feature HTML and forms and not really new functionality to be polyfilled.
+		//decided not to polyfill elements. It is a core feature of HTML forms and not really new functionality to be polyfilled.
 		/*
 		
 		const elementHandler = {
@@ -195,24 +196,39 @@ interface FormLitElement extends HTMLElement {
 }
 
 export const formElement =
-	<V, T extends Constructor<FormLitElement>>(baseElement: T) =>
+	<T extends Constructor<FormLitElement>>(baseElement: T) =>
 		class extends baseElement {
 
 			static formAssociated = true;
 
 			//https://web.dev/more-capable-form-controls/#event-based-api
 			//https://github.com/microsoft/TypeScript/issues/33218
-			internals?: any;
+			_internals?: any;
 
-			value?: V;
+			value?: string | File | FormData;
 
-			checked = false;
+			_customValidity = "";
 
 			constructor(...args: any[]) {
 				super(args);
 				formAssociatedElementPolyfill(this);
-				this.internals = (this as any).attachInternals();
+				this._internals = (this as any).attachInternals();
 			}
+
+			//standard form associated fields
+			get form() { return this._internals.form; }
+			get name() { return this.getAttribute('name'); }
+			get type() { return this.localName; }
+			get validity() { return this._internals.validity; }
+			get validationMessage() { return this._internals.validationMessage; }
+			get willValidate() { return this._internals.willValidate; }
+
+			//checkValidity() { return this.internals.checkValidity(); }
+			reportValidity() { return this._internals.reportValidity(); }
+
+			// formAssociatedCallback(form: FormElement) { }
+			// formDisabledCallback(disabled: boolean) { }
+			// formStateRestoreCallback(state: string | File | FormData, mode: string) { }//mode =  restore or autocomplete
 
 
 			get formField() {
@@ -220,33 +236,48 @@ export const formElement =
 			}
 
 			checkValidity() {
+				if (this._customValidity) {
+					return false;
+				}
 				if (this.hasAttribute('minlength') && this.value instanceof String) {
 					let minLength = this.hasAttribute('required') ? 1 : 0;
 					let minLengthAttr = this.getAttribute('minlength');
 					minLength = minLengthAttr ? parseInt(minLengthAttr) : minLength;
 					if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value || this.value.length < minLength))) {
-						this.setInternals(true, () => !this.value ? `${this.formField.label} is required` : `${minLength} characters are required`);
+						let message = this.formField ? `${this.formField.label} is required` : 'Required';
+						this.setInternals(true, () => !this.value ? message : `${minLength} characters are required`);
 					} else {
 						this.setInternals(false);
 					}
 				} else if (!this.matches(':disabled') && (this.hasAttribute('required') && (!this.value))) {
-					this.setInternals(true, () => `${this.formField.label} is required`);
+					let message = this.formField ? `${this.formField.label} is required` : 'Required';
+					this.setInternals(true, () => message);
 				} else {
 					this.setInternals(false);
 				}
-				return this.internals.checkValidity();
+				return this._internals.checkValidity();
+
+			}
+
+			setCustomValidity(customValidity: string) {
+				this._customValidity = customValidity;
+				if (customValidity) {
+					this.setInternals(true, () => customValidity);
+				} else {
+					this.setInternals(false);
+				}
 			}
 
 			setInternals(isError: boolean, formMessage?: Function) {
 				if (isError) {
 					if (this.formField && formMessage) {
-						this.internals.setValidity({ customError: true }, formMessage.call(this));
-						this.formField.hintText = this.internals.validationMessage;
+						this._internals.setValidity({ customError: true }, formMessage.call(this));
+						this.formField.hintText = this._internals.validationMessage;
 					} else {
-						this.internals.setValidity({ customError: true }, `Required`);
+						this._internals.setValidity({ customError: true }, `Required`);
 					}
 				} else {
-					this.internals.setValidity({ customError: false }, undefined);
+					this._internals.setValidity({ customError: false }, undefined);
 					if (this.formField) {
 						this.formField.hintText = undefined;
 					}
@@ -255,10 +286,14 @@ export const formElement =
 
 
 			formResetCallback() {
-				this.internals.setValidity({ customError: false }, undefined);
+				this._internals.setValidity({ customError: false }, undefined);
 				this.formField.hintText = undefined;
-				this.value = undefined;
-				this.internals.setFormValue(undefined);
+				this.value = '';
+				this._internals.setFormValue(undefined);
+				// if (this instanceof LitElement) {
+				// 	this.requestUpdate();
+				// }
 			}
 
 		};
+

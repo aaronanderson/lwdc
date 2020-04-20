@@ -1,6 +1,6 @@
 {
   "name": "@aaronanderson/lwdc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Workday Canvas Kit Workday CanWeb Components",
   "main": "wc/index.js",
   "module": "wc/index.js",

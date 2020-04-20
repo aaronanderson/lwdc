@@ -9,7 +9,7 @@ const style = css([`${styleCSS}`] as any)
 export class SelectElement<T> extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name?: string;
+	name: string | null = null;
 
 	@property({ type: String, attribute: true, reflect: true })
 	valueId?: string;
@@ -78,7 +78,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 	}
 
 
-	get value() {
+	get selected() {
 		return this.options.find((e: T) => this.valueSelector(e) === this.valueId);
 	}
 

@@ -12,16 +12,16 @@ const style = css([`${styleCSS}`] as any)
 export class RadioElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name?: String;
+	name: string | null = null;
 
 	@property({ type: String, attribute: true, reflect: true })
-	label?: String;
+	label?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
-	group?: String;
+	group?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
-	value?: String;
+	value?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	checked = false;
@@ -70,7 +70,7 @@ export class RadioElement extends formElement(LitElement) {
 
 	handleChange(e: any) {
 		this.value = e.target.value;
-		this.internals.setFormValue(this.value);
+		this._internals.setFormValue(this.value);
 		this.checkValidity();
 	}
 

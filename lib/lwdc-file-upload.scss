@@ -1,8 +1,18 @@
+@import '~@workday/canvas-kit-css-core/lib/colors';
+@import "~@workday/canvas-kit-css-core/lib/mixins/type";
+@import '~@workday/canvas-kit-css-core/lib/variables/spacing';
+@import '~@workday/canvas-kit-css-core/lib/variables/assets';
+@import '~@workday/canvas-kit-css-core/lib/variables/border-radius';
+
+@import '~@workday/canvas-kit-css-common/lib/variables';
+@import "~@workday/canvas-kit-css-common/lib/errors";
+@import "~@workday/canvas-kit-css-common/lib/forms";
+
 .lwdc-upload-wrapper {
 	position: relative;
 }
 
-.lwdc-upload-wrapper input[type=file] {
+.lwdc-file-upload-wrapper input[type=file] {
 	font-size: 42px;
 	position: absolute;
 	left: 0;
@@ -10,4 +20,37 @@
 	opacity: 0;
 	height: 0;
 	width: 0;
+}
+
+.lwdc-file-upload-error {	
+	@include wdc-form-common-box();
+	@include wdc-form-error();
+	min-width: inherit;
+}
+
+.lwdc-file-upload-alert {	
+	@include wdc-form-common-box();
+	@include wdc-form-alert();
+	min-width: inherit;
+}
+
+.lwdc-file-upload-picker {
+	display: flex;
+}
+
+.lwdc-file-upload-picker lwdc-button {
+	margin-right: 16px;
+}
+
+.lwdc-file-upload-picker-list {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.lwdc-file-upload-picker-list span {
+	@include wdc-type();
+	@include wdc-type-body-2();
 }

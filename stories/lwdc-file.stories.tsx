@@ -67,20 +67,21 @@ class FileUploadExampleElement extends LitElement {
 		return [coreStyle];
 	}
 	get fileUpload() {
-		return this.shadowRoot!.querySelector("lwdc-file-upload") as FileUploadElement;
+		return this.shadowRoot!.querySelector("#no-picker") as FileUploadElement;
 	}
 
 	render() {
 		return html`
+			<lwdc-file-upload multiple style="margin-bottom: 24px;"></lwdc-file-upload>
 		
 			${this.files.length > 0 ? html`<h3 class="wdc-type-h3">Selected Files:</h3>` : undefined}
 			${this.files.map((e: File) => html`<h5 class="wdc-type-h5">${e.name}</h5>`)}
 
-			<lwdc-file-upload multiple @lwdc-file-upload-selected=${(e: CustomEvent) => this.files = e.detail.files}></lwdc-file-upload>
+			<lwdc-file-upload id="no-picker" multiple .picker=${false} @lwdc-file-upload-selected=${(e: CustomEvent) => this.files = e.detail.files}></lwdc-file-upload>
 						
-			<lwdc-action-bar>
-				<lwdc-button @click=${(e: MouseEvent) => this.fileUpload.select()}>Select</lwdc-button>
-				<lwdc-button ?disabled=${this.files.length == 0} @click=${this.fileUploadHandler}>Upload</lwdc-button>			
+			<lwdc-action-bar>				
+				<lwdc-button @click=${(e: MouseEvent) => this.fileUpload.select()}>Select</lwdc-button>	
+				<lwdc-button ?disabled=${this.files.length == 0} @click=${this.fileUploadHandler}>Upload</lwdc-button>							
 			</lwdc-action-bar>	
 		
 		`;

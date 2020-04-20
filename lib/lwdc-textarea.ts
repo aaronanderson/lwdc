@@ -12,10 +12,10 @@ const style = css([`${styleCSS}`] as any)
 export class TextAreaElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name?: String;
+	name: string | null = null;
 
 	@property({ type: String, attribute: true, reflect: true })
-	value?: String;
+	value?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	password = false;
@@ -24,7 +24,7 @@ export class TextAreaElement extends formElement(LitElement) {
 	disabled = false;
 
 	@property({ type: String, attribute: true, reflect: true })
-	placeholder?: String;
+	placeholder?: string;
 
 
 
@@ -66,7 +66,7 @@ export class TextAreaElement extends formElement(LitElement) {
 
 	handleChange(e: any) {
 		this.value = e.target.value;
-		this.internals.setFormValue(this.value);
+		this._internals.setFormValue(this.value);
 		this.checkValidity();
 	}
 
