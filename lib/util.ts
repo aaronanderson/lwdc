@@ -27,16 +27,27 @@ export const styleDocument = (styles: string, styleID: string) => {
 
 export const styleLightDOM = (target: Element, styles: CSSResult, styleID: string) => {
 
+	const rootNode = target.getRootNode() as any;
 	if (constructableStylesheetsSupported) {
-		const rootNode = target.getRootNode() as any;
 		rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, styles.styleSheet] : [styles.styleSheet];
 	} else {
-		if (!document.head.querySelector('#' + styleID)) {
-			const styleNode = document.createElement('style');
-			styleNode.id = styleID;
-			styleNode.innerHTML = styles.cssText;
-			document.head.appendChild(styleNode);
+		if (rootNode === document){
+			if (!document.head.querySelector('#' + styleID)) {
+				const styleNode = document.createElement('style');
+				styleNode.id = styleID;
+				styleNode.innerHTML = styles.cssText;
+				document.head.appendChild(styleNode);
+			}
+		} else if (rootNode instanceof ShadowRoot){
+			let shadowRoot = rootNode as ShadowRoot;
+			if (!shadowRoot.querySelector('#' + styleID)) {
+				const styleNode = document.createElement('style');
+				styleNode.id = styleID;
+				styleNode.innerHTML = styles.cssText;
+				shadowRoot.appendChild(styleNode);
+			}
 		}
+
 	}
 
 }
@@ -99,13 +110,13 @@ export class DownloadError extends Error {
 	}
 }
 
-//For Firefox. Mininimal form associated custom element support for only functions used by this library that are supported in Chrome. 
-//Form associated custom elements are not necessary since checkValidity logic below manages the Canvas Kit form-field hintText values that are displayed in the UI. 
-//However plugging into the browser's HTML form lifecycle management is a standards compliant approach and may provide additional benefits in the futures. 
+//For Firefox. Mininimal form associated custom element support for only functions used by this library that are supported in Chrome.
+//Form associated custom elements are not necessary since checkValidity logic below manages the Canvas Kit form-field hintText values that are displayed in the UI.
+//However plugging into the browser's HTML form lifecycle management is a standards compliant approach and may provide additional benefits in the futures.
 export const formAssociatedElementPolyfill = (element: HTMLElement) => {
 
 	// if (!HTMLElement.prototype.attachInternals) {
-	// 	HTMLElement.prototype.attachInternals = () => {		
+	// 	HTMLElement.prototype.attachInternals = () => {
 	if (!formAssociatedCustomElementsSupported) {
 
 		element.attachInternals = function () {
@@ -139,7 +150,7 @@ export const formAssociatedElementPolyfill = (element: HTMLElement) => {
 
 		//decided not to polyfill elements. It is a core feature of HTML forms and not really new functionality to be polyfilled.
 		/*
-		
+
 		const elementHandler = {
 			get: function (target: any, key: any, receiver: any) {
 				console.log('proxy', target, key, receiver);
@@ -155,7 +166,7 @@ export const formAssociatedElementPolyfill = (element: HTMLElement) => {
 				}
 			}
 		});
-		
+
 		*/
 
 
@@ -296,4 +307,3 @@ export const formElement =
 			}
 
 		};
-
