@@ -12,9 +12,6 @@ const style = css([`${styleCSS}`] as any)
 export class TextAreaElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name: string | null = null;
-
-	@property({ type: String, attribute: true, reflect: true })
 	value?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
@@ -74,10 +71,3 @@ export class TextAreaElement extends formElement(LitElement) {
 }
 
 export default TextAreaElement;
-
-
-
-
-
-
-

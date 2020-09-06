@@ -9,18 +9,12 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import '../lib/lwdc-form-field';
 import '../lib/lwdc-radio';
 
-
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components/Radio',
 	component: 'lwdc-radio',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -30,9 +24,9 @@ export const radioStory = () => {
 					</lwdc-form-field>
 				`;
 }
-radioStory.story = {
-	name: 'Default'
-}
+
+radioStory.storyName = 'Default';
+radioStory.parameters = { layout: 'centered' };
 
 
 export const radioGroupStory = () => {
@@ -48,7 +42,6 @@ export const radioGroupStory = () => {
 				</div>
 				`;
 }
-radioGroupStory.story = {
-	name: 'Group'
-}
 
+radioGroupStory.storyName = 'Group';
+radioGroupStory.parameters = { layout: 'centered' };

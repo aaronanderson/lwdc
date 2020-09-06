@@ -10,13 +10,10 @@ import '../lib/lwdc-env-label';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
-
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-env-label',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -27,7 +24,6 @@ const envsRadioKnob = () => radios("Environment", envOptions, 'dev') as any;
 export const envLabelStory = () => {
 	return html`<p style="margin: 10px;">Environment</p> <lwdc-env-label .env=${envsRadioKnob()}></lwdc-env-label>`;
 }
-envLabelStory.story = {
-	name: 'Environment Label'
-}
 
+envLabelStory.storyName = 'Environment Label';
+envLabelStory.parameters = { layout: 'centered' };

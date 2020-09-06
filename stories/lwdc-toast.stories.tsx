@@ -9,17 +9,12 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import '../lib/lwdc-toast';
 
 
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="height: 200px; position: relative; display: flex; flex-flow: column; align-items: center;  margin: 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-toast',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -29,7 +24,5 @@ export const toastStory = () => {
 				`;
 }
 
-toastStory.story = {
-	name: 'Toast'
-}
-
+toastStory.storyName =  'Toast';
+toastStory.parameters = { layout: 'centered' };

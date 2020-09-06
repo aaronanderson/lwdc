@@ -11,6 +11,7 @@ import '../lib/lwdc-action-bar';
 import '../lib/lwdc-form';
 import '../lib/lwdc-form-field';
 import '../lib/lwdc-select';
+import '../lib/lwdc-color-input';
 import '../lib/lwdc-combobox';
 import '../lib/lwdc-text';
 import '../lib/lwdc-textarea';
@@ -20,27 +21,19 @@ import '../lib/lwdc-file-upload';
 
 import { ErrorType } from '../lib/lwdc-form-field';
 
-
-
-
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-text',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
 const options = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
 export const validationStory = () => {
-	return html`<lwdc-form>					
-					<lwdc-form-field label="Combo box"  .errorType=${ErrorType.alert}>
+	return html`<lwdc-form>
+					<lwdc-form-field label="Combo box" .errorType=${ErrorType.alert}>
 						<lwdc-combobox name="combobox" required  .options=${options}></lwdc-combobox>
 					</lwdc-form-field>
 
@@ -64,6 +57,10 @@ export const validationStory = () => {
 						<lwdc-checkbox name="checkbox" label="E-Mail" required></lwdc-checkbox>
 					</lwdc-form-field>
 
+					<lwdc-form-field label="Color Input">
+							<lwdc-color-input name="color" label="Color" required></lwdc-color-input>
+					</lwdc-form-field>
+
 					<lwdc-form-field label="File">
 						<lwdc-file-upload name="file" required></lwdc-file-upload>
 					</lwdc-form-field>
@@ -75,9 +72,9 @@ export const validationStory = () => {
 				</lwdc-form>
 				`;
 }
-validationStory.story = {
-	name: 'Validation'
-}
+
+validationStory.storyName = 'Validation';
+validationStory.parameters = { layout: 'centered' };
 
 const validate = (e: Event) => {
 	const form = (closestElement('lwdc-form', (e.target as HTMLElement)) as any);

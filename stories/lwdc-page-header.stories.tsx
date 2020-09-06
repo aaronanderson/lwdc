@@ -16,13 +16,10 @@ import { ButtonType } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
-
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-page-header',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 export const pageHeaderStory = () => {
@@ -33,10 +30,9 @@ export const pageHeaderStory = () => {
 						<lwdc-button .type=${ButtonType.iconInverse}>
 							<lwdc-icon .icon=${fullscreenIcon} color="frenchVanilla100"></lwdc-icon>
 						</lwdc-button>
-	
+
 	</lwdc-page-header>`;
 }
-pageHeaderStory.story = {
-	name: 'Page Header'
-}
 
+pageHeaderStory.storyName = 'Page Header';
+pageHeaderStory.parameters = { layout: 'centered' };

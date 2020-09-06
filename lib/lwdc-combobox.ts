@@ -14,9 +14,6 @@ const style = css([`${styleCSS}`] as any)
 @customElement('lwdc-combobox')
 export class ComboboxElement<T> extends formElement(LitElement) {
 
-	@property({ type: String, attribute: true, reflect: true })
-	name: string | null = null;
-
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
 
@@ -105,10 +102,10 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 
 	render() {
 		return html`
-			
+
 			<div class="lwdc-combobox-container">
 				<div class="lwdc-combobox-input-container">
-				    
+
 					<div class="wdc-form-textinput">
 						<input formnovalidate type="search" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @input=${this.handleInput} @keydown=${this.handleKeydown}></input>
 					</div>
@@ -145,7 +142,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 								${this.filtered.map((o: T) => {
 				return html`<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`;
 			})}
-							</lwdc-menu>		
+							</lwdc-menu>
 						`
 		}
 	}
@@ -166,7 +163,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 				return this.selected.has(o) ? html`<li><span class="wdc-menu-item-label">${this.nameSelector(o)}</span></li>` : null;
 			})}
 								</ul>
-							</div>		
+							</div>
 					</div>`
 		}
 	}
@@ -182,7 +179,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 
 
 	handleKeydown(e: KeyboardEvent) {
-		//console.log(e, e.target);		
+		//console.log(e, e.target);
 		if (e.keyCode === 13 || (e.shiftKey && e.keyCode === 32)) {
 			this.displayMenu = false;
 			this.searchInput.blur();
@@ -287,10 +284,3 @@ export interface ComboboxNameSelector<T> {
 
 
 export default ComboboxElement;
-
-
-
-
-
-
-

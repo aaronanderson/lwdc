@@ -6,24 +6,26 @@ import { action } from '@storybook/addon-actions';
 
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 
-import '../lib/lwdc-form-field';
-import '../lib/lwdc-textarea';
+import '../lib/lwdc-color-input';
+import '../lib/lwdc-color-input';
+
 
 loadWDCFonts();
 
+
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-textarea',
+	component: 'lwdc-color-input',
 	decorators: [withKnobs]
 };
 
 
-export const textareaStory = () => {
-	return html`<lwdc-form-field label="Text Area">
-						<lwdc-textarea name="textarea" required></lwdc-textarea>
+export const colorInputStory = () => {
+	return html`<lwdc-form-field label="Color Input">
+						<lwdc-color-input name="color" required></lwdc-color-input>
 					</lwdc-form-field>
 				`;
 }
 
-textareaStory.storyName =  'Textarea';
-textareaStory.parameters = { layout: 'centered' };
+colorInputStory.storyName = 'Color Input';
+colorInputStory.parameters = { layout: 'centered' };

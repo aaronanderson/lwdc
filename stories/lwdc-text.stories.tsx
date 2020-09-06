@@ -9,18 +9,12 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import '../lib/lwdc-form-field';
 import '../lib/lwdc-text';
 
-
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-text',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -30,7 +24,6 @@ export const textStory = () => {
 					</lwdc-form-field>
 				`;
 }
-textStory.story = {
-	name: 'Text'
-}
 
+textStory.storyName = 'Text';
+textStory.parameters = { layout: 'centered' };

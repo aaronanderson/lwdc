@@ -14,13 +14,11 @@ import '../lib/lwdc-checkbox';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components/Checkbox',
 	component: 'lwdc-checkbox',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -30,9 +28,10 @@ export const checkboxStory = () => {
 					</lwdc-form-field>
 				`;
 }
-checkboxStory.story = {
-	name: 'Default'
-}
+
+checkboxStory.storyName = 'Default';
+checkboxStory.parameters = { layout: 'centered' };
+
 
 
 export const checkboxGroupStory = () => {
@@ -48,7 +47,6 @@ export const checkboxGroupStory = () => {
 				</div>
 				`;
 }
-checkboxGroupStory.story = {
-	name: 'Group'
-}
 
+checkboxGroupStory.storyName = 'Group';
+checkboxGroupStory.parameters = { layout: 'centered' };

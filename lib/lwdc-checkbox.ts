@@ -9,10 +9,7 @@ const style = css([`${styleCSS}`] as any)
 
 @customElement('lwdc-checkbox')
 export class CheckboxElement extends formElement(LitElement) {
-
-	@property({ type: String, attribute: true, reflect: true })
-	name: string | null = null;
-
+	
 	@property({ type: String, attribute: true, reflect: true })
 	label?: String;
 
@@ -54,7 +51,7 @@ export class CheckboxElement extends formElement(LitElement) {
 		//https://bugzilla.mozilla.org/show_bug.cgi?id=1459865 - for firefox set autocomplete="off" so checkbox reset is applied
 		return html`<div class="${classMap(formTextClass)}">
 						  <input type="checkbox" ?checked="${this.checked}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
-        				  <label htmlFor="checkbox">${this.label}</label>							
+        				  <label htmlFor="checkbox">${this.label}</label>
 					</div>
 					`;
 
@@ -85,10 +82,3 @@ export class CheckboxElement extends formElement(LitElement) {
 }
 
 export default CheckboxElement;
-
-
-
-
-
-
-

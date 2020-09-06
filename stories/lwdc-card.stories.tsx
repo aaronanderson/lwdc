@@ -11,19 +11,17 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import '../lib/lwdc-card';
 
 loadWDCFonts();
-// style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;"
-const center = (storyFn: () => unknown) => html`<div style="display: block; max-width: 800px; width: 100%;">${storyFn()}</div>`;
 
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-card',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 export const cardStory = () => {
 	return html`
-				
+
 				<section>
 					<lwdc-card title="Card Header">
 							.wdc-card
@@ -40,12 +38,11 @@ export const cardStory = () => {
 						</lwdc-card>
 						<lwdc-card title="Card Header" size="4">
 							.wdc-card-4
-						</lwdc-card>	
+						</lwdc-card>
 					</lwdc-card-container>
 				</section>
 				`;
-}			
-cardStory.story = {
-	name: 'Card'
 }
 
+cardStory.storyName =  'Card';
+cardStory.parameters = { layout: 'centered' };

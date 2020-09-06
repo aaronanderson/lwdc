@@ -9,9 +9,6 @@ const style = css([`${styleCSS}`] as any)
 export class SelectElement<T> extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name: string | null = null;
-
-	@property({ type: String, attribute: true, reflect: true })
 	value?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
@@ -30,7 +27,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 	options: Array<T> = [];
 
 
-	
+
 
 	static get styles() {
 		return [style];
@@ -47,7 +44,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 		}
 	}
 
-	//disable shadow DOM so containing wdc-form class relative css can be applied.	
+	//disable shadow DOM so containing wdc-form class relative css can be applied.
 	//https://github.com/Polymer/lit-element/issues/824#issuecomment-536093753
 	createRenderRoot() {
 		return this;
@@ -64,14 +61,14 @@ export class SelectElement<T> extends formElement(LitElement) {
 	render() {
 		return html`<div class="wdc-form-select">
 						<select formnovalidate ?disabled=${this.disabled} autocomplete="on" @change=${this.handleChange}>
-							${this.placeholder ? html`<option ?selected=${!this.value} disabled hidden style='display: none' value="">${this.placeholder}</option>` : undefined} 
+							${this.placeholder ? html`<option ?selected=${!this.value} disabled hidden style='display: none' value="">${this.placeholder}</option>` : undefined}
 			${this.options.map((e: T, i: number) => {
 			let name = this.nameSelector(e);
 			let value = this.valueSelector(e);
 			let selected = value && (value === this.value);
 			return html`<option ?selected=${selected} label="${name}">${value}</option>`;
 
-		})}								
+		})}
 						</select>
 					</div>
 				`;
@@ -82,7 +79,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 		return this.options.find((e: T) => this.valueSelector(e) === this.value);
 	}
 
-	
+
 	handleChange(e: Event) {
 		this.value = (<HTMLSelectElement>e.target).value;
 		this.checkValidity();
@@ -108,10 +105,3 @@ export interface SelectValueSelector<T> {
 };
 
 export default SelectElement;
-
-
-
-
-
-
-

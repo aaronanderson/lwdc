@@ -13,36 +13,22 @@ import '../lib/lwdc-button';
 import '../lib/lwdc-icon';
 import { ButtonType, ButtonSize } from '../lib/lwdc-button';
 
-
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="  ">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-sidepanel',
-	decorators: [withKnobs, center]
+	component: 'lwdc-side-panel',
+	decorators: [withKnobs]
 };
-
-
-
-
-
 
 export const sidepanelStory = () => {
 	let opened = true;
 	return html`<lwdc-side-panel-example></lwdc-side-panel-example>
-	
-				
 				`;
 }
 
-sidepanelStory.story = {
-	name: 'Side Panel'
-}
+sidepanelStory.storyName = 'Side Panel';
+sidepanelStory.parameters = { layout: 'centered' };
 
 @customElement('lwdc-side-panel-example')
 class SidePanelElement extends LitElement {
@@ -54,7 +40,7 @@ class SidePanelElement extends LitElement {
 	static get styles() {
 		return [css`
 					:host {
-						display: flex; 
+						display: flex;
 					}
 
 					section {
@@ -71,7 +57,7 @@ class SidePanelElement extends LitElement {
 						font-family: "Roboto","Helvetica Neue","Helvetica",Arial,sans-serif;
 						padding-left: 24px;
 					}
-					
+
 					ul {
 						 padding-left: 0;
 					}
@@ -99,7 +85,7 @@ class SidePanelElement extends LitElement {
   					li:hover {
     					background-color: #e8ebed;
 					}
-					
+
 					lwdc-button {
 						margin: 15px auto;
   						display: block;
@@ -108,7 +94,7 @@ class SidePanelElement extends LitElement {
 					lwdc-button.closed {
 						padding-left: 15px;
 					}
-		
+
 		`];
 	}
 
@@ -121,10 +107,10 @@ class SidePanelElement extends LitElement {
 						${this.sidePanelContent}
 				</lwdc-side-panel>
 				<section>Main Content</section>
-			</main>	
-			
-			
-		
+			</main>
+
+
+
 		`;
 	}
 
@@ -146,7 +132,7 @@ class SidePanelElement extends LitElement {
 			</li>
 		  </ul>
 	`: html`
-		  <lwdc-button class="closed" .type=${ButtonType.iconCircleFilled} .size=${ButtonSize.small}><lwdc-icon .icon=${plusIcon}></lwdc-icon> </lwdc-button>	
+		  <lwdc-button class="closed" .type=${ButtonType.iconCircleFilled} .size=${ButtonSize.small}><lwdc-icon .icon=${plusIcon}></lwdc-icon> </lwdc-button>
 		  <ul>
 			<li class="closed">
 				<lwdc-icon .icon=${homeIcon}></lwdc-icon>
@@ -163,4 +149,3 @@ class SidePanelElement extends LitElement {
 	}
 
 }
-

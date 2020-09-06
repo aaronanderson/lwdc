@@ -10,25 +10,16 @@ import '../lib/lwdc-card';
 
 import { customElement, LitElement, property, css } from 'lit-element';
 
-
-
-
-//https://storybook.js.org/docs/formats/component-story-format/
-
-const center = (storyFn: () => unknown) => html`<div style="margin: 64px 64px;">${storyFn()}</div>`;
-
-
-//https://design.workday.com/tokens/assets/icons/icon-guidelines
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components/Layout',
 	component: 'lwdc-icon',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
 
 export const boxLayoutStory = () => {
-	return html` 
+	return html`
 	<style>
 		.demo-box {
 			position: relative;
@@ -57,7 +48,7 @@ export const boxLayoutStory = () => {
     		font-size: 20px;
 		}
 	</style>
-	
+
 	<h3>Resizing</h3>
 	<div>
       <lwdc-box-row>
@@ -74,7 +65,7 @@ export const boxLayoutStory = () => {
 	      	<div class="demo-box"></div>
         </lwdc-box-col>
       </lwdc-box-row>
-      
+
       <lwdc-box-row>
         <lwdc-box-col sm="3" md="11" lg="4" xl="1" >
 	      	<div class="demo-box"></div>
@@ -83,7 +74,7 @@ export const boxLayoutStory = () => {
 	      	<div class="demo-box"></div>
         </lwdc-box-col>
       </lwdc-box-row>
-      
+
       <lwdc-box-row>
         <lwdc-box-col sm="5" md="4" lg="5" xl="2" >
 	      	<div class="demo-box"></div>
@@ -96,7 +87,7 @@ export const boxLayoutStory = () => {
         </lwdc-box-col>
       </lwdc-box-row>
 	</div>
-	
+
 	<h3>Fluid</h3>
 	<div>
 		<lwdc-box-row>
@@ -107,7 +98,7 @@ export const boxLayoutStory = () => {
 				<div class="demo-box"></div>
 			</lwdc-box-col>
 		</lwdc-box-row>
-	</div>	
+	</div>
 
 	<h3>Offsets</h3>
 	<div>
@@ -119,80 +110,80 @@ export const boxLayoutStory = () => {
 	<lwdc-box-row>
         <lwdc-box-col offset="10" position="2" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="9" position="3" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="8" position="4" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="7" position="5" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="6" position="6" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="5" position="7" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="4" position="8" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="3" position="9" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="2" position="10" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
+		</lwdc-box-col>
 	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col offset="1" position="11" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>	     
+		</lwdc-box-col>
+	</lwdc-box-row>
 	<lwdc-box-row>
         <lwdc-box-col position="12" >
 	      	<div class="demo-box"></div>
-		</lwdc-box-col>  
-	</lwdc-box-row>		   
+		</lwdc-box-col>
+	</lwdc-box-row>
 	</div>
-	
+
 	<h3>Auto</h3>
 	<div>
 		<lwdc-box-row>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 		</lwdc-box-row>
 		<lwdc-box-row>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 		</lwdc-box-row>
 	</div>
 
@@ -201,17 +192,17 @@ export const boxLayoutStory = () => {
 		<lwdc-box-row start>
 			<lwdc-box-col position="1">
 				<div class="demo-box"></div>
-			</lwdc-box-col> 
+			</lwdc-box-col>
 		</lwdc-box-row>
-		<lwdc-box-row center>	 
+		<lwdc-box-row center>
 			<lwdc-box-col position="1">
 				<div class="demo-box"></div>
 			</lwdc-box-col>
 		</lwdc-box-row>
-		<lwdc-box-row end>  
+		<lwdc-box-row end>
 			<lwdc-box-col position="1">
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 		</lwdc-box-row>
 	</div>
 
@@ -223,23 +214,23 @@ export const boxLayoutStory = () => {
 			</lwdc-box-col>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col> 
+			</lwdc-box-col>
 		</lwdc-box-row>
 		<lwdc-box-row middle>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col>	 
+			</lwdc-box-col>
 			<lwdc-box-col>
 				<div class="demo-box demo-box-big"></div>
-			</lwdc-box-col>			
+			</lwdc-box-col>
 		</lwdc-box-row>
-		<lwdc-box-row bottom>  
+		<lwdc-box-row bottom>
 			<lwdc-box-col>
 				<div class="demo-box demo-box-big"></div>
 			</lwdc-box-col>
 			<lwdc-box-col>
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 		</lwdc-box-row>
 	</div>
 
@@ -254,9 +245,9 @@ export const boxLayoutStory = () => {
 			</lwdc-box-col>
 			<lwdc-box-col position="1">
 				<div class="demo-box"></div>
-			</lwdc-box-col> 
+			</lwdc-box-col>
 		</lwdc-box-row>
-		<lwdc-box-row between>  
+		<lwdc-box-row between>
 			<lwdc-box-col position="1">
 				<div class="demo-box"></div>
 			</lwdc-box-col>
@@ -265,17 +256,16 @@ export const boxLayoutStory = () => {
 			</lwdc-box-col>
 			<lwdc-box-col position="1">
 				<div class="demo-box"></div>
-			</lwdc-box-col>  
+			</lwdc-box-col>
 		</lwdc-box-row>
 	</div>
-	
-	
+
+
 	`;
 }
 
-boxLayoutStory.story = {
-	name: 'Box Layout'
-}
+boxLayoutStory.storyName = 'Box Layout';
+boxLayoutStory.parameters = { layout: 'centered' };
 
 export const sectionLayoutStory = () => {
 	return html`
@@ -284,24 +274,24 @@ export const sectionLayoutStory = () => {
 					<lwdc-section-row gutter="0">
 						<lwdc-section-col spacing="0">
 							<lwdc-card title="Full Page Layout with no gutter & spacing"></lwdc-card>
-						</lwdc-section-col>	
+						</lwdc-section-col>
 					</lwdc-section-row>
 
 					<h3>Full Page with gutter and spacing</h3>
 					<lwdc-section-row>
 						<lwdc-section-col>
 							<lwdc-card title="Full Page Layout with gutter & spacing"></lwdc-card>
-						</lwdc-section-col>	
+						</lwdc-section-col>
 					</lwdc-section-row>
 
 					<h3>Full Page with a max width</h3>
 					<lwdc-section-row capWidth>
 						<lwdc-section-col spacing="0">
 							<lwdc-card title="Full Page Layout with max width"></lwdc-card>
-						</lwdc-section-col>	
+						</lwdc-section-col>
 					</lwdc-section-row>
 				</div>
-				
+
 				<div style="display: block; max-width: 1400px; width: 100%;">
 					<h3>12 Columns</h3>
 					<div>
@@ -381,13 +371,9 @@ export const sectionLayoutStory = () => {
 					</lwdc-section-row>
 					</div>
 				</div>
-				
+
 				`;
 }
 
-sectionLayoutStory.story = {
-	name: 'Section Layout'
-}
-
-
-
+sectionLayoutStory.storyName = 'Section Layout';
+sectionLayoutStory.parameters = { layout: 'centered' };

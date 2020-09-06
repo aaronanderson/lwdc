@@ -12,9 +12,6 @@ const style = css([`${styleCSS}`] as any)
 export class TextElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name: string | null = null;
-
-	@property({ type: String, attribute: true, reflect: true })
 	list?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
@@ -49,7 +46,7 @@ export class TextElement extends formElement(LitElement) {
 		}
 	}
 
-	// static get styles() {		
+	// static get styles() {
 	// 	return [style];
 	// }
 
@@ -76,10 +73,3 @@ export class TextElement extends formElement(LitElement) {
 }
 
 export default TextElement;
-
-
-
-
-
-
-

@@ -16,13 +16,12 @@ import { styleMap } from 'lit-html/directives/style-map';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="  margin: 64px;">${storyFn()}</div>`;
 
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-button',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -56,10 +55,9 @@ export const buttonStory = () => {
 						<lwdc-button .type=${typeMap.get(typesRadioKnob())} .size=${sizeMap.get(sizesRadioKnob())} .text=${textMap.get(textsRadioKnob())} @click=${() => { console.log("clicked"); action("Element Button Clicked"); }} ?disabled=${disabledBox()} ?dropdown=${drobdownBox()} ?inverse=${inverseBox()}>Click Me</lwdc-button>
 					</div>
 				</lwdc-action-bar>
-				
+
 				`;
 }
-buttonStory.story = {
-	name: 'Button'
-}
 
+buttonStory.storyName = 'Button';
+buttonStory.parameters = { layout: 'centered' };

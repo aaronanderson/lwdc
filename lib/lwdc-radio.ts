@@ -12,9 +12,6 @@ const style = css([`${styleCSS}`] as any)
 export class RadioElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	name: string | null = null;
-
-	@property({ type: String, attribute: true, reflect: true })
 	label?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
@@ -62,7 +59,7 @@ export class RadioElement extends formElement(LitElement) {
 
 		return html`<div class="${classMap(formTextClass)}">
 						  <input type="radio" name="${ifDefined(this.formField.group)}" ?checked=${this.checked} .value="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
-        				  <label htmlFor="radio">${this.label}</label>							
+        				  <label htmlFor="radio">${this.label}</label>
 					</div>
 					`;
 	}
@@ -80,10 +77,3 @@ export class RadioElement extends formElement(LitElement) {
 }
 
 export default RadioElement;
-
-
-
-
-
-
-

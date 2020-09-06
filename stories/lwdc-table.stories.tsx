@@ -10,18 +10,12 @@ import '../lib/lwdc-table';
 import '../lib/lwdc-text';
 import { TableElement } from '../lib/lwdc-table';
 
-
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="width: 70%; margin: 64px 64px; ">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-table',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -50,12 +44,12 @@ export const tableStory = () => {
 							<lwdc-table-col key="name" .renderer=${nameRenderer} header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
 						</lwdc-table>
-					</div>	
+					</div>
 				`;
 }
-tableStory.story = {
-	name: 'Table'
-}
+
+tableStory.storyName = 'Table';
+tableStory.parameters = { layout: 'centered' };
 
 const add = (e: CustomEvent) => {
 	console.log('add');
@@ -79,11 +73,9 @@ const nameRenderer = (e: any) => {
 
 const dataList = () => {
 	return html`
-					<datalist id="names">	
+					<datalist id="names">
 						<option label="First" >Entry 1</option>
 						<option>Entry 2</option>
 						<option label="Final" >Entry 3</option>
 					</datalist>`;
 }
-
-

@@ -10,19 +10,12 @@ import '../lib/lwdc-icon';
 import '../lib/lwdc-icon-inject';
 import { customElement, LitElement, property, css } from 'lit-element';
 
-
-
-
 //https://storybook.js.org/docs/formats/component-story-format/
-
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
-
 //https://design.workday.com/tokens/assets/icons/icon-guidelines
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components/Icon',
 	component: 'lwdc-icon',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -49,17 +42,12 @@ export const iconStory = () => {
 	return html`<p style="margin: 10px;">Icon</p> <lwdc-icon .icon=${iconMap.get(iconsRadioKnob())} .size="${iconSizesRadioKnob()}" .color="${iconColorsRadioKnob()}" .background="${iconBackgroundColorsRadioKnob()}"></lwdc-icon>`;
 }
 
-iconStory.story = {
-	name: 'Icon'
-}
+iconStory.storyName = 'Icon';
+iconStory.parameters = { layout: 'centered' };
 
 export const injectIconStory = () => {
 	return html`<p style="margin: 10px;">Icon Inject</p> <lwdc-icon-inject  data-icon="${iconsRadioKnob()}" data-category="system" data-size="${iconSizesRadioKnob()}" data-color="${iconColorsRadioKnob()}"> </lwdc-icon-inject>`;
 }
 
-injectIconStory.story = {
-	name: 'Icon Inject'
-}
-
-
-
+injectIconStory.storyName = 'Icon Inject';
+injectIconStory.parameters = { layout: 'centered' };

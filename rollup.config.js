@@ -16,6 +16,7 @@ export default {
         'lwdc-checkbox': 'lib/lwdc-checkbox.ts',
         'lwdc-combobox': 'lib/lwdc-combobox.ts',
         'lwdc-core': 'lib/lwdc-core.ts',
+        'lwdc-count-badge': 'lib/lwdc-count-badge.ts',
         'lwdc-env-label': 'lib/lwdc-env-label.ts',
         'lwdc-file-upload': 'lib/lwdc-file-upload.ts',
         'lwdc-fonts': 'lib/lwdc-fonts.ts',
@@ -55,12 +56,6 @@ export default {
         typescript(),
         commonjs({
             include: "node_modules/**",
-            namedExports: {
-                // left-hand side can be an absolute path, a path
-                // relative to the current directory, or the name
-                // of a module in node_modules
-                '@workday/design-assets-types': ['CanvasIconTypes']
-            }
         }),
 
 

@@ -12,29 +12,26 @@ import { ErrorType } from '../lib/lwdc-form-field';
 
 loadWDCFonts();
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
-
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components/Form Field',
 	component: 'lwdc-form-field',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
 //<div class="wdc-form"> </div>
 export const formFieldNormalStory = () => {
-	return html`<lwdc-form>		
-					<lwdc-form-field label="Label"><div>Value</div></lwdc-form-field>						
+	return html`<lwdc-form>
+					<lwdc-form-field label="Label"><div>Value</div></lwdc-form-field>
 				</lwdc-form>`;
 }
-formFieldNormalStory.story = {
-	name: 'Label'
-}
+
+formFieldNormalStory.storyName = 'Label';
+formFieldNormalStory.parameters = { layout: 'centered' };
 
 export const formFieldLeftlStory = () => {
 	return html`<lwdc-form><lwdc-form-field label="Label" .errorType=${ErrorType.alert} hint-text="Check Value"><div>Value</div></lwdc-form-field></lwdc-form>`;
 }
-formFieldLeftlStory.story = {
-	name: 'Hint'
-}
+
+formFieldLeftlStory.storyName = 'Hint';
+formFieldLeftlStory.parameters = { layout: 'centered' };

@@ -2,128 +2,6 @@
   "version": "experimental",
   "tags": [
     {
-      "name": "lwdc-form-field",
-      "path": "./../lib/lwdc-form-field.ts",
-      "attributes": [
-        {
-          "name": "group",
-          "type": "undefined",
-          "default": "\"undefined\""
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "label",
-          "type": "String | undefined"
-        },
-        {
-          "name": "hint-text",
-          "type": "String | undefined"
-        },
-        {
-          "name": "showLabel",
-          "type": "boolean",
-          "default": "true"
-        },
-        {
-          "name": "errorType",
-          "type": "ErrorType",
-          "default": "\"ErrorType.error\""
-        }
-      ],
-      "properties": [
-        {
-          "name": "group",
-          "attribute": "group",
-          "type": "undefined",
-          "default": "\"undefined\""
-        },
-        {
-          "name": "disabled",
-          "attribute": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "label",
-          "attribute": "label",
-          "type": "String | undefined"
-        },
-        {
-          "name": "hintText",
-          "attribute": "hint-text",
-          "type": "String | undefined"
-        },
-        {
-          "name": "showLabel",
-          "attribute": "showLabel",
-          "type": "boolean",
-          "default": "true"
-        },
-        {
-          "name": "errorType",
-          "attribute": "errorType",
-          "type": "ErrorType",
-          "default": "\"ErrorType.error\""
-        },
-        {
-          "name": "elementChildren",
-          "type": "Element[]",
-          "default": "[]"
-        },
-        {
-          "name": "defaultTemplate",
-          "type": "TemplateResult"
-        },
-        {
-          "name": "groupTemplate",
-          "type": "TemplateResult"
-        },
-        {
-          "name": "hintTemplate",
-          "type": "TemplateResult | undefined"
-        },
-        {
-          "name": "requiredTemplate",
-          "type": "TemplateResult | undefined"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-form",
-      "path": "./../lib/lwdc-form.ts",
-      "description": "Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.\nBecause of this no shadowDOM styles will be imported.",
-      "attributes": [
-        {
-          "name": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Left\""
-        },
-        {
-          "name": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
-        }
-      ],
-      "properties": [
-        {
-          "name": "labelPosition",
-          "attribute": "labelPosition",
-          "type": "FormFieldLabelPosition",
-          "default": "\"FormFieldLabelPosition.Left\""
-        },
-        {
-          "name": "elementChildNodes",
-          "attribute": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
-        }
-      ]
-    },
-    {
       "name": "lwdc-action-bar",
       "path": "./../lib/lwdc-action-bar.ts",
       "attributes": [
@@ -278,10 +156,6 @@
           "name": "disabled",
           "type": "boolean",
           "default": "false"
-        },
-        {
-          "name": "name",
-          "type": "string | null"
         }
       ],
       "properties": [
@@ -303,6 +177,11 @@
           "default": "false"
         },
         {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
           "name": "value",
           "type": "string | File | FormData | undefined"
         },
@@ -311,7 +190,6 @@
         },
         {
           "name": "name",
-          "attribute": "name",
           "type": "string | null"
         },
         {
@@ -330,109 +208,6 @@
         {
           "name": "formField",
           "type": "FormFieldElement"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-menu-item",
-      "path": "./../lib/lwdc-menu-item.ts",
-      "attributes": [
-        {
-          "name": "icon",
-          "type": "CanvasIcon | undefined"
-        },
-        {
-          "name": "secondaryIcon",
-          "type": "CanvasIcon | undefined"
-        },
-        {
-          "name": "selected",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "focused",
-          "type": "boolean",
-          "default": "false"
-        }
-      ],
-      "properties": [
-        {
-          "name": "icon",
-          "attribute": "icon",
-          "type": "CanvasIcon | undefined"
-        },
-        {
-          "name": "secondaryIcon",
-          "attribute": "secondaryIcon",
-          "type": "CanvasIcon | undefined"
-        },
-        {
-          "name": "selected",
-          "attribute": "selected",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "attribute": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "focused",
-          "attribute": "focused",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-menu",
-      "path": "./../lib/lwdc-menu.ts",
-      "attributes": [
-        {
-          "name": "width",
-          "type": "string | undefined"
-        },
-        {
-          "name": "grow",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
-        }
-      ],
-      "properties": [
-        {
-          "name": "width",
-          "attribute": "width",
-          "type": "string | undefined"
-        },
-        {
-          "name": "grow",
-          "attribute": "grow",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "elementChildNodes",
-          "attribute": "elementChildNodes",
-          "type": "ChildNode[]",
-          "default": "[]"
         }
       ]
     },
@@ -494,10 +269,6 @@
           "name": "selected",
           "type": "Set<T>",
           "default": "\"new Set()\""
-        },
-        {
-          "name": "name",
-          "type": "string | null"
         }
       ],
       "properties": [
@@ -586,6 +357,11 @@
           "type": "TemplateResult | undefined"
         },
         {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
           "name": "value",
           "type": "string | File | FormData | undefined"
         },
@@ -594,7 +370,6 @@
         },
         {
           "name": "name",
-          "attribute": "name",
           "type": "string | null"
         },
         {
@@ -613,6 +388,25 @@
         {
           "name": "formField",
           "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-count-badge",
+      "path": "./../lib/lwdc-count-badge.ts",
+      "attributes": [
+        {
+          "name": "loading",
+          "type": "boolean | undefined",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "loading",
+          "attribute": "loading",
+          "type": "boolean | undefined",
+          "default": "false"
         }
       ]
     },
@@ -647,10 +441,6 @@
           "name": "picker",
           "type": "boolean",
           "default": "true"
-        },
-        {
-          "name": "name",
-          "type": "string | null"
         }
       ],
       "properties": [
@@ -687,6 +477,11 @@
           "type": "HTMLDivElement"
         },
         {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
           "name": "value",
           "type": "string | File | FormData | undefined"
         },
@@ -695,7 +490,6 @@
         },
         {
           "name": "name",
-          "attribute": "name",
           "type": "string | null"
         },
         {
@@ -725,6 +519,128 @@
     {
       "name": "lwdc-fonts",
       "path": "./../lib/lwdc-fonts.ts"
+    },
+    {
+      "name": "lwdc-form-field",
+      "path": "./../lib/lwdc-form-field.ts",
+      "attributes": [
+        {
+          "name": "group",
+          "type": "undefined",
+          "default": "\"undefined\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "hint-text",
+          "type": "String | undefined"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "errorType",
+          "type": "ErrorType",
+          "default": "\"ErrorType.error\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "group",
+          "attribute": "group",
+          "type": "undefined",
+          "default": "\"undefined\""
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "String | undefined"
+        },
+        {
+          "name": "hintText",
+          "attribute": "hint-text",
+          "type": "String | undefined"
+        },
+        {
+          "name": "showLabel",
+          "attribute": "showLabel",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "errorType",
+          "attribute": "errorType",
+          "type": "ErrorType",
+          "default": "\"ErrorType.error\""
+        },
+        {
+          "name": "elementChildren",
+          "type": "Element[]",
+          "default": "[]"
+        },
+        {
+          "name": "defaultTemplate",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "groupTemplate",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "hintTemplate",
+          "type": "TemplateResult | undefined"
+        },
+        {
+          "name": "requiredTemplate",
+          "type": "TemplateResult | undefined"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-form",
+      "path": "./../lib/lwdc-form.ts",
+      "description": "Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.\nBecause of this no shadowDOM styles will be imported.",
+      "attributes": [
+        {
+          "name": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ],
+      "properties": [
+        {
+          "name": "labelPosition",
+          "attribute": "labelPosition",
+          "type": "FormFieldLabelPosition",
+          "default": "\"FormFieldLabelPosition.Left\""
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ]
     },
     {
       "name": "lwdc-header",
@@ -785,6 +701,11 @@
           "type": "TemplateResult"
         }
       ]
+    },
+    {
+      "name": "lwdc-icon-inject",
+      "path": "./../lib/lwdc-icon-inject.ts",
+      "description": "This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. \nIt is slower due to the icon svg files being downloaded from a CDN and the Javascript function executions that convert the the <i> tags to the target icon SVG."
     },
     {
       "name": "lwdc-icon",
@@ -891,11 +812,6 @@
           "type": "string | undefined"
         }
       ]
-    },
-    {
-      "name": "lwdc-icon-inject",
-      "path": "./../lib/lwdc-icon-inject.ts",
-      "description": "This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. \nIt is slower due to the icon svg files being downloaded from a CDN and the Javascript function executions that convert the the <i> tags to the target icon SVG."
     },
     {
       "name": "lwdc-box-row",
@@ -1165,6 +1081,109 @@
       ]
     },
     {
+      "name": "lwdc-menu-item",
+      "path": "./../lib/lwdc-menu-item.ts",
+      "attributes": [
+        {
+          "name": "icon",
+          "type": "CanvasIcon | undefined"
+        },
+        {
+          "name": "secondaryIcon",
+          "type": "CanvasIcon | undefined"
+        },
+        {
+          "name": "selected",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "focused",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "icon",
+          "attribute": "icon",
+          "type": "CanvasIcon | undefined"
+        },
+        {
+          "name": "secondaryIcon",
+          "attribute": "secondaryIcon",
+          "type": "CanvasIcon | undefined"
+        },
+        {
+          "name": "selected",
+          "attribute": "selected",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "focused",
+          "attribute": "focused",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-menu",
+      "path": "./../lib/lwdc-menu.ts",
+      "attributes": [
+        {
+          "name": "width",
+          "type": "string | undefined"
+        },
+        {
+          "name": "grow",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ],
+      "properties": [
+        {
+          "name": "width",
+          "attribute": "width",
+          "type": "string | undefined"
+        },
+        {
+          "name": "grow",
+          "attribute": "grow",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        }
+      ]
+    },
+    {
       "name": "lwdc-modal",
       "path": "./../lib/lwdc-modal.ts",
       "attributes": [
@@ -1335,10 +1354,6 @@
         {
           "name": "value",
           "type": "string | undefined"
-        },
-        {
-          "name": "name",
-          "type": "string | null"
         }
       ],
       "properties": [
@@ -1365,6 +1380,11 @@
           "default": "false"
         },
         {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
           "name": "value",
           "attribute": "value",
           "type": "string | undefined"
@@ -1374,7 +1394,6 @@
         },
         {
           "name": "name",
-          "attribute": "name",
           "type": "string | null"
         },
         {
@@ -1401,10 +1420,6 @@
       "path": "./../lib/lwdc-select.ts",
       "attributes": [
         {
-          "name": "valueId",
-          "type": "string | undefined"
-        },
-        {
           "name": "disabled",
           "type": "boolean",
           "default": "false"
@@ -1430,16 +1445,11 @@
           "default": "[]"
         },
         {
-          "name": "name",
-          "type": "string | null"
+          "name": "value",
+          "type": "string | undefined"
         }
       ],
       "properties": [
-        {
-          "name": "valueId",
-          "attribute": "valueId",
-          "type": "string | undefined"
-        },
         {
           "name": "disabled",
           "attribute": "disabled",
@@ -1475,15 +1485,20 @@
           "type": "T | undefined"
         },
         {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
           "name": "value",
-          "type": "string | File | FormData | undefined"
+          "attribute": "value",
+          "type": "string | undefined"
         },
         {
           "name": "form"
         },
         {
           "name": "name",
-          "attribute": "name",
           "type": "string | null"
         },
         {
@@ -1587,92 +1602,6 @@
           "attribute": "label",
           "type": "string",
           "default": "\"\""
-        }
-      ]
-    },
-    {
-      "name": "lwdc-text",
-      "path": "./../lib/lwdc-text.ts",
-      "attributes": [
-        {
-          "name": "list",
-          "type": "string | undefined"
-        },
-        {
-          "name": "password",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "placeholder",
-          "type": "string | undefined"
-        },
-        {
-          "name": "value",
-          "type": "string | undefined"
-        },
-        {
-          "name": "name",
-          "type": "string | null"
-        }
-      ],
-      "properties": [
-        {
-          "name": "list",
-          "attribute": "list",
-          "type": "string | undefined"
-        },
-        {
-          "name": "password",
-          "attribute": "password",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "disabled",
-          "attribute": "disabled",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "placeholder",
-          "attribute": "placeholder",
-          "type": "string | undefined"
-        },
-        {
-          "name": "value",
-          "attribute": "value",
-          "type": "string | undefined"
-        },
-        {
-          "name": "form"
-        },
-        {
-          "name": "name",
-          "attribute": "name",
-          "type": "string | null"
-        },
-        {
-          "name": "type",
-          "type": "string"
-        },
-        {
-          "name": "validity"
-        },
-        {
-          "name": "validationMessage"
-        },
-        {
-          "name": "willValidate"
-        },
-        {
-          "name": "formField",
-          "type": "FormFieldElement"
         }
       ]
     },
@@ -1910,6 +1839,92 @@
       ]
     },
     {
+      "name": "lwdc-text",
+      "path": "./../lib/lwdc-text.ts",
+      "attributes": [
+        {
+          "name": "list",
+          "type": "string | undefined"
+        },
+        {
+          "name": "password",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined"
+        },
+        {
+          "name": "value",
+          "type": "string | undefined"
+        }
+      ],
+      "properties": [
+        {
+          "name": "list",
+          "attribute": "list",
+          "type": "string | undefined"
+        },
+        {
+          "name": "password",
+          "attribute": "password",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
+          "type": "string | undefined"
+        },
+        {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string | undefined"
+        },
+        {
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
       "name": "lwdc-textarea",
       "path": "./../lib/lwdc-textarea.ts",
       "attributes": [
@@ -1930,10 +1945,6 @@
         {
           "name": "value",
           "type": "string | undefined"
-        },
-        {
-          "name": "name",
-          "type": "string | null"
         }
       ],
       "properties": [
@@ -1955,6 +1966,11 @@
           "type": "string | undefined"
         },
         {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
           "name": "value",
           "attribute": "value",
           "type": "string | undefined"
@@ -1964,7 +1980,6 @@
         },
         {
           "name": "name",
-          "attribute": "name",
           "type": "string | null"
         },
         {

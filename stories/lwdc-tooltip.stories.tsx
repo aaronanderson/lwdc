@@ -13,30 +13,25 @@ import '../lib/lwdc-tooltip';
 import { action } from '@storybook/addon-actions';
 import { ButtonType } from '../lib/lwdc-button';
 
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-tooltip',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
 
 export const tooltipStory = () => {
-	return html`<lwdc-tooltip message="Close">		
+	return html`<lwdc-tooltip message="Close">
 					<lwdc-button .type=${ButtonType.iconCircle}  @click=${() => { console.log("clicked"); action("Element Button Clicked"); }}>
-					
+
 						 <lwdc-icon .icon=${xIcon} ></lwdc-icon>
 					</lwdc-button>
-					
+
 				</lwdc-tooltip>`;
 }
-tooltipStory.story = {
-	name: 'Tooltip'
-}
 
+tooltipStory.storyName =  'Tooltip';
+tooltipStory.parameters = { layout: 'centered' };

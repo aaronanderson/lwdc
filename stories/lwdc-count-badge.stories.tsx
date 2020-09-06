@@ -9,20 +9,25 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import { coreStyle } from '../lib/lwdc-core';
 import { styleLightDOM } from '../lib/util';
 
-import '../lib/lwdc-loading';
+import '../lib/lwdc-count-badge';
 
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-loading',
+	component: 'lwdc-count-badge',
 	decorators: [withKnobs]
 };
 
-export const loadingStory = () => {
-	return html`<h3 class="wdc-type-h3" style="margin-right: 24px;">Loading</h3><lwdc-loading loading title="Explanation"></lwdc-loading>`;
+export const countBadgeStory = () => {
+	return html`<div style="padding: 10px;">
+								<lwdc-count-badge count="999"></lwdc-count-badge>
+							</div>
+							<div style="padding: 10px;">
+								<lwdc-count-badge count="999" inverse></lwdc-count-badge>
+							</div>	`;
 }
 
-loadingStory.storyName = 'Loading';
-loadingStory.parameters = { layout: 'centered' };
+countBadgeStory.storyName = 'Count Badge';
+countBadgeStory.parameters = { layout: 'centered' };

@@ -12,17 +12,12 @@ import '../lib/lwdc-status-indicator';
 import { action } from '@storybook/addon-actions';
 import { StatusIndicatorEmphasis, StatusIndicatorType } from '../lib/lwdc-status-indicator';
 
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-status-indicator',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -46,7 +41,6 @@ const iconMap = new Map([['none', undefined], ['x', xIcon], ['filter', filterIco
 export const statusIndicatorStory = () => {
 	return html`<lwdc-status-indicator label="Status Indicator" .type=${typeMap.get(typesRadioKnob())} .emphasis=${emphasisMap.get(emphasisRadioKnob())} .icon=${iconMap.get(iconsRadioKnob())}></lwdc-status-indicator > `;
 }
-statusIndicatorStory.story = {
-	name: 'Status Indicator'
-}
 
+statusIndicatorStory.storyName = 'Status Indicator';
+statusIndicatorStory.parameters = { layout: 'centered' };

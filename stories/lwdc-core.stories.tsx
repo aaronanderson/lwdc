@@ -14,13 +14,9 @@ import { styleLightDOM } from '../lib/util';
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
 
-const center = (storyFn: () => unknown) => html`<div style="display: flex; align-items: center; justify-content: center; margin: 64px 64px;">${storyFn()}</div>`;
-
-
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-core',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 
@@ -83,7 +79,6 @@ export const coreStory = () => {
 					</section>
 					</div>`;
 }
-coreStory.story = {
-	name: 'Typography'
-}
 
+coreStory.storyName = 'Typography';
+coreStory.parameters = { layout: 'centered' };

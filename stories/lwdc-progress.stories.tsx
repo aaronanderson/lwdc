@@ -10,17 +10,12 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 
 import '../lib/lwdc-progress';
 
-
-
 loadWDCFonts();
-
-const center = (storyFn: () => unknown) => html`<div style="height: 200px; position: relative; display: flex; flex-flow: column; align-items: center;  margin: 64px;">${storyFn()}</div>`;
-
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components',
 	component: 'lwdc-progress',
-	decorators: [withKnobs, center]
+	decorators: [withKnobs]
 };
 
 const value = ['0', '25', '50', '50', '75', '100'];
@@ -32,7 +27,6 @@ const valuesRadioKnob = () => radios("Value", valueOptions, '25') as any;
 export const progressStory = () => {
 	return html`<lwdc-progress title="Progress" value=${valuesRadioKnob()}></lwdc-progress>`;
 }
-progressStory.story = {
-	name: 'Progress'
-}
 
+progressStory.storyName = 'Progress';
+progressStory.parameters = { layout: 'centered' };

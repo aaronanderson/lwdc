@@ -12,9 +12,6 @@ const style = css([`${styleCSS}`] as any)
 @customElement('lwdc-file-upload')
 export class FileUploadElement extends formElement(LitElement) {
 
-	@property({ type: String, attribute: true, reflect: true })
-	name: string | null = null;
-
 	@property({ type: Boolean, attribute: true, reflect: true })
 	multiple = false;
 
@@ -44,7 +41,7 @@ export class FileUploadElement extends formElement(LitElement) {
 	}
 
 	get pickerTemplate() {
-		return html`				
+		return html`
 				<div class="lwdc-file-upload-wrapper">
 					 	<input type="file" ?multiple=${this.multiple} @change="${(e: Event) => { this.checkValidity(); this.requestUpdate() }}"/>
 				</div>
@@ -53,15 +50,15 @@ export class FileUploadElement extends formElement(LitElement) {
 					<div class="lwdc-file-upload-picker-list">
 						${this.files.map((e: File) => html`<span>${e.name}</span>`)}
 					</div>
-				</div> 
+				</div>
 		`;
 	}
 
 	get defaultTemplate() {
-		return html`		
+		return html`
 				<div class="lwdc-file-upload-wrapper">
 					 	<input type="file" ?multiple=${this.multiple} @change="${this.handleFileSelected}"/>
-				</div> 
+				</div>
 		`;
 	}
 
@@ -110,10 +107,3 @@ export class FileUploadElement extends formElement(LitElement) {
 }
 
 export default FileUploadElement;
-
-
-
-
-
-
-

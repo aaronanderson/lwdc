@@ -1,0 +1,78 @@
+@import '~@workday/canvas-kit-css-core/lib/colors';
+@import "~@workday/canvas-kit-css-core/lib/mixins/type";
+@import '~@workday/canvas-kit-css-core/lib/variables/spacing';
+@import '~@workday/canvas-kit-css-core/lib/variables/assets';
+@import '~@workday/canvas-kit-css-core/lib/variables/border-radius';
+
+
+@import '~@workday/canvas-kit-css-common/lib/variables';
+@import "~@workday/canvas-kit-css-common/lib/forms";
+@import "~@workday/canvas-kit-css-common/lib/errors";
+
+
+/*:host,*/ lwdc-color-input {
+	display: contents;
+}
+
+.lwdc-color-input-container {
+  position: relative;
+  width: #{'var(--lwdc-color-input-width, 116px)'};
+}
+
+.lwdc-color-input-text {
+  @include  wdc-form-text();
+	@include  wdc-type-variant-mono();
+  box-sizing: border-box;
+  min-width: #{'var(--lwdc-color-input-width, 116px)'};
+  width: #{'var(--lwdc-color-input-width, 116px)'};
+	padding-left: 46px;
+
+	&:focus::placeholder {
+		color: transparent;
+	}
+
+}
+
+.lwdc-color-input-error {
+	@include wdc-form-error();
+}
+
+.lwdc-color-input-alert {
+	@include wdc-form-alert();
+}
+
+
+.lwdc-color-input-pound-sign-prefix {
+  position: absolute;
+  top: 10px;
+  left: 36px;
+  @include wdc-type-body();
+  @include wdc-type-variant-mono();
+}
+
+.lwdc-color-input-color-swatch {
+	width: 20px;
+	height: 20px;
+	border-radius: $wdc-border-radius-s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  background-color: #{'var(--lwdc-color-swatch-color, #FFFFFF)'};
+  box-shadow: #{'var(--lwdc-color-swatch-box-shadow, inset 0 0 0 1px rgba(0,0,0,0.25) )'};
+
+
+	& > * {
+		// Account for 24px icon
+		margin: -2,
+	}
+
+}
+
+lwdc-color-swatch {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: $wdc-spacing-xxs;
+  margin-top: 10px;
+  pointer-events: none;
+}
