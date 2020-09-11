@@ -14,6 +14,7 @@ export default {
         'lwdc-button': 'lib/lwdc-button.ts',
         'lwdc-card': 'lib/lwdc-card.ts',
         'lwdc-checkbox': 'lib/lwdc-checkbox.ts',
+        'lwdc-color-input': 'lib/lwdc-color-input.ts',
         'lwdc-combobox': 'lib/lwdc-combobox.ts',
         'lwdc-core': 'lib/lwdc-core.ts',
         'lwdc-count-badge': 'lib/lwdc-count-badge.ts',

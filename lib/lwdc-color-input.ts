@@ -22,7 +22,7 @@ export class ColorInputElement extends formElement(LitElement) {
 	@property({ type: String, attribute: true, reflect: true })
 	value?: string;
 
-	@property({ type: Boolean, attribute: true, reflect: true })
+	@property({ type: Boolean, attribute: 'show-check', reflect: true })
 	showCheck = false;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
@@ -31,34 +31,34 @@ export class ColorInputElement extends formElement(LitElement) {
 	@property({ type: String, attribute: true, reflect: true })
 	placeholder?: string;
 
+	@property({ type: Boolean, attribute: true, reflect: true })
+	preview = false;
+
 	@query('input')
 	colorInput?: HTMLDivElement;
-	//disable shadow DOM so containing wdc-form class relative css can be applied.
-	//Further investigation is needed to see how ::slotted could be incorporated into and contributed via a pull request
-	//https://github.com/Workday/canvas-kit/blob/master/modules/form-field/css/lib/form-field.scss
-	//https://github.com/Polymer/lit-element/issues/824#issuecomment-536093753
-	createRenderRoot() {
-		return this;
-	}
 
-	connectedCallback() {
-		styleLightDOM(this, style, 'lwdc-color-input');
-		super.connectedCallback();
-	}
-
-	firstUpdated() {
-		if (!this.getAttribute("tabindex")) {
-			this.setAttribute("tabindex", "-1");
-		}
+	static get styles() {
+		return [style];
 	}
 
 	render() {
 		const formattedValue = this.formatValue(this.value);
-		const placeholder = this.placeholder? this.placeholder : 'FFFFFF';
+		let placeholder = 'FFFFFF';
+		if (this.placeholder){
+			placeholder = this.placeholder;
+		}
+		if (this.preview){
+			placeholder = '';
+		}
+
+		let inputClass = {
+			'lwdc-color-input-preview': !!this.preview,
+			'lwdc-color-input-text': true,
+		};
 		return html`
 		<div class="lwdc-color-input-container">
-			<input type="text" dir="ltr" placeholder=${placeholder} spellcheck="false" maxlength="7" ?disabled=${this.disabled} @change=${this.handleChange} class="lwdc-color-input-text" value=${formattedValue}></input>
-			<lwdc-color-swatch check=${this.showCheck} color=${this.value}></lwdc-color-swatch>
+			<input type="text" dir="ltr" placeholder=${placeholder} spellcheck="false" maxlength="7" ?disabled=${this.disabled} ?readonly=${!!this.preview} @change=${this.handleChange} class="${classMap(inputClass)}" value=${formattedValue}></input>
+			<lwdc-color-swatch ?show-check=${this.showCheck} color=${this.value}></lwdc-color-swatch>
 			<span class="lwdc-color-input-pound-sign-prefix">#</span>
 		</div>
 		`;
@@ -92,7 +92,7 @@ export class ColorInputElement extends formElement(LitElement) {
 	}
 
 	checkValidity() {
-		if (!this.matches(':disabled') && this.hasAttribute('required') && this.value === '') {
+		if (!this.matches(':disabled') && this.hasAttribute('required') && !this.value) {
 			let message = this.formField ? `${this.formField.label} is required` : 'Required';
 			this.setInternals(true, () => message);
 			if (this.colorInput && this.formField) {
@@ -119,11 +119,11 @@ export class ColorSwatchElement extends LitElement {
 	@property({ type: String, attribute: true, reflect: true })
 	color?: string;
 
-	@property({ type: Boolean, attribute: true, reflect: true })
+	@property({ type: Boolean, attribute: 'show-check', reflect: true })
 	showCheck = false;
 
-	createRenderRoot() {
-		return this;
+	static get styles() {
+		return [style];
 	}
 
 	updated(changedProperties: Map<string, any>) {

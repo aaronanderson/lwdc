@@ -19,6 +19,12 @@
   width: #{'var(--lwdc-color-input-width, 116px)'};
 }
 
+.lwdc-color-input-preview {
+	background-color: $wdc-color-french-vanilla-100 !important;
+	border-color: $wdc-color-french-vanilla-100 !important;
+	pointer-events: none;
+}
+
 .lwdc-color-input-text {
   @include  wdc-form-text();
 	@include  wdc-type-variant-mono();
