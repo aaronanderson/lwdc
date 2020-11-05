@@ -82,7 +82,7 @@ export class TableElement<E> extends LitElement {
 					} else if (filterEntry.by === 'Ends-With') {
 						return valE.endsWith(val);
 					} else if (filterEntry.by === 'RegExp') {
-						console.log(new RegExp(val, 'g').test(valE));
+						//console.log(new RegExp(val, 'g').test(valE));
 						return new RegExp(val, 'g').test(valE);
 					}
 					return false;
@@ -147,35 +147,35 @@ export class TableElement<E> extends LitElement {
 							</tr>
 						</thead>
 						<tbody>
-							${this.view.map((e: E) => this.entryRow(e))}               
+							${this.view.map((e: E) => this.entryRow(e))}
 						</tbody>
 					</table>
-	
+
 			`
 	}
 
 	get editEntriesTemplate() {
-		return html`						
+		return html`
 				${this.headerTemplate}
-				
+
 				<table class="wdc-table">
 					<thead>
 						<tr>
 							<th scope="col" style="width: 100px">
-								<span @click="${(m: MouseEvent) => this.addEntry()}">	
+								<span @click="${(m: MouseEvent) => this.addEntry()}">
 									<lwdc-icon .icon=${plusIcon}></lwdc-icon>
-								</span>	
+								</span>
 							</th>
-							${this.cols.map((r: TableColumnElement) => this.renderHeader(r))} 
+							${this.cols.map((r: TableColumnElement) => this.renderHeader(r))}
 						</tr>
 					</thead>
 					<tbody>
-						${this.view.map((e: E) => this.entryEditRow(e))}               
+						${this.view.map((e: E) => this.entryEditRow(e))}
 					</tbody>
 				</table>
-				
+
 				${this.additionalEditRenderer ? this.additionalEditRenderer(this.view) : null}
-			
+
 			`
 
 
@@ -183,23 +183,23 @@ export class TableElement<E> extends LitElement {
 
 	get headerTemplate() {
 		return html`
-							
-					<lwdc-modal title="Sort" id="sort">		
+
+					<lwdc-modal title="Sort" id="sort">
 						<lwdc-form .labelPosition=${FormFieldLabelPosition.Top}>
 							<lwdc-form-field label="Column">
-								<lwdc-select name="sortColumn" placeholder required .options=${this.rowNames} .valueSelector=${(r: any) => r.key} ></lwdc-select>								
-							</lwdc-form-field>	
-							<lwdc-form-field group="order" label="Order">
-								<lwdc-radio  name="order" label="Ascending" checked value="Ascending"></lwdc-radio>
-								<lwdc-radio  name="order" label="Descending" value="Descending"></lwdc-radio>
+								<lwdc-select name="sortColumn" placeholder required .options=${this.rowNames} .valueSelector=${(r: any) => r.key} ></lwdc-select>
 							</lwdc-form-field>
-							<table class="lwdc-table-entries">							
+							<lwdc-form-field group="order" label="Order">
+								<lwdc-radio label="Ascending" checked value="Ascending"></lwdc-radio>
+								<lwdc-radio label="Descending" value="Descending"></lwdc-radio>
+							</lwdc-form-field>
+							<table class="lwdc-table-entries">
 								${[...this.sort].map((e: SortEntry) => html`
 									<tr>
 										<td @click="${(m: MouseEvent) => { this.sort.delete(e); this.requestUpdate(); }}"><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
 										<td>${e.header}</td>
 										<td>${e.direction}</td>
-									</tr>	
+									</tr>
 								`)}
 							</table>
 
@@ -208,52 +208,52 @@ export class TableElement<E> extends LitElement {
 					</lwdc-modal>
 
 
-					<lwdc-modal title="Filter" id="filter">		
+					<lwdc-modal title="Filter" id="filter">
 						<lwdc-form .labelPosition=${FormFieldLabelPosition.Top}>
 							<lwdc-form-field label="Column">
-								<lwdc-select name="filterColumn" placeholder required .options=${this.rowNames} .valueSelector=${(r: any) => r.key} ></lwdc-select>								
-							</lwdc-form-field>	
+								<lwdc-select name="filterColumn" placeholder required .options=${this.rowNames} .valueSelector=${(r: any) => r.key} ></lwdc-select>
+							</lwdc-form-field>
 							<lwdc-form-field group="by" label="By">
-								<lwdc-radio  name="by" label="Contains" checked value="Contains"></lwdc-radio>
-								<lwdc-radio  name="by" label="Begins-With" value="Begins-With"></lwdc-radio>
-								<lwdc-radio  name="by" label="Ends-With" value="Ends-With"></lwdc-radio>
-								<lwdc-radio  name="by" label="RegExp" value="RegExp"></lwdc-radio>
+								<lwdc-radio label="Contains" checked value="Contains"></lwdc-radio>
+								<lwdc-radio label="Begins-With" value="Begins-With"></lwdc-radio>
+								<lwdc-radio label="Ends-With" value="Ends-With"></lwdc-radio>
+								<lwdc-radio label="RegExp" value="RegExp"></lwdc-radio>
 							</lwdc-form-field>
 							<lwdc-form-field label="Value">
 								<lwdc-text name="value" required></lwdc-text>
 							</lwdc-form-field>
-							<table class="lwdc-table-entries">							
+							<table class="lwdc-table-entries">
 								${[...this.filter].map((e: FilterEntry) => html`
 									<tr>
 										<td @click="${(m: MouseEvent) => { this.filter.delete(e); this.requestUpdate(); }}"><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
 										<td>${e.header}</td>
 										<td>${e.by}</td>
 										<td>${e.value}</td>
-									</tr>	
+									</tr>
 								`)}
 							</table>
 
 							<lwdc-button  @click=${this.filterAdd}>Add</lwdc-button>
 						</<lwdc-form>
 					</lwdc-modal>
-					
+
 					<div class="wdc-table-meta">
 						<div class="wdc-table-info">
 							<span class="wdc-table-name">${this.name}</span>
 							<span class="wdc-table-row-count">${this.view.length} Items</span>
 						</div>
-						
+
 						<div class="wdc-icon-list">
-							
+
 							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${() => this.sortDialog!.open()}>
 								<lwdc-icon .icon=${sortIcon}></lwdc-icon>
-							</div>	
+							</div>
 							<div class="wdc-icon-list-icon" role="button" tabIndex="0" @click=${() => this.filterDialog!.open()}>
 								<lwdc-icon .icon=${filterIcon}></lwdc-icon>
 							</div>
 						</div>
-					</div>	
-		
+					</div>
+
 		`;
 	}
 
@@ -296,12 +296,12 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("sortColumn").valueId);
+			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("sortColumn").value);
 			if (col && ![...this.sort].find((e: SortEntry) => e.key === col.key)) {
 				this.sort.add(<SortEntry>{
 					key: col.key,
 					header: col.header,
-					direction: form.item("order")!.value
+					direction: form.radioValue("order")
 				});
 				this.requestUpdate();
 				//dialog.close();
@@ -313,7 +313,7 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("filterColumn").valueId);
+			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("filterColumn").value);
 			if (col && ![...this.filter].find((e: FilterEntry) => e.key === col.key)) {
 				this.filter.add(<FilterEntry>{
 					key: col.key,
@@ -360,12 +360,12 @@ export class TableElement<E> extends LitElement {
 									<span @click="${(m: MouseEvent) => this.editEntry(e)}">
 										<lwdc-icon .icon=${editIcon}></lwdc-icon>
 									</span>
-								</div>`: null}																
+								</div>`: null}
 								<div class="wdc-icon-list-icon">
 									<span @click="${(m: MouseEvent) => this.removeEntry(e)}">
 										<lwdc-icon .icon=${minusIcon}></lwdc-icon>
 									</span>
-								</div>										
+								</div>
 							</div>
 						</td>
 		`);
@@ -380,8 +380,8 @@ export class TableElement<E> extends LitElement {
 						<td style="${this.cellWidth(row)}">
 							<lwdc-form-field label=${row.header} .showLabel=${undefined}>
 								<lwdc-text ?required=${ifDefined(row.required)} .value="${obj.hasOwnProperty(k) ? obj[k] : null}" @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
-							</lwdc-form-field>		
-						</td>								
+							</lwdc-form-field>
+						</td>
 					`);
 				} else {
 					return html``;
@@ -490,11 +490,3 @@ export class TableColumnElement extends LitElement {
 }
 
 export default { TableElement, TableColumnElement };
-
-
-
-
-
-
-
-

@@ -8,7 +8,7 @@ const style = css([`${styleCSS}`] as any)
 
 
 /** Currently the lwdc-form-field element doesn't use the shadowDOM and instead is rendered in the lightDOM.
- * Because of this no shadowDOM styles will be imported. 
+ * Because of this no shadowDOM styles will be imported.
  */
 @customElement('lwdc-form')
 export class FormElement extends LitElement {
@@ -41,9 +41,9 @@ export class FormElement extends LitElement {
 		};
 
 		return html`
-		<form class="${classMap(formClass)}" @submit="${(e: MouseEvent) => e.preventDefault()}"> 
+		<form class="${classMap(formClass)}" @submit="${(e: MouseEvent) => e.preventDefault()}">
 			${this.elementChildNodes}
-		</form>	
+		</form>
 		`;
 	}
 
@@ -63,7 +63,7 @@ export class FormElement extends LitElement {
 	reset() {
 		let form = this.querySelector("form") as HTMLFormElement;
 		if (form) {
-			//form.rest() works on form associated custom elements in Chrome but it is easier to 
+			//form.rest() works on form associated custom elements in Chrome but it is easier to
 			// for (let element of Array.from(form.elements)) {
 			// 	(<any>element).reset && (<any>element).reset();
 			// }
@@ -85,16 +85,25 @@ export class FormElement extends LitElement {
 
 	}
 
+  radioValue(name: string) {
+    let form = this.querySelector("form") as HTMLFormElement;
+    let val;
+		if (form) {
+      let radios = form.elements[<any>name] as any;
+      for (var i=0, len=radios.length; i<len; i++) {
+  			 let  radio = radios[i] as HTMLInputElement;
+          if ( radio.checked ) {
+              val = radio.value;
+              break;
+          }
+      }
+    }
+    return val;
+  }
+
 
 
 }
 
 
 export default FormElement;
-
-
-
-
-
-
-

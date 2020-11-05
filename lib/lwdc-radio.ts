@@ -58,8 +58,8 @@ export class RadioElement extends formElement(LitElement) {
 		};
 
 		return html`<div class="${classMap(formTextClass)}">
-						  <input type="radio" name="${ifDefined(this.formField.group)}" ?checked=${this.checked} .value="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
-        				  <label htmlFor="radio">${this.label}</label>
+						  <input type="radio" name="${ifDefined(this.formField.group)}" ?checked=${this.checked} .value="${ifDefined(this.value)}" id="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}/></input>
+        				  <label for="${ifDefined(this.value)}">${this.label}</label>
 					</div>
 					`;
 	}

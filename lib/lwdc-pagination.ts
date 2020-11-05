@@ -210,7 +210,7 @@ export class PaginationGoToElement extends LitElement {
     return html `<div class="wdc-pagination-goto-wrapper">
                   <label class="wdc-pagination-goto-label">${this.label}</label>
                   <form class="wdc-pagination-goto-form" @submit=${this.formSubmit}>
-                    		<lwdc-text name="goto" inputType="number" width=${53} height=${32} min=${1} max=${this.max}></lwdc-text>
+                    		<lwdc-text name="goto" inputType="number" min=${1} max=${this.max}></lwdc-text>
                   </form>
                 </div>`;
   }
