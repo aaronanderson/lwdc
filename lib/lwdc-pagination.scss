@@ -1,0 +1,63 @@
+@import '~@workday/canvas-kit-css-core/lib/colors.scss';
+@import "~@workday/canvas-kit-css-core/lib/type.scss";
+
+ .wdc-pagination-container {
+   @include wdc-type();
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+ .wdc-pagination-container button {
+  margin: 0 4px;
+}
+
+lwdc-button[page-selected] button{
+    background-color: $wdc-color-blueberry-400 !important;
+    color: #ffffff !important;
+    transition: none !important;
+    pointer-events: none;
+}
+
+.wdc-pagination-ellipsis {
+  @include wdc-type-body-2();
+
+  pointer-events: none;
+  width: 32px;
+  text-align: center;
+  display: inline-block;
+}
+
+.wdc-pagination-label {
+  @include wdc-type-body-2();
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $wdc-color-licorice-300;
+  width: 100%;
+  padding-top: 12px;
+}
+
+.wdc-pagination-goto-wrapper {
+  display: flex;
+  padding-left: 12px;
+}
+
+.wdc-pagination-goto-wrapper input{
+  width: 53px !important;
+  min-width: 53px !important;
+}
+
+.wdc-pagination-goto-label {
+  @include wdc-type-body();
+  @include wdc-type-variant-label();
+
+  margin: auto 0;
+  padding-right: 8px;
+
+}
+
+.wdc-pagination-goto-form {
+    min-width: 10px;
+}

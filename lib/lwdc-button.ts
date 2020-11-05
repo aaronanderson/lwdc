@@ -1,5 +1,6 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
+import { styleLightDOM } from './util';
 
 import styleCSS from './lwdc-button.scss';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -27,20 +28,24 @@ export class ButtonElement extends LitElement {
 	@property({ type: Boolean, attribute: true, reflect: true })
 	inverse = false;
 
+	@property({ type: Array })
+	elementChildNodes: Array<ChildNode> = [];
 
-	connectedCallback() {
-		super.connectedCallback();
-		this.shadowRoot!.addEventListener('click', evt => {
-			if (this.hasAttribute('disabled')) {
-				evt.preventDefault();
-				evt.stopImmediatePropagation();
-			}
-		}, true);
+	createRenderRoot() {
+		return this;
 	}
 
-
-
-
+	connectedCallback() {
+		styleLightDOM(this, style, 'lwdc-button');
+		this.elementChildNodes = Array.from(this.childNodes);
+		super.connectedCallback();
+		this.addEventListener('click', evt => { //this.shadowRoot!
+		 	if (this.hasAttribute('disabled')) {
+		 		evt.preventDefault();
+		 		evt.stopImmediatePropagation();
+		 	}
+		 }, true);
+	}
 
 	firstUpdated() {
 		if (!this.getAttribute("tabindex")) {
@@ -49,10 +54,6 @@ export class ButtonElement extends LitElement {
 	}
 
 
-	static get styles() {
-		return [style];
-	}
-
 	render() {
 
 		let buttonClass = {
@@ -60,6 +61,8 @@ export class ButtonElement extends LitElement {
 			'wdc-btn-dropdown': this.dropdown,
 			//'wdc-btn-disabled': this.disabled,
 			'wdc-btn-icon-plain': this.type == ButtonType.plain,
+			'wdc-btn-icon-square': this.type == ButtonType.iconSquare,
+			'wdc-btn-icon-square-filled': this.type == ButtonType.iconSquareFilled,
 			'wdc-btn-icon-circle': this.type == ButtonType.iconCircle,
 			'wdc-btn-icon-circle-filled': this.type == ButtonType.iconCircleFilled,
 			'wdc-btn-icon-inverse': this.type == ButtonType.iconInverse,
@@ -74,7 +77,7 @@ export class ButtonElement extends LitElement {
 
 		};
 
-		return html`<button ?disabled="${this.disabled}" class="${classMap(buttonClass)}"><slot></slot></button>`;
+		return html`<button ?disabled="${this.disabled}" class="${classMap(buttonClass)}">${this.elementChildNodes}</button>`;
 
 	}
 
@@ -85,6 +88,8 @@ export enum ButtonType {
 	default,
 	delete,
 	plain,
+	iconSquare,
+	iconSquareFilled,
 	iconCircle,
 	iconCircleFilled,
 	iconInverse,
@@ -103,10 +108,3 @@ export enum ButtonText {
 	allCaps
 }
 export default ButtonElement;
-
-
-
-
-
-
-

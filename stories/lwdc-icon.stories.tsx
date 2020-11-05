@@ -4,7 +4,7 @@ import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
 
 
-import { xIcon, filterIcon, uploadCloudIcon, homeIcon } from '@workday/canvas-system-icons-web';
+import { xIcon, filterIcon, uploadCloudIcon, homeIcon, activityStreamIcon } from '@workday/canvas-system-icons-web';
 
 import '../lib/lwdc-icon';
 import '../lib/lwdc-icon-inject';
@@ -20,10 +20,10 @@ export default {
 
 
 
-const icons = ['x', 'filter', 'uploadCloud', 'home'];
+const icons = ['x', 'filter', 'uploadCloud', 'home', 'activity'];
 const iconOptions: Record<string, string> = icons.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
 const iconsRadioKnob = () => radios("Icon", iconOptions, 'x') as any;
-const iconMap = new Map([['x', xIcon], ['filter', filterIcon], ['uploadCloud', uploadCloudIcon], ['home', homeIcon]]);
+const iconMap = new Map([['x', xIcon], ['filter', filterIcon], ['uploadCloud', uploadCloudIcon], ['home', homeIcon], ['activity', activityStreamIcon]]);
 
 const iconSizes = ['24', '48', '72'];
 const iconSizeOptions: Record<string, string> = iconSizes.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});

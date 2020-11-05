@@ -33,6 +33,7 @@ export default {
         'lwdc-menu': 'lib/lwdc-menu.ts',
         'lwdc-modal': 'lib/lwdc-modal.ts',
         'lwdc-page-header': 'lib/lwdc-page-header.ts',
+        'lwdc-pagination': 'lib/lwdc-pagination.ts',
         'lwdc-popup': 'lib/lwdc-popup.ts',
         'lwdc-progress': 'lib/lwdc-progress.ts',
         'lwdc-radio': 'lib/lwdc-radio.ts',

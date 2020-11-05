@@ -29,7 +29,7 @@ export class IconElement extends LitElement {
 	background = "transparent";
 
 	@property({ type: String })
-	backgroundHover?: string;
+	backgroundHover = 'transparent';
 
 	@property({ type: String })
 	color = "licorice200";
@@ -102,9 +102,3 @@ export class IconElement extends LitElement {
 }
 
 export default IconElement;
-
-
-
-
-
-

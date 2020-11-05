@@ -64,6 +64,11 @@
           "name": "inverse",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
         }
       ],
       "properties": [
@@ -102,6 +107,12 @@
           "attribute": "inverse",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
         }
       ]
     },
@@ -208,6 +219,131 @@
         {
           "name": "formField",
           "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-color-input",
+      "path": "./../lib/lwdc-color-input.ts",
+      "attributes": [
+        {
+          "name": "show-check",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined"
+        },
+        {
+          "name": "preview",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "value",
+          "type": "string | undefined"
+        }
+      ],
+      "properties": [
+        {
+          "name": "showCheck",
+          "attribute": "show-check",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
+          "type": "string | undefined"
+        },
+        {
+          "name": "preview",
+          "attribute": "preview",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "colorInput",
+          "type": "HTMLDivElement | undefined"
+        },
+        {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string | undefined"
+        },
+        {
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-color-input-valid-change"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-color-swatch",
+      "path": "./../lib/lwdc-color-input.ts",
+      "attributes": [
+        {
+          "name": "color",
+          "type": "string | undefined"
+        },
+        {
+          "name": "show-check",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "color",
+          "attribute": "color",
+          "type": "string | undefined"
+        },
+        {
+          "name": "showCheck",
+          "attribute": "show-check",
+          "type": "boolean",
+          "default": "false"
         }
       ]
     },
@@ -396,16 +532,27 @@
       "path": "./../lib/lwdc-count-badge.ts",
       "attributes": [
         {
-          "name": "loading",
-          "type": "boolean | undefined",
+          "name": "count",
+          "type": "number | undefined",
+          "default": "\"undefined\""
+        },
+        {
+          "name": "inverse",
+          "type": "boolean",
           "default": "false"
         }
       ],
       "properties": [
         {
-          "name": "loading",
-          "attribute": "loading",
-          "type": "boolean | undefined",
+          "name": "count",
+          "attribute": "count",
+          "type": "number | undefined",
+          "default": "\"undefined\""
+        },
+        {
+          "name": "inverse",
+          "attribute": "inverse",
+          "type": "boolean",
           "default": "false"
         }
       ]
@@ -735,7 +882,8 @@
         },
         {
           "name": "backgroundHover",
-          "type": "string | undefined"
+          "type": "string",
+          "default": "\"transparent\""
         },
         {
           "name": "color",
@@ -787,7 +935,8 @@
         {
           "name": "backgroundHover",
           "attribute": "backgroundHover",
-          "type": "string | undefined"
+          "type": "string",
+          "default": "\"transparent\""
         },
         {
           "name": "color",
@@ -1244,6 +1393,216 @@
         {
           "name": "titles",
           "type": "TemplateResult"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-pagination",
+      "path": "./../lib/lwdc-pagination.ts",
+      "attributes": [
+        {
+          "name": "total",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "currentPage",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "showGoTo",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "customLabel",
+          "type": "(from: number, to: number, total: number) => string",
+          "default": "\"defaultCustomLabel\""
+        },
+        {
+          "name": "goToLabel",
+          "type": "string",
+          "default": "\"Go To\""
+        },
+        {
+          "name": "paginationContainerAriaLabel",
+          "type": "string | undefined"
+        },
+        {
+          "name": "previousPageAriaLabel",
+          "type": "string | undefined"
+        },
+        {
+          "name": "nextPageAriaLabel",
+          "type": "string | undefined"
+        },
+        {
+          "name": "pageButtonAriaLabel",
+          "type": "((page: number, selected: boolean) => string) | undefined"
+        },
+        {
+          "name": "width",
+          "type": "number | undefined"
+        }
+      ],
+      "properties": [
+        {
+          "name": "total",
+          "attribute": "total",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "pageSize",
+          "attribute": "pageSize",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "currentPage",
+          "attribute": "currentPage",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "showGoTo",
+          "attribute": "showGoTo",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "showLabel",
+          "attribute": "showLabel",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "customLabel",
+          "attribute": "customLabel",
+          "type": "(from: number, to: number, total: number) => string",
+          "default": "\"defaultCustomLabel\""
+        },
+        {
+          "name": "goToLabel",
+          "attribute": "goToLabel",
+          "type": "string",
+          "default": "\"Go To\""
+        },
+        {
+          "name": "paginationContainerAriaLabel",
+          "attribute": "paginationContainerAriaLabel",
+          "type": "string | undefined"
+        },
+        {
+          "name": "previousPageAriaLabel",
+          "attribute": "previousPageAriaLabel",
+          "type": "string | undefined"
+        },
+        {
+          "name": "nextPageAriaLabel",
+          "attribute": "nextPageAriaLabel",
+          "type": "string | undefined"
+        },
+        {
+          "name": "pageButtonAriaLabel",
+          "attribute": "pageButtonAriaLabel",
+          "type": "((page: number, selected: boolean) => string) | undefined"
+        },
+        {
+          "name": "width",
+          "attribute": "width",
+          "type": "number | undefined"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-pagination-page-change"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-pagination-pages",
+      "path": "./../lib/lwdc-pagination.ts",
+      "attributes": [
+        {
+          "name": "isMobile",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "current",
+          "type": "number",
+          "default": "0"
+        }
+      ],
+      "properties": [
+        {
+          "name": "isMobile",
+          "attribute": "isMobile",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "total",
+          "attribute": "total",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "current",
+          "attribute": "current",
+          "type": "number",
+          "default": "0"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-pagination-goto",
+      "path": "./../lib/lwdc-pagination.ts",
+      "attributes": [
+        {
+          "name": "max",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "\"Go To\""
+        }
+      ],
+      "properties": [
+        {
+          "name": "max",
+          "attribute": "max",
+          "type": "number",
+          "default": "0"
+        },
+        {
+          "name": "label",
+          "attribute": "label",
+          "type": "string",
+          "default": "\"Go To\""
+        },
+        {
+          "name": "textInput",
+          "type": "TextElement | undefined"
         }
       ]
     },
@@ -1861,6 +2220,19 @@
           "type": "string | undefined"
         },
         {
+          "name": "inputType",
+          "type": "string",
+          "default": "\"text\""
+        },
+        {
+          "name": "min",
+          "type": "number | undefined"
+        },
+        {
+          "name": "max",
+          "type": "number | undefined"
+        },
+        {
           "name": "value",
           "type": "string | undefined"
         }
@@ -1887,6 +2259,22 @@
           "name": "placeholder",
           "attribute": "placeholder",
           "type": "string | undefined"
+        },
+        {
+          "name": "inputType",
+          "attribute": "inputType",
+          "type": "string",
+          "default": "\"text\""
+        },
+        {
+          "name": "min",
+          "attribute": "min",
+          "type": "number | undefined"
+        },
+        {
+          "name": "max",
+          "attribute": "max",
+          "type": "number | undefined"
         },
         {
           "name": "formAssociated",
@@ -2114,6 +2502,69 @@
         {
           "name": "fileUpload",
           "type": "FileUploadElement"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-pagination-example",
+      "path": "./../stories/lwdc-pagination.stories.tsx",
+      "attributes": [
+        {
+          "name": "width",
+          "type": "number",
+          "default": "800"
+        },
+        {
+          "name": "currentPage",
+          "type": "number",
+          "default": "1"
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "default": "50"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "showGoTo",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "width",
+          "attribute": "width",
+          "type": "number",
+          "default": "800"
+        },
+        {
+          "name": "currentPage",
+          "attribute": "currentPage",
+          "type": "number",
+          "default": "1"
+        },
+        {
+          "name": "total",
+          "attribute": "total",
+          "type": "number",
+          "default": "50"
+        },
+        {
+          "name": "showLabel",
+          "attribute": "showLabel",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "showGoTo",
+          "attribute": "showGoTo",
+          "type": "boolean",
+          "default": "false"
         }
       ]
     },

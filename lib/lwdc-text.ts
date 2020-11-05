@@ -26,6 +26,14 @@ export class TextElement extends formElement(LitElement) {
 	@property({ type: String, attribute: true, reflect: true })
 	placeholder?: string;
 
+	@property({ type: String, attribute: true, reflect: true })
+	inputType: string = "text";
+
+	@property({ type: Number, attribute: true, reflect: true })
+	min?: number;
+
+	@property({ type: Number, attribute: true, reflect: true })
+	max?: number;
 
 	//disable shadow DOM so containing wdc-form class relative css can be applied.
 	//Further investigation is needed to see how ::slotted could be incorporated into and contributed via a pull request
@@ -58,7 +66,7 @@ export class TextElement extends formElement(LitElement) {
 		};
 
 		return html`<div class="${classMap(formTextClass)}">
-						<input formnovalidate type="${this.password ? 'password' : 'text'}" .value="${ifDefined(this.value)}" list="${ifDefined(this.list)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></input>
+						<input formnovalidate type="${this.password ? 'password' : this.inputType}" .min="${ifDefined(this.min)}" .max="${ifDefined(this.max)}" .value="${ifDefined(this.value)}" list="${ifDefined(this.list)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></input>
 					</div>
 					`;
 	}

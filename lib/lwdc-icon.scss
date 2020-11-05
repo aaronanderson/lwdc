@@ -2,6 +2,11 @@
 @import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
 
 //:host,
+
+:host {
+	color: inherit;
+}
+
 lwdc-icon {
 	display: contents;
 }
