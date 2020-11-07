@@ -13,7 +13,7 @@ import './lwdc-text';
 import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon, arrowUpIcon, arrowDownIcon } from '@workday/canvas-system-icons-web';
 import ModalElement from './lwdc-modal';
 import { FormFieldLabelPosition } from './lwdc-form-field';
-import { closestElement } from './util';
+import { closestElement, pathValue } from './util';
 
 import styleCSS from './lwdc-table.scss';
 const style = css([`${styleCSS}`] as any)
@@ -74,7 +74,7 @@ export class TableElement<E> extends LitElement {
 				let k: string = col.key;
 				let val = filterEntry.value.toLocaleLowerCase();
 				viewEntries = viewEntries.filter((e: any) => {
-					let valQ = eval('e'.concat('.',k));
+					let valQ = pathValue(e,k);
 					let valE: string = valQ ? valQ.toLocaleLowerCase() : '';
 					if (filterEntry.by === 'Contains') {
 						return valE.includes(val);
@@ -97,9 +97,9 @@ export class TableElement<E> extends LitElement {
 			if (col && col.key) {
 				let k: string = col.key;
 				viewEntries.sort((a: any, b: any) => {
-					let valQ = eval('a'.concat('.',k));
+					let valQ = pathValue(a,k);
 					let valA = valQ ? valQ : '';
-					valQ = eval('b'.concat('.',k));
+					valQ = pathValue(b,k);
 					let valB = valQ ? valQ : '';
 					if (sortEntry.direction === 'Ascending') {
 						return valA.localeCompare(valB, undefined, { numeric: true });

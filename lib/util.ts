@@ -110,6 +110,11 @@ export class DownloadError extends Error {
 	}
 }
 
+export const pathValue = (obj: any, path: string) => {
+    return path.split(/(\[|\]|\.)/).reduce(function (x, y) {
+        return ('[].'.indexOf(y) > -1) ? x : (x === Object(x) && y in x) ? x[y] : undefined;
+    }, obj)
+}
 //For Firefox. Mininimal form associated custom element support for only functions used by this library that are supported in Chrome.
 //Form associated custom elements are not necessary since checkValidity logic below manages the Canvas Kit form-field hintText values that are displayed in the UI.
 //However plugging into the browser's HTML form lifecycle management is a standards compliant approach and may provide additional benefits in the futures.
