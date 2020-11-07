@@ -74,11 +74,11 @@ export class TableElement<E> extends LitElement {
 				let k: string = col.key;
 				let val = filterEntry.value.toLocaleLowerCase();
 				viewEntries = viewEntries.filter((e: any) => {
-					let valE = e[k] ? e[k].toLocaleLowerCase() : '';
+					let valE: string = e[k] ? e[k].toLocaleLowerCase() : '';
 					if (filterEntry.by === 'Contains') {
 						return valE.includes(val);
 					} else if (filterEntry.by === 'Begins-With') {
-						return valE.startWith(val);
+						return valE.startsWith(val);
 					} else if (filterEntry.by === 'Ends-With') {
 						return valE.endsWith(val);
 					} else if (filterEntry.by === 'RegExp') {
@@ -318,7 +318,7 @@ export class TableElement<E> extends LitElement {
 				this.filter.add(<FilterEntry>{
 					key: col.key,
 					header: col.header,
-					by: form.item("by")!.value,
+					by: form.radioValue("by"),
 					value: form.item("value")!.value
 				});
 				this.requestUpdate();
