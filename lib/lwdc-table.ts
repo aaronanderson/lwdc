@@ -74,7 +74,8 @@ export class TableElement<E> extends LitElement {
 				let k: string = col.key;
 				let val = filterEntry.value.toLocaleLowerCase();
 				viewEntries = viewEntries.filter((e: any) => {
-					let valE: string = e[k] ? e[k].toLocaleLowerCase() : '';
+					let valQ = eval('e'.concat('.',k));
+					let valE: string = valQ ? valQ.toLocaleLowerCase() : '';
 					if (filterEntry.by === 'Contains') {
 						return valE.includes(val);
 					} else if (filterEntry.by === 'Begins-With') {
@@ -96,8 +97,10 @@ export class TableElement<E> extends LitElement {
 			if (col && col.key) {
 				let k: string = col.key;
 				viewEntries.sort((a: any, b: any) => {
-					let valA = a[k] ? a[k] : '';
-					let valB = b[k] ? b[k] : '';
+					let valQ = eval('a'.concat('.',k));
+					let valA = valQ ? valQ : '';
+					valQ = eval('b'.concat('.',k));
+					let valB = valQ ? valQ : '';
 					if (sortEntry.direction === 'Ascending') {
 						return valA.localeCompare(valB, undefined, { numeric: true });
 					} else {
