@@ -37,6 +37,7 @@ export default {
         'lwdc-popup': 'lib/lwdc-popup.ts',
         'lwdc-progress': 'lib/lwdc-progress.ts',
         'lwdc-radio': 'lib/lwdc-radio.ts',
+        'lwdc-search-bar': 'lib/lwdc-search-bar.ts',
         'lwdc-select': 'lib/lwdc-select.ts',
         'lwdc-side-panel': 'lib/lwdc-side-panel.ts',
         'lwdc-status-indicator': 'lib/lwdc-status-indicator.ts',

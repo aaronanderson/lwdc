@@ -1,0 +1,148 @@
+//@import '~@workday/canvas-kit-css-core/lib/spacing';
+@import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+
+:host {
+	display: contents;
+}
+
+$lwdc-search-bar-max-width: 480px;
+$lwdc-search-bar-min-width: 120px;
+
+.lwdc-search-bar-form {
+	position: relative;
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	margin-left: 0px; //$wdc-spacing-m
+	min-width: $lwdc-search-bar-min-width;
+}
+
+/*.lwdc-search-bar-form-collapsed {
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	margin: 0;
+	position: showForm ? 'absolute' : 'relative',
+	background-color: showForm ? formCollapsedBackground : 'rgba(0, 0, 0, 0)',
+	transition: background-color 120ms;
+	max-width: 56px; //showForm ? 'none' : spacingNumbers.xl + spacingNumbers.xxs,
+	min-width: 56px;//spacingNumbers.xl + spacingNumbers.xs,
+	overflow: showForm ? 'visible' : 'hidden',
+	z-index: 1;
+}*/
+
+.lwdc-search-bar-container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	text-align: left;
+	min-height: #{'var(--lwdc-search-bar-height, 40px)'};
+	height: #{'var(--lwdc-search-bar-height, 40px)'};
+}
+
+$lwdc-search-bar-icon-size: 32px;
+$lwdc-search-bar-icon-collapsed-size: 40px;
+
+
+.lwdc-search-bar-icon-search button {
+	position: absolute;
+	margin: auto 8px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	padding: 0;
+	z-index: 3;
+	display: flex;
+	min-height: $lwdc-search-bar-icon-size;
+	height: $lwdc-search-bar-icon-size;
+	min-width: $lwdc-search-bar-icon-size;
+	width: $lwdc-search-bar-icon-size;
+
+}
+
+/*.lwdc-search-bar-icon-search-collapsed button {
+	margin: auto 4px;
+	min-height: $lwdc-search-bar-icon-size;
+	height: $lwdc-search-bar-icon-size;
+	min-width: $lwdc-search-bar-icon-size;
+	width: $lwdc-search-bar-icon-size;
+}*/
+
+
+.lwdc-search-bar-icon-reset button {
+	position: absolute;
+	margin: auto 4px;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	padding: 0;
+	z-index: 3;
+	display: inline-block; //none
+}
+
+.lwdc-search-bar-icon-reset[hidden] {
+	display: none;
+}
+
+button:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+/*.lwdc-search-bar-icon-reset-collapsed button {
+	display: inline-block;
+}*/
+
+.lwdc-search-bar-form-field .wdc-form-field-wrapper{
+	display: inline-block; // none
+	width: 100%;
+	height: #{'var(--lwdc-search-bar-height, 40px)'};
+	max-width: 100%;// isCollapsed || grow ? '100%' : $lwdc-search-bar-max-width;
+	margin-bottom: 0px;
+}
+
+.lwdc-search-bar-form-field-collapsed .wdc-form-field-wrapper{
+	display: inline-block;
+	width: 100%;
+}
+
+.lwdc-search-bar-form-field > div{
+  display: block;
+ }
+
+.lwdc-search-bar-input .wdc-form-textinput input{
+	font-size: 14px;
+	line-height: 14px;
+	box-shadow: none;//inputColors.boxShadow,
+	color: $wdc-color-black-pepper-300;//inputColors.color,
+	border: none;
+	//webkit-appearance: none;
+	transition: background-color 120ms, color 120ms, box-shadow 200ms, border-color 200ms;
+	z-index: 2;
+	width: 100%;
+
+  max-width: 100%;
+	//max-width: $lwdc-search-bar-max-width;//grow ? '100%' : maxWidth,
+	min-width: $lwdc-search-bar-min-width;
+	padding-left: 56px; //spacingNumbers.xl + spacingNumbers.xxs,
+	padding-right: 40px;//spacing.xl,
+	background-color: $wdc-color-soap-200;
+	height: #{'var(--lwdc-search-bar-height, 40px)'};
+ }
+
+/*.lwdc-search-bar-input-collapsed .wdc-form-textinput input{
+	font-size: 20px;
+	line-height: 20px; // For ie11, line-height needs to match font-size
+	padding-left: 56px;//spacingNumbers.xl + spacingNumbers.s,
+	padding-right: 56px;//spacingNumbers.xl + spacingNumbers.s,
+	max-width: none;
+	min-width: 0;
+	background-color: rgba(0, 0, 0, 0);
+	height: #{'var(--lwdc-search-bar-height, 40px)'};
+}*/
+
+.lwdc-search-bar-input .wdc-form-textinput input::-webkit-search-cancel-button {
+   -webkit-appearance: none;
+}

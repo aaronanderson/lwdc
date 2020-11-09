@@ -50,11 +50,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 		return this;
 	}
 
-	connectedCallback() {
-		if (this.getRootNode()) {
-			const rootNode = this.getRootNode() as any;
-			rootNode.adoptedStyleSheets = !!rootNode.adoptedStyleSheets ? [...rootNode.adoptedStyleSheets, style.styleSheet] : [style.styleSheet];
-		}
+	connectedCallback() {	
 		super.connectedCallback();
 	}
 

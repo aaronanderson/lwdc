@@ -28,6 +28,9 @@ export class ButtonElement extends LitElement {
 	@property({ type: Boolean, attribute: true, reflect: true })
 	inverse = false;
 
+	@property({ type: String, attribute: true, reflect: true })
+	action = "submit";
+
 	@property({ type: Array })
 	elementChildNodes: Array<ChildNode> = [];
 
@@ -77,7 +80,7 @@ export class ButtonElement extends LitElement {
 
 		};
 
-		return html`<button ?disabled="${this.disabled}" class="${classMap(buttonClass)}">${this.elementChildNodes}</button>`;
+		return html`<button ?disabled="${this.disabled}" type=${this.action} class="${classMap(buttonClass)}">${this.elementChildNodes}</button>`;
 
 	}
 
