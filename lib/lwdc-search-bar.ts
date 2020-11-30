@@ -74,6 +74,8 @@ export class SearchBarElement extends LitElement {
 		if (this.searchText) {
 		  this.searchText.value='';
 			this.resetEnabled = false;
+			let event = new CustomEvent('lwdc-search-bar-reset');
+			this.dispatchEvent(event);
 	  }
 	}
 

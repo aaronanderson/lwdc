@@ -92,6 +92,7 @@ export class PaginationElement extends LitElement {
   };
 
   pageChange(page: number){
+    this.currentPage = page;
     let event = new CustomEvent('lwdc-pagination-page-change', {
       detail: {
         page: page
