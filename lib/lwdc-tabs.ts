@@ -1,4 +1,4 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import { LitElement, html, css, customElement, property,queryAll } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
 import styleCSS from './lwdc-tabs.scss';
@@ -20,6 +20,8 @@ export class TabsElement<T> extends LitElement {
 	@property({ type: Number, attribute: true, reflect: true })
 	index: number = 0;
 
+	@property({ type: Number, attribute: true, reflect: true })
+	nextIndex: number = -1;
 
 
 	static get styles() {
@@ -40,22 +42,24 @@ export class TabsElement<T> extends LitElement {
 			<div class="lwdc-tab-bar" role="tablist">
 				<ul class="${classMap(tabsClass)}">
 					${this.tabs.map((t: T, i: number) => {
-			let tabClass = {				
-				'current': i == this.index
+			let tabClass = {
+				'current': i == this.index,
+				'next': i == this.nextIndex
 			};
 			return html`
-				<li class="${classMap(tabClass)}" @click=${() => this.handleClick(i)}>
-					<div>${this.nameSelector(t)}</div>
+				<li class="${classMap(tabClass)}" @click=${() => this.handleTab(i)}>
+					<div id="tab-${i}" tabIndex="${i}" @keydown=${this.onKeyDown}>${this.nameSelector(t)}</div>
 				</li>`;
-		})}
+				})}
 				</ul>
 			</div>
 			<slot></slot>
 		`;
 	}
 
-	handleClick(i: number) {
+	handleTab(i: number) {
 		this.index = i;
+		this.nextIndex = -1;
 		this.fireEvent();
 	}
 
@@ -68,13 +72,57 @@ export class TabsElement<T> extends LitElement {
 	}
 
 
+	onKeyDown(event: KeyboardEvent) {
+		switch (event.key) {
+			case 'ArrowLeft':
+			case 'Left':
+				this.setIntentTab('previous');
+				break;
+			case 'ArrowRight':
+			case 'Right':
+				this.setIntentTab('next');
+				break;
+			case 'Home':
+				this.setIntentTab('first');
+				break;
+			case 'End':
+				this.setIntentTab('last');
+				break;
+			case 'Enter':
+			case ' ':
+				this.handleTab(this.nextIndex);
+				event.preventDefault();
+				break;
+			default:
+				break;
+		}
+	}
+
+
+setIntentTab(value: 'first' | 'last' | 'next' | 'previous') {
+		this.nextIndex = this.nextIndex == -1 ? this.index: this.nextIndex;
+		if (value === 'first') {
+			this.nextIndex = 0;
+		} else if (value === 'last') {
+			this.nextIndex = this.tabs.length - 1;
+		} else {
+			this.nextIndex = this.nextIndex  +	(value === 'next' ? 1 : -1);
+			if (this.nextIndex < 0) {
+				this.nextIndex = this.tabs.length - 1;
+			} else if (this.nextIndex >= this.tabs.length) {
+				this.nextIndex = 0;
+			}
+		}
+		//let element = this.shadowRoot?.querySelector(`#tab-${this.nextIndex}`) as HTMLDivElement;
+		//element.focus();
+
+		}
 }
 
 
 const defaultNameSelector = function (value: any) {
 	return value;
 }
-
 
 
 export interface TabNameSelector<T> {
@@ -88,11 +136,3 @@ export enum Theme {
 }
 
 export default TabsElement;
-
-
-
-
-
-
-
-

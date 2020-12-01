@@ -22,7 +22,7 @@ const tabActivated = (e: CustomEvent) => {
  }
 
 export const tabsStory = () => {
-	return html`<lwdc-tabs style="width: 75%;" .tabs=${['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4']} @lwdc-tab-activated=${tabActivated}></lwdc-tabs>`;
+	return html`<lwdc-tabs style="width: 75%;" .tabs=${['First Tab', 'Second Tab', 'Third Tab']} @lwdc-tab-activated=${tabActivated}></lwdc-tabs>`;
 }
 
 tabsStory.storyName = 'Tabs';

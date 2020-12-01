@@ -66,6 +66,11 @@
           "default": "false"
         },
         {
+          "name": "action",
+          "type": "string",
+          "default": "\"submit\""
+        },
+        {
           "name": "elementChildNodes",
           "type": "ChildNode[]",
           "default": "[]"
@@ -107,6 +112,12 @@
           "attribute": "inverse",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "action",
+          "attribute": "action",
+          "type": "string",
+          "default": "\"submit\""
         },
         {
           "name": "elementChildNodes",
@@ -1775,6 +1786,79 @@
       ]
     },
     {
+      "name": "lwdc-search-bar",
+      "path": "./../lib/lwdc-search-bar.ts",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "string | undefined"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined",
+          "default": "\" \""
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "default": "40"
+        },
+        {
+          "name": "resetEnabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "value",
+          "attribute": "value",
+          "type": "string | undefined"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "placeholder",
+          "attribute": "placeholder",
+          "type": "string | undefined",
+          "default": "\" \""
+        },
+        {
+          "name": "height",
+          "attribute": "height",
+          "type": "number",
+          "default": "40"
+        },
+        {
+          "name": "resetEnabled",
+          "attribute": "resetEnabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "searchText",
+          "type": "TextElement | undefined"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-search-bar-reset"
+        },
+        {
+          "name": "lwdc-search-bar-query"
+        }
+      ]
+    },
+    {
       "name": "lwdc-select",
       "path": "./../lib/lwdc-select.ts",
       "attributes": [
@@ -2163,6 +2247,11 @@
           "name": "index",
           "type": "number",
           "default": "0"
+        },
+        {
+          "name": "nextIndex",
+          "type": "number",
+          "default": "-1"
         }
       ],
       "properties": [
@@ -2189,6 +2278,12 @@
           "attribute": "index",
           "type": "number",
           "default": "0"
+        },
+        {
+          "name": "nextIndex",
+          "attribute": "nextIndex",
+          "type": "number",
+          "default": "-1"
         }
       ],
       "events": [

@@ -1,16 +1,19 @@
 @import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+@import "~@workday/canvas-kit-css-core/lib/mixins/type.scss";
 
 .lwdc-tab-bar {
 	display: flex;
 	flex-grow: 1;
 	justify-content: center;
 	/*height: inherit;*/
-	height: 40px;
-	margin-left: 40px;
+	//height: 40px;
+	//margin-left: 40px;
 
+  @include wdc-type();
 	font-size: 14px;
-	font-weight: 700;
-	font-family: "Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-weight: 500;
+
+	border-bottom: 1px solid $wdc-color-soap-400;
 }
 
 ul {
@@ -19,7 +22,7 @@ ul {
 	justify-content: center;
 	list-style-type: none;
 	padding: 0;
-	margin: 0;
+	margin: 0 24px;
 	height: inherit;
 
 	flex-grow: 1;
@@ -44,15 +47,21 @@ ul.lwdc-blue:hover {
 
 
 li {
+	color: $wdc-color-licorice-300;
 	box-sizing: border-box;
 	position: relative;
 	display: flex;
 	align-items: center;
 	font-size: 14px;
-	font-weight: 700;
-	height: inherit;
+	font-weight: 500;
+	//height: inherit;
 	transition: color 150ms ease-out 0s;
 	cursor: pointer;
+
+	line-height: 20px;
+	border-radius: 4px 4px 0px 0px;
+	margin-left: 4px;
+	max-width: 280px;
 
 	flex-grow: 1;
 	justify-content: center;
@@ -72,11 +81,11 @@ li:last-child>* {
 li>* {
 	color: inherit;
 	text-decoration: none;
-	padding: 0px 16px;
-	margin: 0 4px;
+	padding: 16px;
 	display: flex;
 	align-items: center;
 	height: inherit;
+	outline: none;
 }
 
 li>*:visited {
@@ -86,10 +95,27 @@ li>*:visited {
 ul.lwdc-white>li:hover,
 ul.lwdc-white>li:active {
 	color: $wdc-color-black-pepper-400;
+	background-color: $wdc-color-soap-200;
+}
+
+/*@keyframes focus-ring {
+    0% {
+        box-shadow: inset 0 0 0 2px $wdc-color-blueberry-400, inset 0 0 0 2px $wdc-color-french-vanilla-100;
+    }
+    100% {
+        box-shadow: inset 0 0 0 2px $wdc-color-blueberry-400, inset 0 0 0 2px $wdc-color-french-vanilla-100;
+    }
+ }*/
+
+ul.lwdc-white>li.next {
+	//animation: focus-ring 100ms;
+	box-shadow: inset 0 0 0 2px $wdc-color-blueberry-400, inset 0 0 0 2px $wdc-color-french-vanilla-100;
+	background-color: $wdc-color-soap-200;
 }
 
 ul.lwdc-white>li.current {
 	color: $wdc-color-blueberry-400;
+	background-color: $wdc-color-french-vanilla-100;
 }
 
 ul.lwdc-white>li.current a {
@@ -108,6 +134,7 @@ ul.lwdc-white>li.current:after {
 	content: '';
 	height: 4px;
 	width: 100%;
+	margin-top: -2px;
 	background-color: $wdc-color-blueberry-400;
 	border-radius: 4px 4px 0 0;
 }
