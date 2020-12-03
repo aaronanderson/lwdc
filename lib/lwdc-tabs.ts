@@ -66,7 +66,8 @@ export class TabsElement<T> extends LitElement {
 	fireEvent() {
 		this.dispatchEvent(new CustomEvent('lwdc-tab-activated', {
 			detail: {
-				index: this.index
+				index: this.index,
+				tab: this.tabs[this.index]
 			}
 		}));
 	}
