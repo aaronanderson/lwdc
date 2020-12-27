@@ -23,7 +23,7 @@ export const popupStory = () => {
 	return html`<lwdc-popup style="position:absolute; top: 10px;">
 					<h3>Welcome to your popup positioned by Popup!</h3>
 				</lwdc-popup>
-				<lwdc-button @click=${(e: Event) => { ((e.target as HTMLElement).parentElement.querySelector("lwdc-popup") as any).open(); }} style="margin-top: auto;">Open</lwdc-button>
+				<lwdc-button @click=${(e: Event) => { console.log("debug",document.querySelector("lwdc-popup") ); (document.querySelector("lwdc-popup") as any).open(); }} style="margin-top: auto;">Open</lwdc-button>
 				`;
 }
 

@@ -30,7 +30,7 @@ export const modalStory = () => {
 						<lwdc-button .type=${ButtonType.default} @click=${(e: Event) => { ((e.target as HTMLElement).closest("lwdc-modal") as any).close(); }}>Cancel</lwdc-button>
 					</div>
 				</lwdc-modal>
-				<lwdc-button @click=${(e: Event) => { ((e.target as HTMLElement).parentElement.querySelector("lwdc-modal") as any).open(); }}>Open</lwdc-button>
+				<lwdc-button @click=${(e: Event) => { (document.querySelector("lwdc-modal") as any).open(); }}>Open</lwdc-button>
 				`;
 }
 
