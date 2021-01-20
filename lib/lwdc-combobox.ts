@@ -1,5 +1,7 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import {repeat} from 'lit-html/directives/repeat';
+
 import './lwdc-menu-item';
 
 import styleCSS from './lwdc-combobox.scss';
@@ -139,7 +141,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 			}
 			return html`
 							<lwdc-menu id="selections" tabindex="0" class="${classMap(menuClass)}" width="${this.width ? this.width : '280px'}" @keydown=${this.handleKeydown}>
-								${this.filtered.map((o: T) => {
+								${repeat(this.filtered, (o: T) => this.nameSelector(o), (o: T, index: number) => {
 				return html`<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`;
 			})}
 							</lwdc-menu>
@@ -158,7 +160,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 			return html`<div class="${classMap(menuClass)}">
 							<div class="wdc-card-body">
 								<ul id="selected" role="listbox" tabindex="0"  tabIndex="0">
-								${this.options.map((o: T) => {
+								${repeat(this.options, (o: T) => this.nameSelector(o), (o: T, index: number) => {
 
 				return this.selected.has(o) ? html`<li><span class="wdc-menu-item-label">${this.nameSelector(o)}</span></li>` : null;
 			})}
