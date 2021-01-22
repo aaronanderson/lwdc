@@ -122,11 +122,11 @@ export class TableElement<E> extends LitElement {
 		return [style];
 	}
 
-	constructor() {
-		super();
-		this.cols = Array.from(this.children) as TableColumnElement[];
-	}
-
+	connectedCallback() {
+	  super.connectedCallback();
+	  this.cols = Array.from(this.children) as TableColumnElement[];
+  }
+ 
 	firstUpdated() {
 
 	}
