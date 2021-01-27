@@ -73,7 +73,7 @@ class FileUploadExampleElement extends LitElement {
 			${this.files.length > 0 ? html`<h3 class="wdc-type-h3">Selected Files:</h3>` : undefined}
 			${this.files.map((e: File) => html`<h5 class="wdc-type-h5">${e.name}</h5>`)}
 
-			<lwdc-file-upload id="no-picker" multiple .picker=${false} @lwdc-file-upload-selected=${(e: CustomEvent) => this.files = e.detail.files}></lwdc-file-upload>
+			<lwdc-file-upload id="no-picker" multiple .picker=${false} @lwdc-file-upload-selected=${(e: CustomEvent) => {console.log("Files selected", e.detail.files); this.files = e.detail.files}}></lwdc-file-upload>
 
 			<lwdc-action-bar>
 				<lwdc-button @click=${(e: MouseEvent) => this.fileUpload.select()}>Select</lwdc-button>

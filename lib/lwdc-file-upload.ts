@@ -43,7 +43,7 @@ export class FileUploadElement extends formElement(LitElement) {
 	get pickerTemplate() {
 		return html`
 				<div class="lwdc-file-upload-wrapper">
-					 	<input type="file" ?multiple=${this.multiple} @change="${(e: Event) => { this.checkValidity(); this.requestUpdate() }}"/>
+					 	<input type="file" ?multiple=${this.multiple} @change=${(e: Event) => { if(this.checkValidity()){this.handleFileSelected()}; this.requestUpdate(); }}/>
 				</div>
 				<div class="lwdc-file-upload-picker">
 					<lwdc-button .size=${ButtonSize.small} .type=${ButtonType.default} @click=${(e: MouseEvent) => this.select()}>Choose</lwdc-button>
@@ -57,12 +57,13 @@ export class FileUploadElement extends formElement(LitElement) {
 	get defaultTemplate() {
 		return html`
 				<div class="lwdc-file-upload-wrapper">
-					 	<input type="file" ?multiple=${this.multiple} @change="${this.handleFileSelected}"/>
+					 	<input type="file" ?multiple=${this.multiple} @change=${this.handleFileSelected} />
 				</div>
 		`;
 	}
 
 	handleFileSelected() {
+		console.log("file selected",this.files);
 		this.dispatchEvent(new CustomEvent(`lwdc-file-upload-selected`, {
 			detail: {
 				files: this.files

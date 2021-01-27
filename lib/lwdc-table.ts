@@ -10,7 +10,7 @@ import './lwdc-button';
 import './lwdc-radio';
 import './lwdc-text';
 
-import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon, arrowUpIcon, arrowDownIcon } from '@workday/canvas-system-icons-web';
+import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon, arrowUpIcon, arrowDownIcon, caretBottomSmallIcon, caretTopSmallIcon, caretDownSmallIcon, caretUpSmallIcon } from '@workday/canvas-system-icons-web';
 import ModalElement from './lwdc-modal';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement, pathValue } from './util';
@@ -30,6 +30,9 @@ export class TableElement<E> extends LitElement {
 
 	@property({ type: Boolean, attribute: 'inline', reflect: true })
 	inlineEditMode: boolean = false;
+
+	@property({ type: Boolean, attribute: 'move', reflect: true })
+	editMoveMode: boolean = false;
 
 	@property({ type: Boolean, attribute: 'select', reflect: true })
 	selectMode: boolean = false;
@@ -126,10 +129,6 @@ export class TableElement<E> extends LitElement {
 	  super.connectedCallback();
 	  this.cols = Array.from(this.children) as TableColumnElement[];
   }
- 
-	firstUpdated() {
-
-	}
 
 	render() {
 		if (this.editMode) {
@@ -169,15 +168,18 @@ export class TableElement<E> extends LitElement {
 									<lwdc-icon .icon=${plusIcon}></lwdc-icon>
 								</span>
 							</th>
+							${this.editMoveMode? html `
+								<th scope="col" style="width: 100px">Order</th>
+								`: undefined}
 							${this.cols.map((r: TableColumnElement) => this.renderHeader(r))}
 						</tr>
 					</thead>
 					<tbody>
-						${this.view.map((e: E) => this.entryEditRow(e))}
+						${this.view.map((e: E, i: number, a: Array<E>) => this.entryEditRow(e, i, a))}
 					</tbody>
 				</table>
 
-				${this.additionalEditRenderer ? this.additionalEditRenderer(this.view) : null}
+				${this.additionalEditRenderer ? this.additionalEditRenderer(this.view) : undefined}
 
 			`
 
@@ -353,7 +355,7 @@ export class TableElement<E> extends LitElement {
 		}
 	}
 
-	entryEditRow(e: E) {
+	entryEditRow(e: E, i: number, a: Array<E>) {
 		let body: TemplateResult[] = [];
 		body.push(html`
 						<td>
@@ -363,7 +365,7 @@ export class TableElement<E> extends LitElement {
 									<span @click="${(m: MouseEvent) => this.editEntry(e)}">
 										<lwdc-icon .icon=${editIcon}></lwdc-icon>
 									</span>
-								</div>`: null}
+								</div>`: undefined}
 								<div class="wdc-icon-list-icon">
 									<span @click="${(m: MouseEvent) => this.removeEntry(e)}">
 										<lwdc-icon .icon=${minusIcon}></lwdc-icon>
@@ -371,6 +373,21 @@ export class TableElement<E> extends LitElement {
 								</div>
 							</div>
 						</td>
+						${this.editMoveMode ? html`
+						<td>
+							<div class="wdc-icon-list">
+								<div class="wdc-icon-list-icon">
+									<span @click="${(m: MouseEvent) => this.moveEntry(e, 'up')}">
+										<lwdc-icon .icon=${ i == 0? caretBottomSmallIcon: caretUpSmallIcon}></lwdc-icon>
+									</span>
+								</div>
+								<div class="wdc-icon-list-icon">
+									<span @click="${(m: MouseEvent) => this.moveEntry(e, 'down')}">
+										<lwdc-icon .icon=${ i== a.length -1 ? caretTopSmallIcon: caretDownSmallIcon}></lwdc-icon>
+									</span>
+								</div>
+							</div class="wdc-icon-list">
+						</td>`: undefined}
 		`);
 		this.cols.forEach((row: TableColumnElement) => {
 			if (this.inlineEditMode) {
@@ -382,7 +399,7 @@ export class TableElement<E> extends LitElement {
 					body.push(html`
 						<td style="${this.cellWidth(row)}">
 							<lwdc-form-field label=${row.header} .showLabel=${undefined}>
-								<lwdc-text ?required=${ifDefined(row.required)} .value="${obj.hasOwnProperty(k) ? obj[k] : null}" @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
+								<lwdc-text ?required=${ifDefined(row.required)} .value="${obj.hasOwnProperty(k) ? obj[k] : undefined}" @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
 							</lwdc-form-field>
 						</td>
 					`);
@@ -435,14 +452,33 @@ export class TableElement<E> extends LitElement {
 			let index = this.entries.indexOf(e);
 			if (index > -1) {
 				this.entries.splice(index, 1);
+				this.resetView();
+				this.requestUpdate();
 			}
-			this.resetView();
-			this.requestUpdate();
 		}
 
 		this.fireEvent('remove', e);
 	}
 
+	moveEntry(e: E, d: string) {
+		//console.log("moveEntry", d);
+		let index = this.entries.indexOf(e);
+		if (index > -1) {
+			let len = this.entries.length;
+			this.entries.splice(index, 1);
+			if (index == 0 && 'up' == d){
+				this.entries.push(e);
+			} else if (index == len -1 && 'down' == d){
+				this.entries.unshift(e);
+			} else {
+				let dir = 'up' == d ?  -1 : 1;
+				this.entries.splice(index + dir, 0, e);
+			}
+			this.resetView();
+			this.requestUpdate();
+		}
+		this.fireEvent(`move-${d}`, e);
+	}
 
 	get sortDialog() {
 		return this.shadowRoot!.getElementById("sort") as ModalElement;

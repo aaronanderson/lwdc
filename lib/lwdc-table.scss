@@ -1,5 +1,9 @@
 @import "~@workday/canvas-kit-css-table";
 
+:host {
+	display: contents;
+}
+
 .lwdc-table-entries {
 	width: 100%;
 	padding-bottom: 16px;

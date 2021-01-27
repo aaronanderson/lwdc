@@ -32,7 +32,7 @@ export const tableStory = () => {
 					</div>
 					<div>
 						<h3>Edit</h3>
-						<lwdc-table edit .entries=${entries} @lwdc-table-add=${add} @lwdc-table-edit=${edit} @lwdc-table-remove=${remove}}>
+						<lwdc-table edit move .entries=${entries} @lwdc-table-add=${add} @lwdc-table-edit=${edit} @lwdc-table-remove=${remove}}>
 							<lwdc-table-col key="id" header="ID"></lwdc-table-col>
 							<lwdc-table-col key="name" header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
@@ -40,7 +40,7 @@ export const tableStory = () => {
 					</div>
 					<div>
 						<h3>Inline Edit</h3>
-						<lwdc-table edit inline .entries=${entries} @lwdc-table-add=${add} @lwdc-table-edit=${edit} @lwdc-table-remove=${remove}} .additionalEditRenderer=${dataList.bind(this)}>
+						<lwdc-table edit inline move .entries=${entries} @lwdc-table-add=${add} @lwdc-table-edit=${edit} @lwdc-table-remove=${remove}} .additionalEditRenderer=${dataList.bind(this)}>
 							<lwdc-table-col key="id" header="ID" ?required=${true}></lwdc-table-col>
 							<lwdc-table-col key="name" .renderer=${nameRenderer} header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
