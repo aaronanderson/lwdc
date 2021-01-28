@@ -1,4 +1,4 @@
-import { LitElement, html, css, customElement, property, TemplateResult } from 'lit-element';
+import { LitElement, html, css, customElement, property, query, TemplateResult } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 
 import './lwdc-icon';
@@ -12,6 +12,7 @@ import './lwdc-text';
 
 import { filterIcon, sortIcon, plusIcon, editIcon, minusIcon, arrowUpIcon, arrowDownIcon, caretBottomSmallIcon, caretTopSmallIcon, caretDownSmallIcon, caretUpSmallIcon } from '@workday/canvas-system-icons-web';
 import ModalElement from './lwdc-modal';
+import { FormElement } from './lwdc-form';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement, pathValue } from './util';
 
@@ -40,6 +41,10 @@ export class TableElement<E> extends LitElement {
 
 	@property({ type: Object })
 	additionalEditRenderer?: Function;
+
+	@query("#edit-form")
+	editForm?: FormElement;
+
 
 	//@property({ type: Object })
 	//pendingChanges: Set<E> = new Set();
@@ -157,30 +162,33 @@ export class TableElement<E> extends LitElement {
 	}
 
 	get editEntriesTemplate() {
+		const tableTemplate = html `
+		<table class="wdc-table">
+			<thead>
+				<tr>
+					<th scope="col" style="width: 100px">
+						<span @click="${(m: MouseEvent) => this.addEntry()}">
+							<lwdc-icon .icon=${plusIcon}></lwdc-icon>
+						</span>
+					</th>
+					${this.editMoveMode? html `
+						<th scope="col" style="width: 100px">Order</th>
+						`: undefined}
+					${this.cols.map((r: TableColumnElement) => this.renderHeader(r))}
+				</tr>
+			</thead>
+			<tbody>
+				${this.view.map((e: E, i: number, a: Array<E>) => this.entryEditRow(e, i, a))}
+			</tbody>
+		</table>
+
+		${this.additionalEditRenderer ? this.additionalEditRenderer(this.view) : undefined}
+
+		`;
+
 		return html`
 				${this.headerTemplate}
-
-				<table class="wdc-table">
-					<thead>
-						<tr>
-							<th scope="col" style="width: 100px">
-								<span @click="${(m: MouseEvent) => this.addEntry()}">
-									<lwdc-icon .icon=${plusIcon}></lwdc-icon>
-								</span>
-							</th>
-							${this.editMoveMode? html `
-								<th scope="col" style="width: 100px">Order</th>
-								`: undefined}
-							${this.cols.map((r: TableColumnElement) => this.renderHeader(r))}
-						</tr>
-					</thead>
-					<tbody>
-						${this.view.map((e: E, i: number, a: Array<E>) => this.entryEditRow(e, i, a))}
-					</tbody>
-				</table>
-
-				${this.additionalEditRenderer ? this.additionalEditRenderer(this.view) : undefined}
-
+				${this.inlineEditMode? html `<lwdc-form id="edit-form">${tableTemplate}</lwdc-form>`: tableTemplate}
 			`
 
 

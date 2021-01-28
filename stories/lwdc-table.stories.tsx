@@ -8,6 +8,8 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import { closestElement } from '../lib/util';
 import '../lib/lwdc-table';
 import '../lib/lwdc-text';
+import '../lib/lwdc-action-bar';
+import '../lib/lwdc-button';
 import { TableElement } from '../lib/lwdc-table';
 
 loadWDCFonts();
@@ -24,7 +26,7 @@ export const tableStory = () => {
 
 	return html`	<div>
 						<h3>View</h3>
-						<lwdc-table select .entries=${entries}>
+						<lwdc-table select name="View" .entries=${entries}>
 							${true? html `<lwdc-table-col key="id" header="ID"></lwdc-table-col>` : undefined }
 							<lwdc-table-col key="name" header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
@@ -40,12 +42,15 @@ export const tableStory = () => {
 					</div>
 					<div>
 						<h3>Inline Edit</h3>
-						<lwdc-table edit inline move .entries=${entries} @lwdc-table-add=${add} @lwdc-table-edit=${edit} @lwdc-table-remove=${remove}} .additionalEditRenderer=${dataList.bind(this)}>
+						<lwdc-table edit inline move .entries=${entries} @lwdc-table-add=${add} @lwdc-table-edit=${edit} @lwdc-table-remove=${remove}} .additionalEditRenderer=${dataList.bind(this)} id="inline-edit">
 							<lwdc-table-col key="id" header="ID" ?required=${true}></lwdc-table-col>
 							<lwdc-table-col key="name" .renderer=${nameRenderer} header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
 						</lwdc-table>
 					</div>
+					<lwdc-action-bar>
+						<lwdc-button @click="${handleValidate}">Validate</lwdc-button>
+					</lwdc-action-bar>
 				`;
 }
 
@@ -70,6 +75,12 @@ const nameRenderer = (e: any) => {
 			<lwdc-text required .value="${e.name}" @change=${(c: Event) => { let t = (c.target as any); let table = closestElement('lwdc-table', t) as TableElement<any>; e.name = t.value; table.fireEvent('edit', e); table.requestUpdate(); }} list="names"></lwdc-text>
 		</lwdc-form-field>
 	`;
+}
+
+const handleValidate = (e: MouseEvent) => {
+  const editTable = document.querySelector("#inline-edit");
+	const validationResult = editTable.editForm.validate();
+	console.log('validate', validationResult);
 }
 
 const dataList = () => {
