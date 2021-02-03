@@ -50,7 +50,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 		return this;
 	}
 
-	connectedCallback() {	
+	connectedCallback() {
 		super.connectedCallback();
 	}
 
@@ -78,6 +78,11 @@ export class SelectElement<T> extends formElement(LitElement) {
 
 	handleChange(e: Event) {
 		this.value = (<HTMLSelectElement>e.target).value;
+		this.dispatchEvent(new CustomEvent(`lwdc-select-change`, e ? {
+			detail: {
+				entry: this.value
+			}
+		} : undefined));
 		this.checkValidity();
 	}
 

@@ -63,7 +63,6 @@ export class FileUploadElement extends formElement(LitElement) {
 	}
 
 	handleFileSelected() {
-		console.log("file selected",this.files);
 		this.dispatchEvent(new CustomEvent(`lwdc-file-upload-selected`, {
 			detail: {
 				files: this.files

@@ -21,7 +21,7 @@ export default {
 const selections = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
 export const selectStory = () => {
 	return html`<lwdc-form-field label="Selection">
-						<lwdc-select name="selection" required  .options=${selections}></lwdc-select>
+						<lwdc-select name="selection" required  .options=${selections} @lwdc-select-change=${(e)=> console.log("selection change", e.detail.entry)}></lwdc-select>
 					</lwdc-form-field>
 				`;
 }

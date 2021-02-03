@@ -34,7 +34,7 @@ const wrapBox = () => boolean("Wrap", false);
 
 export const comboboxStory = () => {
 	return html`<lwdc-form-field label="Selection">
-						<lwdc-combobox name="selection" required  .options=${options} .selected=${selected} .selectedWidth=${widthMap.get(widthsRadioKnob())} ?wrap=${wrapBox()}></lwdc-combobox>
+						<lwdc-combobox name="selection" required  .options=${options} .selected=${selected} .selectedWidth=${widthMap.get(widthsRadioKnob())} ?wrap=${wrapBox()} @lwdc-combobox-change=${(e)=> console.log("selection change", e.detail.selected)}></lwdc-combobox>
 					</lwdc-form-field>
 				`;
 }

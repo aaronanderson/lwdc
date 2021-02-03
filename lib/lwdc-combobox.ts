@@ -174,6 +174,11 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 		} else {
 			this.selected.add(o);
 		}
+		this.dispatchEvent(new CustomEvent(`lwdc-combobox-change`, {
+			detail: {
+				selected: this.selected
+			}
+		}));
 		this.requestUpdate();
 	}
 
@@ -202,6 +207,11 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 					this.selected.add(option as T);
 				}
 			}
+			this.dispatchEvent(new CustomEvent(`lwdc-combobox-change`, {
+				detail: {
+					selected: this.selected
+				}
+			}));
 			this.requestUpdate();
 
 

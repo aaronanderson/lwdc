@@ -287,10 +287,10 @@ export class TableElement<E> extends LitElement {
 	}
 
 
-	renderCell(e: E, row: TableColumnElement): TemplateResult {
+	renderCell(e: E, i: number, row: TableColumnElement): TemplateResult {
 		let contents = undefined;
 		if (row.renderer) {
-			contents = html`${row.renderer(e)}`;
+			contents = html`${row.renderer(e, i)}`;
 		} else if (row.key) {
 			let obj = e as any;
 			contents = html`${obj[row.key]}</td>`;
@@ -342,8 +342,8 @@ export class TableElement<E> extends LitElement {
 
 	entryRow(e: E) {
 		let body: TemplateResult[] = [];
-		this.cols.forEach((row: TableColumnElement) => {
-			body.push(this.renderCell(e, row));
+		this.cols.forEach((row: TableColumnElement, i: number) => {
+			body.push(this.renderCell(e, i, row));
 		});
 		if (this.selectMode) {
 			return html`<tr @click=${(m: MouseEvent) => this.entryClick(e, m.currentTarget as HTMLTableRowElement)}>${body}</tr>`;
@@ -400,7 +400,7 @@ export class TableElement<E> extends LitElement {
 		this.cols.forEach((row: TableColumnElement) => {
 			if (this.inlineEditMode) {
 				if (row.renderer) {
-					body.push(html`<td style="${this.cellWidth(row)}">${row.renderer(e)}</td>`);
+					body.push(html`<td style="${this.cellWidth(row)}">${row.renderer(e, i)}</td>`);
 				} else if (row.key) {
 					let obj = e as any;
 					let k: string = row.key;
@@ -415,7 +415,7 @@ export class TableElement<E> extends LitElement {
 					return html``;
 				}
 			} else {
-				body.push(this.renderCell(e, row));
+				body.push(this.renderCell(e, i, row));
 			}
 		});
 		return html`<tr>${body}</tr>`;
