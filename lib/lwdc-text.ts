@@ -72,8 +72,16 @@ export class TextElement extends formElement(LitElement) {
 	}
 
 	handleChange(e: any) {
+		const oldValue = this.value;
 		this.value = e.target.value;
 		this._internals.setFormValue(this.value);
+		if (oldValue != this.value){
+			this.dispatchEvent(new CustomEvent(`lwdc-text-change`, {
+				detail: {
+					value: this.value
+				}
+			}));
+		}
 		this.checkValidity();
 	}
 

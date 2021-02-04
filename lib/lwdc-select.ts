@@ -78,13 +78,14 @@ export class SelectElement<T> extends formElement(LitElement) {
 
 	handleChange(e: Event) {
 		this.value = (<HTMLSelectElement>e.target).value;
-		this.dispatchEvent(new CustomEvent(`lwdc-select-change`, e ? {
+		this._internals.setFormValue(this.value);
+		this.dispatchEvent(new CustomEvent(`lwdc-select-change`, {
 			detail: {
-				entry: this.value
+				entry: this.selected
 			}
-		} : undefined));
-		this.checkValidity();
-	}
+		}));
+    this.checkValidity();
+  }
 
 }
 

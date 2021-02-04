@@ -111,6 +111,15 @@ export class ColorInputElement extends formElement(LitElement) {
 		return this._internals.checkValidity();
 	}
 
+	formResetCallback() {
+		super.formResetCallback();
+		this.value = undefined;
+		if (this.colorInput && this.formField) {
+			this.colorInput.classList.remove('lwdc-color-input-alert', 'lwdc-color-input-error');
+		}
+		this.requestUpdate();
+	}
+
 }
 
 @customElement('lwdc-color-swatch')

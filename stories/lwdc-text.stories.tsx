@@ -20,7 +20,7 @@ export default {
 
 export const textStory = () => {
 	return html`<lwdc-form-field label="Text">
-						<lwdc-text name="text" required></lwdc-text>
+						<lwdc-text name="text" required @lwdc-text-change=${(e)=> console.log("text changed", e.detail.value)}></lwdc-text>
 					</lwdc-form-field>
 				`;
 }

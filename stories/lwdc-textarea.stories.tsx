@@ -20,7 +20,7 @@ export default {
 
 export const textareaStory = () => {
 	return html`<lwdc-form-field label="Text Area">
-						<lwdc-textarea name="textarea" required></lwdc-textarea>
+						<lwdc-textarea name="textarea" required @lwdc-textarea-change=${(e)=>console.log("textarea changed", e.detail.value)}></lwdc-textarea>
 					</lwdc-form-field>
 				`;
 }
