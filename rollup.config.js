@@ -11,6 +11,7 @@ export default {
     input: {
         'index': 'lib/index.ts',
         'lwdc-action-bar': 'lib/lwdc-action-bar.ts',
+        'lwdc-banner': 'lib/lwdc-banner.ts',
         'lwdc-button': 'lib/lwdc-button.ts',
         'lwdc-card': 'lib/lwdc-card.ts',
         'lwdc-checkbox': 'lib/lwdc-checkbox.ts',

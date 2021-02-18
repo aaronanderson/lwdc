@@ -25,7 +25,7 @@ export class CardElement extends LitElement {
 				 <h3 class="wdc-card-heading">${this.title}</h3>
           		 <div class="wdc-card-body"><slot></slot></div>
 			</div>
-		
+
 		`;
 	}
 
@@ -42,20 +42,12 @@ export class CardContainerElement extends LitElement {
 		return html`
 			<div class="wdc-card-container">
 				<slot></slot>
-			
+
 			</div>
-		
+
 		`;
 	}
 
 }
 
-export default CardContainerElement;
-
-
-
-
-
-
-
-
+export default {CardElement, CardContainerElement};

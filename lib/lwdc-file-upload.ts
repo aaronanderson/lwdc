@@ -1,4 +1,4 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import { LitElement, html, css, customElement, property, query } from 'lit-element';
 import { formElement } from './util';
 
 import './lwdc-button';
@@ -18,12 +18,11 @@ export class FileUploadElement extends formElement(LitElement) {
 	@property({ type: Boolean })
 	picker = true;
 
+	@query("input")
+	fileInput?: HTMLInputElement;
+
 	static get styles() {
 		return [style];
-	}
-
-	get fileInput() {
-		return this.shadowRoot!.querySelector("input") as HTMLInputElement;
 	}
 
 	get files() {
@@ -96,7 +95,9 @@ export class FileUploadElement extends formElement(LitElement) {
 
 
 	formResetCallback() {
-		this.fileInput.value = '';
+		if (this.fileInput){
+			this.fileInput.value = '';
+		}
 		super.formResetCallback();
 		if (this.picker && this.formField) {
 			this.filePicker.classList.remove('lwdc-file-upload-alert', 'lwdc-file-upload-error');
