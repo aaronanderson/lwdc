@@ -1,6 +1,6 @@
 {
   "name": "@aaronanderson/lwdc",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Workday Canvas Kit LitElement Web Components",
   "main": "wc/index.js",
   "module": "wc/index.js",
@@ -42,6 +42,7 @@
     "@storybook/addon-viewport": "^6.1.18",
     "@storybook/web-components": "^6.1.18",
     "@types/events": "^3.0.0",
+    "postcss": "8.2.6",
     "node-sass": "^5.0.0",
     "raw-loader": "^4.0.2",
     "rollup": "^2.39.0",
