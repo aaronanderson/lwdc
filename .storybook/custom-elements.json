@@ -32,6 +32,69 @@
       ]
     },
     {
+      "name": "lwdc-banner",
+      "path": "./../lib/lwdc-banner.ts",
+      "attributes": [
+        {
+          "name": "href",
+          "type": "string",
+          "default": "\"#\""
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "link",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "sticky",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "href",
+          "attribute": "href",
+          "type": "string",
+          "default": "\"#\""
+        },
+        {
+          "name": "text",
+          "attribute": "text",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "link",
+          "attribute": "link",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "sticky",
+          "attribute": "sticky",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "error",
+          "attribute": "error",
+          "type": "boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
       "name": "lwdc-button",
       "path": "./../lib/lwdc-button.ts",
       "attributes": [
@@ -536,6 +599,11 @@
           "name": "formField",
           "type": "FormFieldElement"
         }
+      ],
+      "events": [
+        {
+          "name": "lwdc-combobox-change"
+        }
       ]
     },
     {
@@ -616,7 +684,7 @@
         },
         {
           "name": "fileInput",
-          "type": "HTMLInputElement"
+          "type": "HTMLInputElement | undefined"
         },
         {
           "name": "files",
@@ -1961,6 +2029,11 @@
           "name": "formField",
           "type": "FormFieldElement"
         }
+      ],
+      "events": [
+        {
+          "name": "lwdc-select-change"
+        }
       ]
     },
     {
@@ -2067,6 +2140,11 @@
           "default": "false"
         },
         {
+          "name": "move",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
           "name": "select",
           "type": "boolean",
           "default": "false"
@@ -2103,6 +2181,12 @@
           "default": "false"
         },
         {
+          "name": "editMoveMode",
+          "attribute": "move",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
           "name": "selectMode",
           "attribute": "select",
           "type": "boolean",
@@ -2114,9 +2198,18 @@
           "type": "Function | undefined"
         },
         {
+          "name": "editForm",
+          "type": "FormElement | undefined"
+        },
+        {
           "name": "selections",
           "type": "Set<E>",
           "default": "\"new Set()\""
+        },
+        {
+          "name": "cols",
+          "type": "TableColumnElement[]",
+          "default": "[]"
         },
         {
           "name": "sort",
@@ -2161,11 +2254,6 @@
         {
           "name": "filterDialog",
           "type": "ModalElement"
-        },
-        {
-          "name": "cols",
-          "type": "TableColumnElement[]",
-          "default": "[]"
         }
       ]
     },
@@ -2405,6 +2493,11 @@
           "name": "formField",
           "type": "FormFieldElement"
         }
+      ],
+      "events": [
+        {
+          "name": "lwdc-text-change"
+        }
       ]
     },
     {
@@ -2481,6 +2574,11 @@
         {
           "name": "formField",
           "type": "FormFieldElement"
+        }
+      ],
+      "events": [
+        {
+          "name": "lwdc-textarea-change"
         }
       ]
     },
