@@ -44,7 +44,7 @@ const textOptions: Record<string, string> = text.reduce((r: Record<string, strin
 const textsRadioKnob = () => radios("Text", textOptions, 'large') as any;
 const textMap = new Map([['large', ButtonText.large], ['small', ButtonText.small], ['allCaps', ButtonText.allCaps]]);
 
-const drobdownBox = () => boolean("Dropdown", false);
+const dropdownBox = () => boolean("Dropdown", false);
 const disabledBox = () => boolean("Disabled", false);
 const inverseBox = () => boolean("Inverse", false);
 
@@ -56,7 +56,7 @@ export const buttonStory = () => {
 	return html`
 				<lwdc-action-bar>
 					<div style="${styleMap(backgroundStyle())}">
-						<lwdc-button .type=${typeMap.get(typesRadioKnob())} .size=${sizeMap.get(sizesRadioKnob())} .text=${textMap.get(textsRadioKnob())} @click=${() => { console.log("clicked"); action("Element Button Clicked"); }} ?disabled=${disabledBox()} ?dropdown=${drobdownBox()} ?inverse=${inverseBox()}>${(typesRadioKnob().startsWith('icon') || typesRadioKnob() === "plain") ? html `<lwdc-icon .icon=${activityStreamIcon}></lwd-icon>` : html `Click Me`}</lwdc-button>
+						<lwdc-button .type=${typeMap.get(typesRadioKnob())} .size=${sizeMap.get(sizesRadioKnob())} .text=${textMap.get(textsRadioKnob())} @click=${() => { console.log("clicked"); action("Element Button Clicked"); }} ?disabled=${disabledBox()} ?dropdown=${dropdownBox()} ?inverse=${inverseBox()}>${(typesRadioKnob().startsWith('icon') || typesRadioKnob() === "plain") ? html `<lwdc-icon .icon=${activityStreamIcon}></lwd-icon>` : html `Click Me`}</lwdc-button>
 					</div>
 				</lwdc-action-bar>
 

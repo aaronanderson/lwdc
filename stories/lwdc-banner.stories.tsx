@@ -30,7 +30,7 @@ const errorBox = () => boolean("Error", false);
 
 export const bannerStory = () => {
 	return html`
-				<lwdc-banner text="3 Entries" link="View All" ?sticky=${stickyBox()} ?error=${errorBox()} ></lwdc-banner>
+				<lwdc-banner link="View All" ?sticky=${stickyBox()} ?error=${errorBox()} >3 <b>Entries</b></lwdc-banner>
 				`;
 }
 

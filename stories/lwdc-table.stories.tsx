@@ -20,6 +20,7 @@ export default {
 	decorators: [withKnobs]
 };
 
+const hideColumnBox = () => boolean("Hide Column", false);
 
 const entries = [{ 'id': '1', 'name': 'Entry 1', 'description': 'Description 1' }, { 'id': '2', 'name': 'Entry 2', 'description': 'Description 2' }, { 'id': '3', 'name': 'Entry 3', 'description': 'Description 3' }];
 export const tableStory = () => {
@@ -27,7 +28,7 @@ export const tableStory = () => {
 	return html`	<div>
 						<h3>View</h3>
 						<lwdc-table select name="View" .entries=${entries}>
-							${true? html `<lwdc-table-col key="id" header="ID"></lwdc-table-col>` : undefined }
+							<lwdc-table-col key="id" header="ID" .hidden=${hideColumnBox()}></lwdc-table-col>
 							<lwdc-table-col key="name" header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
 						</lwdc-table>

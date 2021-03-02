@@ -35,7 +35,7 @@ export class BannerElement extends LitElement {
 		};
 		return html`
 			<a class="${classMap(bannerClass)}" href="${this.href}">
-				<span class="wdc-banner-text">${this.text}</span>
+				<span class="wdc-banner-text"><slot></slot></span>
 				<span class="wdc-banner-link">${this.link}</span>
 			</a>
 

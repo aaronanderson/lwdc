@@ -77,7 +77,7 @@ export class TableElement<E> extends LitElement {
 		let viewEntries = Array.from(this._entries);
 
 		for (let filterEntry of this.filter) {
-			const col = this.cols.find((r: TableColumnElement) => r.key === filterEntry.key);
+			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === filterEntry.key);
 			if (col && col.key) {
 				let k: string = col.key;
 				let val = filterEntry.value.toLocaleLowerCase();
@@ -101,7 +101,7 @@ export class TableElement<E> extends LitElement {
 		}
 
 		for (let sortEntry of this.sort) {
-			const col = this.cols.find((r: TableColumnElement) => r.key === sortEntry.key);
+			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === sortEntry.key);
 			if (col && col.key) {
 				let k: string = col.key;
 				viewEntries.sort((a: any, b: any) => {
@@ -150,7 +150,7 @@ export class TableElement<E> extends LitElement {
 					<table class="wdc-table">
 						<thead>
 							<tr>
-								${this.cols.map((r: TableColumnElement) => this.renderHeader(r))}
+								${this.cols.filter((row: TableColumnElement)=> !row.hidden).map((r: TableColumnElement) => this.renderHeader(r))}
 							</tr>
 						</thead>
 						<tbody>
@@ -174,7 +174,7 @@ export class TableElement<E> extends LitElement {
 					${this.editMoveMode? html `
 						<th scope="col" style="width: 100px">Order</th>
 						`: undefined}
-					${this.cols.map((r: TableColumnElement) => this.renderHeader(r))}
+					${this.cols.filter((row: TableColumnElement)=> !row.hidden).map((r: TableColumnElement) => this.renderHeader(r))}
 				</tr>
 			</thead>
 			<tbody>
@@ -271,7 +271,7 @@ export class TableElement<E> extends LitElement {
 	}
 
 	renderHeader(r: TableColumnElement): TemplateResult {
-		let contents = html`${r.header}`;
+	  let contents = html`${r.header}`;
 		for (let sortEntry of this.sort) {
 			if (sortEntry.key === r.key) {
 				let icon = sortEntry.direction === 'Ascending' ? arrowDownIcon : arrowUpIcon;
@@ -300,7 +300,7 @@ export class TableElement<E> extends LitElement {
 
 
 	get rowNames() {
-		return this.cols.filter((r: TableColumnElement) => r.key).map((r: TableColumnElement) => <any>{ 'key': r.key, 'name': r.header });
+		return this.cols.filter((r: TableColumnElement) => !r.hidden && r.key).map((r: TableColumnElement) => <any>{ 'key': r.key, 'name': r.header });
 	}
 
 
@@ -309,7 +309,7 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("sortColumn").value);
+			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === form.item("sortColumn").value);
 			if (col && ![...this.sort].find((e: SortEntry) => e.key === col.key)) {
 				this.sort.add(<SortEntry>{
 					key: col.key,
@@ -326,7 +326,7 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			const col = this.cols.find((r: TableColumnElement) => r.key === form.item("filterColumn").value);
+			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === form.item("filterColumn").value);
 			if (col && ![...this.filter].find((e: FilterEntry) => e.key === col.key)) {
 				this.filter.add(<FilterEntry>{
 					key: col.key,
@@ -342,7 +342,7 @@ export class TableElement<E> extends LitElement {
 
 	entryRow(e: E) {
 		let body: TemplateResult[] = [];
-		this.cols.forEach((row: TableColumnElement, i: number) => {
+		this.cols.filter((row: TableColumnElement)=> !row.hidden).forEach((row: TableColumnElement, i: number) => {
 			body.push(this.renderCell(e, i, row));
 		});
 		if (this.selectMode) {
@@ -397,7 +397,7 @@ export class TableElement<E> extends LitElement {
 							</div class="wdc-icon-list">
 						</td>`: undefined}
 		`);
-		this.cols.forEach((row: TableColumnElement) => {
+		this.cols.filter((row: TableColumnElement)=> !row.hidden).forEach((row: TableColumnElement) => {
 			if (this.inlineEditMode) {
 				if (row.renderer) {
 					body.push(html`<td style="${this.cellWidth(row)}">${row.renderer(e, i)}</td>`);
@@ -529,6 +529,9 @@ export class TableColumnElement extends LitElement {
 
 	@property({ type: Boolean, attribute: true })
 	required: boolean = false;
+
+	@property({ type: Boolean, attribute: true })
+	hidden: boolean = false;
 
 	@property({ type: Object })
 	renderer?: Function;
