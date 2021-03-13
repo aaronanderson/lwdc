@@ -4,6 +4,7 @@ import styleCSS from './lwdc-color-input.scss';
 import { classMap } from 'lit-html/directives/class-map';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { styleLightDOM, formElement } from './util';
+import {CanvasTheme, themeElement} from './theme';
 
 import { ErrorType } from './lwdc-form-field';
 
@@ -17,7 +18,7 @@ import { colors } from '@workday/canvas-colors-web/dist/ts/canvas-colors-hex';
 //git diff HEAD 'HEAD@{2020-09-05}' -- modules/color-picker/react/lib
 
 @customElement('lwdc-color-input')
-export class ColorInputElement extends formElement(LitElement) {
+export class ColorInputElement extends themeElement(formElement(LitElement)) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	value?: string;
@@ -150,6 +151,11 @@ export class ColorSwatchElement extends LitElement {
 			${this.showCheck? html `<lwdc-icon .icon=${checkSmallIcon} .color="${this.color}" .fill="{pickForegroundColor(this.color)}" .fillHover="{pickForegroundColor(this.color)}" ></lwdc-icon>` : undefined}
 		</div>
 		`;
+	}
+
+	themeChanged(theme: CanvasTheme) {
+		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
+		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
 	}
 
 }

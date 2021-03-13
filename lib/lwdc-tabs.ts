@@ -1,12 +1,14 @@
 import { LitElement, html, css, customElement, property,queryAll } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
+import {CanvasTheme, themeElement} from './theme';
+
 import styleCSS from './lwdc-tabs.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-tabs')
-export class TabsElement<T> extends LitElement {
+export class TabsElement<T> extends themeElement(LitElement) {
 
 	@property({ type: Object })
 	theme: Theme = Theme.white;
@@ -117,6 +119,11 @@ setIntentTab(value: 'first' | 'last' | 'next' | 'previous') {
 		//let element = this.shadowRoot?.querySelector(`#tab-${this.nextIndex}`) as HTMLDivElement;
 		//element.focus();
 
+		}
+
+		themeChanged(theme: CanvasTheme) {
+			//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
+			//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
 		}
 }
 

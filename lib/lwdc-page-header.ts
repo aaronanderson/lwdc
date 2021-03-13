@@ -1,12 +1,14 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
+import {CanvasTheme, themeElement} from './theme';
+
 import styleCSS from './lwdc-page-header.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-page-header')
-export class PageHeaderElement extends LitElement {
+export class PageHeaderElement extends themeElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	title: string = '';
@@ -28,7 +30,7 @@ export class PageHeaderElement extends LitElement {
 					</div>
 				</div>
 			</header>
-		
+
 		`;
 	}
 
@@ -43,14 +45,11 @@ export class PageHeaderElement extends LitElement {
 		}
 	}
 
+	themeChanged(theme: CanvasTheme) {
+		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
+		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
+	}
+
 }
 
 export default PageHeaderElement;
-
-
-
-
-
-
-
-

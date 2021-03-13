@@ -3,13 +3,14 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleMap, StyleInfo } from 'lit-html/directives/style-map';
 import { styleLightDOM } from './util';
+import {CanvasTheme, themeElement} from './theme';
 
 import styleCSS from './lwdc-menu.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-menu')
-export class MenuElement extends LitElement {
+export class MenuElement extends themeElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	width?: string | undefined;
@@ -17,7 +18,7 @@ export class MenuElement extends LitElement {
 	@property({ type: Boolean, attribute: true, reflect: true })
 	grow = false;
 
-	//TODO investigate how Canvas Kit CSS could be modified to handle menu item slots/parts fully in the ShadowDOM 
+	//TODO investigate how Canvas Kit CSS could be modified to handle menu item slots/parts fully in the ShadowDOM
 	@property({ type: Array })
 	elementChildNodes: Array<ChildNode> = [];
 
@@ -47,7 +48,7 @@ export class MenuElement extends LitElement {
 		let classes = {
 			'lwdc-menu': !!this.width,
 			'wdc-menu': true,
-			'wdc-menu-grow': this.grow,			
+			'wdc-menu-grow': this.grow,
 		}
 
 
@@ -57,8 +58,13 @@ export class MenuElement extends LitElement {
 				 ${this.elementChildNodes}
 			</ul>
 		</div>
-		 
+
 		`;
+	}
+
+	themeChanged(theme: CanvasTheme) {
+		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
+		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
 	}
 
 
@@ -67,11 +73,3 @@ export class MenuElement extends LitElement {
 
 
 export default { MenuElement }
-
-
-
-
-
-
-
-

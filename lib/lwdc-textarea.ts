@@ -3,13 +3,14 @@ import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import FormFieldElement from './lwdc-form-field';
 import { styleLightDOM, formElement } from './util';
+import {CanvasTheme, themeElement} from './theme';
 
 import styleCSS from './lwdc-textarea.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-textarea')
-export class TextAreaElement extends formElement(LitElement) {
+export class TextAreaElement extends themeElement(formElement(LitElement)) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	value?: string;
@@ -73,6 +74,11 @@ export class TextAreaElement extends formElement(LitElement) {
 			}));
 		}
 		this.checkValidity();
+	}
+
+	themeChanged(theme: CanvasTheme) {
+		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
+		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
 	}
 
 

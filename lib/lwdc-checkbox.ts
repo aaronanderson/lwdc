@@ -2,14 +2,15 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleLightDOM, formElement } from './util';
+import {CanvasTheme, themeElement} from './theme';
 
 import styleCSS from './lwdc-checkbox.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-checkbox')
-export class CheckboxElement extends formElement(LitElement) {
-	
+export class CheckboxElement extends themeElement(formElement(LitElement)) {
+
 	@property({ type: String, attribute: true, reflect: true })
 	label?: String;
 
@@ -77,6 +78,11 @@ export class CheckboxElement extends formElement(LitElement) {
 		this.formField.hintText = undefined;
 		this.checked = false;
 		this._internals.setFormValue(false);
+	}
+
+	themeChanged(theme: CanvasTheme) {
+		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
+		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
 	}
 
 }

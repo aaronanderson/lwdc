@@ -20,11 +20,27 @@ export default {
 	decorators: [withKnobs]
 };
 
-
-
 export const headerStory = () => {
-	return html`<lwdc-header title="Sample Header" style="width: 100%">
+
+	return html` <lwdc-header title="Sample Header" style="width: 100%">
+		<nav>
+			<ul>
+				<li class="current">
+					<a href="#" >Discover</a>
+				</li>
+				<li>
+					<a href="#">Library</a>
+				</li>
+				<li>
+					<a href="#">Create</a>
+				</li>
+				<li>
+					<a href="#">Manage</a>
+				</li>
+			</ul>
+		</nav>
 		<lwdc-button .type=${ButtonType.iconCircleFilled}><lwdc-icon .icon=${userIcon}></lwdc-icon> </lwdc-button>
+
 	</lwdc-header>
 				`;
 }
