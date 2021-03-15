@@ -1,5 +1,7 @@
+@import 'theme.scss';
 @import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
-@import "~@workday/canvas-kit-css-core/lib/type.scss";
+@import '~@workday/canvas-kit-css-core/lib/variables/colors';
+@import "~@workday/canvas-kit-css-core/lib/type";
 
 .lwdc-progress-container {
 	display: flex;
@@ -31,11 +33,11 @@ progress {
 }
 
 ::-webkit-progress-value {
-	background-color: $wdc-color-blueberry-500;
+	background-color: $wdc-color-dark;
 	border-radius: 20px;
 }
 
 ::-moz-progress-bar {
-	background-color: $wdc-color-blueberry-500;
+	background-color: $wdc-color-dark;
 	border-radius: 20px;
 }

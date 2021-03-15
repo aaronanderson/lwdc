@@ -20,7 +20,7 @@ export default {
 
 export const toastStory = () => {
 	return html`<lwdc-toast message="Message" action-text="Action Text" style="position:absolute; top: 10px;"></lwdc-toast>
-				<lwdc-button @click=${(e: Event) => { ((e.target as HTMLElement).parentElement.querySelector("lwdc-toast") as any).open(); }} style="margin-top: auto;">Open</lwdc-button>
+				<lwdc-button @click=${(e: Event) => {((e.target as HTMLElement).ownerDocument.querySelector("lwdc-toast") as any).open(); }} style="margin-top: auto;">Open</lwdc-button>
 				`;
 }
 

@@ -1,4 +1,5 @@
-@import "~@workday/canvas-kit-css-modal";
+@import 'theme.scss';
+@import "~@workday/canvas-kit-css-modal/index.scss";
 
 .wdc-modal-bg {
 	z-index: 1;

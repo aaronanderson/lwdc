@@ -1,5 +1,6 @@
-@import '~@workday/canvas-kit-css-core/lib/colors.scss';
-@import '~@workday/canvas-kit-css-core/lib/type.scss';
+@import 'theme.scss';
+@import '~@workday/canvas-kit-css-core/lib/colors';
+@import '~@workday/canvas-kit-css-core/lib/type';
 
 :host {
 	display: block;

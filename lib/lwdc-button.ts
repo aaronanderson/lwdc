@@ -1,7 +1,7 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleLightDOM } from './util';
-import {CanvasTheme, themeElement} from './theme';
+import { themeElement} from './theme';
 
 import styleCSS from './lwdc-button.scss';
 import { ifDefined } from 'lit-html/directives/if-defined';
@@ -83,11 +83,6 @@ export class ButtonElement extends themeElement(LitElement) {
 
 		return html`<button ?disabled="${this.disabled}" type=${this.action} class="${classMap(buttonClass)}">${this.elementChildNodes}</button>`;
 
-	}
-
-	themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
 	}
 
 }

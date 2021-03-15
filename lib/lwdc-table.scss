@@ -1,4 +1,5 @@
-@import "~@workday/canvas-kit-css-table";
+@import 'theme.scss';
+@import "~@workday/canvas-kit-css-table/index.scss";
 
 :host {
 	display: contents;

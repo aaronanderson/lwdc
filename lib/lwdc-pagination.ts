@@ -5,7 +5,6 @@ import './lwdc-button';
 import './lwdc-text';
 import {TextElement} from './lwdc-text';
 import { closestElement } from './util';
-import {CanvasTheme, themeElement} from './theme';
 
 import range from 'lodash/range';
 
@@ -16,7 +15,7 @@ const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-pagination')
-export class PaginationElement extends themeElement(LitElement) {
+export class PaginationElement extends LitElement {
 
   @property({ type: Number, attribute: true, reflect: true })
 	total: number = 0;
@@ -171,10 +170,6 @@ export class PaginationPagesElement extends LitElement {
 
   }
 
-  themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
-	}
 }
 
 @customElement('lwdc-pagination-goto')

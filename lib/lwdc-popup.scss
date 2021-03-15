@@ -1,4 +1,5 @@
-@import "~@workday/canvas-kit-css-popup";
+@import 'theme.scss';
+@import "~@workday/canvas-kit-css-popup/index.scss";
 
 :host {
 	display: block;

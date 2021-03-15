@@ -1,4 +1,5 @@
-@import "~@workday/canvas-kit-css-select";
+@import 'theme.scss';
+@import "~@workday/canvas-kit-css-select/index.scss";
 
 /*:host,*/ lwdc-select {
 	display: contents;

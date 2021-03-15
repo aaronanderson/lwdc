@@ -5,7 +5,6 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from '@rollup/plugin-commonjs';
 import postcss from 'rollup-plugin-postcss';
 
-
 export default {
     external: ['lit-element','lit-html/directives/class-map','lit-html/directives/if-defined', 'lit-html/directives/style-map'],
     input: {
@@ -68,6 +67,7 @@ export default {
             inject: false,
             modules: false,
             use: ['sass'],
+            plugins: [require('postcss-inline-svg')]
         }),
 
 

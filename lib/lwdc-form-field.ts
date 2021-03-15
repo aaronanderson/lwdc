@@ -2,14 +2,13 @@ import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
 import { classMap } from 'lit-html/directives/class-map';
 import { styleLightDOM } from './util';
-import {CanvasTheme, themeElement} from './theme';
 
 import styleCSS from './lwdc-form-field.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-form-field')
-export class FormFieldElement extends themeElement(LitElement) {
+export class FormFieldElement extends LitElement {
 
 	@property({ type: String, attribute: true, reflect: true })
 	group = undefined;
@@ -126,13 +125,6 @@ export class FormFieldElement extends themeElement(LitElement) {
 			return html`<abbr class="lwdc-required-astrisk">*</abbr>`;
 		}
 	}
-
-	themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
-	}
-
-
 
 }
 

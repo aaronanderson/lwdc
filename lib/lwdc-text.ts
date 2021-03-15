@@ -10,7 +10,7 @@ const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-text')
-export class TextElement extends themeElement(formElement(LitElement)) {
+export class TextElement extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	list?: string;
@@ -85,12 +85,6 @@ export class TextElement extends themeElement(formElement(LitElement)) {
 		}
 		this.checkValidity();
 	}
-
-	themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
-	}
-
 
 }
 

@@ -1,13 +1,12 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { styleLightDOM, formElement } from './util';
-import {CanvasTheme, themeElement} from './theme';
 
 import styleCSS from './lwdc-select.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-select')
-export class SelectElement<T> extends themeElement(formElement(LitElement)) {
+export class SelectElement<T> extends formElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	value?: string;
@@ -88,10 +87,6 @@ export class SelectElement<T> extends themeElement(formElement(LitElement)) {
     this.checkValidity();
   }
 
-	themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
-	}
 
 }
 

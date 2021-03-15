@@ -15,14 +15,13 @@ import ModalElement from './lwdc-modal';
 import { FormElement } from './lwdc-form';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement, pathValue } from './util';
-import {CanvasTheme, themeElement} from './theme';
 
 import styleCSS from './lwdc-table.scss';
 const style = css([`${styleCSS}`] as any)
 
 
 @customElement('lwdc-table')
-export class TableElement<E> extends themeElement(LitElement) {
+export class TableElement<E> extends LitElement {
 
 	@property({ type: String, attribute: true })
 	name?: string;
@@ -497,10 +496,6 @@ export class TableElement<E> extends themeElement(LitElement) {
 		return this.shadowRoot!.getElementById("filter") as ModalElement;
 	}
 
-	themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
-	}
 
 }
 

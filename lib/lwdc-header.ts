@@ -1,22 +1,22 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 
-import {CanvasTheme, themeElement} from './theme';
+import {colors, iconColors, gradients} from '@workday/canvas-colors-web';
 
 import depth from '@workday/canvas-depth-web/dist/ts/canvas-depth';
 
 import styleCSS from './lwdc-header.scss';
 const style = css([`${styleCSS}`] as any)
 
-const themeDepth = depth[3] as any;
-const depthStyle = css([`.lwdc-depth {
-	${themeDepth.boxShadow? `box-shadow: ${themeDepth.boxShadow};`: ''}
-	${themeDepth.border? `border: ${themeDepth.border};`: ''}
-}`] as any);
+// const themeDepth = depth[3] as any;
+// const depthStyle = css([`.lwdc-depth {
+// 	${themeDepth.boxShadow? `box-shadow: ${themeDepth.boxShadow};`: ''}
+// 	${themeDepth.border? `border: ${themeDepth.border};`: ''}
+// }`] as any);
 
 
 @customElement('lwdc-header')
-export class HeaderElement extends themeElement(LitElement) {
+export class HeaderElement extends LitElement {
 
 	@property({ type: String, attribute: true, reflect: true })
 	title: string = '';
@@ -26,10 +26,10 @@ export class HeaderElement extends themeElement(LitElement) {
 	imgURL: string = '//design.workday.com/images/ck-wday-logo-white.svg';
 
 	@property({ type: Object })
-	variant: HeaderVariant = HeaderVariant.full;
+	variant: HeaderVariant = HeaderVariant.Full;
 
 	@property({ type: Object })
-	theme: HeaderTheme = HeaderTheme.blue;
+	theme: HeaderTheme = HeaderTheme.Dark;
 
 	@property({ type: Array })
 	elementChildNodes: Array<ChildNode> = [];
@@ -53,21 +53,21 @@ export class HeaderElement extends themeElement(LitElement) {
 	}
 
 	static get styles() {
-		return [style, depthStyle];
+		return [style];
 	}
 
 	render() {
 		let headerClass = {
-			'lwdc-large': this.variant == HeaderVariant.full,
-			'lwdc-small': this.variant != HeaderVariant.full,
-			'lwdc-blue': this.theme == HeaderTheme.blue,
-			'lwdc-depth': true,
+			'lwdc-large': this.variant == HeaderVariant.Full,
+			'lwdc-small': this.variant != HeaderVariant.Full,
+			'lwdc-dark': this.theme == HeaderTheme.Dark,
+			'lwdc-white': this.theme == HeaderTheme.White,
 
 		};
 		return html`<header class="${classMap(headerClass)}">
 			<slot name="brand">
 				<a href="#" class="brandLink">
-					${this.variant == HeaderVariant.full ? this.fullLogoTitle : this.dubLogoTitle}
+					${this.variant == HeaderVariant.Full ? this.fullLogoTitle : this.dubLogoTitle}
 				</a>
 			</slot>
 
@@ -84,13 +84,13 @@ export class HeaderElement extends themeElement(LitElement) {
 	get fullLogoTitle() {
 		let lockupClass = {
 			'lockup': true,
-			'lwdc-large': this.variant == HeaderVariant.full,
-			'lwdc-small': this.variant != HeaderVariant.full,
+			'lwdc-large': this.variant == HeaderVariant.Full,
+			'lwdc-small': this.variant != HeaderVariant.Full,
 
 		};
 		let titleClass = {
 			'logoTitle': true,
-			'lwdc-blue': this.theme == HeaderTheme.blue
+			'lwdc-blue': this.theme == HeaderTheme.Dark
 
 		};
 
@@ -116,24 +116,139 @@ export class HeaderElement extends themeElement(LitElement) {
 		this.navItems.forEach((n)=> n == e.currentTarget? n.classList.add("current") : n.classList.remove("current"));
 	}
 
-	themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
-	}
-
 }
 
+
+//types.tsx
+export enum HeaderTheme {
+  White,
+  Dark,
+  Transparent,
+}
 
 export enum HeaderVariant {
-	full,
-	dub,
-	global
+  Dub,
+  Full,
+  Global,
 }
 
-export enum HeaderTheme {
-	white,
-	blue,
-	transparent
+export enum HeaderHeight {
+  Small = '64px',
+  Large = '80px',
 }
+
+export enum SearchTheme {
+  Light,
+  Dark,
+  Transparent,
+}
+
+//themes.tsx
+export interface ThemeAttributes {
+  color: string;
+  background: string;
+  depth: any;
+  systemIcon: {
+    color: string;
+    colorHover: string;
+  };
+  linkColor: string;
+  linkFadeOutColor: string;
+  currentLinkColor: string;
+  chipColor: string;
+}
+
+export interface Themes {
+  [key: string]: ThemeAttributes;
+}
+
+export const themes: Themes = {
+  [HeaderTheme.White]: {
+    color: colors.blackPepper400,
+    background: colors.frenchVanilla100,
+    depth: depth['1'],
+    systemIcon: {
+      color: iconColors.standard,
+      colorHover: iconColors.hover,
+    },
+    linkColor: colors.blackPepper400,
+    linkFadeOutColor: colors.licorice200,
+    currentLinkColor: colors.blueberry500,
+    chipColor: colors.blueberry400,
+  },
+  [HeaderTheme.Dark]: {
+    color: colors.frenchVanilla100,
+    background: gradients.blueberry,
+    depth: depth['3'],
+    systemIcon: {
+      color: colors.frenchVanilla100,
+      colorHover: colors.blueberry200,
+    },
+    linkColor: colors.frenchVanilla100,
+    linkFadeOutColor: colors.frenchVanilla100, //alpha in the SCSS - chroma(colors.frenchVanilla100).alpha(0.5).css(),
+    currentLinkColor: colors.frenchVanilla100,
+    chipColor: colors.frenchVanilla100,
+  },
+  [HeaderTheme.Transparent]: {
+    color: colors.frenchVanilla100,
+    background: 'transparent',
+    depth: {boxShadow: 'none'},
+    systemIcon: {
+      color: colors.frenchVanilla100,
+      colorHover: colors.blueberry200,
+    },
+    linkColor: colors.frenchVanilla100,
+    linkFadeOutColor: colors.frenchVanilla100, //alpha in the SCSS - chroma(colors.frenchVanilla100).alpha(0.5).css(),
+    currentLinkColor: colors.frenchVanilla100,
+    chipColor: colors.frenchVanilla100,
+  },
+};
+
+export interface SearchThemeAttributes {
+  background?: string;
+  backgroundFocus?: string;
+  backgroundHover?: string;
+  color?: string;
+  colorFocus?: string;
+  placeholderColor?: string;
+  placeholderColorFocus?: string;
+  boxShadow?: string | string[];
+  boxShadowFocus?: string | string[];
+}
+
+export interface SearchThemes {
+  [key: string]: SearchThemeAttributes;
+}
+
+export const searchThemes: SearchThemes = {
+  [SearchTheme.Transparent]: {
+    background: 'rgba(0, 0, 0, 0)',
+    backgroundFocus: 'rgba(0, 0, 0, 0)',
+    color: colors.blackPepper300,
+    colorFocus: colors.blackPepper300,
+    placeholderColor: colors.licorice300,
+    placeholderColorFocus: colors.licorice300,
+    boxShadow: 'none',
+    boxShadowFocus: 'none',
+  },
+  [SearchTheme.Light]: {
+    background: colors.soap200,
+    backgroundFocus: colors.soap200,
+    backgroundHover: colors.soap300,
+    color: colors.blackPepper300,
+    placeholderColor: colors.licorice300,
+    boxShadow: 'none',
+    boxShadowFocus: `0 0 0 ${/*innerWidth=seperation*/0}px ${/*innerColor*/ colors.frenchVanilla100}, 0 0 0 ${/*outerWidth = width + seleration*/ 2}px ${/*outerColor*/'var(--lwdc-theme-primary-main)'}`//focusRing().boxShadow,
+  },
+  [SearchTheme.Dark]: {
+    background: 'rgba(0, 0, 0, 0.2)',
+    backgroundFocus: colors.frenchVanilla100,
+    color: colors.frenchVanilla100,
+    colorFocus: colors.blackPepper300,
+    placeholderColor: colors.frenchVanilla100,
+    placeholderColorFocus: colors.licorice300,
+    boxShadow: 'none',
+  },
+};
 
 export default HeaderElement;

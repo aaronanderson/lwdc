@@ -1,5 +1,7 @@
+@import 'theme.scss';
 @import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
-@import "~@workday/canvas-kit-css-core/lib/mixins/type.scss";
+@import '~@workday/canvas-kit-css-core/lib/variables/colors';
+@import "~@workday/canvas-kit-css-core/lib/mixins/type";
 
 :host {
 	display: contents;
@@ -41,11 +43,11 @@ ul.lwdc-white:hover {
 	color: $wdc-color-licorice-200;
 }
 
-ul.lwdc-blue {
+ul.lwdc-dark {
 	color: $wdc-color-french-vanilla-100;
 }
 
-ul.lwdc-blue:hover {
+ul.lwdc-dark:hover {
 	color: rgba(255, 255, 255, 0.5);
 }
 
@@ -114,12 +116,12 @@ ul.lwdc-white>li:active {
 
 ul.lwdc-white>li.next {
 	//animation: focus-ring 100ms;
-	box-shadow: inset 0 0 0 2px $wdc-color-blueberry-400, inset 0 0 0 2px $wdc-color-french-vanilla-100;
+	box-shadow: inset 0 0 0 2px $wdc-color-main, inset 0 0 0 2px $wdc-color-french-vanilla-100;
 	background-color: $wdc-color-soap-200;
 }
 
 ul.lwdc-white>li.current {
-	color: $wdc-color-blueberry-400;
+	color: $wdc-color-main;
 	background-color: $wdc-color-french-vanilla-100;
 }
 
@@ -129,7 +131,7 @@ ul.lwdc-white>li.current a {
 
 ul.lwdc-white>li.current:hover,
 ul.lwdc-white>li.current:active {
-	color: $wdc-color-blueberry-400;
+	color: $wdc-color-main;
 }
 
 ul.lwdc-white>li.current:after {
@@ -140,6 +142,6 @@ ul.lwdc-white>li.current:after {
 	height: 4px;
 	width: 100%;
 	margin-top: -2px;
-	background-color: $wdc-color-blueberry-400;
+	background-color: $wdc-color-main;
 	border-radius: 4px 4px 0 0;
 }

@@ -1,4 +1,5 @@
-@import '~@workday/canvas-kit-css-checkbox';
+@import 'theme.scss';
+@import '~@workday/canvas-kit-css-checkbox/index.scss';
 
 /*:host,*/
 lwdc-checkbox {
@@ -10,7 +11,7 @@ input[type="checkbox"] {
 }
 
 .wdc-form-checkbox {
-	position: relative;	
+	position: relative;
 }
 
 

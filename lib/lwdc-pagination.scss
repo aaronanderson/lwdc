@@ -1,5 +1,6 @@
-@import '~@workday/canvas-kit-css-core/lib/colors.scss';
-@import "~@workday/canvas-kit-css-core/lib/type.scss";
+@import 'theme.scss';
+@import '~@workday/canvas-kit-css-core/lib/colors';
+@import "~@workday/canvas-kit-css-core/lib/type";
 
  .wdc-pagination-container {
    @include wdc-type();
@@ -13,7 +14,7 @@
 }
 
 lwdc-button[page-selected] button{
-    background-color: $wdc-color-blueberry-400 !important;
+    background-color: $wdc-color-main !important;
     color: #ffffff !important;
     transition: none !important;
     pointer-events: none;

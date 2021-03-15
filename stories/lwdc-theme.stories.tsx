@@ -22,6 +22,14 @@ const customTheme = {
 		primary: {
 			main: colors.greenApple400,
 			contrast: colors.blackPepper600,
+
+			lightest: colors.greenApple100,
+			light: colors.greenApple200,
+			//main: colors.greenApple400,
+			dark: colors.greenApple500,
+			darkest: colors.greenApple600,
+			contrast: colors.blackPepper600,
+
 		},
 	},
 };
@@ -75,9 +83,5 @@ class ThemeSampleElement extends themeElement(LitElement) {
 		return html`<h3><slot></slot></h3>`;
    }
 
-	 themeChanged(theme: CanvasTheme) {
-		 this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		 this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
-	 }
 
 }

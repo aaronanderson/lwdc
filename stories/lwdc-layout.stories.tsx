@@ -26,7 +26,7 @@ export const boxLayoutStory = () => {
 			box-sizing: border-box;
 			min-height: 16px;
 			margin-bottom: 16px;
-			background: #005cb9;
+			background: var(--lwdc-theme-primary-main, #005cb9);
 			border: 1px solid #fff;
 			border-radius: 2px;
 			overflow: hidden;

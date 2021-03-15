@@ -5,7 +5,6 @@ import './lwdc-menu-item';
 import styleCSS from './lwdc-combobox.scss';
 import { classMap } from 'lit-html/directives/class-map';
 import { formElement } from './util';
-import {CanvasTheme, themeElement} from './theme';
 import { MenuElement } from './lwdc-menu';
 import { ErrorType } from './lwdc-form-field';
 const style = css([`${styleCSS}`] as any)
@@ -13,7 +12,7 @@ const style = css([`${styleCSS}`] as any)
 //git diff HEAD 'HEAD@{2020-03-01}' -- modules/_labs/combobox/react/lib
 
 @customElement('lwdc-combobox')
-export class ComboboxElement<T> extends themeElement(formElement(LitElement)) {
+export class ComboboxElement<T> extends formElement(LitElement) {
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
@@ -274,11 +273,6 @@ export class ComboboxElement<T> extends themeElement(formElement(LitElement)) {
 			this.searchInput.parentElement!.classList.remove('lwdc-combobox-error', 'lwdc-combobox-alert');
 		}
 		this.requestUpdate();
-	}
-
-	themeChanged(theme: CanvasTheme) {
-		//this.style.setProperty('--lwdc-theme-primary-main', theme.palette.primary.main);
-		//this.style.setProperty('--lwdc-theme-primary-contrast', theme.palette.primary.contrast);
 	}
 
 

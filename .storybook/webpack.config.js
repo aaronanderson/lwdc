@@ -17,8 +17,20 @@ module.exports = ({ config }) => {
 				loader: 'raw-loader',
 			},
 			{
+				loader: 'postcss-loader',
+				options: {
+          postcssOptions: {
+            plugins: [
+              [
+                "postcss-inline-svg",                
+              ],
+            ],
+          },
+				},
+			},
+			{
 				loader: 'sass-loader',
-			}, 
+			},
 
 		],
 

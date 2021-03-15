@@ -126,6 +126,14 @@ export const defaultCanvasTheme: CanvasTheme = {
       dark: colors.blueberry500,
       darkest: colors.blueberry600,
       contrast: colors.frenchVanilla100,
+
+      //Testing
+      // lightest: colors.greenApple100,
+      // light: colors.greenApple200,
+      // main: colors.greenApple400,
+      // dark: colors.greenApple500,
+      // darkest: colors.greenApple600,
+      // contrast: colors.blackPepper600,
     },
     alert: {
       lightest: colors.cantaloupe100,
@@ -177,21 +185,36 @@ export const defaultCanvasTheme: CanvasTheme = {
 
 
 const themeObservers = new Set();
-var lwdcTheme = defaultCanvasTheme;
+var lwdcTheme!: CanvasTheme;
 
 type themeChanged = (theme: CanvasTheme) => void;
 
+//useTheme.js
 export function useTheme(theme?: PartialCanvasTheme): CanvasTheme {
-	console.log(theme, lwdcTheme);
+	//console.log(theme, lwdcTheme);
 	lwdcTheme = merge({}, defaultCanvasTheme, theme) as CanvasTheme;
  themeObservers.forEach((l : any)=>{
 	  new Promise(() => {
 	   l(lwdcTheme);
 	  });
-
  });
+  let root = document.querySelector('body'); //document.documentElement
+  if (root){
+    root.style.setProperty('--lwdc-theme-primary-lightest', lwdcTheme.palette.primary.lightest);
+    root.style.setProperty('--lwdc-theme-primary-light', lwdcTheme.palette.primary.light);
+    root.style.setProperty('--lwdc-theme-primary-main', lwdcTheme.palette.primary.main);
+    root.style.setProperty('--lwdc-theme-primary-dark', lwdcTheme.palette.primary.dark);
+    root.style.setProperty('--lwdc-theme-primary-darkest', lwdcTheme.palette.primary.darkest);
+    root.style.setProperty('--lwdc-theme-primary-contrast', lwdcTheme.palette.primary.contrast);
+    root.style.setProperty('--lwdc-theme-common-focus-outline', lwdcTheme.palette.common.focusOutline);
+  } else {
+    throw Error("HTML body not found");
+  }
+
 	return lwdcTheme;
 }
+
+useTheme(defaultCanvasTheme);
 
 
 
@@ -199,7 +222,6 @@ export function useTheme(theme?: PartialCanvasTheme): CanvasTheme {
 interface ThemeLitElement extends HTMLElement {
 	connectedCallback?(): void;
 	disconnectedCallback?(): void;
-
 }
 
 export const themeElement =

@@ -1,5 +1,6 @@
-@import "~@workday/canvas-kit-css-form-field";
-@import '~@workday/canvas-kit-css-core/lib/colors.scss';
+@import 'theme.scss';
+@import "~@workday/canvas-kit-css-form-field/index.scss";
+@import '~@workday/canvas-kit-css-core/lib/colors';
 
 /*:host,*/ lwdc-form-field {
 	display: contents;
