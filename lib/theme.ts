@@ -185,7 +185,7 @@ export const defaultCanvasTheme: CanvasTheme = {
 
 
 const themeObservers = new Set();
-var lwdcTheme!: CanvasTheme;
+export var lwdcTheme!: CanvasTheme;
 
 type themeChanged = (theme: CanvasTheme) => void;
 
