@@ -41,6 +41,7 @@ export default {
         'lwdc-select': 'lib/lwdc-select.ts',
         'lwdc-side-panel': 'lib/lwdc-side-panel.ts',
         'lwdc-status-indicator': 'lib/lwdc-status-indicator.ts',
+        'lwdc-switch': 'lib/lwdc-switch.ts',
         'lwdc-table': 'lib/lwdc-table.ts',
         'lwdc-tabs': 'lib/lwdc-tabs.ts',
         'lwdc-text': 'lib/lwdc-text.ts',

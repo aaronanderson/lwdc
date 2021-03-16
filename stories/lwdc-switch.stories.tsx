@@ -9,7 +9,8 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import { coreStyle } from '../lib/lwdc-core';
 import { styleLightDOM } from '../lib/util';
 
-//import '../lib/lwdc-switch';
+import '../lib/lwdc-form-field';
+import '../lib/lwdc-switch';
 
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
@@ -20,8 +21,14 @@ export default {
 	decorators: [withKnobs]
 };
 
+const disabledBox = () => boolean("Disabled", false);
+
 export const switchStory = () => {
-	return html`<h3>TODO</h3>`;
+	return html`<div class="wdc-form wdc-form-label-position-left">
+								<lwdc-form-field label="Label">
+										<lwdc-switch ?disabled=${disabledBox()}></lwdc-switch>
+								</lwdc-form-field>
+							</div>`;
 }
 
 switchStory.storyName = 'Switch';

@@ -17,6 +17,7 @@ import '../lib/lwdc-text';
 import '../lib/lwdc-textarea';
 import '../lib/lwdc-radio';
 import '../lib/lwdc-checkbox';
+import '../lib/lwdc-switch';
 import '../lib/lwdc-file-upload';
 
 import { ErrorType } from '../lib/lwdc-form-field';
@@ -55,6 +56,10 @@ export const validationStory = () => {
 
 					<lwdc-form-field label="Checkbox">
 						<lwdc-checkbox name="checkbox" label="E-Mail" required></lwdc-checkbox>
+					</lwdc-form-field>
+
+					<lwdc-form-field label="Switch" .errorType=${ErrorType.alert}>
+						<lwdc-switch name="switch" required></lwdc-switch>
 					</lwdc-form-field>
 
 					<lwdc-form-field label="Color Input">

@@ -1,0 +1,92 @@
+@import 'theme.scss';
+@import "~@workday/canvas-colors-web/dist/sass/canvas-colors-hex.scss";
+@import "~@workday/canvas-depth-web/dist/sass/canvas-depth.scss";
+@import '~@workday/canvas-kit-css-core/lib/variables/spacing';
+@import '~@workday/canvas-kit-css-core/lib/variables/border-radius';
+
+$lwdc-switch-error-inner: $wdc-color-cinnamon-500;
+$lwdc-switch-error-outer: $wdc-color-cinnamon-500;
+$lwdc-switch-error-box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $lwdc-switch-error-inner, 0 0 0 5px $lwdc-switch-error-outer,;
+
+$lwdc-switch-alert-inner: $wdc-color-cantaloupe-400;
+$lwdc-switch-alert-outer: $wdc-color-cantaloupe-400;
+$lwdc-switch-alert-box-shadow: 0 0 0 2px $wdc-color-french-vanilla-100, 0 0 0 4px $lwdc-switch-alert-inner, 0 0 0 5px $lwdc-switch-alert-outer,;
+
+lwdc-switch {
+	display: contents;
+}
+
+.lwdc-switch-container {
+  position: relative;
+  height: $wdc-spacing-m;
+  width: $wdc-spacing-l;
+}
+
+.lwdc-switch-input {
+  position: absolute;
+   height: $wdc-spacing-m;
+   width: $wdc-spacing-l;
+   margin: 0;
+   margin-left: $wdc-spacing-xxxs;
+   border-radius: $wdc-border-radius-circle;
+   opacity: 0;
+   display: block;
+   cursor: #{'var(--lwdc-switch-cursor, pointer)'};
+}
+
+
+.lwdc-switch-error:focus {
+  outline: none;
+}
+
+//.lwdc-switch-error:focus ~ div:first-of-type {
+  //...focusRing({separation: 2, animate: false}, theme),
+//}
+
+.lwdc-switch-alert ~ div:first-of-type {
+  box-shadow: $lwdc-switch-alert-box-shadow;
+}
+
+.lwdc-switch-alert:focus ~ div:first-of-type, .lwdc-switch-alert:active ~ div:first-of-type {
+  box-shadow: $lwdc-switch-alert-box-shadow;
+}
+
+.lwdc-switch-error ~ div:first-of-type {
+  box-shadow: $lwdc-switch-error-box-shadow;
+}
+
+.lwdc-switch-error:focus ~ div:first-of-type, .lwdc-switch-error:active ~ div:first-of-type {
+  box-shadow: $lwdc-switch-error-box-shadow;
+}
+
+//$wdc-color-cinnamon-500 error
+
+
+.lwdc-switch-background {
+    box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    margin-top: $wdc-spacing-xxxs;
+    width: $wdc-spacing-l;
+    height: $wdc-spacing-s;
+    border-radius: $wdc-border-radius-circle;
+    padding: 0px 2px;
+    transition: background-color 200ms ease;
+    background-color: #{'var(--lwdc-switch-background-color, #0875e1)'};
+}
+
+
+
+.lwdc-switch-circle {
+  width: $wdc-spacing-xs;
+  height: $wdc-spacing-xs;
+  border-radius: $wdc-border-radius-circle;
+  @include wdc-depth-1();
+  //...depth[1],
+  transition: transform 150ms ease;
+  pointer-events: none;
+  background-color: #{'var(--lwdc-switch-circle-color, #ffffff)'};
+  transform: #{'var(--lwdc-switch-circle-translate, translateX(0))'};
+}

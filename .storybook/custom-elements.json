@@ -879,18 +879,22 @@
         },
         {
           "name": "imgURL",
-          "type": "string",
-          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
+          "type": "string | undefined"
         },
         {
           "name": "variant",
           "type": "HeaderVariant",
-          "default": "\"HeaderVariant.full\""
+          "default": "\"HeaderVariant.Full\""
         },
         {
           "name": "theme",
           "type": "HeaderTheme",
-          "default": "\"HeaderTheme.blue\""
+          "default": "\"HeaderTheme.Dark\""
+        },
+        {
+          "name": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
         }
       ],
       "properties": [
@@ -903,20 +907,30 @@
         {
           "name": "imgURL",
           "attribute": "imgURL",
-          "type": "string",
-          "default": "\"//design.workday.com/images/ck-wday-logo-white.svg\""
+          "type": "string | undefined"
         },
         {
           "name": "variant",
           "attribute": "variant",
           "type": "HeaderVariant",
-          "default": "\"HeaderVariant.full\""
+          "default": "\"HeaderVariant.Full\""
         },
         {
           "name": "theme",
           "attribute": "theme",
           "type": "HeaderTheme",
-          "default": "\"HeaderTheme.blue\""
+          "default": "\"HeaderTheme.Dark\""
+        },
+        {
+          "name": "elementChildNodes",
+          "attribute": "elementChildNodes",
+          "type": "ChildNode[]",
+          "default": "[]"
+        },
+        {
+          "name": "navItems",
+          "type": "HTMLElement[]",
+          "default": "[]"
         },
         {
           "name": "fullLogoTitle",
@@ -1480,174 +1494,84 @@
       "path": "./../lib/lwdc-pagination.ts",
       "attributes": [
         {
-          "name": "total",
+          "name": "lastPage",
           "type": "number",
-          "default": "0"
+          "default": "1"
         },
         {
-          "name": "pageSize",
+          "name": "firstPage",
           "type": "number",
-          "default": "0"
+          "default": "1"
+        },
+        {
+          "name": "rangeSize",
+          "type": "number",
+          "default": "5"
         },
         {
           "name": "currentPage",
           "type": "number",
-          "default": "0"
+          "default": "1"
         },
         {
-          "name": "showGoTo",
+          "name": "jumpControls",
           "type": "boolean",
-          "default": "false"
+          "default": "true"
         },
         {
-          "name": "showLabel",
-          "type": "boolean",
-          "default": "false"
+          "name": "gotoLabel",
+          "type": "(() => TemplateResult) | undefined"
         },
         {
-          "name": "customLabel",
-          "type": "(from: number, to: number, total: number) => string",
-          "default": "\"defaultCustomLabel\""
-        },
-        {
-          "name": "goToLabel",
-          "type": "string",
-          "default": "\"Go To\""
-        },
-        {
-          "name": "paginationContainerAriaLabel",
-          "type": "string | undefined"
-        },
-        {
-          "name": "previousPageAriaLabel",
-          "type": "string | undefined"
-        },
-        {
-          "name": "nextPageAriaLabel",
-          "type": "string | undefined"
-        },
-        {
-          "name": "pageButtonAriaLabel",
-          "type": "((page: number, selected: boolean) => string) | undefined"
-        },
-        {
-          "name": "width",
-          "type": "number | undefined"
+          "name": "additionalDetails",
+          "type": "((element: PaginationElement) => TemplateResult) | undefined"
         }
       ],
       "properties": [
         {
-          "name": "total",
-          "attribute": "total",
+          "name": "lastPage",
+          "attribute": "lastPage",
           "type": "number",
-          "default": "0"
+          "default": "1"
         },
         {
-          "name": "pageSize",
-          "attribute": "pageSize",
+          "name": "firstPage",
+          "attribute": "firstPage",
           "type": "number",
-          "default": "0"
+          "default": "1"
+        },
+        {
+          "name": "rangeSize",
+          "attribute": "rangeSize",
+          "type": "number",
+          "default": "5"
         },
         {
           "name": "currentPage",
           "attribute": "currentPage",
           "type": "number",
-          "default": "0"
+          "default": "1"
         },
         {
-          "name": "showGoTo",
-          "attribute": "showGoTo",
+          "name": "jumpControls",
+          "attribute": "jumpControls",
           "type": "boolean",
-          "default": "false"
+          "default": "true"
         },
         {
-          "name": "showLabel",
-          "attribute": "showLabel",
-          "type": "boolean",
-          "default": "false"
+          "name": "gotoLabel",
+          "attribute": "gotoLabel",
+          "type": "(() => TemplateResult) | undefined"
         },
         {
-          "name": "customLabel",
-          "attribute": "customLabel",
-          "type": "(from: number, to: number, total: number) => string",
-          "default": "\"defaultCustomLabel\""
-        },
-        {
-          "name": "goToLabel",
-          "attribute": "goToLabel",
-          "type": "string",
-          "default": "\"Go To\""
-        },
-        {
-          "name": "paginationContainerAriaLabel",
-          "attribute": "paginationContainerAriaLabel",
-          "type": "string | undefined"
-        },
-        {
-          "name": "previousPageAriaLabel",
-          "attribute": "previousPageAriaLabel",
-          "type": "string | undefined"
-        },
-        {
-          "name": "nextPageAriaLabel",
-          "attribute": "nextPageAriaLabel",
-          "type": "string | undefined"
-        },
-        {
-          "name": "pageButtonAriaLabel",
-          "attribute": "pageButtonAriaLabel",
-          "type": "((page: number, selected: boolean) => string) | undefined"
-        },
-        {
-          "name": "width",
-          "attribute": "width",
-          "type": "number | undefined"
+          "name": "additionalDetails",
+          "attribute": "additionalDetails",
+          "type": "((element: PaginationElement) => TemplateResult) | undefined"
         }
       ],
       "events": [
         {
           "name": "lwdc-pagination-page-change"
-        }
-      ]
-    },
-    {
-      "name": "lwdc-pagination-pages",
-      "path": "./../lib/lwdc-pagination.ts",
-      "attributes": [
-        {
-          "name": "isMobile",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "total",
-          "type": "number",
-          "default": "0"
-        },
-        {
-          "name": "current",
-          "type": "number",
-          "default": "0"
-        }
-      ],
-      "properties": [
-        {
-          "name": "isMobile",
-          "attribute": "isMobile",
-          "type": "boolean",
-          "default": "false"
-        },
-        {
-          "name": "total",
-          "attribute": "total",
-          "type": "number",
-          "default": "0"
-        },
-        {
-          "name": "current",
-          "attribute": "current",
-          "type": "number",
-          "default": "0"
         }
       ]
     },
@@ -1661,9 +1585,9 @@
           "default": "0"
         },
         {
-          "name": "label",
-          "type": "string",
-          "default": "\"Go To\""
+          "name": "gotoLabel",
+          "type": "() => TemplateResult",
+          "default": "\"() => html ``\""
         }
       ],
       "properties": [
@@ -1674,10 +1598,10 @@
           "default": "0"
         },
         {
-          "name": "label",
-          "attribute": "label",
-          "type": "string",
-          "default": "\"Go To\""
+          "name": "gotoLabel",
+          "attribute": "gotoLabel",
+          "type": "() => TemplateResult",
+          "default": "\"() => html ``\""
         },
         {
           "name": "textInput",
@@ -2122,6 +2046,73 @@
       ]
     },
     {
+      "name": "lwdc-switch",
+      "path": "./../lib/lwdc-switch.ts",
+      "attributes": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "properties": [
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "switchInput",
+          "type": "HTMLInputElement"
+        },
+        {
+          "name": "formAssociated",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "value",
+          "type": "string | File | FormData | undefined"
+        },
+        {
+          "name": "form"
+        },
+        {
+          "name": "name",
+          "type": "string | null"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "validity"
+        },
+        {
+          "name": "validationMessage"
+        },
+        {
+          "name": "willValidate"
+        },
+        {
+          "name": "formField",
+          "type": "FormFieldElement"
+        }
+      ]
+    },
+    {
       "name": "lwdc-table",
       "path": "./../lib/lwdc-table.ts",
       "attributes": [
@@ -2279,6 +2270,11 @@
           "default": "false"
         },
         {
+          "name": "hidden",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
           "name": "renderer",
           "type": "Function | undefined"
         }
@@ -2302,6 +2298,12 @@
         {
           "name": "required",
           "attribute": "required",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "hidden",
+          "attribute": "hidden",
           "type": "boolean",
           "default": "false"
         },
@@ -2703,38 +2705,57 @@
       "path": "./../stories/lwdc-pagination.stories.tsx",
       "attributes": [
         {
-          "name": "width",
-          "type": "number",
-          "default": "800"
-        },
-        {
           "name": "currentPage",
           "type": "number",
           "default": "1"
         },
         {
-          "name": "total",
+          "name": "resultCount",
           "type": "number",
-          "default": "50"
+          "default": "10"
         },
         {
-          "name": "showLabel",
+          "name": "totalCount",
+          "type": "number",
+          "default": "100"
+        },
+        {
+          "name": "jumpControls",
           "type": "boolean",
           "default": "false"
         },
         {
-          "name": "showGoTo",
+          "name": "showGoToLabel",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "gotoLabel",
+          "type": "() => any",
+          "default": "\"() => html `of ${this.totalCount} results`\""
+        },
+        {
+          "name": "showAdditionalData",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "rangeSize",
+          "type": "number",
+          "default": "5"
+        },
+        {
+          "name": "lastPage",
+          "type": "number",
+          "default": "\"getLastPage(this.resultCount, this.totalCount)\""
+        },
+        {
+          "name": "additionalDetails",
+          "type": "(element: PaginationElement) => any",
+          "default": "\"(element: PaginationElement) => html  `${getVisibleResultsMin(element.currentPage, this.resultCount)}-${getVisibleResultsMax(element.currentPage, this.resultCount,  this.totalCount)} of ${this.totalCount} results`\""
         }
       ],
       "properties": [
-        {
-          "name": "width",
-          "attribute": "width",
-          "type": "number",
-          "default": "800"
-        },
         {
           "name": "currentPage",
           "attribute": "currentPage",
@@ -2742,22 +2763,58 @@
           "default": "1"
         },
         {
-          "name": "total",
-          "attribute": "total",
+          "name": "resultCount",
+          "attribute": "resultCount",
           "type": "number",
-          "default": "50"
+          "default": "10"
         },
         {
-          "name": "showLabel",
-          "attribute": "showLabel",
+          "name": "totalCount",
+          "attribute": "totalCount",
+          "type": "number",
+          "default": "100"
+        },
+        {
+          "name": "jumpControls",
+          "attribute": "jumpControls",
           "type": "boolean",
           "default": "false"
         },
         {
-          "name": "showGoTo",
-          "attribute": "showGoTo",
+          "name": "showGoToLabel",
+          "attribute": "showGoToLabel",
           "type": "boolean",
           "default": "false"
+        },
+        {
+          "name": "gotoLabel",
+          "attribute": "gotoLabel",
+          "type": "() => any",
+          "default": "\"() => html `of ${this.totalCount} results`\""
+        },
+        {
+          "name": "showAdditionalData",
+          "attribute": "showAdditionalData",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "rangeSize",
+          "attribute": "rangeSize",
+          "type": "number",
+          "default": "5"
+        },
+        {
+          "name": "lastPage",
+          "attribute": "lastPage",
+          "type": "number",
+          "default": "\"getLastPage(this.resultCount, this.totalCount)\""
+        },
+        {
+          "name": "additionalDetails",
+          "attribute": "additionalDetails",
+          "type": "(element: PaginationElement) => any",
+          "default": "\"(element: PaginationElement) => html  `${getVisibleResultsMin(element.currentPage, this.resultCount)}-${getVisibleResultsMax(element.currentPage, this.resultCount,  this.totalCount)} of ${this.totalCount} results`\""
         }
       ]
     },
@@ -2781,6 +2838,23 @@
         {
           "name": "sidePanelContent",
           "type": "TemplateResult"
+        }
+      ]
+    },
+    {
+      "name": "lwdc-theme-example",
+      "path": "./../stories/lwdc-theme.stories.tsx",
+      "attributes": [
+        {
+          "name": "theme",
+          "type": "CanvasTheme | undefined"
+        }
+      ],
+      "properties": [
+        {
+          "name": "theme",
+          "attribute": "theme",
+          "type": "CanvasTheme | undefined"
         }
       ]
     }
