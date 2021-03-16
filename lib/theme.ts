@@ -1,6 +1,8 @@
 import { Constructor, LitElement } from "lit-element";
+import chroma from 'chroma-js';
 import colors from '@workday/canvas-colors-web';
 import merge from 'lodash/merge';
+import findKey from 'lodash/findKey';
 
 //common-react/theming/breakpoints.ts
 export enum BreakpointKey {
@@ -180,8 +182,6 @@ export const defaultCanvasTheme: CanvasTheme = {
   },
   direction: ContentDirection.LTR,
 };
-
-
 
 
 const themeObservers = new Set();

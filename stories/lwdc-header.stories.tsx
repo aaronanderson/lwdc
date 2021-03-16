@@ -8,7 +8,7 @@ import { action } from '@storybook/addon-actions';
 import { userIcon } from '@workday/canvas-system-icons-web';
 import {colors} from '@workday/canvas-colors-web';
 
-import {hexToRgb} from '../lib/util';
+import chroma from 'chroma-js';
 
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 
@@ -32,8 +32,39 @@ const themeColorMap = new Map([['white', HeaderTheme.White], ['dark', HeaderThem
 
 const bgImg = 'https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/_labs/header/react/static/workday-bg.jpg';
 
+const shiftColor = (hexColor: string, darken: boolean) => {
+	try {
+		const newColor = darken ? chroma(hexColor).darken() : chroma(hexColor).brighten();
+		return newColor.hex();
+	} catch (e) {
+		console.warn(`Invalid color '${hexColor}' used in theme`);
+		return hexColor;
+	}
+}
+
+
+const buildPalette = (main: string) =>{
+		const light = shiftColor(main, false);
+		const lightest = shiftColor(light, false);
+		const dark = shiftColor(main, true);
+		const darkest = shiftColor(dark, true);
+
+		return {
+			lightest: lightest,
+			light: light,
+			main: main,
+			dark: dark,
+			darkest: darkest
+		}
+
+
+}
+
+//console.log(buildPalette("#0875e1"));
+
 export const headerStory = () => {
 	let theme = themeColorMap.get(themeColorRadioKnob());
+
 
 	let containerClass = {
 		'container': true,
@@ -48,7 +79,7 @@ export const headerStory = () => {
 	}
 	.header-background {
 		padding: 0 0 64px 0;
-		background: linear-gradient( rgba(${hexToRgb(colors.blueberry500)}, 0.8), rgba(${hexToRgb(colors.blueberry400)}, 0.8)), url(${bgImg});
+		background: linear-gradient(${chroma(colors.blueberry500).alpha(0.8).css()}, ${chroma(colors.blueberry400).alpha(0.8).css()}), url(${bgImg});
 		background-position: 0 50%;
 		background-size: cover;
 	}

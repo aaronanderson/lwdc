@@ -1,4 +1,4 @@
-import { LitElement, html, css, customElement, property, query } from 'lit-element';
+import { LitElement, TemplateResult, html, css, customElement, property, query } from 'lit-element';
 
 import {  ButtonType, ButtonSize } from './lwdc-button';
 import './lwdc-button';
@@ -8,7 +8,7 @@ import { closestElement } from './util';
 
 import range from 'lodash/range';
 
-import { chevronLeftSmallIcon, chevronRightSmallIcon } from '@workday/canvas-system-icons-web';
+import { chevron2xLeftSmallIcon, chevronLeftSmallIcon, chevronRightSmallIcon, chevron2xRightSmallIcon } from '@workday/canvas-system-icons-web';
 
 import styleCSS from './lwdc-pagination.scss';
 const style = css([`${styleCSS}`] as any)
@@ -18,41 +18,25 @@ const style = css([`${styleCSS}`] as any)
 export class PaginationElement extends LitElement {
 
   @property({ type: Number, attribute: true, reflect: true })
-	total: number = 0;
+	lastPage: number = 1;
 
 	@property({ type: Number, attribute: true, reflect: true })
-  pageSize: number = 0;
-
-	@property({ type: Number, attribute: true, reflect: true })
-  currentPage: number = 0;
-
-	@property({ type: Boolean, attribute: true, reflect: true })
-  showGoTo= false;
-
-	@property({ type: Boolean, attribute: true, reflect: true })
-  showLabel= false;
-
-	@property({ type: Object })
-  customLabel: (from: number, to: number, total: number) => string =  this.defaultCustomLabel;
-
-	@property({ type: Boolean, attribute: true, reflect: true })
-  goToLabel: string = "Go To";
-
-  @property({ type: String})
-  paginationContainerAriaLabel?: string;
-
-  @property({ type: String})
-  previousPageAriaLabel?: string;
-
-  @property({ type: String})
-  nextPageAriaLabel?: string;
-
-  @property({ type: Object})
-  pageButtonAriaLabel?: (page: number, selected: boolean) => string;
+  firstPage: number = 1;
 
   @property({ type: Number, attribute: true, reflect: true })
-  width?: number;
+  rangeSize: number = 5;
 
+	@property({ type: Number, attribute: true, reflect: true })
+  currentPage: number = 1;
+
+  @property({ type: Boolean, attribute: true, reflect: true })
+  jumpControls: boolean = true;
+
+	@property({ type: Object })
+  gotoLabel?: () => TemplateResult;
+
+	@property({ type: Object })
+  additionalDetails?: (element: PaginationElement) => TemplateResult;
 
 
 	static get styles() {
@@ -60,36 +44,49 @@ export class PaginationElement extends LitElement {
 	}
 
 	render() {
-    const numPages = Math.ceil(this.total / this.pageSize);
-    const isMobile = this.width ? this.width < 500 : false;
 
-    const labelFrom = (this.currentPage - 1) * this.pageSize + 1;
-    const labelTo = this.currentPage * this.pageSize >= this.total ? this.total : this.currentPage * this.pageSize;
+    const range = buildPageRange(this.currentPage, this.lastPage, this.rangeSize);
+    const rangeMin = getRangeMin(range);
+    const rangeMax = getRangeMax(range);
 
 		return html`
-		<nav class="wdc-pagination-container">
-      		<div class="wdc-pagination-button-container">
-            	<lwdc-button .type=${ButtonType.iconSquare} .size=${ButtonSize.small} @click=${() => this.pageChange(this.currentPage - 1)} ?disabled=${this.currentPage - 1 <= 0}>
+		<nav class="lwdc-pagination-container">
+      		<div class="lwdc-pagination-content-container">
+              ${this.jumpControls? html `<lwdc-button .type=${ButtonType.iconSquare} .size=${ButtonSize.small} @click=${() => this.pageChange(this.firstPage)} ?disabled=${this.currentPage <= this.firstPage}>
+                <lwdc-icon .icon=${chevron2xLeftSmallIcon}></lwdc-icon>
+              </lwdc-button>`: undefined}
+              <lwdc-button .type=${ButtonType.iconSquare} .size=${ButtonSize.small} @click=${() => this.pageChange(this.currentPage - 1)} ?disabled=${this.currentPage <= this.firstPage}>
                 <lwdc-icon .icon=${chevronLeftSmallIcon}></lwdc-icon>
               </lwdc-button>
 
-              <lwdc-pagination-pages ?isMobile=${isMobile} total=${numPages} current=${this.currentPage}></lwdc-pagination-pages>
+              <ol role="list" class="lwdc-pagination-page-list">
+                    ${range.map(this.pageToButton.bind(this))}
+              </ol>
 
-              <lwdc-button .type=${ButtonType.iconSquare} .size=${ButtonSize.small} @click=${() => this.pageChange(this.currentPage + 1)} ?disabled=${this.currentPage + 1 > numPages}>
+
+              <lwdc-button .type=${ButtonType.iconSquare} .size=${ButtonSize.small} @click=${() => this.pageChange(this.currentPage + 1)} ?disabled=${this.currentPage >= this.lastPage}>
                 <lwdc-icon .icon=${chevronRightSmallIcon}></lwdc-icon>
               </lwdc-button>
+              ${this.jumpControls? html `<lwdc-button .type=${ButtonType.iconSquare} .size=${ButtonSize.small} @click=${() => this.pageChange(this.lastPage)} ?disabled=${this.currentPage >= this.lastPage}>
+                <lwdc-icon .icon=${chevron2xRightSmallIcon}></lwdc-icon>
+              </lwdc-button>`: undefined}
+              ${this.gotoLabel ? html `<lwdc-pagination-goto .max=${this.lastPage} .gotoLabel=${this.gotoLabel}></lwdc-pagination-goto>`: undefined}
           </div>
-          ${this.showGoTo ? html `<lwdc-pagination-goto .max=${numPages} .label=${this.goToLabel}></lwdc-pagination-goto>`: undefined}
-          ${this.showLabel ? html `<div class="wdc-pagination-label">${this.customLabel(labelFrom, labelTo, this.total)}</div>`: undefined}
+          ${this.additionalDetails ? html `<div class="lwdc-pagination-details">${this.additionalDetails(this)}</div>`: undefined}
 		</nav>
 		`;
 	}
 
-  defaultCustomLabel(from: number, to: number, total: number)  {
-    const item = `item${total > 1 ? 's' : ''}`;
-
-    return `${from.toLocaleString()}\u2013${to.toLocaleString()} of ${total.toLocaleString()} ${item}`;
-  };
+  pageToButton(page: number){
+    let pagination = closestElement('lwdc-pagination', this) as PaginationElement;
+    let buttonType = page === this.currentPage ? ButtonType.iconSquareFilled : ButtonType.iconSquare;
+    return html `
+    <li class="lwdc-pagination-page-list-item">
+      <lwdc-button ?page-selected=${page === this.currentPage} .type=${buttonType} .size=${ButtonSize.small} @click=${() => pagination.pageChange(page)}>
+      ${page}
+      </lwdc-button>
+    </li>`;
+  }
 
   pageChange(page: number){
     this.currentPage = page;
@@ -103,74 +100,6 @@ export class PaginationElement extends LitElement {
 
 }
 
-@customElement('lwdc-pagination-pages')
-export class PaginationPagesElement extends LitElement {
-
-	@property({ type: Boolean, attribute: true, reflect: true })
-  isMobile=false;
-
-  @property({ type: Number, attribute: true, reflect: true })
-  total=0;
-
-  @property({ type: Number, attribute: true, reflect: true })
-  current=0;
-
-  createRenderRoot() {
-    return this;
-  }
-
-  getPages(total: number, current: number, isMobile: boolean): [number[], number[]] {
-    const max = this.isMobile ? 3 : 7; // max pages to be shown at once
-    const maxWithSplit = this.isMobile ? 2 : 6; // max amount of pages shown if pages are split
-    const padNumber = this.isMobile ? 0 : 2; // padding pages around active page
-    const showEndThreshold = this.isMobile ? 1 : 4; // how many pages to last page where first page is show again and last pages are visible
-
-    // show all pages on left side
-    if (this.total <= max) {
-      return [range(1, this.total + 1), []];
-    }
-
-    // Mobile shows last pages without first page, unlike desktop
-    if (this.isMobile && this.current >= this.total - showEndThreshold) {
-      return [range(this.total - max + 1, this.total + 1), []];
-    }
-
-    // show padding pages around current page on left and last page on right
-    if (this.current <= this.total - showEndThreshold) {
-      const minPage = Math.max(1, this.current - padNumber);
-      const maxPage = Math.max(maxWithSplit, this.current + padNumber + 1);
-      return [range(minPage, maxPage), [this.total]];
-    }
-
-    // show first page on left and last pages on the right
-    return [[1], range(this.total - maxWithSplit + padNumber, this.total + 1)];
-  }
-
-  pageToButton(page: number){
-    let pagination = closestElement('lwdc-pagination', this) as PaginationElement;
-    let buttonType = page === this.current ? ButtonType.iconSquareFilled : ButtonType.iconSquare;
-    return html `<lwdc-button ?page-selected=${page === this.current} .type=${buttonType} .size=${ButtonSize.small} @click=${() => pagination.pageChange(page)}>
-    ${page}
-    </lwdc-button>`;
-  }
-
-  render() {
-    const [left, right] = this.getPages(this.total, this.current, this.isMobile);
-
-    const ellipsis =
-      right.length === 0
-        ? html ``
-        : html `
-            <span class="wdc-pagination-ellipsis">
-              ...
-            </span>
-          `;
-    //const buttons = [...left.map(this.pageToButton), ...ellipsis, ...right.map(this.pageToButton)];
-    return html `${left.map(this.pageToButton.bind(this))}${ellipsis}${right.map(this.pageToButton.bind(this))}`;
-
-  }
-
-}
 
 @customElement('lwdc-pagination-goto')
 export class PaginationGoToElement extends LitElement {
@@ -178,8 +107,8 @@ export class PaginationGoToElement extends LitElement {
   @property({ type: Number, attribute: true, reflect: true })
   max=0;
 
-  @property({ type: String, attribute: true, reflect: true })
-  label="Go To";
+  @property({ type: Object })
+  gotoLabel: () => TemplateResult = () => html ``;
 
   @query('lwdc-text')
   textInput?: TextElement;
@@ -209,13 +138,69 @@ export class PaginationGoToElement extends LitElement {
   };
 
   render() {
-    return html `<div class="wdc-pagination-goto-wrapper">
-                  <label class="wdc-pagination-goto-label">${this.label}</label>
-                  <form class="wdc-pagination-goto-form" @submit=${this.formSubmit}>
+    return html `  <form class="lwdc-pagination-goto" @submit=${this.formSubmit}>
                     		<lwdc-text name="goto" inputType="number" min=${1} max=${this.max}></lwdc-text>
+                        <label class="lwdc-pagination-goto-label">${this.gotoLabel()}</label>
                   </form>
-                </div>`;
+                `;
   }
 }
 
-export default {PaginationElement, PaginationPagesElement, PaginationGoToElement};
+//modules/_labs/pagination/react/lib/Pagination/common/utils/helpers.ts
+export function getLastPage(resultCount: number, totalCount: number): number {
+  return Math.ceil(totalCount / resultCount);
+}
+
+export function getRangeMin(range: number[]): number {
+  return range[0];
+}
+
+export function getRangeMax(range: number[]): number {
+  return range[range.length - 1];
+}
+
+export function getVisibleResultsMin(currentPage: number, resultCount: number): number {
+  return currentPage * resultCount - resultCount + 1;
+}
+
+export function getVisibleResultsMax(
+  currentPage: number,
+  resultCount: number,
+  totalCount: number
+): number {
+  if (totalCount < currentPage * resultCount) {
+    return totalCount;
+  }
+  return currentPage * resultCount;
+}
+
+
+//modules/_labs/pagination/react/lib/Pagination/buildPageRange.ts
+const buildRange = (max: number, min: number): number[] => {
+  // `max` determines the size of the range, and `min + index` determines its values
+  return [...Array(max)].map((_, index) => min + index);
+};
+
+
+export const buildPageRange = (currentPage: number, lastPage: number, rangeSize: number) => {
+  // prevent the range size exceeding the number of pages
+  const adjustedRangeSize = lastPage < rangeSize ? lastPage : rangeSize;
+
+  // Prevent the range from going below 1
+  if (currentPage <= Math.floor(rangeSize / 2)) {
+    const rangeMin = 1;
+    return buildRange(adjustedRangeSize, rangeMin);
+  }
+  // Prevent the range from going above the lastPage
+  if (currentPage + Math.floor(adjustedRangeSize / 2) > lastPage) {
+    const rangeMin = lastPage - adjustedRangeSize + 1;
+    return buildRange(adjustedRangeSize, rangeMin);
+  }
+
+  const rangeMin = currentPage - Math.floor(adjustedRangeSize / 2);
+  return buildRange(adjustedRangeSize, rangeMin);
+};
+
+
+
+export default {PaginationElement, PaginationGoToElement};

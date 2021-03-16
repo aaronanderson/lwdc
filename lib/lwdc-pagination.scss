@@ -2,63 +2,88 @@
 @import '~@workday/canvas-kit-css-core/lib/colors';
 @import "~@workday/canvas-kit-css-core/lib/type";
 
- .wdc-pagination-container {
-   @include wdc-type();
+ .lwdc-pagination-container {
+  @include wdc-type();
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+@mixin lwdc-flex-stack() {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  flex-flow: row wrap;
-  justify-content: center;
+  flex-direction: row;
 }
- .wdc-pagination-container button {
-  margin: 0 4px;
+
+.lwdc-pagination-content-container {
+  @include lwdc-flex-stack();
+}
+
+
+.lwdc-pagination-page-list {
+  @include lwdc-flex-stack();
+
+   margin: 0px;
+   padding: 0px;
+   list-style: none;
+}
+
+.lwdc-pagination-page-list-item {
+   box-sizing: border-box;
+   display: flex;
+}
+
+ .lwdc-pagination-page-list > * {
+  margin-left: 4px;
+}
+
+/*modules/button/react/lib/parts/ButtonLabelData*/
+button {
+  position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: $wdc-color-type-hint !important;
 }
 
 lwdc-button[page-selected] button{
     background-color: $wdc-color-main !important;
-    color: #ffffff !important;
+    color: $lwdc-color-contrast !important;
     transition: none !important;
+    font-weight: 700 !important;
     pointer-events: none;
 }
 
-.wdc-pagination-ellipsis {
-  @include wdc-type-body-2();
-
-  pointer-events: none;
-  width: 32px;
-  text-align: center;
-  display: inline-block;
-}
-
-.wdc-pagination-label {
-  @include wdc-type-body-2();
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: $wdc-color-licorice-300;
-  width: 100%;
-  padding-top: 12px;
-}
-
-.wdc-pagination-goto-wrapper {
-  display: flex;
-  padding-left: 12px;
-}
-
-.wdc-pagination-goto-wrapper input{
-  width: 53px !important;
-  min-width: 53px !important;
-}
-
-.wdc-pagination-goto-label {
+.lwdc-pagination-details {
   @include wdc-type-body();
-  @include wdc-type-variant-label();
+  @include lwdc-flex-stack();
 
-  margin: auto 0;
-  padding-right: 8px;
+  margin-top: 12px;
+  color: $wdc-color-type-hint;
+}
+
+.lwdc-pagination-goto {
+  @include lwdc-flex-stack();
+}
+
+.lwdc-pagination-goto input{
+  @include wdc-type-body();
+  width: 55px !important;
+  min-width: 55px !important;
+}
+
+.lwdc-pagination-goto-label {
+  @include wdc-type-body();
+
+  color: $wdc-color-type-hint;
+  margin-left: 8px;
 
 }
 
-.wdc-pagination-goto-form {
+.lwdc-pagination-goto-form {
     min-width: 10px;
 }

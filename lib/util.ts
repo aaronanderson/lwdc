@@ -63,11 +63,6 @@ export const closestElement = (selector: string, base: Element) => {
 	return __closestFrom(selector, base);
 }
 
-export const hexToRgb = (hex: string)=> {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : null;
-}
-
 //Ensure server sends the following HTTP headers:
 //Content-Disposition: attachment;filename="somefilename.txt"
 //Access-Control-Expose-Headers: Content-Disposition

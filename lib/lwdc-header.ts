@@ -6,7 +6,7 @@ import {colors, iconColors, gradients} from '@workday/canvas-colors-web';
 import depth from '@workday/canvas-depth-web/dist/ts/canvas-depth';
 
 import {lwdcTheme} from './theme';
-import {hexToRgb} from './util';
+import chroma from 'chroma-js';
 
 import styleCSS from './lwdc-header.scss';
 const style = css([`${styleCSS}`] as any)
@@ -212,7 +212,7 @@ export const themes: Themes = {
       colorHover: () => colors.blueberry200,
     },
     linkColor: () => lwdcTheme.palette.primary.contrast, //colors.frenchVanilla100,
-    linkFadeOutColor:  () =>`rgba(${hexToRgb(lwdcTheme.palette.primary.contrast)}, 0.5)`, //chroma(colors.frenchVanilla100).alpha(0.5)
+    linkFadeOutColor:  () =>chroma(lwdcTheme.palette.primary.contrast).alpha(0.5).css(),
     currentLinkColor: () => lwdcTheme.palette.primary.contrast, //colors.frenchVanilla100,
     chipColor: () => lwdcTheme.palette.primary.contrast, //colors.frenchVanilla100,
   },
@@ -226,7 +226,7 @@ export const themes: Themes = {
       colorHover: () => colors.blueberry200,
     },
     linkColor: () => colors.frenchVanilla100,
-    linkFadeOutColor: () => `rgba(${hexToRgb(colors.frenchVanilla100)}, 0.5)`, //chroma(colors.frenchVanilla100).alpha(0.5)
+    linkFadeOutColor: () => chroma(colors.frenchVanilla100).alpha(0.5).css(),
     currentLinkColor: () => colors.frenchVanilla100,
     chipColor: () => colors.frenchVanilla100,
   },
