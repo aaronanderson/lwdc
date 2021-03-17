@@ -9,6 +9,12 @@ import { styleLightDOM } from './util';
 import styleCSS from './lwdc-icon.scss';
 const style = css([`${styleCSS}`] as any)
 
+export const getHexColor = (color: string): string => {
+		if (color && color.startsWith("#")){
+			return color;
+		}
+		return getColor(color);
+};
 
 @customElement('lwdc-icon')
 export class IconElement extends LitElement {
@@ -68,28 +74,28 @@ export class IconElement extends LitElement {
 		svg.style.height = this.size + 'px';
 		svg.style.width = this.size + 'px';
 
-		let accentColor = this.accent ? getColor(this.accent) : '';
+		let accentColor = this.accent ? getHexColor(this.accent) : '';
 		this.style.setProperty('--lwdc-icon-accent', accentColor);
 
-		let accentHoverColor = this.accentHover ? getColor(this.accentHover) : '';
+		let accentHoverColor = this.accentHover ? getHexColor(this.accentHover) : '';
 		this.style.setProperty('--lwdc-icon-accent-hover', accentHoverColor);
 
-		let backgroundColor = getColor(this.background);
+		let backgroundColor = getHexColor(this.background);
 		this.style.setProperty('--lwdc-icon-background', backgroundColor);
 
-		let backgroundHoverColor = this.backgroundHover ? getColor(this.backgroundHover) : '';
+		let backgroundHoverColor = this.backgroundHover ? getHexColor(this.backgroundHover) : '';
 		this.style.setProperty('--lwdc-icon-background-hover', backgroundHoverColor);
 
-		let colorColor = getColor(this.color);
+		let colorColor = getHexColor(this.color);
 		this.style.setProperty('--lwdc-icon-color', colorColor);
 
-		let colorHoverColor = this.colorHover ? getColor(this.colorHover) : '';
+		let colorHoverColor = this.colorHover ? getHexColor(this.colorHover) : '';
 		this.style.setProperty('--lwdc-icon-color-hover', colorHoverColor);
 
-		let fillColor = this.fill ? getColor(this.fill) : '';
+		let fillColor = this.fill ? getHexColor(this.fill) : '';
 		this.style.setProperty('--lwdc-icon-fill', fillColor);
 
-		let fillHoverColor = this.fillHover ? getColor(this.fillHover) : '';
+		let fillHoverColor = this.fillHover ? getHexColor(this.fillHover) : '';
 		this.style.setProperty('--lwdc-icon-fill-hover', fillHoverColor);
 
 
@@ -97,6 +103,7 @@ export class IconElement extends LitElement {
 
 		return html`${base}`;
 	}
+
 
 
 }

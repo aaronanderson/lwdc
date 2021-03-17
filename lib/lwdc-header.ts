@@ -65,8 +65,7 @@ export class HeaderElement extends LitElement {
 	}
 
 
-	updated(changedProperties: Map<string, any>) {
-		console.log(themes[this.theme]);
+	updated(changedProperties: Map<string, any>) {		
 		if (changedProperties.has("variant")) {
 				this.style.setProperty('--lwdc-header-height', this.variant == HeaderVariant.Full ? HeaderHeight.Large : HeaderHeight.Small);
 				this.style.setProperty('--lwdc-header-lockup-height', this.variant == HeaderVariant.Global ? HeaderHeight.Small : HeaderHeight.Large);

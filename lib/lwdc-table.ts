@@ -17,6 +17,7 @@ import ModalElement from './lwdc-modal';
 import { FormElement } from './lwdc-form';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement, pathValue } from './util';
+import {lwdcTheme} from './theme';
 
 import styleCSS from './lwdc-table.scss';
 const style = css([`${styleCSS}`] as any)
@@ -136,19 +137,19 @@ export class TableElement<E> extends LitElement {
 		return [style];
 	}
 
-	async connectedCallback() {
-	  this.cols = Array.from(this.children) as TableColumnElement[];
+	connectedCallback() {
+		this.cols = Array.from(this.children) as TableColumnElement[];
 		super.connectedCallback();
-  	//await this.updateComplete;
   }
 
 	render() {
-		return html `${cache(this.editMode ? this.editEntriesTemplate : this.entriesTemplate)}`;
-		// if (this.editMode) {
-		// 	return this.editEntriesTemplate;
-		// } else {
-		// 	return this.entriesTemplate;
-		// }
+		//cache function returns template string in SnowPack. troubleshoot in the future.
+		//return html `${cache(this.editMode ? this.editEntriesTemplate : this.entriesTemplate)}`;
+		if (this.editMode) {
+			return this.editEntriesTemplate;
+		} else {
+			return this.entriesTemplate;
+		}
 	}
 
 	get entriesTemplate() {
@@ -283,12 +284,12 @@ export class TableElement<E> extends LitElement {
 		for (let sortEntry of this.sort) {
 			if (sortEntry.key === r.key) {
 				let icon = sortEntry.direction === 'Ascending' ? arrowDownIcon : arrowUpIcon;
-				contents = html`${contents}<lwdc-icon .icon=${icon} .color=${'blueberry500'} .size=${16} ></lwdc-icon>`;
+				contents = html`${contents}<lwdc-icon .icon=${icon} .color=${lwdcTheme.palette.primary.main} .size=${16} ></lwdc-icon>`;
 			}
 		}
 		for (let filterEntry of this.filter) {
 			if (filterEntry.key === r.key) {
-				contents = html`${contents}<lwdc-icon .icon=${filterIcon} .color=${'blueberry500'} .size=${16} ></lwdc-icon>`;
+				contents = html`${contents}<lwdc-icon .icon=${filterIcon} .color=${lwdcTheme.palette.primary.main} .size=${16} ></lwdc-icon>`;
 			}
 		}
 		return html`<th scope="col" style="${this.cellWidth(r)}">${contents}</th>`;
@@ -450,8 +451,7 @@ export class TableElement<E> extends LitElement {
 		return classMap(errorClass);
 	}
 
-	checkEditFormValidity(c: CustomEvent){ //
-
+	checkEditFormValidity(c: CustomEvent){
 		if (this.editForm && c.target){
 			let tr = (c.target as HTMLElement).closest("tr");
 			if (tr){
@@ -460,7 +460,6 @@ export class TableElement<E> extends LitElement {
 					rowErrors = new Set();
 					this.rowErrorCache.set(tr, rowErrors);
 				}
-
 				if (!c.detail.validity){
 					rowErrors.add(c.target);
 				}else {
