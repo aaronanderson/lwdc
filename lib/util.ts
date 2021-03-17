@@ -232,12 +232,12 @@ export const formElement =
 			}
 
 			//standard form associated fields
-			get form() { return this._internals.form; }
+			get form() { return this._internals.form; } //currently null.
 			get name() { return this.getAttribute('name'); }
 			get type() { return this.localName; }
-			get validity() { return this._internals.validity; }
+			get validity() { return this._internals.isValid; }
 			get validationMessage() { return this._internals.validationMessage; }
-			get willValidate() { return this._internals.willValidate; }
+			get willValidate() { return this._internals.willValidate; } //currently null
 
 			//checkValidity() { return this.internals.checkValidity(); }
 			reportValidity() { return this._internals.reportValidity(); }
@@ -292,12 +292,21 @@ export const formElement =
 					} else {
 						this._internals.setValidity({ customError: true }, `Required`);
 					}
+
 				} else {
 					this._internals.setValidity({ customError: false }, undefined);
 					if (this.formField) {
 						this.formField.hintText = undefined;
 					}
 				}
+				this.dispatchEvent(new CustomEvent(`lwdc-form-element-validity`, {
+					composed: false,
+			 		bubbles: true,
+					detail: {
+						validity: this.validity,
+						message: this.validationMessage
+					}
+				}));
 			}
 
 

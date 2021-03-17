@@ -1,4 +1,4 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import { LitElement, html, css, customElement, property, query } from 'lit-element';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { classMap } from 'lit-html/directives/class-map';
 
@@ -20,6 +20,21 @@ export class FormElement extends LitElement {
 	@property({ type: Array })
 	elementChildNodes: Array<ChildNode> = [];
 
+
+  @query("form")
+  form?: HTMLFormElement;
+
+  get elements(){
+    let elements: Array<Element> = [];
+    if (this.form){
+      if (formAssociatedCustomElementsSupported) {
+        elements = Array.from(this.form.elements);
+      } else {
+        elements = formElements(this.form);
+      }
+    }
+    return elements.filter((e)=> !e.hasAttribute('formnovalidate'));
+  }
 
 	connectedCallback() {
 		this.elementChildNodes = Array.from(this.childNodes);
@@ -48,48 +63,49 @@ export class FormElement extends LitElement {
 	}
 
 	validate() {
-		let form = this.querySelector("form") as HTMLFormElement;
-		if (form) {
+    let value = false;
+		if (this.form) {
 			//further research needed to see why custom element form validate is not triggered the same way as a native component is triggered
-			for (let element of Array.from(form.elements)) {
+			for (let element of Array.from(this.form.elements)) {
 				!element.hasAttribute('formnovalidate') && (<any>element).checkValidity && (<any>element).checkValidity();
 			}
-
-			return form.checkValidity();
+      value = this.form.checkValidity();
 		}
-		return false;
+    this.dispatchEvent(new CustomEvent(`lwdc-form-validate`, {
+      detail: {
+        valid: value
+      }
+    }));
+		return value;
 	}
 
 	reset() {
-		let form = this.querySelector("form") as HTMLFormElement;
-		if (form) {
+		if (this.form) {
 			//form.rest() works on form associated custom elements in Chrome but it is easier to
 			// for (let element of Array.from(form.elements)) {
 			// 	(<any>element).reset && (<any>element).reset();
 			// }
 
-			return form.reset();
+			return this.form.reset();
 		}
 		return false;
 	}
 
 	item(name: string) {
-		let form = this.querySelector("form") as HTMLFormElement;
-		if (form) {
+		if (this.form) {
 			if (formAssociatedCustomElementsSupported) {
-				return form.elements.namedItem(name);
+				return this.form.elements.namedItem(name);
 			} else {
-				return formElements(form).find((e: Element) => (e as any).name === name);
+				return formElements(this.form).find((e: Element) => (e as any).name === name);
 			}
 		}
 
 	}
 
   radioValue(name: string) {
-    let form = this.querySelector("form") as HTMLFormElement;
     let val;
-		if (form) {
-      let radios = form.elements[<any>name] as any;
+		if (this.form) {
+      let radios = this.form.elements[<any>name] as any;
       for (var i=0, len=radios.length; i<len; i++) {
   			 let  radio = radios[i] as HTMLInputElement;
           if ( radio.checked ) {

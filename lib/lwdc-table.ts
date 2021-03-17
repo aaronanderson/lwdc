@@ -1,5 +1,7 @@
 import { LitElement, html, css, customElement, property, query, TemplateResult } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import { classMap } from 'lit-html/directives/class-map';
+import {cache} from 'lit-html/directives/cache.js';
 
 import './lwdc-icon';
 import './lwdc-modal';
@@ -38,12 +40,16 @@ export class TableElement<E> extends LitElement {
 	@property({ type: Boolean, attribute: 'select', reflect: true })
 	selectMode: boolean = false;
 
+	@property({ type: String, attribute: true })
+	rowErrorKey: string = 'rowErrorType';
 
 	@property({ type: Object })
 	additionalEditRenderer?: Function;
 
 	@query("#edit-form")
 	editForm?: FormElement;
+
+	rowErrorCache = new WeakMap();
 
 
 	//@property({ type: Object })
@@ -77,7 +83,7 @@ export class TableElement<E> extends LitElement {
 		let viewEntries = Array.from(this._entries);
 
 		for (let filterEntry of this.filter) {
-			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === filterEntry.key);
+			const col = this.cols.filter((col: TableColumnElement)=> !col.hidden).find((r: TableColumnElement) => r.key === filterEntry.key);
 			if (col && col.key) {
 				let k: string = col.key;
 				let val = filterEntry.value.toLocaleLowerCase();
@@ -101,7 +107,7 @@ export class TableElement<E> extends LitElement {
 		}
 
 		for (let sortEntry of this.sort) {
-			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === sortEntry.key);
+			const col = this.cols.filter((col: TableColumnElement)=> !col.hidden).find((r: TableColumnElement) => r.key === sortEntry.key);
 			if (col && col.key) {
 				let k: string = col.key;
 				viewEntries.sort((a: any, b: any) => {
@@ -130,17 +136,19 @@ export class TableElement<E> extends LitElement {
 		return [style];
 	}
 
-	connectedCallback() {
-	  super.connectedCallback();
+	async connectedCallback() {
 	  this.cols = Array.from(this.children) as TableColumnElement[];
+		super.connectedCallback();
+  	//await this.updateComplete;
   }
 
 	render() {
-		if (this.editMode) {
-			return this.editEntriesTemplate;
-		} else {
-			return this.entriesTemplate;
-		}
+		return html `${cache(this.editMode ? this.editEntriesTemplate : this.entriesTemplate)}`;
+		// if (this.editMode) {
+		// 	return this.editEntriesTemplate;
+		// } else {
+		// 	return this.entriesTemplate;
+		// }
 	}
 
 	get entriesTemplate() {
@@ -150,7 +158,7 @@ export class TableElement<E> extends LitElement {
 					<table class="wdc-table">
 						<thead>
 							<tr>
-								${this.cols.filter((row: TableColumnElement)=> !row.hidden).map((r: TableColumnElement) => this.renderHeader(r))}
+								${this.cols.filter((col: TableColumnElement)=> !col.hidden).map((r: TableColumnElement) => this.renderHeader(r))}
 							</tr>
 						</thead>
 						<tbody>
@@ -174,7 +182,7 @@ export class TableElement<E> extends LitElement {
 					${this.editMoveMode? html `
 						<th scope="col" style="width: 100px">Order</th>
 						`: undefined}
-					${this.cols.filter((row: TableColumnElement)=> !row.hidden).map((r: TableColumnElement) => this.renderHeader(r))}
+					${this.cols.filter((col: TableColumnElement)=> !col.hidden).map((r: TableColumnElement) => this.renderHeader(r))}
 				</tr>
 			</thead>
 			<tbody>
@@ -188,7 +196,7 @@ export class TableElement<E> extends LitElement {
 
 		return html`
 				${this.headerTemplate}
-				${this.inlineEditMode? html `<lwdc-form id="edit-form">${tableTemplate}</lwdc-form>`: tableTemplate}
+				${this.inlineEditMode? html `<lwdc-form id="edit-form" @lwdc-form-element-validity=${(c: CustomEvent)=> this.checkEditFormValidity(c)} >${tableTemplate}</lwdc-form>`: tableTemplate}
 			`
 
 
@@ -287,15 +295,15 @@ export class TableElement<E> extends LitElement {
 	}
 
 
-	renderCell(e: E, i: number, row: TableColumnElement): TemplateResult {
+	renderCell(e: E, i: number, col: TableColumnElement): TemplateResult {
 		let contents = undefined;
-		if (row.renderer) {
-			contents = html`${row.renderer(e, i)}`;
-		} else if (row.key) {
+		if (col.renderer) {
+			contents = html`${col.renderer(e, i)}`;
+		} else if (col.key) {
 			let obj = e as any;
-			contents = html`${obj[row.key]}</td>`;
+			contents = html`${obj[col.key]}</td>`;
 		}
-		return html`<td style="${this.cellWidth(row)}">${contents}</td>`;
+		return html`<td style="${this.cellWidth(col)}">${contents}</td>`;
 	}
 
 
@@ -309,7 +317,7 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === form.item("sortColumn").value);
+			const col = this.cols.filter((col: TableColumnElement)=> !col.hidden).find((r: TableColumnElement) => r.key === form.item("sortColumn").value);
 			if (col && ![...this.sort].find((e: SortEntry) => e.key === col.key)) {
 				this.sort.add(<SortEntry>{
 					key: col.key,
@@ -326,7 +334,7 @@ export class TableElement<E> extends LitElement {
 		let form = closestElement('lwdc-form', (e.target as HTMLElement)) as any;
 		//let dialog = closestElement('lwdc-modal', (e.target as HTMLElement)) as any;
 		if (form.validate()) {
-			const col = this.cols.filter((row: TableColumnElement)=> !row.hidden).find((r: TableColumnElement) => r.key === form.item("filterColumn").value);
+			const col = this.cols.filter((col: TableColumnElement)=> !col.hidden).find((r: TableColumnElement) => r.key === form.item("filterColumn").value);
 			if (col && ![...this.filter].find((e: FilterEntry) => e.key === col.key)) {
 				this.filter.add(<FilterEntry>{
 					key: col.key,
@@ -342,13 +350,14 @@ export class TableElement<E> extends LitElement {
 
 	entryRow(e: E) {
 		let body: TemplateResult[] = [];
-		this.cols.filter((row: TableColumnElement)=> !row.hidden).forEach((row: TableColumnElement, i: number) => {
-			body.push(this.renderCell(e, i, row));
+	  let rowErrorType = (e as any)[this.rowErrorKey] as RowErrorType;
+		this.cols.filter((col: TableColumnElement)=> !col.hidden).forEach((col: TableColumnElement, i: number) => {
+			body.push(this.renderCell(e, i, col));
 		});
 		if (this.selectMode) {
-			return html`<tr @click=${(m: MouseEvent) => this.entryClick(e, m.currentTarget as HTMLTableRowElement)}>${body}</tr>`;
+			return html`<tr class=${this.rowErrorClass(rowErrorType)} @click=${(m: MouseEvent) => this.entryClick(e, m.currentTarget as HTMLTableRowElement)}>${body}</tr>`;
 		} else {
-			return html`<tr>${body}</tr>`;
+			return html`<tr class=${this.rowErrorClass(rowErrorType)}>${body}</tr>`;
 		}
 
 	}
@@ -365,6 +374,7 @@ export class TableElement<E> extends LitElement {
 
 	entryEditRow(e: E, i: number, a: Array<E>) {
 		let body: TemplateResult[] = [];
+		let rowErrorType = (e as any)[this.rowErrorKey] as RowErrorType;
 		body.push(html`
 						<td>
 							<div class="wdc-icon-list">
@@ -397,17 +407,17 @@ export class TableElement<E> extends LitElement {
 							</div class="wdc-icon-list">
 						</td>`: undefined}
 		`);
-		this.cols.filter((row: TableColumnElement)=> !row.hidden).forEach((row: TableColumnElement) => {
+		this.cols.filter((col: TableColumnElement)=> !col.hidden).forEach((col: TableColumnElement) => {
 			if (this.inlineEditMode) {
-				if (row.renderer) {
-					body.push(html`<td style="${this.cellWidth(row)}">${row.renderer(e, i)}</td>`);
-				} else if (row.key) {
+				if (col.renderer) {
+					body.push(html`<td style="${this.cellWidth(col)}">${col.renderer(e, i)}</td>`);
+				} else if (col.key) {
 					let obj = e as any;
-					let k: string = row.key;
+					let k: string = col.key;
 					body.push(html`
-						<td style="${this.cellWidth(row)}">
-							<lwdc-form-field label=${row.header} .showLabel=${undefined}>
-								<lwdc-text ?required=${ifDefined(row.required)} .value="${obj.hasOwnProperty(k) ? obj[k] : undefined}" @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
+						<td style="${this.cellWidth(col)}">
+							<lwdc-form-field label=${col.header} .showLabel=${undefined}>
+								<lwdc-text ?required=${ifDefined(col.required)} .value="${obj.hasOwnProperty(k) ? obj[k] : undefined}"  @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
 							</lwdc-form-field>
 						</td>
 					`);
@@ -415,17 +425,57 @@ export class TableElement<E> extends LitElement {
 					return html``;
 				}
 			} else {
-				body.push(this.renderCell(e, i, row));
+				body.push(this.renderCell(e, i, col));
 			}
 		});
-		return html`<tr>${body}</tr>`;
+		return html`<tr class=${this.rowErrorClass(rowErrorType)}>${body}</tr>`;
 
 	}
 
-	cellWidth(row: TableColumnElement) {
-		return ifDefined(row.width ? 'width: ' + row.width : undefined);
+	cellWidth(col: TableColumnElement) {
+		return ifDefined(col.width ? 'width: ' + col.width : undefined);
 	}
 
+	rowErrorClass(rowErrorType?: RowErrorType){
+		let errorClass = {} as any;
+		if (rowErrorType == RowErrorType.error){
+			errorClass['wdc-table-row-error'] = true;
+		} else if (rowErrorType == RowErrorType.alert){
+			errorClass['wdc-table-row-alert'] = true;
+		} else if (rowErrorType == RowErrorType.error_boarderless){
+			errorClass['wdc-table-row-error-borderless'] = true;
+		} else if (rowErrorType == RowErrorType.alert_borderless){
+			errorClass['wdc-table-row-alert-borderless'] = true;
+		}
+		return classMap(errorClass);
+	}
+
+	checkEditFormValidity(c: CustomEvent){ //
+
+		if (this.editForm && c.target){
+			let tr = (c.target as HTMLElement).closest("tr");
+			if (tr){
+				let rowErrors = this.rowErrorCache.get(tr);
+				if (!rowErrors){
+					rowErrors = new Set();
+					this.rowErrorCache.set(tr, rowErrors);
+				}
+
+				if (!c.detail.validity){
+					rowErrors.add(c.target);
+				}else {
+					rowErrors.delete(c.target);
+				}
+				if (rowErrors.size > 0){
+					tr.classList.add('wdc-table-row-error');
+				}else {
+					this.rowErrorCache.delete(tr);
+					tr.classList.remove('wdc-table-row-error');
+				}
+				this.requestUpdate();
+			}
+		}
+	}
 
 	fireEvent(type: string, e?: E) {
 		this.dispatchEvent(new CustomEvent(`lwdc-table-${type}`, e ? {
@@ -442,6 +492,7 @@ export class TableElement<E> extends LitElement {
 			this.entries.push(entry);
 			this.resetView();
 			this.requestUpdate();
+			//await this.updateComplete;//wait for form elements to sync for validation purposes.
 			this.fireEvent('add', entry);
 		} else {
 			this.fireEvent('add');
@@ -510,6 +561,13 @@ interface FilterEntry {
 	key: string;
 	by: string;
 	value: string;
+}
+
+export enum RowErrorType {
+	alert,
+	alert_borderless,
+	error,
+	error_boarderless
 }
 
 
