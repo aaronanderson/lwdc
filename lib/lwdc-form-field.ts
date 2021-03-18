@@ -113,7 +113,12 @@ export class FormFieldElement extends LitElement {
 
 	get hintTemplate() {
 		if (this.hintText) {
-			return html`<div class="wdc-form-hint-message">
+			let hintClass = {
+				'wdc-form-hint-message': true,
+				'lwdc-form-hint-message-error': this.errorType == ErrorType.error,
+				'lwdc-form-hint-message-alert': this.errorType == ErrorType.alert
+			};
+			return html`<div class=${classMap(hintClass)}>
 				${this.errorType == ErrorType.error ? html`<strong>Error:</strong> ${this.hintText}` : html`<strong>Alert:</strong> ${this.hintText}`}
 			</div>`;
 		}

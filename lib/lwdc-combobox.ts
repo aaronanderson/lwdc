@@ -1,11 +1,14 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { ifDefined } from 'lit-html/directives/if-defined';
+import { xIcon } from '@workday/canvas-system-icons-web';
 import './lwdc-menu-item';
+import './lwdc-button';
 
 import styleCSS from './lwdc-combobox.scss';
 import { classMap } from 'lit-html/directives/class-map';
 import { formElement } from './util';
 import { MenuElement } from './lwdc-menu';
+import { ButtonType, ButtonSize } from './lwdc-button';
 import { ErrorType } from './lwdc-form-field';
 const style = css([`${styleCSS}`] as any)
 
@@ -108,12 +111,20 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 
 					<div class="wdc-form-textinput">
 						<input formnovalidate type="search" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @input=${this.handleInput} @keydown=${this.handleKeydown}></input>
+						<lwdc-button class="lwdc-combobox-reset-button" .type=${ButtonType.plain} .size=${ButtonSize.small} ?hidden=${ifDefined(this.selected.size ==  0)} @click=${this.handleReset}>
+							<lwdc-icon .icon=${xIcon} .size=${16}></lwd-icon>
+						</lwdc-button>
 					</div>
 					${this.menuTemplate}
 					${this.selectedTemplate}
 				</div>
 			</div>
 		`;
+	}
+
+	handleReset(){
+		this.selected.clear();
+		this.requestUpdate();
 	}
 
 	get searchInput() {

@@ -14,3 +14,11 @@
 	padding-left: 2px;
 	text-decoration: unset;
 }
+
+.lwdc-form-hint-message-error {
+	color: $wdc-color-error
+}
+
+.lwdc-form-hint-message-alert {
+	color: $wdc-color-alert
+}

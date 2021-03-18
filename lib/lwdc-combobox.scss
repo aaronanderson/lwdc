@@ -56,6 +56,40 @@
 
 }
 
+.wdc-form-textinput {
+	position: relative;
+}
+
+
+.lwdc-combobox-reset-button {
+	width: 32px;
+  minWidth: 32px;
+  height: 32px;
+  position: absolute;
+  margin: auto 4px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0;
+  zIndex: 2;
+  transition: opacity 120ms;
+
+	visibility: visible;
+	opacity: 1;
+
+	top: 8px;
+}
+
+.lwdc-combobox-reset-button > button {
+	box-shadow: none !important;
+}
+
+.lwdc-combobox-reset-button[hidden] {
+	visibility: hidden;
+	opacity: 0;
+}
+
+
 .lwdc-combobox-selected-container {
 	top: 100%;
 	border-radius: 4px;
