@@ -51,7 +51,7 @@ button {
 }
 
 lwdc-button[page-selected] button{
-    background-color: $wdc-color-main !important;
+    background-color: $wdc-color-primary-main !important;
     color: $lwdc-color-contrast !important;
     transition: none !important;
     font-weight: 700 !important;

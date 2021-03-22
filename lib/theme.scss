@@ -2,10 +2,10 @@
 
 $wdc-system-icons-path: '../node_modules/@workday/canvas-system-icons-web/dist/svg' !default;
 
-$wdc-color-lightest: #{'var(--lwdc-theme-primary-lightest, #d7eafc )'};
-$wdc-color-light: #{'var(--lwdc-theme-primary-light, #a6d2ff )'};
-$wdc-color-main: #{'var(--lwdc-theme-primary-main, #0875e1 )'};
-$wdc-color-dark: #{'var(--lwdc-theme-primary-dark, #005cb9 )'};
-$wdc-color-darkest: #{'var(--lwdc-theme-primary-darkest, #004387 )'};
+$wdc-color-primary-lightest: #{'var(--lwdc-theme-primary-lightest, #d7eafc )'};
+$wdc-color-primary-light: #{'var(--lwdc-theme-primary-light, #a6d2ff )'};
+$wdc-color-primary-main: #{'var(--lwdc-theme-primary-main, #0875e1 )'};
+$wdc-color-primary-dark: #{'var(--lwdc-theme-primary-dark, #005cb9 )'};
+$wdc-color-primary-darkest: #{'var(--lwdc-theme-primary-darkest, #004387 )'};
 $lwdc-color-contrast: #{'var(--lwdc-theme-primary-contrast, #FFFFFF )'};
 $lwdc-color-focus: #{'var((--lwdc-theme-common-focus-outline, #FFFFFF )'};
