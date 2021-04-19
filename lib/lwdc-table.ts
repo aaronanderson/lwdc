@@ -17,6 +17,7 @@ import ModalElement from './lwdc-modal';
 import { FormElement } from './lwdc-form';
 import { FormFieldLabelPosition } from './lwdc-form-field';
 import { closestElement, pathValue } from './util';
+import { coreStyle } from './lwdc-core';
 import {lwdcTheme} from './theme';
 
 import styleCSS from './lwdc-table.scss';
@@ -134,7 +135,7 @@ export class TableElement<E> extends LitElement {
 
 
 	static get styles() {
-		return [style];
+		return [coreStyle, style];
 	}
 
 	connectedCallback() {

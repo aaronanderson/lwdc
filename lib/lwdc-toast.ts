@@ -1,4 +1,4 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import { LitElement, html, css, customElement, property, query } from 'lit-element';
 import { checkIcon } from '@workday/canvas-system-icons-web';
 import PopupElement from './lwdc-popup';
 import { CanvasIcon } from '@workday/design-assets-types';
@@ -26,19 +26,18 @@ export class ToastElement extends LitElement {
 	@property({ type: String, attribute: 'action-text' })
 	actionText = '';
 
+	@query("lwdc-popup")
+	popup?: PopupElement;
+
 	static get styles() {
 		return [style];
 	}
 
 
-
-
-
-
 	render() {
 		return html`
-			<lwdc-popup>	
-				
+			<lwdc-popup>
+
 				<div class="lwdc-toast-container wdc-type-body-2">
 
 					<span class="lwdc-toast-icon">
@@ -46,14 +45,10 @@ export class ToastElement extends LitElement {
 					</span>
 					<div class="lwdc-toast-message">${this.message}${this.action}</div>
 				</div>
-				
-			</lwdc-popup>	
+
+			</lwdc-popup>
 		`;
 
-	}
-
-	get popup() {
-		return this.shadowRoot && this.shadowRoot.querySelector("lwdc-popup") as PopupElement;
 	}
 
 	get action() {
@@ -69,20 +64,14 @@ export class ToastElement extends LitElement {
 	}
 
 	open() {
-		this.popup!.open();
+		this.popup?.open();
 	}
 
 	close() {
-		this.popup!.close();
+		this.popup?.close();
 	}
 
 
 }
 
 export default ToastElement;
-
-
-
-
-
-
