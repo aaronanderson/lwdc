@@ -1,5 +1,7 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map.js';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
+import {classMap} from  'lit/directives/class-map.js';
 
 import {colors, iconColors, gradients} from '@workday/canvas-colors-web';
 
@@ -9,7 +11,7 @@ import {lwdcTheme} from './theme';
 import chroma from 'chroma-js';
 
 import styleCSS from './lwdc-header.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 // const themeDepth = depth[3] as any;
 // const depthStyle = css([`.lwdc-depth {

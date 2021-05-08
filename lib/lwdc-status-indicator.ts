@@ -1,4 +1,6 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
 
 
 import './lwdc-icon';
@@ -9,7 +11,7 @@ import { CanvasIcon } from '@workday/design-assets-types';
 import { getColor } from '@workday/canvas-kit-css-icon/lib/utils.js';
 
 import styleCSS from './lwdc-status-indicator.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 //git diff HEAD 'HEAD@{2020-04-18}' -- modules/status-indicator/react/lib/StatusIndicator.tsx
 

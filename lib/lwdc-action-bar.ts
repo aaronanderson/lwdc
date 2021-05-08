@@ -1,9 +1,11 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map.js';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
+import {classMap} from  'lit/directives/class-map.js';
 
 import styleCSS from './lwdc-action-bar.scss';
 import { styleLightDOM } from './util';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-action-bar')
@@ -43,18 +45,10 @@ export class ActionBarElement extends LitElement {
     				${this.elementChildNodes}
   				</div>
 			</div>
-		
+
 		`;
 	}
 
 }
 
 export default ActionBarElement;
-
-
-
-
-
-
-
-

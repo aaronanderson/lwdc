@@ -1,16 +1,18 @@
-import { LitElement, html, css, customElement, property, query } from 'lit-element';
-import { formElement } from './util';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement, query} from 'lit/decorators.js';
+
+import { FormBaseElement } from './util';
 
 import './lwdc-button';
 
 import styleCSS from './lwdc-file-upload.scss';
 import { ErrorType } from './lwdc-form-field';
 import { ButtonSize, ButtonType } from './lwdc-button';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-file-upload')
-export class FileUploadElement extends formElement(LitElement) {
+export class FileUploadElement extends FormBaseElement(LitElement) {
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	multiple = false;

@@ -1,13 +1,15 @@
-import { LitElement, html, css, customElement, property, query } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement, query} from 'lit/decorators.js';
+
 
 import styleCSS from './lwdc-color-input.scss';
-import { classMap } from 'lit-html/directives/class-map.js';
-import { ifDefined } from 'lit-html/directives/if-defined.js';
-import { styleLightDOM, formElement } from './util';
+import {classMap} from  'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { styleLightDOM, FormBaseElement } from './util';
 
 import { ErrorType } from './lwdc-form-field';
 
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 // @ts-ignore
 import pickForegroundColor from '@workday/canvas-kit-css-icon/lib/canvas-kit-css-icon.js';
@@ -17,7 +19,7 @@ import { colors } from '@workday/canvas-colors-web/dist/ts/canvas-colors-hex';
 //git diff HEAD 'HEAD@{2020-09-05}' -- modules/color-picker/react/lib
 
 @customElement('lwdc-color-input')
-export class ColorInputElement extends formElement(LitElement) {
+export class ColorInputElement extends FormBaseElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
 	value?: string;

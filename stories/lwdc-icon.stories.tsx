@@ -8,7 +8,6 @@ import { xIcon, filterIcon, uploadCloudIcon, homeIcon, activityStreamIcon } from
 
 import '../lib/lwdc-icon';
 import '../lib/lwdc-icon-inject';
-import { customElement, LitElement, property, css } from 'lit-element';
 
 //https://storybook.js.org/docs/formats/component-story-format/
 //https://design.workday.com/tokens/assets/icons/icon-guidelines

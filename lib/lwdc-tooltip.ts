@@ -1,8 +1,10 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
 import { styleLightDOM } from './util';
 
 import styleCSS from './lwdc-tooltip.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-tooltip')

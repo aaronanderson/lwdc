@@ -1,5 +1,7 @@
 /* eslint-disable import/extensions */
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+import {html as html2} from 'lit-html';
 
 import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
@@ -32,7 +34,7 @@ export default {
 
 
 export const fileDownloadStory = () => {
-	return html`
+	return html2`
 				<lwdc-action-bar>
 					<a href="/testfile.txt" download><lwdc-button>Anchor</lwdc-button></a>
 					<lwdc-button @click=${(e: MouseEvent) => fileDownload('/testfile.txt', 'testfile.txt')}>Blob</lwdc-button>
@@ -47,7 +49,7 @@ fileDownloadStory.parameters = { layout: 'centered' };
 
 
 export const fileUploadStory = () => {
-	return html`<lwdc-file-upload-example></lwdc-file-upload-example>`;
+	return html2`<lwdc-file-upload-example></lwdc-file-upload-example>`;
 }
 
 fileUploadStory.storyName = 'Upload';

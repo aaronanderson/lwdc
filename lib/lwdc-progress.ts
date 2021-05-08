@@ -1,7 +1,9 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
 
 import styleCSS from './lwdc-progress.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-progress')

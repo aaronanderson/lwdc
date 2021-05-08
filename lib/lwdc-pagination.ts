@@ -1,4 +1,6 @@
-import { LitElement, TemplateResult, html, css, customElement, property, query } from 'lit-element';
+import {LitElement, CSSResult, TemplateResult, html, css} from 'lit';
+import {property, customElement, query} from 'lit/decorators.js';
+
 
 import {  ButtonType, ButtonSize } from './lwdc-button';
 import './lwdc-button';
@@ -11,7 +13,7 @@ import range from 'lodash/range';
 import { chevron2xLeftSmallIcon, chevronLeftSmallIcon, chevronRightSmallIcon, chevron2xRightSmallIcon } from '@workday/canvas-system-icons-web';
 
 import styleCSS from './lwdc-pagination.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-pagination')

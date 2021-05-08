@@ -1,8 +1,10 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map.js';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
+import {classMap} from  'lit/directives/class-map.js';
 
  import styleCSS from './lwdc-env-label.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 /** Element to display service environment. */
@@ -40,11 +42,3 @@ export class EnvLabelElement extends LitElement {
 }
 
 export default EnvLabelElement;
-
-
-
-
-
-
-
-

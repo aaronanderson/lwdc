@@ -1,7 +1,9 @@
-import { LitElement, html, css, customElement, property, query, TemplateResult } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined.js';
-import { classMap } from 'lit-html/directives/class-map.js';
-import {cache} from 'lit-html/directives/cache.js';
+import {LitElement, CSSResult, TemplateResult, html, css} from 'lit';
+import {property, customElement, query} from 'lit/decorators.js';
+
+import { ifDefined } from 'lit/directives/if-defined.js';
+import {classMap} from  'lit/directives/class-map.js';
+import {cache} from 'lit/directives/cache.js';
 
 import './lwdc-icon';
 import './lwdc-modal';
@@ -21,7 +23,7 @@ import { coreStyle } from './lwdc-core';
 import {lwdcTheme} from './theme';
 
 import styleCSS from './lwdc-table.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-table')

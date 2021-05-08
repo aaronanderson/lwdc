@@ -1,4 +1,6 @@
-import { LitElement, html, css, customElement, property, query } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement, query} from 'lit/decorators.js';
+
 import { checkIcon } from '@workday/canvas-system-icons-web';
 import PopupElement from './lwdc-popup';
 import { CanvasIcon } from '@workday/design-assets-types';
@@ -7,7 +9,7 @@ import './lwdc-popup';
 import './lwdc-icon';
 
 import styleCSS from './lwdc-toast.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 //git diff HEAD 'HEAD@{2020-04-18}' -- modules/toast/react/lib
 

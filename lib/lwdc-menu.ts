@@ -1,11 +1,13 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined.js';
-import { classMap } from 'lit-html/directives/class-map.js';
-import { styleMap, StyleInfo } from 'lit-html/directives/style-map.js';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
+import { ifDefined } from 'lit/directives/if-defined.js';
+import {classMap} from  'lit/directives/class-map.js';
+import { styleMap, StyleInfo } from 'lit/directives/style-map.js';
 import { styleLightDOM } from './util';
 
 import styleCSS from './lwdc-menu.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-menu')

@@ -1,11 +1,13 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
 import { CanvasIcon, CanvasIconTypes } from '@workday/design-assets-types';
 
 // @ts-ignore
 import initializeIcons from '@workday/canvas-kit-css-icon/lib/canvas-kit-css-icon.js';
 
 import styleCSS from './lwdc-icon-inject.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 /** This component wraps the https://github.com/Workday/canvas-kit/tree/master/modules/icon/css Javascript and provides full support of all icon varieties. 

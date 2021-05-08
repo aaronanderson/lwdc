@@ -1,5 +1,7 @@
 /* eslint-disable import/extensions */
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+import {html as html2} from 'lit-html';
 
 import { withKnobs, text, boolean, radios, number } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
@@ -32,7 +34,7 @@ const gotoBox = () => boolean("Show GoTo", false);
 
 
 export const paginationStory = () => {
-	return html`<lwdc-pagination-example ?jumpControls=${jumpControlsBox()} ?showAdditionalData=${additionalDataBox()} ?showGoToLabel=${gotoBox()} rangeSize=${rangeSizeBox()}></lwdc-pagination-example>`;
+	return html2`<lwdc-pagination-example ?jumpControls=${jumpControlsBox()} ?showAdditionalData=${additionalDataBox()} ?showGoToLabel=${gotoBox()} rangeSize=${rangeSizeBox()}></lwdc-pagination-example>`;
 
 }
 

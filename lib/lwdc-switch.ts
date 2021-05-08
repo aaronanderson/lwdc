@@ -1,15 +1,17 @@
-import { LitElement, html, css, customElement, property, query } from 'lit-element';
-import { formElement } from './util';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement, query} from 'lit/decorators.js';
+
+import { FormBaseElement } from './util';
 import {lwdcTheme} from './theme';
 import { ErrorType } from './lwdc-form-field';
 import {colors} from '@workday/canvas-colors-web';
 
 import styleCSS from './lwdc-switch.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-switch')
-export class SwitchElement extends formElement(LitElement) {
+export class SwitchElement extends FormBaseElement(LitElement) {
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	checked = false;

@@ -8,7 +8,6 @@ import '../lib/lwdc-layout-box';
 import '../lib/lwdc-layout-section';
 import '../lib/lwdc-card';
 
-import { customElement, LitElement, property, css } from 'lit-element';
 
 export default {
 	title: 'LitElement Workday Canvas Kit Web Components/Layout',

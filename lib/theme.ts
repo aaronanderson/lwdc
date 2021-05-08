@@ -1,4 +1,4 @@
-import { Constructor, LitElement } from "lit-element";
+import { LitElement } from "lit";
 import chroma from 'chroma-js';
 import colors from '@workday/canvas-colors-web';
 import merge from 'lodash/merge';
@@ -184,7 +184,6 @@ export const defaultCanvasTheme: CanvasTheme = {
 };
 
 
-const themeObservers = new Set();
 export var lwdcTheme!: CanvasTheme;
 
 type themeChanged = (theme: CanvasTheme) => void;
@@ -193,11 +192,11 @@ type themeChanged = (theme: CanvasTheme) => void;
 export function useTheme(theme?: PartialCanvasTheme): CanvasTheme {
 	//console.log(theme, lwdcTheme);
 	lwdcTheme = merge({}, defaultCanvasTheme, theme) as CanvasTheme;
- themeObservers.forEach((l : any)=>{
-	  new Promise(() => {
-	   l(lwdcTheme);
-	  });
- });
+  document.dispatchEvent(new CustomEvent(`lwdc-theme-update`, {
+    detail: {
+      theme: lwdcTheme
+    }
+  }));
   let root = document.querySelector('body'); //document.documentElement
   if (root){
     root.style.setProperty('--lwdc-theme-primary-lightest', lwdcTheme.palette.primary.lightest);
@@ -215,39 +214,3 @@ export function useTheme(theme?: PartialCanvasTheme): CanvasTheme {
 }
 
 useTheme(defaultCanvasTheme);
-
-
-
-//exporting LitElement with it's private/protected members generates a 'TS4094 exported class expression may not be private or protected' error so define a limited interface
-interface ThemeLitElement extends HTMLElement {
-	connectedCallback?(): void;
-	disconnectedCallback?(): void;
-}
-
-export const themeElement =
-	<T extends Constructor<ThemeLitElement>>(baseElement: T) =>
-		class extends baseElement {
-
-				_themeListener!: themeChanged;
-
-			connectedCallback() {
-
-				super.connectedCallback && super.connectedCallback();
-
-				this._themeListener =  (t: CanvasTheme) => this.themeChanged(t);
-				themeObservers.add(this._themeListener);
-				this._themeListener(lwdcTheme);
-				//this._storeUnsubscribe = store.subscribe(() => this.stateChanged(store.getState()));
-				//this.stateChanged(store.getState());
-			}
-
-			disconnectedCallback() {
-				themeObservers.delete(this._themeListener);
-
-
-				super.disconnectedCallback && super.disconnectedCallback();
-
-			}
-
-			themeChanged(theme: CanvasTheme) { }
-		};

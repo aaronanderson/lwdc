@@ -1,4 +1,6 @@
-import { LitElement, html, css, customElement, property, query } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement, query} from 'lit/decorators.js';
+
 import { xIcon, searchIcon} from '@workday/canvas-system-icons-web';
 
 import {  ButtonType,ButtonSize } from './lwdc-button';
@@ -9,7 +11,7 @@ import './lwdc-form-field';
 import './lwdc-text';
 
 import styleCSS from './lwdc-search-bar.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-search-bar')

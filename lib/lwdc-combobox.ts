@@ -1,21 +1,23 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined.js';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { xIcon } from '@workday/canvas-system-icons-web';
 import './lwdc-menu-item';
 import './lwdc-button';
 
 import styleCSS from './lwdc-combobox.scss';
-import { classMap } from 'lit-html/directives/class-map.js';
-import { formElement } from './util';
+import {classMap} from  'lit/directives/class-map.js';
+import { FormBaseElement } from './util';
 import { MenuElement } from './lwdc-menu';
 import { ButtonType, ButtonSize } from './lwdc-button';
 import { ErrorType } from './lwdc-form-field';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 //git diff HEAD 'HEAD@{2020-03-01}' -- modules/_labs/combobox/react/lib
 
 @customElement('lwdc-combobox')
-export class ComboboxElement<T> extends formElement(LitElement) {
+export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;

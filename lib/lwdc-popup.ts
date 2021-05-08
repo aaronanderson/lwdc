@@ -1,4 +1,6 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
 
 import './lwdc-button';
 import './lwdc-icon';
@@ -6,7 +8,7 @@ import { ButtonType } from './lwdc-button';
 import { xIcon } from '@workday/canvas-system-icons-web';
 
 import styleCSS from './lwdc-popup.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 
 @customElement('lwdc-popup')

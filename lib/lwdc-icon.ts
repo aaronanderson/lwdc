@@ -1,4 +1,6 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+
 import { CanvasIcon, CanvasIconTypes } from '@workday/design-assets-types';
 import canvasColors from '@workday/canvas-colors-web';
 
@@ -7,7 +9,7 @@ import { getColor } from '@workday/canvas-kit-css-icon/lib/utils.js';
 import { styleLightDOM } from './util';
 
 import styleCSS from './lwdc-icon.scss';
-const style = css([`${styleCSS}`] as any)
+const style = css([`${styleCSS}`] as any) as CSSResult;
 
 export const getHexColor = (color: string): string => {
 		if (color && color.startsWith("#")){

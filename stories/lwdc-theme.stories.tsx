@@ -1,4 +1,7 @@
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+import {html as html2} from 'lit-html';
+
 
 import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
@@ -44,7 +47,7 @@ const themeMap = new Map([['default', defaultCanvasTheme], ['custom', customThem
 
 export const themeStory = () => {
 
-	return html`<lwdc-theme-example .theme=${themeMap.get(themeRadioKnob())}>Themed Component</lwdc-theme-example>`;
+	return html2`<lwdc-theme-example .theme=${themeMap.get(themeRadioKnob())}>Themed Component</lwdc-theme-example>`;
 }
 
 themeStory.storyName = 'Theme';

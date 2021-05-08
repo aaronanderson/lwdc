@@ -1,5 +1,8 @@
 /* eslint-disable import/extensions */
-import { LitElement, html, css, customElement, property } from 'lit-element';
+import {LitElement, CSSResult, html, css} from 'lit';
+import {property, customElement} from 'lit/decorators.js';
+import {html as html2} from 'lit-html';
+
 
 import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
@@ -23,7 +26,7 @@ export default {
 
 export const sidepanelStory = () => {
 	let opened = true;
-	return html`<lwdc-side-panel-example></lwdc-side-panel-example>
+	return html2`<lwdc-side-panel-example></lwdc-side-panel-example>
 				`;
 }
 

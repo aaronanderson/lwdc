@@ -1,4 +1,4 @@
-import { CSSResult, Constructor, LitElement } from "lit-element";
+import { CSSResult, LitElement } from "lit";
 import FormFieldElement from './lwdc-form-field';
 import FormElement from "./lwdc-form";
 
@@ -205,15 +205,33 @@ export const formElements = (form: HTMLFormElement): Array<Element> => {
 
 }
 
-//exporting LitElement with it's private/protected members generates a 'TS4094 exported class expression may not be private or protected' error so define a limited interface
-interface FormLitElement extends HTMLElement {
-	connectedCallback?(): void;
+//https://lit.dev/docs/composition/mixins/ - When a mixin adds new public/protected API
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Constructor<T = {}> = new (...args: any[]) => T;
 
+export declare class FormBaseInterface {
+		value?: string | File | FormData;
+  	_internals?: any;
+		_customValidity?: string;
+
+
+		form: HTMLFormElement;
+		name:string ;
+		type: string;
+		validity: boolean;
+		validationMessage: string;
+		willValidate: boolean;
+		reportValidity() : boolean;
+		formField: FormFieldElement;
+		checkValidity(): boolean;
+		setCustomValidity(customValidity: string): void;
+		setInternals(isError: boolean, formMessage?: Function): void;
+		formResetCallback(): void;
 }
 
-export const formElement =
-	<T extends Constructor<FormLitElement>>(baseElement: T) =>
-		class extends baseElement {
+​
+export const FormBaseElement = <T extends Constructor<LitElement>>(superClass: T) => {
+  class FormBaseElementMixin extends superClass {
 
 			static formAssociated = true;
 
@@ -319,5 +337,6 @@ export const formElement =
 				// 	this.requestUpdate();
 				// }
 			}
-
-		};
+	}
+	return FormBaseElementMixin as Constructor<FormBaseInterface> & T;;
+};
