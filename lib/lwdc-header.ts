@@ -1,5 +1,5 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 
 import {colors, iconColors, gradients} from '@workday/canvas-colors-web';
 

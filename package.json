@@ -1,6 +1,6 @@
 {
   "name": "@aaronanderson/lwdc",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "description": "Workday Canvas Kit LitElement Web Components",
   "main": "wc/index.js",
   "module": "wc/index.js",
@@ -28,7 +28,7 @@
     "@workday/canvas-kit-css": "^4.7.0",
     "@workday/canvas-kit-css-fonts": "^4.7.0",
     "chroma-js": "^2.1.1",
-    "lit-element": "^2.4.0",
+    "lit-element": "^2.5.1",
     "lodash": "^4.17.20"
   },
   "devDependencies": {

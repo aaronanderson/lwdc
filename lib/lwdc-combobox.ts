@@ -1,11 +1,11 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
 import { xIcon } from '@workday/canvas-system-icons-web';
 import './lwdc-menu-item';
 import './lwdc-button';
 
 import styleCSS from './lwdc-combobox.scss';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 import { formElement } from './util';
 import { MenuElement } from './lwdc-menu';
 import { ButtonType, ButtonSize } from './lwdc-button';

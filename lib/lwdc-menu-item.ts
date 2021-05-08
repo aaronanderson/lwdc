@@ -1,6 +1,6 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 import { CanvasIcon } from '@workday/design-assets-types';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 
 import styleCSS from './lwdc-menu-item.scss';
 import { styleLightDOM } from './util';

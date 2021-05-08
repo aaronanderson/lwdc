@@ -1,10 +1,11 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
+import { classMap } from 'lit-html/directives/class-map.js';
 import { styleLightDOM } from './util';
 import { themeElement} from './theme';
 
 import styleCSS from './lwdc-button.scss';
-import { ifDefined } from 'lit-html/directives/if-defined';
+
 const style = css([`${styleCSS}`] as any)
 
 

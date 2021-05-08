@@ -1,7 +1,7 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { classMap } from 'lit-html/directives/class-map';
-import { styleMap, StyleInfo } from 'lit-html/directives/style-map';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
+import { classMap } from 'lit-html/directives/class-map.js';
+import { styleMap, StyleInfo } from 'lit-html/directives/style-map.js';
 import { styleLightDOM } from './util';
 
 import styleCSS from './lwdc-menu.scss';

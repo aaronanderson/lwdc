@@ -1,6 +1,6 @@
 import { LitElement, html, css, customElement, property, query } from 'lit-element';
 import { FormFieldLabelPosition } from './lwdc-form-field';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 
 import styleCSS from './lwdc-form-field.scss';
 import { formElements, formAssociatedCustomElementsSupported } from './util';

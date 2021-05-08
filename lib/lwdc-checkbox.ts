@@ -1,6 +1,6 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { classMap } from 'lit-html/directives/class-map';
+import { ifDefined } from 'lit-html/directives/if-defined.js';
+import { classMap } from 'lit-html/directives/class-map.js';
 import { styleLightDOM, formElement } from './util';
 
 import styleCSS from './lwdc-checkbox.scss';

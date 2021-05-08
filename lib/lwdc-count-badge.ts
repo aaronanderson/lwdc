@@ -1,7 +1,7 @@
 import { LitElement, html, css, customElement, property } from 'lit-element';
 
 import styleCSS from './lwdc-count-badge.scss';
-import { classMap } from 'lit-html/directives/class-map';
+import { classMap } from 'lit-html/directives/class-map.js';
 
 const style = css([`${styleCSS}`] as any)
 
