@@ -36,7 +36,7 @@ export class LayoutSectionElement extends LitElement {
 		}
 
 		return html`
-			<div class="layoutContainer" style="${styleMap(containerStyles)}">				  
+			<div class="layoutContainer" style=${styleMap(containerStyles)}>				  
 				<slot @slotchange=${this.slotChanged}></slot>
 			</div>
 		`;
@@ -98,7 +98,7 @@ export class LayoutSectionColumnElement extends LitElement {
 		}
 
 		return html`
-			<div class="columnContainer" style="${styleMap(colStyle)}">
+			<div class="columnContainer" style=${styleMap(colStyle)}>
 				<slot></slot>
 			</div>`;
 	}

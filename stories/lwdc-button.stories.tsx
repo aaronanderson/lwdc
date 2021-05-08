@@ -55,7 +55,7 @@ const backgroundStyle = () => {
 export const buttonStory = () => {
 	return html`
 				<lwdc-action-bar>
-					<div style="${styleMap(backgroundStyle())}">
+					<div style=${styleMap(backgroundStyle())}>
 						<lwdc-button .type=${typeMap.get(typesRadioKnob())} .size=${sizeMap.get(sizesRadioKnob())} .text=${textMap.get(textsRadioKnob())} @click=${() => { console.log("clicked"); action("Element Button Clicked"); }} ?disabled=${disabledBox()} ?dropdown=${dropdownBox()} ?inverse=${inverseBox()}>${(typesRadioKnob().startsWith('icon') || typesRadioKnob() === "plain") ? html `<lwdc-icon .icon=${activityStreamIcon}></lwd-icon>` : html `Click Me`}</lwdc-button>
 					</div>
 				</lwdc-action-bar>

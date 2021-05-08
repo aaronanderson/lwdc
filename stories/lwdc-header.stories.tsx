@@ -85,7 +85,7 @@ export const headerStory = () => {
 	}
 	</style>
 
-	<div class="${classMap(containerClass)}">
+	<div class=${classMap(containerClass)}>
 		<lwdc-header title="Sample Header" style="width: 100%" .theme=${theme}>
 			<nav>
 				<ul>

@@ -57,9 +57,9 @@ export class RadioElement extends formElement(LitElement) {
 			'wdc-form-disabled': this.disabled
 		};
 
-		return html`<div class="${classMap(formTextClass)}">
-						  <input type="radio" name="${ifDefined(this.formField.group)}" ?checked=${this.checked} .value="${ifDefined(this.value)}" id="${ifDefined(this.value)}" ?disabled=${this.disabled} @change=${this.handleChange}></input>
-        			<label for="${ifDefined(this.value)}">${this.label}</label>
+		return html`<div class=${classMap(formTextClass)}>
+						  <input type="radio" name=${ifDefined(this.formField.group)} ?checked=${this.checked} .value=${ifDefined(this.value)} id=${ifDefined(this.value)} ?disabled=${this.disabled} @change=${this.handleChange}></input>
+        			<label for=${ifDefined(this.value)}>${this.label}</label>
 					</div>
 					`;
 	}

@@ -38,7 +38,7 @@ export class ActionBarElement extends LitElement {
 		};
 
 		return html`
-			<div class="${classMap(actionBarClass)}" role="region" aria-label="Action Bar">
+			<div class=${classMap(actionBarClass)} role="region" aria-label="Action Bar">
   				<div class="wdc-action-bar-container">
     				${this.elementChildNodes}
   				</div>

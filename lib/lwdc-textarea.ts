@@ -55,8 +55,8 @@ export class TextAreaElement extends formElement(LitElement) {
 			'wdc-form-disabled': this.disabled
 		};
 
-		return html`<div class="${classMap(formTextAreaClass)}">
-						<textarea formnovalidate .value="${ifDefined(this.value)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></textarea>
+		return html`<div class=${classMap(formTextAreaClass)}>
+						<textarea formnovalidate .value=${ifDefined(this.value)} placeholder=${ifDefined(this.placeholder)} ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></textarea>
 					</div>
 					`;
 	}

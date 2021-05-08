@@ -66,13 +66,13 @@ export class FormFieldElement extends LitElement {
 		};
 
 
-		return html`<div class="${classMap(fieldClass)}">
+		return html`<div class=${classMap(fieldClass)}>
 						${this.showLabel ?
 				html`<label class="wdc-form-label">
 									${ifDefined(this.label)}
 									${this.requiredTemplate}
 								</label>`: undefined}
-						<div class="${classMap(formClass)}">
+						<div class=${classMap(formClass)}>
 							${this.elementChildren}
 							${this.hintTemplate}
 						</div>
@@ -94,7 +94,7 @@ export class FormFieldElement extends LitElement {
 		};
 
 
-		return html`<fieldset class="${classMap(fieldClass)}">
+		return html`<fieldset class=${classMap(fieldClass)}>
 						${this.showLabel ?
 				html`<legend class="wdc-form-label">
 							${ifDefined(this.label)}
@@ -103,7 +103,7 @@ export class FormFieldElement extends LitElement {
 						 <div class="wdc-form-group-fields">
 
 							${this.elementChildren.map((e: Element) => {
-					return html`<div class="${classMap(formClass)}">${e}</div>`;
+					return html`<div class=${classMap(formClass)}>${e}</div>`;
 				})}
 								${this.hintTemplate}
 							</div>

@@ -80,7 +80,7 @@ export const tableStory = () => {
 						</lwdc-table>
 					</div>
 					<lwdc-action-bar>
-						<lwdc-button @click="${handleValidate}">Validate</lwdc-button>
+						<lwdc-button @click=${handleValidate}>Validate</lwdc-button>
 					</lwdc-action-bar>
 				`;
 }
@@ -103,7 +103,7 @@ const remove = (e: CustomEvent) => {
 const nameRenderer = (e: any) => {
 	return html`
 		<lwdc-form-field label="Name" .showLabel=${undefined}>
-			<lwdc-text required .value="${e.name}" @change=${(c: Event) => { let t = (c.target as any); let table = closestElement('lwdc-table', t) as TableElement<any>; e.name = t.value; table.fireEvent('edit', e); table.requestUpdate(); }} list="names"></lwdc-text>
+			<lwdc-text required .value=${e.name} @change=${(c: Event) => { let t = (c.target as any); let table = closestElement('lwdc-table', t) as TableElement<any>; e.name = t.value; table.fireEvent('edit', e); table.requestUpdate(); }} list="names"></lwdc-text>
 		</lwdc-form-field>
 	`;
 }

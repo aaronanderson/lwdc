@@ -56,7 +56,7 @@ export class FormElement extends LitElement {
 		};
 
 		return html`
-		<form class="${classMap(formClass)}" @submit="${(e: MouseEvent) => e.preventDefault()}">
+		<form class=${classMap(formClass)} @submit=${(e: MouseEvent) => e.preventDefault()}>
 			${this.elementChildNodes}
 		</form>
 		`;

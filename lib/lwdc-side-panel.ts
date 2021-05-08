@@ -46,12 +46,12 @@ export class SidePanelElement extends LitElement {
 			'lwdc-close': !this.isOpen
 		};
 
-		return html`<aside class="${classMap(modeClass)}">
-			<div class="${classMap(containerClass)}">
+		return html`<aside class=${classMap(modeClass)}>
+			<div class=${classMap(containerClass)}>
 			 	${this.header && this.isOpen ? html`<h2 class="header">${this.header}</h2>` : undefined}
 				<slot></slot>
 			</div>
-			<div class="${classMap(footerClass)}">
+			<div class=${classMap(footerClass)}>
 				<lwdc-button .type=${ButtonType.iconCircleFilled}><lwdc-icon .icon=${this.isOpen ? chevronLeftIcon : chevronRightIcon} @click=${() => this.toggle()}></lwdc-icon> </lwdc-button>
 			</div>
 		

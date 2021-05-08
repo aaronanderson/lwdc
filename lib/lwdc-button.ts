@@ -81,7 +81,7 @@ export class ButtonElement extends themeElement(LitElement) {
 
 		};
 
-		return html`<button ?disabled="${this.disabled}" type=${this.action} class="${classMap(buttonClass)}">${this.elementChildNodes}</button>`;
+		return html`<button ?disabled=${this.disabled} type=${this.action} class=${classMap(buttonClass)}>${this.elementChildNodes}</button>`;
 
 	}
 

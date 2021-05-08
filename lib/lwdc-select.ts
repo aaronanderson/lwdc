@@ -62,7 +62,7 @@ export class SelectElement<T> extends formElement(LitElement) {
 			let name = this.nameSelector(e);
 			let value = this.valueSelector(e);
 			let selected = value && (value === this.value);
-			return html`<option ?selected=${selected} label="${name}">${value}</option>`;
+			return html`<option ?selected=${selected} label=${name}>${value}</option>`;
 
 		})}
 						</select>

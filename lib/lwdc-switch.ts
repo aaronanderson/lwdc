@@ -44,7 +44,7 @@ export class SwitchElement extends formElement(LitElement) {
 	render() {
 		return html`
 		<div class="lwdc-switch-container">
-      		<input class="lwdc-switch-input" role="checkbox" tabindex="0" type="checkbox" ?checked="${this.checked}" ?disabled=${this.disabled} @change=${this.handleChange}></input>
+      		<input class="lwdc-switch-input" role="checkbox" tabindex="0" type="checkbox" ?checked=${this.checked} ?disabled=${this.disabled} @change=${this.handleChange}></input>
 					<div class="lwdc-switch-background">
 							<div class="lwdc-switch-circle"></div>
 					</div>

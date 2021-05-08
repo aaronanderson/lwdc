@@ -40,15 +40,15 @@ export class TabsElement<T> extends LitElement {
 
 		return html`
 			<div class="lwdc-tab-bar" role="tablist">
-				<ul class="${classMap(tabsClass)}">
+				<ul class=${classMap(tabsClass)}>
 					${this.tabs.map((t: T, i: number) => {
 			let tabClass = {
 				'current': i == this.index,
 				'next': i == this.nextIndex
 			};
 			return html`
-				<li class="${classMap(tabClass)}" @click=${() => this.handleTab(i)}>
-					<div id="tab-${i}" tabIndex="${i}" @keydown=${this.onKeyDown}>${this.nameSelector(t)}</div>
+				<li class=${classMap(tabClass)} @click=${() => this.handleTab(i)}>
+					<div id="tab-${i}" tabIndex=${i} @keydown=${this.onKeyDown}>${this.nameSelector(t)}</div>
 				</li>`;
 				})}
 				</ul>

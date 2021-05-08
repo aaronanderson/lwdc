@@ -177,7 +177,7 @@ export class TableElement<E> extends LitElement {
 			<thead>
 				<tr>
 					<th scope="col" style="width: 100px">
-						<span @click="${(m: MouseEvent) => this.addEntry()}">
+						<span @click=${(m: MouseEvent) => this.addEntry()}>
 							<lwdc-icon .icon=${plusIcon}></lwdc-icon>
 						</span>
 					</th>
@@ -219,7 +219,7 @@ export class TableElement<E> extends LitElement {
 							<table class="lwdc-table-entries">
 								${[...this.sort].map((e: SortEntry) => html`
 									<tr>
-										<td @click="${(m: MouseEvent) => { this.sort.delete(e); this.requestUpdate(); }}"><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
+										<td @click=${(m: MouseEvent) => { this.sort.delete(e); this.requestUpdate(); }}><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
 										<td>${e.header}</td>
 										<td>${e.direction}</td>
 									</tr>
@@ -248,7 +248,7 @@ export class TableElement<E> extends LitElement {
 							<table class="lwdc-table-entries">
 								${[...this.filter].map((e: FilterEntry) => html`
 									<tr>
-										<td @click="${(m: MouseEvent) => { this.filter.delete(e); this.requestUpdate(); }}"><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
+										<td @click=${(m: MouseEvent) => { this.filter.delete(e); this.requestUpdate(); }}><lwdc-icon .icon=${minusIcon}></lwdc-icon></td>
 										<td>${e.header}</td>
 										<td>${e.by}</td>
 										<td>${e.value}</td>
@@ -293,7 +293,7 @@ export class TableElement<E> extends LitElement {
 				contents = html`${contents}<lwdc-icon .icon=${filterIcon} .color=${lwdcTheme.palette.primary.main} .size=${16} ></lwdc-icon>`;
 			}
 		}
-		return html`<th scope="col" style="${this.cellWidth(r)}">${contents}</th>`;
+		return html`<th scope="col" style=${this.cellWidth(r)}>${contents}</th>`;
 	}
 
 
@@ -305,7 +305,7 @@ export class TableElement<E> extends LitElement {
 			let obj = e as any;
 			contents = html`${obj[col.key]}</td>`;
 		}
-		return html`<td style="${this.cellWidth(col)}">${contents}</td>`;
+		return html`<td style=${this.cellWidth(col)}>${contents}</td>`;
 	}
 
 
@@ -382,12 +382,12 @@ export class TableElement<E> extends LitElement {
 							<div class="wdc-icon-list">
 								${!this.inlineEditMode ? html`
 								<div class="wdc-icon-list-icon">
-									<span @click="${(m: MouseEvent) => this.editEntry(e)}">
+									<span @click=${(m: MouseEvent) => this.editEntry(e)}>
 										<lwdc-icon .icon=${editIcon}></lwdc-icon>
 									</span>
 								</div>`: undefined}
 								<div class="wdc-icon-list-icon">
-									<span @click="${(m: MouseEvent) => this.removeEntry(e)}">
+									<span @click=${(m: MouseEvent) => this.removeEntry(e)}>
 										<lwdc-icon .icon=${minusIcon}></lwdc-icon>
 									</span>
 								</div>
@@ -397,12 +397,12 @@ export class TableElement<E> extends LitElement {
 						<td>
 							<div class="wdc-icon-list">
 								<div class="wdc-icon-list-icon">
-									<span @click="${(m: MouseEvent) => this.moveEntry(e, 'up')}">
+									<span @click=${(m: MouseEvent) => this.moveEntry(e, 'up')}>
 										<lwdc-icon .icon=${ i == 0? caretBottomSmallIcon: caretUpSmallIcon}></lwdc-icon>
 									</span>
 								</div>
 								<div class="wdc-icon-list-icon">
-									<span @click="${(m: MouseEvent) => this.moveEntry(e, 'down')}">
+									<span @click=${(m: MouseEvent) => this.moveEntry(e, 'down')}>
 										<lwdc-icon .icon=${ i== a.length -1 ? caretTopSmallIcon: caretDownSmallIcon}></lwdc-icon>
 									</span>
 								</div>
@@ -412,14 +412,14 @@ export class TableElement<E> extends LitElement {
 		this.cols.filter((col: TableColumnElement)=> !col.hidden).forEach((col: TableColumnElement) => {
 			if (this.inlineEditMode) {
 				if (col.renderer) {
-					body.push(html`<td style="${this.cellWidth(col)}">${col.renderer(e, i)}</td>`);
+					body.push(html`<td style=${this.cellWidth(col)}>${col.renderer(e, i)}</td>`);
 				} else if (col.key) {
 					let obj = e as any;
 					let k: string = col.key;
 					body.push(html`
-						<td style="${this.cellWidth(col)}">
+						<td style=${this.cellWidth(col)}>
 							<lwdc-form-field label=${col.header} .showLabel=${undefined}>
-								<lwdc-text ?required=${ifDefined(col.required)} .value="${obj.hasOwnProperty(k) ? obj[k] : undefined}"  @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
+								<lwdc-text ?required=${ifDefined(col.required)} .value=${obj.hasOwnProperty(k) ? obj[k] : undefined}  @change=${(c: Event) => { obj[k] = (<HTMLInputElement>c.target).value; this.fireEvent('edit', e); this.requestUpdate(); }}></lwdc-text>
 							</lwdc-form-field>
 						</td>
 					`);

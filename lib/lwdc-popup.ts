@@ -28,7 +28,7 @@ export class PopupElement extends LitElement {
 			<div class="wdc-popup" role="dialog" aria-labelledby="popup-heading">
 				
 				${this.closeEnabled ? html`<div class="wdc-popup-close">
-					<lwdc-button .type=${ButtonType.plain} @click="${this.close}" aria-label="Close">
+					<lwdc-button .type=${ButtonType.plain} @click=${this.close} aria-label="Close">
 						<lwdc-icon .icon=${xIcon}></lwdc-icon>
 					</lwdc-button>
 				</div>`: null}

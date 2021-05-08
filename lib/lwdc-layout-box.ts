@@ -51,7 +51,7 @@ export class LayoutBoxRowElement extends LitElement {
 		};
 
 		return html`
-			<div class="${classMap(rowClass)}" role="region" aria-label="Action Bar">				  
+			<div class=${classMap(rowClass)} role="region" aria-label="Action Bar">				  
 				  	<slot></slot>
 			</div>
 		`;
@@ -118,7 +118,7 @@ export class LayoutBoxColumnElement extends LitElement {
 		}
 
 		return html`
-			<div class="${classMap(colClass)}">
+			<div class=${classMap(colClass)}>
 				<slot></slot>
 			</div>`;
 	}

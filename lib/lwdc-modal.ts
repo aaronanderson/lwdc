@@ -29,7 +29,7 @@ export class ModalElement extends LitElement {
 				<div class="wdc-modal" role="dialog" aria-labelledby="modal-heading">
 					${this.closeEnabled ? html`<div class="wdc-popup-close">
 						 <div class="wdc-modal-close">
-							<lwdc-button .type=${ButtonType.plain} @click="${this.close}" aria-label="Close">
+							<lwdc-button .type=${ButtonType.plain} @click=${this.close} aria-label="Close">
 								<lwdc-icon .icon=${xIcon}></lwdc-icon>
 							</lwdc-button>
 						</div>

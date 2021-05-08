@@ -110,7 +110,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 				<div class="lwdc-combobox-input-container">
 
 					<div class="wdc-form-textinput">
-						<input formnovalidate type="search" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @input=${this.handleInput} @keydown=${this.handleKeydown}></input>
+						<input formnovalidate type="search" placeholder=${ifDefined(this.placeholder)} ?disabled=${this.disabled} @input=${this.handleInput} @keydown=${this.handleKeydown}></input>
 						<lwdc-button class="lwdc-combobox-reset-button" .type=${ButtonType.plain} .size=${ButtonSize.small} ?hidden=${ifDefined(this.selected.size ==  0)} @click=${this.handleReset}>
 							<lwdc-icon .icon=${xIcon} .size=${16}></lwd-icon>
 						</lwdc-button>
@@ -149,7 +149,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 				'lwdc-combobox-wrap': !!this.wrap
 			}
 			return html`
-							<lwdc-menu id="selections" tabindex="0" class="${classMap(menuClass)}" width="${this.width ? this.width : '280px'}" @keydown=${this.handleKeydown}>
+							<lwdc-menu id="selections" tabindex="0" class=${classMap(menuClass)} width=${this.width ? this.width : '280px'} @keydown=${this.handleKeydown}>
 								${this.filtered.map((o: T) => {
 				return html`<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`;
 			})}
@@ -166,7 +166,7 @@ export class ComboboxElement<T> extends formElement(LitElement) {
 				'lwdc-combobox-selected-container': true,
 				'lwdc-combobox-wrap': !!this.wrap || !!this.selectedWrap
 			}
-			return html`<div class="${classMap(menuClass)}">
+			return html`<div class=${classMap(menuClass)}>
 							<div class="wdc-card-body">
 								<ul id="selected" role="listbox" tabindex="0"  tabIndex="0">
 								${this.options.map((o: T) => {

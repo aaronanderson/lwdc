@@ -52,7 +52,7 @@ export class MenuElement extends LitElement {
 
 
 		return html`
-		<div class="${classMap(classes)}" role="menu" aria-label="Menu">
+		<div class=${classMap(classes)} role="menu" aria-label="Menu">
 			<ul>
 				 ${this.elementChildNodes}
 			</ul>

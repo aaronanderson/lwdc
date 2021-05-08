@@ -39,14 +39,14 @@ const iconBackgroundColorsRadioKnob = () => radios("Background", iconBackgroundC
 
 
 export const iconStory = () => {
-	return html`<p style="margin: 10px;">Icon</p> <lwdc-icon .icon=${iconMap.get(iconsRadioKnob())} .size="${iconSizesRadioKnob()}" .color="${iconColorsRadioKnob()}" .background="${iconBackgroundColorsRadioKnob()}"></lwdc-icon>`;
+	return html`<p style="margin: 10px;">Icon</p> <lwdc-icon .icon=${iconMap.get(iconsRadioKnob())} .size=${iconSizesRadioKnob()} .color=${iconColorsRadioKnob()} .background=${iconBackgroundColorsRadioKnob()}></lwdc-icon>`;
 }
 
 iconStory.storyName = 'Icon';
 iconStory.parameters = { layout: 'centered' };
 
 export const injectIconStory = () => {
-	return html`<p style="margin: 10px;">Icon Inject</p> <lwdc-icon-inject  data-icon="${iconsRadioKnob()}" data-category="system" data-size="${iconSizesRadioKnob()}" data-color="${iconColorsRadioKnob()}"> </lwdc-icon-inject>`;
+	return html`<p style="margin: 10px;">Icon Inject</p> <lwdc-icon-inject  data-icon=${iconsRadioKnob()} data-category="system" data-size=${iconSizesRadioKnob()} data-color=${iconColorsRadioKnob()}> </lwdc-icon-inject>`;
 }
 
 injectIconStory.storyName = 'Icon Inject';

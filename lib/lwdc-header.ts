@@ -120,7 +120,7 @@ export class HeaderElement extends LitElement {
 		<div class="lockupContainer">
 			<div class="lockup">
 				<span class="logo">
-					<img src="${imgURL}"/>
+					<img src=${imgURL}/>
 				</span>
 				<h3 class="logoTitle">${this.title}</h3>
 

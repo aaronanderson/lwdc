@@ -66,8 +66,8 @@ export class TextElement extends formElement(LitElement) {
 			'wdc-form-disabled': this.disabled
 		};
 
-		return html`<div class="${classMap(formTextClass)}">
-						<input formnovalidate type="${this.password ? 'password' : this.inputType}" .min="${ifDefined(this.min)}" .max="${ifDefined(this.max)}" .value="${ifDefined(this.value)}" list="${ifDefined(this.list)}" placeholder="${ifDefined(this.placeholder)}" ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></input>
+		return html`<div class=${classMap(formTextClass)}>
+						<input formnovalidate type=${this.password ? 'password' : this.inputType} .min=${ifDefined(this.min)} .max=${ifDefined(this.max)} .value=${ifDefined(this.value)} list=${ifDefined(this.list)} placeholder=${ifDefined(this.placeholder)} ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></input>
 					</div>
 					`;
 	}

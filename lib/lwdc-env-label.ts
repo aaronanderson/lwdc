@@ -28,7 +28,7 @@ export class EnvLabelElement extends LitElement {
 			} else if (this.env == "dev") {
 				envName = "Development Enviroment";
 			}
-			return html`<div class="${classMap(envClass)}">${envName}</div>`;
+			return html`<div class=${classMap(envClass)}>${envName}</div>`;
 		}
 
 		return html``;

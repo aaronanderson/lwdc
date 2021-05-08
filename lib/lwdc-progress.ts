@@ -30,7 +30,7 @@ export class ProgressElement extends LitElement {
 
 			<div class="lwdc-progress-container">
 					${this.title != '' ? html`<h3 class="wdc-type-h3">${this.title}</h3>` : undefined}
-					<progress value="${this.value}" max="${this.max}"></progress>
+					<progress value=${this.value} max=${this.max}></progress>
 					${this.showLabel ? html`<span class="wdc-type-variant-label">${Math.round(this.value != 0 ? (this.value / this.max) * 100 : 0)}%</span>` : undefined}
 			</div>
 

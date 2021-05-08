@@ -21,7 +21,7 @@ export class CardElement extends LitElement {
 	render() {
 		let className = this.size ? `wdc-card-${this.size}` : `wdc-card`;
 		return html`
-			<div class="${className}">
+			<div class=${className}>
 				 <h3 class="wdc-card-heading">${this.title}</h3>
           		 <div class="wdc-card-body"><slot></slot></div>
 			</div>

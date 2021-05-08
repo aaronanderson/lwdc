@@ -57,7 +57,7 @@ export class ColorInputElement extends formElement(LitElement) {
 		};
 		return html`
 		<div class="lwdc-color-input-container">
-			<input type="text" dir="ltr" placeholder=${placeholder} spellcheck="false" maxlength="7" ?disabled=${this.disabled} ?readonly=${!!this.preview} @change=${this.handleChange} class="${classMap(inputClass)}" value=${formattedValue}></input>
+			<input type="text" dir="ltr" placeholder=${placeholder} spellcheck="false" maxlength="7" ?disabled=${this.disabled} ?readonly=${!!this.preview} @change=${this.handleChange} class=${classMap(inputClass)} value=${formattedValue}></input>
 			<lwdc-color-swatch ?show-check=${this.showCheck} color=${this.value}></lwdc-color-swatch>
 			<span class="lwdc-color-input-pound-sign-prefix">#</span>
 		</div>
@@ -147,7 +147,7 @@ export class ColorSwatchElement extends LitElement {
 	render() {
 		return html`
 		<div class="lwdc-color-input-color-swatch">
-			${this.showCheck? html `<lwdc-icon .icon=${checkSmallIcon} .color="${this.color}" .fill="{pickForegroundColor(this.color)}" .fillHover="{pickForegroundColor(this.color)}" ></lwdc-icon>` : undefined}
+			${this.showCheck? html `<lwdc-icon .icon=${checkSmallIcon} .color=${this.color} .fill=${pickForegroundColor(this.color)} .fillHover=${pickForegroundColor(this.color)} ></lwdc-icon>` : undefined}
 		</div>
 		`;
 	}

@@ -25,7 +25,7 @@ export class CountBadgeElement extends LitElement {
 			'wdc-count-badge-inverse': this.inverse
 		};
 		return html`
-		<span class="${classMap(countBadgeClass)}">${this.count}</span>
+		<span class=${classMap(countBadgeClass)}>${this.count}</span>
 		`;
 	}
 
