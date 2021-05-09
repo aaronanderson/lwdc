@@ -229,7 +229,7 @@ export declare class FormBaseInterface {
 		formResetCallback(): void;
 }
 
-​
+
 export const FormBaseElement = <T extends Constructor<LitElement>>(superClass: T) => {
   class FormBaseElementMixin extends superClass {
 

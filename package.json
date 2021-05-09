@@ -16,7 +16,7 @@
   "scripts": {
     "wca": "wca analyze --outFiles .storybook/custom-elements.json",
     "clean": "rm -rf wc aaronanderson-lwdc*.tgz",
-    "build": "rollup -c",
+    "build": "node build.js",
     "build-storybook": "build-storybook",
     "start": "start-storybook -s ./stories/assets -p 9001"
   },
@@ -32,9 +32,6 @@
     "lodash": "^4.17.20"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^19.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
-    "@rollup/plugin-typescript": "^8.2.1",
     "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-controls": "^6.2.9",
     "@storybook/addon-docs": "^6.2.9",
@@ -43,23 +40,22 @@
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/addon-storysource": "^6.2.9",
     "@storybook/addon-viewport": "^6.2.9",
-    "@storybook/web-components": "^6.2.9",
     "@storybook/builder-webpack5": "^6.2.9",
+    "@storybook/web-components": "^6.2.9",
     "@types/events": "^3.0.0",
+    "esbuild": "^0.11.20",
+    "esbuild-plugin-postcss2": "^0.0.9",
+    "esbuild-sass-plugin": "^1.3.1",
+    "lit-html": "^1.4.1",
     "node-sass": "^5.0.0",
     "postcss": "^8.2.14",
     "postcss-inline-svg": "^5.0.0",
     "postcss-loader": "^5.2.0",
     "raw-loader": "^4.0.2",
-    "rollup": "^2.47.0",
-    "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-scss": "^2.6.1",
-    "rollup-plugin-typescript2": "^0.30.0",
     "sass-loader": "^11.0.1",
     "ts-loader": "^9.1.2",
     "typescript": "^4.2.4",
     "typescript-lit-html-plugin": "^0.9.0",
-    "web-component-analyzer": "^1.1.6",
-    "lit-html": "^1.4.1"
+    "web-component-analyzer": "^1.1.6"
   }
 }

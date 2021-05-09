@@ -1,6 +1,6 @@
 const path = require('path');
 module.exports = ({ config }) => {
-	config.devtool = "source-maps";
+	config.devtool = "eval";
 
 	config.module.rules.push({
 		test: /\.(ts|tsx)$/,
@@ -22,7 +22,7 @@ module.exports = ({ config }) => {
           postcssOptions: {
             plugins: [
               [
-                "postcss-inline-svg",                
+                "postcss-inline-svg",
               ],
             ],
           },
