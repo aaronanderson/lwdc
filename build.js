@@ -1,7 +1,8 @@
 const esbuild = require("esbuild");
 const path = require("path");
 const sassPlugin = require("esbuild-sass-plugin").sassPlugin;
-const postCssPlugin = require("esbuild-plugin-postcss2").default;
+//const postCssPlugin = require("esbuild-plugin-postcss2").default;
+const postcss = require("postcss");
 
 esbuild.build({
     entryPoints: {
@@ -54,13 +55,17 @@ esbuild.build({
     plugins: [
       sassPlugin({
        implementation: 'node-sass',
-       type: 'lit-css',
+       //wait for update to lit
+       //type: 'lit-css',
+       type: "css-text",
        includePaths: [
          path.resolve('node_modules'),
-       ]
+       ],
+       async transform(source, resolveDir) {
+         const {css} = await postcss([require('postcss-inline-svg')]).process(source);
+         return css;
+       }
+
      }),
-     postCssPlugin({
-       plugins: [require('postcss-inline-svg')]
-     })
    ],
   }).catch((e) => console.error(e.message));

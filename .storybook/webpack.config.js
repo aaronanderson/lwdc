@@ -13,6 +13,10 @@ module.exports = ({ config }) => {
 	config.module.rules.push({
 		test: /\.scss$/,
 		use: [
+			//wait for update to lit
+		  //{
+		  //		loader: 'lit-css-loader',
+		  //	},
 			{
 				loader: 'raw-loader',
 			},
@@ -30,6 +34,9 @@ module.exports = ({ config }) => {
 			},
 			{
 				loader: 'sass-loader',
+				options: {
+					 implementation: require("node-sass"),
+				}
 			},
 
 		],
