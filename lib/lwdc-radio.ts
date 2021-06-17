@@ -20,7 +20,7 @@ export class RadioElement extends FormBaseElement(LitElement) {
 	group?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
-	value?: string;
+	value?: string = undefined;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	checked = false;

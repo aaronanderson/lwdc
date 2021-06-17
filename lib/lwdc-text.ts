@@ -17,7 +17,7 @@ export class TextElement extends FormBaseElement(LitElement) {
 	list?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
-	value?: string;
+	value?: string = undefined;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	password = false;

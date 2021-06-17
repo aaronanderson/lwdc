@@ -440,7 +440,7 @@ export class TableElement<E> extends LitElement {
 		return ifDefined(col.width ? 'width: ' + col.width : undefined);
 	}
 
-	rowErrorClass(rowErrorType?: RowErrorType){
+	rowErrorClass(rowErrorType?: RowErrorType): any{
 		let errorClass = {} as any;
 		if (rowErrorType == RowErrorType.error){
 			errorClass['wdc-table-row-error'] = true;

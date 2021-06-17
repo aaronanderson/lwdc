@@ -11,7 +11,7 @@ const style = css([`${styleCSS}`] as any) as CSSResult;
 export class SelectElement<T> extends FormBaseElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	value?: string;
+	value?: string = undefined;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;

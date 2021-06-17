@@ -22,7 +22,7 @@ import { colors } from '@workday/canvas-colors-web/dist/ts/canvas-colors-hex';
 export class ColorInputElement extends FormBaseElement(LitElement) {
 
 	@property({ type: String, attribute: true, reflect: true })
-	value?: string;
+	 value?: string = undefined;
 
 	@property({ type: Boolean, attribute: 'show-check', reflect: true })
 	showCheck = false;
