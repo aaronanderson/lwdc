@@ -8,7 +8,7 @@ import { action } from '@storybook/addon-actions';
 
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 
-import {CanvasTheme, themeElement, useTheme, defaultCanvasTheme} from '../lib/theme';
+import {CanvasTheme, useTheme, defaultCanvasTheme} from '../lib/theme';
 
 import colors from '@workday/canvas-colors-web';
 
@@ -58,7 +58,7 @@ themeStory.parameters = { layout: 'centered' };
 
 
 @customElement('lwdc-theme-example')
-class ThemeSampleElement extends themeElement(LitElement) {
+class ThemeSampleElement extends LitElement {
 
 	@property({ type: Object })
 	theme?: CanvasTheme;
