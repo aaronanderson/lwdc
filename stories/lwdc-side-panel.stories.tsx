@@ -18,6 +18,12 @@ import { ButtonType, ButtonSize } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-side-panel',
+	decorators: [withKnobs]
+};
+
 export const sidepanelStory = () => {
 	let opened = true;
 	return html2`<lwdc-side-panel-example></lwdc-side-panel-example>
@@ -26,9 +32,6 @@ export const sidepanelStory = () => {
 
 sidepanelStory.storyName = 'Side Panel';
 sidepanelStory.parameters = { layout: 'centered' };
-sidepanelStory.component = 'lwdc-side-panel';
-sidepanelStory.decorators= [withKnobs];
-
 
 @customElement('lwdc-side-panel-example')
 class SidePanelElement extends LitElement {

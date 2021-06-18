@@ -11,6 +11,13 @@ import '../lib/lwdc-select';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-select',
+	decorators: [withKnobs]
+};
+
+
 const selections = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
 export const selectStory = () => {
 	return html`<lwdc-form-field label="Selection">
@@ -21,5 +28,3 @@ export const selectStory = () => {
 
 selectStory.storyName = 'Select';
 selectStory.parameters = { layout: 'centered' };
-selectStory.component = 'lwdc-select';
-selectStory.decorators= [withKnobs];

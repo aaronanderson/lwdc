@@ -14,11 +14,15 @@ import { styleLightDOM } from '../lib/util';
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	//component: 'lwdc-breadcrumbs',
+	decorators: [withKnobs]
+};
+
 export const breadCrumbsStory = () => {
 	return html`<h3>TODO</h3>`;
 }
 
 breadCrumbsStory.storyName = 'Breadcrumbs';
 breadCrumbsStory.parameters = { layout: 'centered' };
-//breadCrumbsStory.component= 'lwdc-breadcrumbs';
-breadCrumbsStory.decorators=  [withKnobs];

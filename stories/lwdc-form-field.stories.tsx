@@ -12,6 +12,12 @@ import { ErrorType } from '../lib/lwdc-form-field';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components/Form Field',
+	component: 'lwdc-form-field',
+	decorators: [withKnobs]
+};
+
 
 //<div class="wdc-form"> </div>
 export const formFieldNormalStory = () => {
@@ -22,9 +28,6 @@ export const formFieldNormalStory = () => {
 
 formFieldNormalStory.storyName = 'Label';
 formFieldNormalStory.parameters = { layout: 'centered' };
-formFieldNormalStory.component = 'lwdc-form-field';
-formFieldNormalStory.decorators= [withKnobs];
-
 
 export const formFieldLeftlStory = () => {
 	return html`<lwdc-form><lwdc-form-field label="Label" .errorType=${ErrorType.alert} hint-text="Check Value"><div>Value</div></lwdc-form-field></lwdc-form>`;
@@ -32,5 +35,3 @@ export const formFieldLeftlStory = () => {
 
 formFieldLeftlStory.storyName = 'Hint';
 formFieldLeftlStory.parameters = { layout: 'centered' };
-formFieldLeftlStory.component = 'lwdc-form-field';
-formFieldLeftlStory.decorators= [withKnobs];

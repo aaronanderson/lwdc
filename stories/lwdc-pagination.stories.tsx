@@ -16,6 +16,12 @@ import '../lib/lwdc-pagination';
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-pagination',
+	decorators: [withKnobs]
+};
+
 const jumpControlsBox = () => boolean("Jump Controls", true);
 
 const rangeSizeBox = () => number("Range Size", 5);
@@ -34,9 +40,6 @@ export const paginationStory = () => {
 
 paginationStory.storyName = 'Pagination';
 paginationStory.parameters = { layout: 'centered' };
-paginationStory.component = 'lwdc-pagination';
-paginationStory.decorators= [withKnobs];
-
 
 
 

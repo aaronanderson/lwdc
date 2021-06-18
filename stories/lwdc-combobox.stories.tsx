@@ -13,6 +13,13 @@ import '../lib/lwdc-combobox';
 loadWDCFonts();
 
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-select',
+	decorators: [withKnobs]
+};
+
+
 //const options = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
 const options: Array<any> = Array.from(Array(100)).map((_, i) => { let sp = i % 2 == 0 ? ' ' : ''; return { name: `Entry ${i} XXXXXXXXX${sp}XXXXXXXXXXXXXXXXXXX${sp}XXXXXXXXXXXXXXXXXXXX${sp}XXXXXXXXXX`, id: i } });
 const selected = new Set();
@@ -34,5 +41,3 @@ export const comboboxStory = () => {
 
 comboboxStory.storyName =  'Combobox';
 comboboxStory.parameters = { layout: 'centered' };
-comboboxStory.component = 'lwdc-select';
-comboboxStory.decorators= [withKnobs];

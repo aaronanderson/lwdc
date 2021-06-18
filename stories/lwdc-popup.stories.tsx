@@ -13,6 +13,12 @@ import '../lib/lwdc-button';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-popup',
+	decorators: [withKnobs]
+};
+
 export const popupStory = () => {
 	return html`<lwdc-popup style="position:absolute; top: 10px;">
 					<h3>Welcome to your popup positioned by Popup!</h3>
@@ -23,5 +29,3 @@ export const popupStory = () => {
 
 popupStory.storyName = 'Popup';
 popupStory.parameters = { layout: 'centered' };
-popupStory.component = 'lwdc-popup';
-popupStory.decorators= [withKnobs];

@@ -11,6 +11,13 @@ import '../lib/lwdc-text';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-text',
+	decorators: [withKnobs]
+};
+
+
 export const textStory = () => {
 	return html`<lwdc-form-field label="Text">
 						<lwdc-text name="text" required @lwdc-text-change=${(e)=> console.log("text changed", e.detail.value)}></lwdc-text>
@@ -20,5 +27,3 @@ export const textStory = () => {
 
 textStory.storyName = 'Text';
 textStory.parameters = { layout: 'centered' };
-textStory.component = 'lwdc-text';
-textStory.decorators= [withKnobs];

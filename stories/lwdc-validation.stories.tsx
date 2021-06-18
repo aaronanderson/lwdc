@@ -24,6 +24,13 @@ import { ErrorType } from '../lib/lwdc-form-field';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-text',
+	decorators: [withKnobs]
+};
+
+
 const options = [{ 'id': '1', 'name': 'Option 1' }, { 'id': '2', 'name': 'Option 2' }, { 'id': '3', 'name': 'Option 3' }];
 export const validationStory = () => {
 	return html`<lwdc-form>
@@ -73,8 +80,6 @@ export const validationStory = () => {
 
 validationStory.storyName = 'Validation';
 validationStory.parameters = { layout: 'centered' };
-validationStory.decorators= [withKnobs];
-
 
 const validate = (e: Event) => {
 	const form = (closestElement('lwdc-form', (e.target as HTMLElement)) as any);

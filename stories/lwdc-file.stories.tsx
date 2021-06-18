@@ -20,7 +20,18 @@ import { ButtonType } from '../lib/lwdc-button';
 import { fileDownload } from '../lib/util';
 import FileUploadElement from '../lib/lwdc-file-upload';
 
+
+
+
 loadWDCFonts();
+
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components/File',
+	component: 'lwdc-file-upload',
+	decorators: [withKnobs]
+};
+
+
 
 export const fileDownloadStory = () => {
 	return html2`
@@ -35,8 +46,6 @@ export const fileDownloadStory = () => {
 
 fileDownloadStory.storyName = 'Download';
 fileDownloadStory.parameters = { layout: 'centered' };
-fileDownloadStory.component = 'lwdc-file-upload';
-fileDownloadStory.decorators= [withKnobs];
 
 
 export const fileUploadStory = () => {
@@ -45,9 +54,6 @@ export const fileUploadStory = () => {
 
 fileUploadStory.storyName = 'Upload';
 fileUploadStory.parameters = { layout: 'centered' };
-fileUploadStory.component = 'lwdc-file-upload';
-fileUploadStory.decorators= [withKnobs];
-
 
 @customElement('lwdc-file-upload-example')
 class FileUploadExampleElement extends LitElement {

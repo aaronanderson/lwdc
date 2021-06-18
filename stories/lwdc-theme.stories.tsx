@@ -14,6 +14,11 @@ import colors from '@workday/canvas-colors-web';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	decorators: [withKnobs]
+};
+
 
 const customTheme = {
 	palette: {
@@ -47,8 +52,6 @@ export const themeStory = () => {
 
 themeStory.storyName = 'Theme';
 themeStory.parameters = { layout: 'centered' };
-themeStory.decorators= [withKnobs];
-
 
 
 

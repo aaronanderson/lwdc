@@ -21,6 +21,14 @@ import { styleMap } from 'lit-html/directives/style-map';
 loadWDCFonts();
 
 
+
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-button',
+	decorators: [withKnobs]
+};
+
+
 const size = ['small', 'medium', 'large'];
 const sizeOptions: Record<string, string> = size.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
 const sizesRadioKnob = () => radios("Size", sizeOptions, 'medium') as any;
@@ -57,5 +65,3 @@ export const buttonStory = () => {
 
 buttonStory.storyName = 'Button';
 buttonStory.parameters = { layout: 'centered' };
-buttonStory.component = 'lwdc-button';
-buttonStory.decorators= [withKnobs];

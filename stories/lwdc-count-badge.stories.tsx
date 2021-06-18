@@ -14,6 +14,11 @@ import '../lib/lwdc-count-badge';
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-count-badge',
+	decorators: [withKnobs]
+};
 
 export const countBadgeStory = () => {
 	return html`<div style="padding: 10px;">
@@ -26,5 +31,3 @@ export const countBadgeStory = () => {
 
 countBadgeStory.storyName = 'Count Badge';
 countBadgeStory.parameters = { layout: 'centered' };
-countBadgeStory.component = 'lwdc-count-badge';
-countBadgeStory.decorators= [withKnobs];

@@ -10,6 +10,14 @@ import '../lib/lwdc-search-bar';
 
 loadWDCFonts();
 
+export default {
+	title: 'LitElement Workday Canvas Kit Web Components',
+	component: 'lwdc-search-bar',
+	decorators: [withKnobs]
+};
+
+
+
 export const searchBarStory = () => {
 	return html`
 
@@ -23,5 +31,3 @@ export const searchBarStory = () => {
 
 searchBarStory.storyName = 'Search Bar';
 searchBarStory.parameters = { layout: 'centered' };
-searchBarStory.component = 'lwdc-search-bar';
-searchBarStory.decorators= [withKnobs];
