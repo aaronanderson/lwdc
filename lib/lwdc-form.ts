@@ -22,9 +22,9 @@ export class FormElement extends LitElement {
 	@property({ type: Array })
 	elementChildNodes: Array<ChildNode> = [];
 
-
-  @query("form")
-  form?: HTMLFormElement;
+  get form(){
+    return this.querySelector("form") as HTMLFormElement;
+  }
 
   get elements(){
     let elements: Array<Element> = [];

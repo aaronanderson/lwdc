@@ -112,9 +112,6 @@ export class PaginationGoToElement extends LitElement {
   @property({ type: Object })
   gotoLabel: () => TemplateResult = () => html ``;
 
-  @query('lwdc-text')
-  textInput?: TextElement;
-
   createRenderRoot() {
     return this;
   }
@@ -132,7 +129,8 @@ export class PaginationGoToElement extends LitElement {
 
   formSubmit(e: any) {
     e.preventDefault();
-    const page = this.validatePage(this.textInput && this.textInput.value ? this.textInput.value: '');
+    const textInput = this.querySelector("lwdc-text") as TextElement;
+    const page = this.validatePage(textInput && textInput.value ? textInput.value: '');
     if (page) {
         let pagination = closestElement('lwdc-pagination', this) as PaginationElement;
         pagination.pageChange(page);

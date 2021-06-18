@@ -20,7 +20,7 @@ export class SwitchElement extends FormBaseElement(LitElement) {
 	disabled = false;
 
 	@query("input")
-	switchInput!: HTMLInputElement;
+	switchInput?: HTMLInputElement;
 
 
 	static get styles() {
@@ -55,7 +55,6 @@ export class SwitchElement extends FormBaseElement(LitElement) {
 	}
 
 	handleChange(e: any) {
-		console.log(e);
 		this.checked = e.target.checked;
 		this._internals.setFormValue(this.checked);
 		this.checkValidity();
@@ -65,7 +64,7 @@ export class SwitchElement extends FormBaseElement(LitElement) {
 		if (this._customValidity) {
 			return false;
 		}
-		if (!this.matches(':disabled') && (this.hasAttribute('required') && !this.checked)) {
+		if (!this.matches(':disabled') && (this.hasAttribute('required') && !this.checked && this.switchInput)) {
 			if (this.formField) {
 				this.setInternals(true, () => `${this.formField.label} is required`);
 				if (this.formField.errorType == ErrorType.alert) {
@@ -78,7 +77,7 @@ export class SwitchElement extends FormBaseElement(LitElement) {
 			}
 		} else {
 			this.setInternals(false);
-			if (this.formField) {
+			if (this.formField && this.switchInput) {
 				this.switchInput.classList.remove('lwdc-switch-error', 'lwdc-switch-alert');
 			}
 		}
@@ -89,7 +88,7 @@ export class SwitchElement extends FormBaseElement(LitElement) {
 	formResetCallback() {
 		super.formResetCallback();
 		this.checked = false;
-		if (this.formField) {
+		if (this.formField && this.switchInput) {
 			this.switchInput.classList.remove('lwdc-switch-error', 'lwdc-switch-alert');
 		}
 		this.requestUpdate();
