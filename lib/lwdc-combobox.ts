@@ -86,7 +86,6 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 				selected();
 			}
 		});
-		this.updateStyle();
 
 	}
 
@@ -98,22 +97,16 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 			}
 			this.requestUpdate();
 		}
-		if (changedProperties.has("width") || changedProperties.has("width") || changedProperties.has("selectedWidth") || changedProperties.has("selectedHeight")) {
-				this.updateStyle();
-		}
-	}
-
-	updateStyle(){
-		if (this.width) {
+		if (changedProperties.has("width") && this.width) {
 			this.style.setProperty('--lwdc-combobox-width', this.width);
 		}
-		if (this.height) {
+		if (changedProperties.has("width") && this.height) {
 			this.style.setProperty('--lwdc-combobox-height', this.height);
 		}
-		if (this.selectedWidth) {
+		if (changedProperties.has("selectedWidth") && this.selectedWidth) {
 			this.style.setProperty('--lwdc-combobox-selected-width', this.selectedWidth);
 		}
-		if (this.selectedHeight) {
+		if (changedProperties.has("selectedHeight") && this.selectedHeight) {
 			this.style.setProperty('--lwdc-combobox-selected-height', this.selectedHeight);
 		}
 	}

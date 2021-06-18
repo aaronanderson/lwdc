@@ -53,8 +53,6 @@ export class HeaderElement extends LitElement {
 			return true;
 		});
 		//set the header theme CSS variables.
-		this.updateVariant();
-		this.updateTheme();
 		super.connectedCallback();
 		this.navItems.forEach((n)=> n.addEventListener("click", this.handleItemClicked.bind(this)));
 
@@ -72,29 +70,22 @@ export class HeaderElement extends LitElement {
 
 	updated(changedProperties: Map<string, any>) {
 		if (changedProperties.has("variant")) {
-			this.updateVariant();
+				this.style.setProperty('--lwdc-header-height', this.variant == HeaderVariant.Full ? HeaderHeight.Large : HeaderHeight.Small);
+				this.style.setProperty('--lwdc-header-lockup-height', this.variant == HeaderVariant.Global ? HeaderHeight.Small : HeaderHeight.Large);
 		}
 		if (changedProperties.has("theme")) {
-			this.updateTheme();
+			this.style.setProperty('--lwdc-header-background', themes[this.theme].background() );
+			this.style.setProperty('--lwdc-header-color', themes[this.theme].color() );
+			this.style.setProperty('--lwdc-header-title-chip', themes[this.theme].titleChip() );
+			this.style.setProperty('--lwdc-header-box-shadow', themes[this.theme].depth.boxShadow );
+			this.style.setProperty('--lwdc-header-border', themes[this.theme].depth.border );
+
+			this.style.setProperty('--lwdc-header-link-color', themes[this.theme].linkColor() );
+			this.style.setProperty('--lwdc-header-link-fadeout-color', themes[this.theme].linkFadeOutColor() );
+			this.style.setProperty('--lwdc-header-current-link-color', themes[this.theme].currentLinkColor() );
+			this.style.setProperty('--lwdc-header-chip-color', themes[this.theme].chipColor() );
+
 		}
-	}
-
-	updateVariant(){
-		this.style.setProperty('--lwdc-header-height', this.variant == HeaderVariant.Full ? HeaderHeight.Large : HeaderHeight.Small);
-		this.style.setProperty('--lwdc-header-lockup-height', this.variant == HeaderVariant.Global ? HeaderHeight.Small : HeaderHeight.Large);
-	}
-
-	updateTheme(){
-		this.style.setProperty('--lwdc-header-background', themes[this.theme].background() );
-		this.style.setProperty('--lwdc-header-color', themes[this.theme].color() );
-		this.style.setProperty('--lwdc-header-title-chip', themes[this.theme].titleChip() );
-		this.style.setProperty('--lwdc-header-box-shadow', themes[this.theme].depth.boxShadow );
-		this.style.setProperty('--lwdc-header-border', themes[this.theme].depth.border );
-
-		this.style.setProperty('--lwdc-header-link-color', themes[this.theme].linkColor() );
-		this.style.setProperty('--lwdc-header-link-fadeout-color', themes[this.theme].linkFadeOutColor() );
-		this.style.setProperty('--lwdc-header-current-link-color', themes[this.theme].currentLinkColor() );
-		this.style.setProperty('--lwdc-header-chip-color', themes[this.theme].chipColor() );
 	}
 
 

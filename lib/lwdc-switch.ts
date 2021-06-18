@@ -27,24 +27,20 @@ export class SwitchElement extends FormBaseElement(LitElement) {
 		return [style];
 	}
 
-	firstUpdated(){
-		this.updateStyle();
-	}
-
 	updated(changedProperties: Map<string, any>) {
-		this.updateStyle();
-	}
-
-	updateStyle(){
-		this.style.setProperty('--lwdc-switch-cursor', this.disabled? 'not-allowed' :'pointer');
+		if (changedProperties.has("disabled")) {
+				this.style.setProperty('--lwdc-switch-cursor', this.disabled? 'not-allowed' :'pointer');
+		}
 		if (this.checked) {
-					this.style.setProperty('--lwdc-switch-background-color', this.disabled? lwdcTheme.palette.primary.light : lwdcTheme.palette.primary.main);
+				  this.style.setProperty('--lwdc-switch-background-color', this.disabled? lwdcTheme.palette.primary.light : lwdcTheme.palette.primary.main);
 					this.style.setProperty('--lwdc-switch-circle-translate', `translateX(16px)`);//spacing.s
 		 } else {
-				this.style.setProperty('--lwdc-switch-background-color', this.disabled ? colors.soap400 : colors.licorice200);
+			 	this.style.setProperty('--lwdc-switch-background-color', this.disabled ? colors.soap400 : colors.licorice200);
 				this.style.setProperty('--lwdc-switch-circle-translate', 'translateX(0)');
-		 }
+	 	 }
 		 this.style.setProperty('--lwdc-switch-circle-color', colors.frenchVanilla100);//consistent with checkbox //lwdcTheme.palette.primary.contrast
+
+
 	}
 
 	render() {
