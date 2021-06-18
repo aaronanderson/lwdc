@@ -15,13 +15,6 @@ import '../lib/lwdc-checkbox';
 loadWDCFonts();
 
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components/Checkbox',
-	component: 'lwdc-checkbox',
-	decorators: [withKnobs]
-};
-
-
 export const checkboxStory = () => {
 	return html`<lwdc-form-field label="Checkbox">
 						<lwdc-checkbox name="checkbox" label="E-Mail" @change=${(e: Event) => console.log(e.target)}></lwdc-checkbox>
@@ -31,6 +24,8 @@ export const checkboxStory = () => {
 
 checkboxStory.storyName = 'Default';
 checkboxStory.parameters = { layout: 'centered' };
+checkboxStory.component = 'lwdc-checkbox';
+checkboxStory.decorators= [withKnobs];
 
 
 
@@ -50,3 +45,5 @@ export const checkboxGroupStory = () => {
 
 checkboxGroupStory.storyName = 'Group';
 checkboxGroupStory.parameters = { layout: 'centered' };
+checkboxGroupStory.component = 'lwdc-checkbox';
+checkboxGroupStory.decorators= [withKnobs];

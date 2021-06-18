@@ -15,12 +15,6 @@ import '../lib/lwdc-switch';
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	//component: 'lwdc-switch',
-	decorators: [withKnobs]
-};
-
 const disabledBox = () => boolean("Disabled", false);
 
 export const switchStory = () => {
@@ -33,3 +27,5 @@ export const switchStory = () => {
 
 switchStory.storyName = 'Switch';
 switchStory.parameters = { layout: 'centered' };
+switchStory.component = 'lwdc-switch';
+switchStory.decorators= [withKnobs];

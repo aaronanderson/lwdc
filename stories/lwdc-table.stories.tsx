@@ -14,12 +14,6 @@ import { TableElement, RowErrorType } from '../lib/lwdc-table';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-table',
-	decorators: [withKnobs]
-};
-
 const hideColumnBox = () => boolean("Hide Column", false);
 
 const entries = [{ 'id': '1', 'name': 'Entry 1', 'description': 'Description 1' }, { 'id': '2', 'name': 'Entry 2', 'description': 'Description 2' }, { 'id': '3', 'name': 'Entry 3', 'description': 'Description 3' }];
@@ -87,6 +81,9 @@ export const tableStory = () => {
 
 tableStory.storyName = 'Table';
 tableStory.parameters = { layout: 'centered' };
+tableStory.component = 'lwdc-table';
+tableStory.decorators= [withKnobs];
+
 
 const add = (e: CustomEvent) => {
 	console.log('add');

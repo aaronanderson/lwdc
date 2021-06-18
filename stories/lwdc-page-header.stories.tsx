@@ -16,12 +16,6 @@ import { ButtonType } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-page-header',
-	decorators: [withKnobs]
-};
-
 export const pageHeaderStory = () => {
 	return html`<lwdc-page-header style="width:100%" title="Page Header" sub-title="Page Sub-Header">
 						<lwdc-button .type=${ButtonType.iconInverse}>
@@ -36,3 +30,5 @@ export const pageHeaderStory = () => {
 
 pageHeaderStory.storyName = 'Page Header';
 pageHeaderStory.parameters = { layout: 'centered' };
+pageHeaderStory.component = 'lwdc-page-header';
+pageHeaderStory.decorators= [withKnobs];

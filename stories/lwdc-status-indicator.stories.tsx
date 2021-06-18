@@ -14,14 +14,6 @@ import { StatusIndicatorEmphasis, StatusIndicatorType } from '../lib/lwdc-status
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-status-indicator',
-	decorators: [withKnobs]
-};
-
-
-
 const type = ['gray', 'orange', 'blue', 'green', 'red', 'transparent'];
 const typeOptions: Record<string, string> = type.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
 const typesRadioKnob = () => radios("Type", typeOptions, 'gray') as any;
@@ -44,3 +36,5 @@ export const statusIndicatorStory = () => {
 
 statusIndicatorStory.storyName = 'Status Indicator';
 statusIndicatorStory.parameters = { layout: 'centered' };
+statusIndicatorStory.component = 'lwdc-status-indicator';
+statusIndicatorStory.decorators= [withKnobs];

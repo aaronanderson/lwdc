@@ -15,14 +15,6 @@ import { ButtonType } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-tooltip',
-	decorators: [withKnobs]
-};
-
-
-
 export const tooltipStory = () => {
 	return html`<lwdc-tooltip message="Close">
 					<lwdc-button .type=${ButtonType.iconCircle}  @click=${() => { console.log("clicked"); action("Element Button Clicked"); }}>
@@ -35,3 +27,5 @@ export const tooltipStory = () => {
 
 tooltipStory.storyName =  'Tooltip';
 tooltipStory.parameters = { layout: 'centered' };
+tooltipStory.component = 'lwdc-tooltip';
+tooltipStory.decorators= [withKnobs];

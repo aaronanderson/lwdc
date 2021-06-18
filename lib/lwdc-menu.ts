@@ -33,6 +33,7 @@ export class MenuElement extends LitElement {
 		//Maybe need a mutation observer here in case child menu items change
 		this.elementChildNodes = Array.from(this.childNodes);
 		super.connectedCallback();
+		this.updateStyle();
 	}
 
 	static get styles() {
@@ -40,7 +41,13 @@ export class MenuElement extends LitElement {
 	}
 
 	updated(changedProperties: Map<string, any>) {
-		if (changedProperties.has("width") && this.width) {
+		if (changedProperties.has("width")) {
+			this.updateStyle();
+		}
+	}
+
+	updateStyle(){
+		if (this.width) {
 			this.style.setProperty('--lwdc-menu-width', this.width);
 		}
 	}

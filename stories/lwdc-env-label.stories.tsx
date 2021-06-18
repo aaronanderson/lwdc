@@ -10,12 +10,6 @@ import '../lib/lwdc-env-label';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-env-label',
-	decorators: [withKnobs]
-};
-
 
 const envs = ['dev', 'qa', 'prod'];
 const envOptions: Record<string, string> = envs.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
@@ -27,3 +21,5 @@ export const envLabelStory = () => {
 
 envLabelStory.storyName = 'Environment Label';
 envLabelStory.parameters = { layout: 'centered' };
+envLabelStory.component = 'lwdc-env-label';
+envLabelStory.decorators= [withKnobs];

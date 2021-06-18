@@ -16,14 +16,6 @@ import { styleMap } from 'lit-html/directives/style-map';
 loadWDCFonts();
 
 
-
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-banner',
-	decorators: [withKnobs]
-};
-
-
 const stickyBox = () => boolean("Sticky", false);
 const errorBox = () => boolean("Error", false);
 
@@ -36,3 +28,5 @@ export const bannerStory = () => {
 
 bannerStory.storyName = 'Banner';
 bannerStory.parameters = { layout: 'centered' };
+bannerStory.component = 'lwdc-banner';
+bannerStory.decorators= [withKnobs];

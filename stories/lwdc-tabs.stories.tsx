@@ -11,12 +11,6 @@ import '../lib/lwdc-tabs';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-tabs',
-	decorators: [withKnobs]
-};
-
 const tabActivated = (e: CustomEvent) => {
 	render(html`<span>Content ${e.detail.index + 1}</span>`, e.target as HTMLElement);
  }
@@ -27,3 +21,5 @@ export const tabsStory = () => {
 
 tabsStory.storyName = 'Tabs';
 tabsStory.parameters = { layout: 'centered' };
+tabsStory.component = 'lwdc-tabs';
+tabsStory.decorators= [withKnobs];

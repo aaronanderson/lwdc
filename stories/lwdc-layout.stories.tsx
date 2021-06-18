@@ -9,12 +9,6 @@ import '../lib/lwdc-layout-section';
 import '../lib/lwdc-card';
 
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components/Layout',
-	component: 'lwdc-icon',
-	decorators: [withKnobs]
-};
-
 
 
 export const boxLayoutStory = () => {
@@ -265,6 +259,8 @@ export const boxLayoutStory = () => {
 
 boxLayoutStory.storyName = 'Box Layout';
 boxLayoutStory.parameters = { layout: 'centered' };
+boxLayoutStory.decorators= [withKnobs];
+
 
 export const sectionLayoutStory = () => {
 	return html`
@@ -376,3 +372,4 @@ export const sectionLayoutStory = () => {
 
 sectionLayoutStory.storyName = 'Section Layout';
 sectionLayoutStory.parameters = { layout: 'centered' };
+sectionLayoutStory.decorators= [withKnobs];

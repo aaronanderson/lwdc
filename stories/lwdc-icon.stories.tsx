@@ -11,12 +11,6 @@ import '../lib/lwdc-icon-inject';
 
 //https://storybook.js.org/docs/formats/component-story-format/
 //https://design.workday.com/tokens/assets/icons/icon-guidelines
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components/Icon',
-	component: 'lwdc-icon',
-	decorators: [withKnobs]
-};
-
 
 
 const icons = ['x', 'filter', 'uploadCloud', 'home', 'activity'];
@@ -43,6 +37,9 @@ export const iconStory = () => {
 
 iconStory.storyName = 'Icon';
 iconStory.parameters = { layout: 'centered' };
+iconStory.component = 'lwdc-icon';
+iconStory.decorators= [withKnobs];
+
 
 export const injectIconStory = () => {
 	return html`<p style="margin: 10px;">Icon Inject</p> <lwdc-icon-inject  data-icon=${iconsRadioKnob()} data-category="system" data-size=${iconSizesRadioKnob()} data-color=${iconColorsRadioKnob()}> </lwdc-icon-inject>`;
@@ -50,3 +47,5 @@ export const injectIconStory = () => {
 
 injectIconStory.storyName = 'Icon Inject';
 injectIconStory.parameters = { layout: 'centered' };
+injectIconStory.component = 'lwdc-icon';
+injectIconStory.decorators= [withKnobs];

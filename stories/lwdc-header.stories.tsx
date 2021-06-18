@@ -19,11 +19,6 @@ import { ButtonType } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-header',
-	decorators: [withKnobs]
-};
 
 const themeColor = ['white', 'dark', 'transparent'];
 const themeColorOptions: Record<string, string> = themeColor.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
@@ -112,3 +107,5 @@ export const headerStory = () => {
 
 headerStory.storyName = 'Header';
 headerStory.parameters = { layout: 'centered' };
+headerStory.component = 'lwdc-header';
+headerStory.decorators= [withKnobs];

@@ -137,11 +137,17 @@ export class ColorSwatchElement extends LitElement {
 		return [style];
 	}
 
+  firstUpdated(){
+		this.updateStyle();
+	}
+
 	updated(changedProperties: Map<string, any>) {
+		this.updateStyle();
+	}
+
+	updateStyle(){
 		const swatchColor = this.color  === undefined ? colors.frenchVanilla100 : `#${this.color}`;
-		if (changedProperties.has("color")) {
-			this.style.setProperty('--lwdc-color-swatch-color', swatchColor);
-		}
+		this.style.setProperty('--lwdc-color-swatch-color', swatchColor);
 		const boxShadow = this.showCheck || swatchColor === colors.frenchVanilla100  ? 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.25)' : null;
 		this.style.setProperty('--lwdc-color-swatch-box-shadow', boxShadow);
 	}

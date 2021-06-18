@@ -73,12 +73,20 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 		this.searchInput.addEventListener('focus', () => {
 			this.calculateMenu();
 		});
-		this.addEventListener('blur', () => {
+
+		const selected = () => {
 			this.calculateMenu();
 			this.checkValidity();
 			this.searchInput.value = '';
 			this.filtered = this.options;
+		};
+		this.addEventListener('blur', selected);
+		this.addEventListener('keypress', (e: KeyboardEvent) => {
+			if (e.keyCode === 13) {
+				selected();
+			}
 		});
+		this.updateStyle();
 
 	}
 
@@ -90,16 +98,22 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 			}
 			this.requestUpdate();
 		}
-		if (changedProperties.has("width") && this.width) {
+		if (changedProperties.has("width") || changedProperties.has("width") || changedProperties.has("selectedWidth") || changedProperties.has("selectedHeight")) {
+				this.updateStyle();
+		}
+	}
+
+	updateStyle(){
+		if (this.width) {
 			this.style.setProperty('--lwdc-combobox-width', this.width);
 		}
-		if (changedProperties.has("width") && this.height) {
+		if (this.height) {
 			this.style.setProperty('--lwdc-combobox-height', this.height);
 		}
-		if (changedProperties.has("selectedWidth") && this.selectedWidth) {
+		if (this.selectedWidth) {
 			this.style.setProperty('--lwdc-combobox-selected-width', this.selectedWidth);
 		}
-		if (changedProperties.has("selectedHeight") && this.selectedHeight) {
+		if (this.selectedHeight) {
 			this.style.setProperty('--lwdc-combobox-selected-height', this.selectedHeight);
 		}
 	}
@@ -142,6 +156,7 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 		} else {
 			this.displayMenu = false;
 		}
+		this.requestUpdate();
 	}
 
 	get menuTemplate() {

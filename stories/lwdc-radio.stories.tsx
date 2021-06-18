@@ -11,11 +11,6 @@ import '../lib/lwdc-radio';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components/Radio',
-	component: 'lwdc-radio',
-	decorators: [withKnobs]
-};
 
 
 export const radioStory = () => {
@@ -27,6 +22,9 @@ export const radioStory = () => {
 
 radioStory.storyName = 'Default';
 radioStory.parameters = { layout: 'centered' };
+radioStory.component = 'lwdc-radio';
+radioStory.decorators= [withKnobs];
+
 
 
 export const radioGroupStory = () => {
@@ -45,3 +43,5 @@ export const radioGroupStory = () => {
 
 radioGroupStory.storyName = 'Group';
 radioGroupStory.parameters = { layout: 'centered' };
+radioGroupStory.component = 'lwdc-radio';
+radioGroupStory.decorators= [withKnobs];

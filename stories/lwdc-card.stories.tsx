@@ -13,12 +13,6 @@ import '../lib/lwdc-card';
 loadWDCFonts();
 
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-card',
-	decorators: [withKnobs]
-};
-
 export const cardStory = () => {
 	return html`
 
@@ -46,3 +40,5 @@ export const cardStory = () => {
 
 cardStory.storyName =  'Card';
 cardStory.parameters = { layout: 'centered' };
+cardStory.component = 'lwdc-card';
+cardStory.decorators= [withKnobs];

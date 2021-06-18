@@ -11,12 +11,6 @@ import '../lib/lwdc-textarea';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-textarea',
-	decorators: [withKnobs]
-};
-
 
 export const textareaStory = () => {
 	return html`<lwdc-form-field label="Text Area">
@@ -27,3 +21,5 @@ export const textareaStory = () => {
 
 textareaStory.storyName =  'Textarea';
 textareaStory.parameters = { layout: 'centered' };
+textareaStory.component = 'lwdc-textarea';
+textareaStory.decorators= [withKnobs];

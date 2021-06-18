@@ -14,10 +14,6 @@ import { styleLightDOM } from '../lib/util';
 loadWDCFonts();
 styleLightDOM(document.body, coreStyle, 'lwdc-core');
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	decorators: [withKnobs]
-};
 
 
 
@@ -82,3 +78,4 @@ export const coreStory = () => {
 
 coreStory.storyName = 'Typography';
 coreStory.parameters = { layout: 'centered' };
+coreStory.decorators= [withKnobs];

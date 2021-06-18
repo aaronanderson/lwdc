@@ -13,13 +13,6 @@ import '../lib/lwdc-menu-item';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-menu',
-	decorators: [withKnobs]
-};
-
-
 
 export const menuStory = () => {
 	return html`<lwdc-menu width="250px">
@@ -35,3 +28,5 @@ export const menuStory = () => {
 
 menuStory.storyName = 'Menu';
 menuStory.parameters = { layout: 'centered' };
+menuStory.component = 'lwdc-menu';
+menuStory.decorators= [withKnobs];

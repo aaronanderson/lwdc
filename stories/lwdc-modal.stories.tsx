@@ -14,14 +14,6 @@ import { ButtonType } from '../lib/lwdc-button';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-modal',
-	decorators: [withKnobs]
-};
-
-
-
 export const modalStory = () => {
 	return html`<lwdc-modal title="Delete Item">
 					<div style="margin-bottom: 24px;">Are you sure you'd like to delete the item titled 'My Item'?</div>
@@ -36,3 +28,5 @@ export const modalStory = () => {
 
 modalStory.storyName = 'Modal';
 modalStory.parameters = { layout: 'centered' };
+modalStory.component = 'lwdc-modal';
+modalStory.decorators= [withKnobs];

@@ -11,12 +11,6 @@ import '../lib/lwdc-color-input';
 loadWDCFonts();
 
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components/Color Picker',
-	component: 'lwdc-color-input',
-	decorators: [withKnobs]
-};
-
 
 export const colorInputStory = () => {
 	return html`<lwdc-form-field label="Color Input">
@@ -27,6 +21,8 @@ export const colorInputStory = () => {
 
 colorInputStory.storyName = 'Color Input';
 colorInputStory.parameters = { layout: 'centered' };
+colorInputStory.component = 'lwdc-color-input';
+colorInputStory.decorators= [withKnobs];
 
 export const colorPreviewStory = () => {
 	return html`<lwdc-form-field label="Color Preview">
@@ -37,3 +33,5 @@ export const colorPreviewStory = () => {
 
 colorPreviewStory.storyName = 'Color Preview';
 colorPreviewStory.parameters = { layout: 'centered' };
+colorPreviewStory.component = 'lwdc-color-input';
+colorPreviewStory.decorators= [withKnobs];

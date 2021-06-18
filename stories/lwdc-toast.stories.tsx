@@ -11,13 +11,6 @@ import '../lib/lwdc-toast';
 
 loadWDCFonts();
 
-export default {
-	title: 'LitElement Workday Canvas Kit Web Components',
-	component: 'lwdc-toast',
-	decorators: [withKnobs]
-};
-
-
 export const toastStory = () => {
 	return html`<lwdc-toast message="Message" action-text="Action Text" style="position:absolute; top: 10px;"></lwdc-toast>
 				<lwdc-button @click=${(e: Event) => {((e.target as HTMLElement).ownerDocument.querySelector("lwdc-toast") as any).open(); }} style="margin-top: auto;">Open</lwdc-button>
@@ -26,3 +19,5 @@ export const toastStory = () => {
 
 toastStory.storyName =  'Toast';
 toastStory.parameters = { layout: 'centered' };
+toastStory.component = 'lwdc-toast';
+toastStory.decorators= [withKnobs];
