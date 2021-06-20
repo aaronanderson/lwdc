@@ -11,6 +11,7 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import {CanvasTheme, useTheme, defaultCanvasTheme} from '../lib/theme';
 
 import colors from '@workday/canvas-colors-web';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 
 loadWDCFonts();
 
@@ -31,7 +32,6 @@ const customTheme = {
 			//main: colors.greenApple400,
 			dark: colors.greenApple500,
 			darkest: colors.greenApple600,
-			contrast: colors.blackPepper600,
 
 		},
 	},
@@ -39,7 +39,7 @@ const customTheme = {
 
 
 const theme = ['default', 'custom'];
-const themeOptions: Record<string, string> = theme.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
+const themeOptions: RadiosTypeOptionsProp<string> = theme.reduce((r: RadiosTypeOptionsProp<string>, e: string) => { r[e] = e; return r; }, {});
 const themeRadioKnob = () => radios("Theme", themeOptions, 'default') as any;
 const themeMap = new Map([['default', defaultCanvasTheme], ['custom', customTheme]]);
 

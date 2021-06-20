@@ -1,5 +1,7 @@
 /* eslint-disable import/extensions */
-import { html } from 'lit-html';
+import {html} from 'lit';
+import {html as html2} from 'lit-html';
+
 
 import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
@@ -23,7 +25,7 @@ export default {
 const hideColumnBox = () => boolean("Hide Column", false);
 
 const entries = [{ 'id': '1', 'name': 'Entry 1', 'description': 'Description 1' }, { 'id': '2', 'name': 'Entry 2', 'description': 'Description 2' }, { 'id': '3', 'name': 'Entry 3', 'description': 'Description 3' }];
-const errorEntries = Array(7).fill().map((_, i) => {
+const errorEntries = Array(7).fill("").map((_: any, i: number) => {
 	let errorType = undefined;
 	let errorTypeDesc = 'None';
 	if (i==0){
@@ -44,7 +46,7 @@ const errorEntries = Array(7).fill().map((_, i) => {
 
 export const tableStory = () => {
 
-	return html`
+	return html2`
 					<div>
 						<h3>View</h3>
 						<lwdc-table select name="View" .entries=${entries}>
@@ -109,13 +111,15 @@ const nameRenderer = (e: any) => {
 }
 
 const handleValidate = (e: MouseEvent) => {
-  const editTable = document.querySelector("#inline-edit");
+  const editTable = document.querySelector("#inline-edit") as TableElement<unknown>;
+  if (editTable && editTable.editForm){
 	const validationResult = editTable.editForm.validate();
 	console.log('validate', validationResult);
+  }
 }
 
 const dataList = () => {
-	return html`
+	return html `
 					<datalist id="names">
 						<option label="First" >Entry 1</option>
 						<option>Entry 2</option>

@@ -58,7 +58,7 @@ export class FileUploadElement extends FormBaseElement(LitElement) {
 	get defaultTemplate() {
 		return html`
 				<div class="lwdc-file-upload-wrapper">
-					 	<input type="file" ?multiple=${this.multiple} @change=${this.handleFileSelected} />
+					 	<input type="file" ?multiple=${this.multiple} @change=${this.handleFileSelected.bind(this)} />
 				</div>
 		`;
 	}

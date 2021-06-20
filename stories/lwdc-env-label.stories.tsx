@@ -7,6 +7,7 @@ import { action } from '@storybook/addon-actions';
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 
 import '../lib/lwdc-env-label';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 
 loadWDCFonts();
 
@@ -18,7 +19,7 @@ export default {
 
 
 const envs = ['dev', 'qa', 'prod'];
-const envOptions: Record<string, string> = envs.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
+const envOptions: RadiosTypeOptionsProp<string> = envs.reduce((r: RadiosTypeOptionsProp<string>, e: string) => { r[e] = e; return r; }, {});
 const envsRadioKnob = () => radios("Environment", envOptions, 'dev') as any;
 
 export const envLabelStory = () => {

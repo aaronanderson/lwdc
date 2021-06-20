@@ -8,6 +8,7 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 
 import '../lib/lwdc-form-field';
 import '../lib/lwdc-combobox';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 
 
 loadWDCFonts();
@@ -26,7 +27,7 @@ const selected = new Set();
 selected.add(options[1]);
 
 const width = ['default', '500px', '100%'];
-const widthOptions: Record<string, string> = width.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
+const widthOptions: RadiosTypeOptionsProp<string> = width.reduce((r: RadiosTypeOptionsProp<string>, e: string) => { r[e] = e; return r; }, {});
 const widthsRadioKnob = () => radios("Width", widthOptions, 'default') as any;
 const widthMap = new Map([['default', 'unset'], ['500px', '500px'], ['100%', '100%']]);
 
@@ -34,7 +35,7 @@ const wrapBox = () => boolean("Wrap", false);
 
 export const comboboxStory = () => {
 	return html`<lwdc-form-field label="Selection">
-						<lwdc-combobox name="selection" required  .options=${options} .selected=${selected} .selectedWidth=${widthMap.get(widthsRadioKnob())} ?wrap=${wrapBox()} @lwdc-combobox-change=${(e)=> console.log("selection change", e.detail.selected)}></lwdc-combobox>
+						<lwdc-combobox name="selection" required  .options=${options} .selected=${selected} .selectedWidth=${widthMap.get(widthsRadioKnob())} ?wrap=${wrapBox()} @lwdc-combobox-change=${(e : CustomEvent)=> console.log("selection change", e.detail?.selected)}></lwdc-combobox>
 					</lwdc-form-field>
 				`;
 }

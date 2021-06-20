@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import {LitElement, CSSResult, html, css} from 'lit';
+import {LitElement, CSSResult, html, css, TemplateResult} from 'lit';
 import {property, customElement} from 'lit/decorators.js';
 import {html as html2} from 'lit-html';
 
@@ -56,7 +56,7 @@ class PaginationElement extends LitElement {
 	totalCount = 100;
 
 	@property({ type: Boolean })
-  jumpControls: boolean = false;
+    jumpControls: boolean = false;
 
 	@property({ type: Boolean})
 	showGoToLabel = false;
@@ -76,9 +76,7 @@ class PaginationElement extends LitElement {
 	@property({ type: Number })
 	lastPage = getLastPage(this.resultCount, this.totalCount);
 
-	additionalDetails
-
-
+	
 
 	static get styles() {
 		return css `:host{text-align: center}`;
@@ -95,7 +93,7 @@ class PaginationElement extends LitElement {
 		<h4>
 			Current Page: <span data-testid="pageNumber">${this.currentPage}</span>
 		</h4>
-		<lwdc-pagination ?jumpControls=${this.jumpControls} .additionalDetails=${this.showAdditionalData? this.additionalDetails: undefined} .gotoLabel=${this.showGoToLabel? this.gotoLabel: undefined} rangeSize=${this.rangeSize} lastPage=${this.lastPage}  @lwdc-pagination-page-change=${(e)=> {console.log('page change', this.currentPage, e.detail.page); this.currentPage = e.detail.page;  }}></lwdc-pagination>`;//
+		<lwdc-pagination ?jumpControls=${this.jumpControls} .additionalDetails=${this.showAdditionalData? this.additionalDetails: undefined} .gotoLabel=${this.showGoToLabel? this.gotoLabel: undefined} rangeSize=${this.rangeSize} lastPage=${this.lastPage}  @lwdc-pagination-page-change=${(e : CustomEvent)=> {console.log('page change', this.currentPage, e.detail?.page); this.currentPage = e.detail?.page;  }}></lwdc-pagination>`;//
 	}
 
 

@@ -9,6 +9,7 @@ import { setupIcon, uploadCloudIcon, extLinkIcon, userIcon } from '@workday/canv
 import { loadWDCFonts } from '../lib/lwdc-fonts';
 
 import '../lib/lwdc-progress';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 
 loadWDCFonts();
 
@@ -19,7 +20,7 @@ export default {
 };
 
 const value = ['0', '25', '50', '50', '75', '100'];
-const valueOptions: Record<string, string> = value.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
+const valueOptions: RadiosTypeOptionsProp<string> = value.reduce((r: RadiosTypeOptionsProp<string>, e: string) => { r[e] = e; return r; }, {});
 const valuesRadioKnob = () => radios("Value", valueOptions, '25') as any;
 
 

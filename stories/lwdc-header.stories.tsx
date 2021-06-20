@@ -16,6 +16,7 @@ import {HeaderTheme, HeaderVariant} from '../lib/lwdc-header';
 import '../lib/lwdc-header';
 import '../lib/lwdc-button';
 import { ButtonType } from '../lib/lwdc-button';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
 
 loadWDCFonts();
 
@@ -26,7 +27,7 @@ export default {
 };
 
 const themeColor = ['white', 'dark', 'transparent'];
-const themeColorOptions: Record<string, string> = themeColor.reduce((r: Record<string, string>, e: string) => { r[e] = e; return r; }, {});
+const themeColorOptions: RadiosTypeOptionsProp<string> = themeColor.reduce((r: RadiosTypeOptionsProp<string>, e: string) => { r[e] = e; return r; }, {});
 const themeColorRadioKnob = () => radios("Theme", themeColorOptions, 'dark') as any;
 const themeColorMap = new Map([['white', HeaderTheme.White], ['dark', HeaderTheme.Dark], ['transparent', HeaderTheme.Transparent]]);
 

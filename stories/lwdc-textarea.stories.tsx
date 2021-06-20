@@ -19,11 +19,11 @@ export default {
 
 
 export const textareaStory = () => {
-	return html`<lwdc-form-field label="Text Area">
-						<lwdc-textarea name="textarea" required @lwdc-textarea-change=${(e)=>console.log("textarea changed", e.detail.value)}></lwdc-textarea>
+	return html `<lwdc-form-field label="Text Area">
+						<lwdc-textarea name="textarea" required @lwdc-textarea-change=${(e : CustomEvent) => console.log("textarea changed", e.detail?.value)}></lwdc-textarea>
 					</lwdc-form-field>
 				`;
-}
+};
 
 textareaStory.storyName =  'Textarea';
 textareaStory.parameters = { layout: 'centered' };
