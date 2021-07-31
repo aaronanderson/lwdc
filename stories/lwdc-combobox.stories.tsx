@@ -8,7 +8,7 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 
 import '../lib/lwdc-form-field';
 import '../lib/lwdc-combobox';
-import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/components/types';
 
 
 loadWDCFonts();

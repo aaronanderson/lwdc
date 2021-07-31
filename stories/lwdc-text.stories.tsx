@@ -17,10 +17,31 @@ export default {
 	decorators: [withKnobs]
 };
 
+const textTypeOptions = {
+	Text: 'text',
+	Password: 'password',
+	Search: 'search',
+	Number: 'number',
+	Range: 'range',
+	Email: 'email',
+	Telephone: 'tel',
+	URL: 'url',
+	File: 'file',
+	Image: 'image',
+	Date: 'date',
+	DateTimeLocal: 'datetime-local',
+	Time: 'time',
+	Month: 'month',
+	Color: 'color',
+	
+  };
+
+const textTypeRadioKnob = () => radios("Text Type", textTypeOptions, 'text') as any;
+
 
 export const textStory = () => {
 	return html`<lwdc-form-field label="Text">
-						<lwdc-text name="text" required @lwdc-text-change=${(e: CustomEvent)=> console.log("text changed", e.detail?.value)}></lwdc-text>
+						<lwdc-text name="text" .inputType=${textTypeRadioKnob()} required @lwdc-text-change=${(e: CustomEvent)=> console.log("text changed", e.detail?.value)}></lwdc-text>
 					</lwdc-form-field>
 				`;
 }

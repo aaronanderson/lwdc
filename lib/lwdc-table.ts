@@ -93,16 +93,18 @@ export class TableElement<E> extends LitElement {
 				let val = filterEntry.value.toLocaleLowerCase();
 				viewEntries = viewEntries.filter((e: any) => {
 					let valQ = pathValue(e,k);
-					let valE: string = valQ ? valQ.toLocaleLowerCase() : '';
-					if (filterEntry.by === 'Contains') {
-						return valE.includes(val);
-					} else if (filterEntry.by === 'Begins-With') {
-						return valE.startsWith(val);
-					} else if (filterEntry.by === 'Ends-With') {
-						return valE.endsWith(val);
-					} else if (filterEntry.by === 'RegExp') {
-						//console.log(new RegExp(val, 'g').test(valE));
-						return new RegExp(val, 'g').test(valE);
+					let valE = this.toValues(valQ);										
+					for (let valA of valE){						
+						if (filterEntry.by === 'Contains' && valA.includes(val)) {
+							return true;
+						} else if (filterEntry.by === 'Begins-With' && valA.startsWith(val)) {
+							return true;
+						} else if (filterEntry.by === 'Ends-With' && valA.endsWith(val)) {
+							return true;
+						} else if (filterEntry.by === 'RegExp' && new RegExp(val, 'g').test(valA)) {
+							//console.log(new RegExp(val, 'g').test(valE));
+							return true;
+						}
 					}
 					return false;
 
@@ -116,9 +118,11 @@ export class TableElement<E> extends LitElement {
 				let k: string = col.key;
 				viewEntries.sort((a: any, b: any) => {
 					let valQ = pathValue(a,k);
-					let valA = valQ ? valQ : '';
+					let valE = this.toValues(valQ);															
+					let valA = valE.join("-");
 					valQ = pathValue(b,k);
-					let valB = valQ ? valQ : '';
+					valE = this.toValues(valQ);															
+					let valB = valE.join("-");
 					if (sortEntry.direction === 'Ascending') {
 						return valA.localeCompare(valB, undefined, { numeric: true });
 					} else {
@@ -129,6 +133,20 @@ export class TableElement<E> extends LitElement {
 			}
 		}
 		return viewEntries;
+	}
+
+	toValues(valQ: any){
+		const valE = [];					
+		if (typeof valQ === "string"){
+			valE.push(valQ.toLocaleLowerCase());
+		} else if (typeof valQ === "number"){
+			valE.push(valQ.toString());
+		} else if (valQ.values){
+			valQ.values.forEach((e: string) => {
+				valE.push(e.toString().toLocaleLowerCase());
+			});
+		}
+		return valE;
 	}
 
 	resetView() {

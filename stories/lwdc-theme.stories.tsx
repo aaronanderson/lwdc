@@ -11,7 +11,7 @@ import { loadWDCFonts } from '../lib/lwdc-fonts';
 import {CanvasTheme, useTheme, defaultCanvasTheme} from '../lib/theme';
 
 import colors from '@workday/canvas-colors-web';
-import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/components/types';
 
 loadWDCFonts();
 

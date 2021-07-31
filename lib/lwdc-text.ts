@@ -29,13 +29,25 @@ export class TextElement extends FormBaseElement(LitElement) {
 	placeholder?: string;
 
 	@property({ type: String, attribute: true, reflect: true })
+	pattern?: string;
+
+	@property({ type: String, attribute: true, reflect: true })
+	src?: string;
+
+	@property({ type: String, attribute: true, reflect: true })
 	inputType: string = "text";
 
 	@property({ type: Number, attribute: true, reflect: true })
-	min?: number;
+	min?: string;
 
 	@property({ type: Number, attribute: true, reflect: true })
-	max?: number;
+	max?: string;
+
+	@property({ type: Number, attribute: true, reflect: true })
+	size?: number;
+
+	@property({ type: Number, attribute: true, reflect: true })
+	step?: number;
 
 	//disable shadow DOM so containing wdc-form class relative css can be applied.
 	//Further investigation is needed to see how ::slotted could be incorporated into and contributed via a pull request
@@ -68,7 +80,7 @@ export class TextElement extends FormBaseElement(LitElement) {
 		};
 
 		return html`<div class=${classMap(formTextClass)}>
-						<input formnovalidate type=${this.password ? 'password' : this.inputType} .min=${ifDefined(this.min)} .max=${ifDefined(this.max)} .value=${ifDefined(this.value)} list=${ifDefined(this.list)} placeholder=${ifDefined(this.placeholder)} ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></input>
+						<input formnovalidate type=${this.password ? 'password' : this.inputType} min=${ifDefined(this.min)} max=${ifDefined(this.max)} size=${ifDefined(this.size)} step=${ifDefined(this.step)} value=${ifDefined(this.value)} list=${ifDefined(this.list)} placeholder=${ifDefined(this.placeholder)} pattern=${ifDefined(this.pattern)} src=${ifDefined(this.src)} ?disabled=${this.disabled} @change=${this.handleChange} @blur=${this.handleChange}></input>
 					</div>
 					`;
 	}

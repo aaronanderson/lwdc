@@ -2,7 +2,7 @@ import { html } from 'lit-html';
 
 import { withKnobs, text, boolean, radios } from "@storybook/addon-knobs";
 import { action } from '@storybook/addon-actions';
-import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/components/types';
 
 import { xIcon, filterIcon, uploadCloudIcon, homeIcon, activityStreamIcon } from '@workday/canvas-system-icons-web';
 

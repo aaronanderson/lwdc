@@ -70,7 +70,7 @@ class FileUploadExampleElement extends LitElement {
 
 	render() {
 		return html`
-			<lwdc-file-upload multiple style="margin-bottom: 24px;"></lwdc-file-upload>
+			<lwdc-file-upload multiple style="margin-bottom: 24px; display: block;"></lwdc-file-upload>
 
 			${this.files.length > 0 ? html`<h3 class="wdc-type-h3">Selected Files:</h3>` : undefined}
 			${this.files.map((e: File) => html`<h5 class="wdc-type-h5">${e.name}</h5>`)}

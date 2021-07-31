@@ -16,7 +16,7 @@ import {HeaderTheme, HeaderVariant} from '../lib/lwdc-header';
 import '../lib/lwdc-header';
 import '../lib/lwdc-button';
 import { ButtonType } from '../lib/lwdc-button';
-import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/components/types';
 
 loadWDCFonts();
 

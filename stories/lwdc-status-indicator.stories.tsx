@@ -11,7 +11,7 @@ import '../lib/lwdc-status-indicator';
 
 import { action } from '@storybook/addon-actions';
 import { StatusIndicatorEmphasis, StatusIndicatorType } from '../lib/lwdc-status-indicator';
-import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/ts3.9/components/types';
+import { RadiosTypeOptionsProp } from '@storybook/addon-knobs/dist/components/types';
 
 loadWDCFonts();
 

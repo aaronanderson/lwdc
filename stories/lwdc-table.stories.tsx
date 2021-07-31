@@ -24,7 +24,7 @@ export default {
 
 const hideColumnBox = () => boolean("Hide Column", false);
 
-const entries = [{ 'id': '1', 'name': 'Entry 1', 'description': 'Description 1' }, { 'id': '2', 'name': 'Entry 2', 'description': 'Description 2' }, { 'id': '3', 'name': 'Entry 3', 'description': 'Description 3' }];
+const entries = [{ 'id': '1', 'name': 'Entry 1', 'description': 'Description 1', 'value': html`<b>${1}</b>` }, { 'id': '2', 'name': 'Entry 2', 'description': 'Description 2', 'value': html`<b>${2}</b>` }, { 'id': '3', 'name': 'Entry 3', 'description': 'Description 3' , 'value': html`<b>${3}</b>`}];
 const errorEntries = Array(7).fill("").map((_: any, i: number) => {
 	let errorType = undefined;
 	let errorTypeDesc = 'None';
@@ -53,6 +53,7 @@ export const tableStory = () => {
 							<lwdc-table-col key="id" header="ID" .hidden=${hideColumnBox()}></lwdc-table-col>
 							<lwdc-table-col key="name" header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
+							<lwdc-table-col key="value" header="Value"></lwdc-table-col>
 						</lwdc-table>
 					</div>
 
@@ -71,6 +72,7 @@ export const tableStory = () => {
 							<lwdc-table-col key="id" header="ID"></lwdc-table-col>
 							<lwdc-table-col key="name" header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
+							<lwdc-table-col key="value" header="Value"></lwdc-table-col>
 						</lwdc-table>
 					</div>
 					<div>
@@ -79,6 +81,7 @@ export const tableStory = () => {
 							<lwdc-table-col key="id" header="ID" ?required=${true}></lwdc-table-col>
 							<lwdc-table-col key="name" .renderer=${nameRenderer} header="Name"></lwdc-table-col>
 							<lwdc-table-col key="description" header="Description"></lwdc-table-col>
+							<lwdc-table-col key="value" header="Value"></lwdc-table-col>
 						</lwdc-table>
 					</div>
 					<lwdc-action-bar>
