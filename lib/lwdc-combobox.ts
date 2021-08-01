@@ -1,5 +1,6 @@
-import {LitElement, CSSResult, html, css} from 'lit';
-import {property, customElement} from 'lit/decorators.js';
+import {LitElement, CSSResult, html, css, TemplateResult} from 'lit';
+import {property, state, customElement} from 'lit/decorators.js';
+import { repeat,ItemTemplate } from 'lit/directives/repeat.js';
 
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { xIcon } from '@workday/canvas-system-icons-web';
@@ -22,12 +23,8 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 	@property({ type: Boolean, attribute: true, reflect: true })
 	disabled = false;
 
-	@property({ type: Boolean, attribute: true, reflect: true })
-	displayMenu = false;
-
 	@property({ type: String, attribute: true, reflect: true })
 	placeholder?: String;
-
 
 	@property({ type: String, attribute: true, reflect: true })
 	width?: string;
@@ -36,7 +33,10 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 	height?: string;
 
 	@property({ type: Boolean, attribute: true, reflect: true })
-	wrap?: boolean = false;
+	wrap: boolean = false;
+
+	@property({ type: Boolean, attribute: true, reflect: true })
+	multiple: boolean = true;
 
 	@property({ type: String, attribute: true, reflect: true })
 	selectedWidth?: string;
@@ -51,17 +51,35 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 	nameSelector: ComboboxNameSelector<T> = defaultNameSelector;
 
 	@property({ type: Array })
-	options: Array<T> = [];
-
+	options: Array<T | ComboBoxGroup<T>> = [];
+	
 	@property({ type: Array })
 	selected: Set<T> = new Set();
 
-	filtered: Array<T> = [];
+	@state()
+	displayMenu = false;
+
+	@state()
+	isGroup? = false;
+
+	@state()
+	filtered: Array<T | ComboBoxGroup<T>> = [];
+
+	@state()
+	_options: Array<T> = [];
 
 	static get styles() {
 		return [style];
 	}
 
+	updateFilter(options: Array<T | ComboBoxGroup<T>>){
+		this.filtered = options;		
+		if (this.isGroup){
+			this._options = (options as Array<ComboBoxGroup<T>>).flatMap((c: ComboBoxGroup<T>)=>c.items);
+		} else{
+			this._options = options as Array<T>;
+		}
+	}
 
 	firstUpdated() {
 		if (!this.getAttribute("tabindex")) {
@@ -78,11 +96,11 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 			this.calculateMenu();
 			this.checkValidity();
 			this.searchInput.value = '';
-			this.filtered = this.options;
+			this.updateFilter(this.options);
 		};
 		this.addEventListener('blur', selected);
 		this.addEventListener('keypress', (e: KeyboardEvent) => {
-			if (e.keyCode === 13) {
+			if (e.code === "Enter") {
 				selected();
 			}
 		});
@@ -91,7 +109,8 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 
 	updated(changedProperties: Map<string, any>) {
 		if (changedProperties.has("options")) {
-			this.filtered = this.options;
+			this.isGroup = this.options.length>0 && typeof this.options[0] === 'object' && (this.options[0] as any).hasOwnProperty("header");
+			this.updateFilter(this.options);
 			if (!changedProperties.has("selected")) {
 				this.selected.clear();
 			}
@@ -149,6 +168,9 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 		} else {
 			this.displayMenu = false;
 		}
+
+		//storybook monitors the 1 key and the search filter will lose focus if it is pressed.
+		//console.trace();
 		this.requestUpdate();
 	}
 
@@ -158,13 +180,22 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 				'lwdc-combobox-autocomplete-list': true,
 				'lwdc-combobox-wrap': !!this.wrap
 			}
-			return html`
-							<lwdc-menu id="selections" tabindex="0" class=${classMap(menuClass)} width=${this.width ? this.width : '280px'} @keydown=${this.handleKeydown}>
-								${this.filtered.map((o: T) => {
-				return html`<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`;
-			})}
-							</lwdc-menu>
-						`
+			return html`<lwdc-menu id="selections" tabindex="0" class=${classMap(menuClass)} width=${this.width ? this.width : '280px'} @keydown=${this.handleKeydown}>${this.optionsTemplate}</lwdc-menu>`;
+		}						
+	}
+
+	get optionsTemplate(){
+		if (this.filtered && !this.isGroup){
+			return repeat(this.filtered as Array<T>, (o: T, index) => 
+				html `<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`
+			);
+		} else {
+			return repeat(this.filtered as Array<ComboBoxGroup<T>>, (c: ComboBoxGroup<T>, index) => [
+				c.header,
+				repeat(c.items, (o: T, index) => 
+				html `<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`
+			)			
+			]);		
 		}
 	}
 
@@ -178,11 +209,10 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 			}
 			return html`<div class=${classMap(menuClass)}>
 							<div class="wdc-card-body">
-								<ul id="selected" role="listbox" tabindex="0"  tabIndex="0">
-								${this.options.map((o: T) => {
-
-				return this.selected.has(o) ? html`<li><span class="wdc-menu-item-label">${this.nameSelector(o)}</span></li>` : null;
-			})}
+								<ul id="selected" role="listbox" tabindex="0" >
+									${repeat(this._options,  (o: T, index) => {
+										return this.selected.has(o) ? html`<li><span class="wdc-menu-item-label">${this.nameSelector(o)}</span></li>` : null;
+									})}
 								</ul>
 							</div>
 					</div>`
@@ -193,6 +223,9 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 		if (this.selected.has(o)) {
 			this.selected.delete(o);
 		} else {
+			if (!this.multiple){
+				this.selected.clear();
+			}
 			this.selected.add(o);
 		}
 		this.dispatchEvent(new CustomEvent(`lwdc-combobox-change`, {
@@ -204,15 +237,14 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 	}
 
 
-	handleKeydown(e: KeyboardEvent) {
-		//console.log(e, e.target);
-		if (e.keyCode === 13 || (e.shiftKey && e.keyCode === 32)) {
+	handleKeydown(e: KeyboardEvent) {		
+		if (e.code === 'Enter' || (e.shiftKey && e.code === "Space")) {
 			this.displayMenu = false;
 			this.searchInput.blur();
-		} else if (e.ctrlKey && e.key.toLowerCase() === 'a') {
+		} else if (e.ctrlKey && e.key.toLowerCase() === 'a' && this.multiple) {
 			const selected = new Set();
 			const unselected = new Set();
-			for (const option of this.filtered) {
+			for (const option of this._options) {
 				if (this.selected.has(option)) {
 					selected.add(option);
 				} else {
@@ -247,16 +279,30 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 	}
 
 	handleInput(e: Event) {
-		let filterValue = (e.target as HTMLInputElement).value;
+		let filterValue = (e.target as HTMLInputElement).value;		
 		if (filterValue) {
 			const regex = new RegExp(filterValue, 'gi');
-			this.filtered = this.options.filter((o: T) => {
-				let name = this.nameSelector(o);
-				return name && !!name.match(regex);
-
-			});
+			let newFiltered: Array<T | ComboBoxGroup<T>> = [];
+			if (this.options && !this.isGroup){
+				newFiltered = (this.options as Array<T>).filter((o: T) => {
+					let name = this.nameSelector(o);
+					return name && !!name.match(regex);
+				});
+			} else {
+				newFiltered =[];
+				 (this.options as Array<ComboBoxGroup<T>>) .forEach((c: ComboBoxGroup<T>) => {
+					let items = c.items.filter((o: T) => {
+						let name = this.nameSelector(o);
+						return name && !!name.match(regex);
+					});
+					if (items.length>0){
+						newFiltered.push( {header: c.header, items: items} as ComboBoxGroup<T>);
+					}
+				});					
+			}			
+			this.updateFilter(newFiltered);
 		} else {
-			this.filtered = this.options;
+			this.updateFilter(this.options);
 		}
 		this.checkValidity();
 		this.requestUpdate();
@@ -304,14 +350,14 @@ const defaultNameSelector = function (value: any) {
 	return value.name;
 }
 
-const defaultValueSelector = function (value: any) {
-	return value.id;
-}
-
 export interface ComboboxNameSelector<T> {
 	(value: T): string;
 };
 
+export interface ComboBoxGroup<T> {	
+	header: TemplateResult;
+	items: Array<T>;
+  }
 
 
 export default ComboboxElement;

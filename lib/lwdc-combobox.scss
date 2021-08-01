@@ -66,7 +66,7 @@
 
 .lwdc-combobox-reset-button {
 	width: 32px;
-  minWidth: 32px;
+  min-width: 32px;
   height: 32px;
   position: absolute;
   margin: auto 4px;
@@ -74,7 +74,7 @@
   bottom: 0;
   right: 0;
   padding: 0;
-  zIndex: 2;
+  z-index: 2;
   transition: opacity 120ms;
 
 	visibility: visible;
