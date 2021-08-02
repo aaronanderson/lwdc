@@ -1,0 +1,72 @@
+@import 'theme.scss';
+@import '~@workday/canvas-kit-css-core/lib/colors';
+@import "~@workday/canvas-kit-css-core/lib/mixins/type";
+
+:host {
+	display: contents;
+}
+
+.lwdc-breadcrumbs-list {
+	align-items: center;
+    box-sizing: border-box;    
+    display: inline-flex;
+    min-height: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lwdc-breadcrumbs-list-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.lwdc-breadcrumbs-link {
+    @include wdc-type-variant-link();
+    font-family: $wdc-font-family;
+    font-weight: 400;
+    text-decoration: underline;
+    font-size: 0.875rem; //CanvasFontSizes.14
+    line-height: 1.25rem;
+    letter-spacing: 0.015rem;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: #{'var(--lwdc-breadcrumb-width, 350px)'};
+    //background-color: inherit !important;
+    //box-shadow: none !important;
+}
+
+.lwdc-breadcrumbs-current {
+    font-family: $wdc-font-family;
+    flex-direction: column;
+    text-align: left;    
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.015rem;
+    font-weight: 400;
+    color: #494949;
+    display: inline-block;
+    max-width: #{'var(--lwdc-breadcrumb-width, 350px)'};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;    
+}
+
+lwdc-menu {  
+    width: 250px;
+    position: absolute;
+    top: 50px;
+    z-index: 30;
+}
+
+
+button:hover {
+    background-color: inherit !important;
+}
+
+button:focus {
+    box-shadow: none !important;
+}

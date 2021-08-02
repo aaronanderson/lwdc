@@ -1,6 +1,6 @@
 import {LitElement, CSSResult, html, css, TemplateResult} from 'lit';
 import {property, state, customElement} from 'lit/decorators.js';
-import { repeat,ItemTemplate } from 'lit/directives/repeat.js';
+import { repeat } from 'lit/directives/repeat.js';
 
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { xIcon } from '@workday/canvas-system-icons-web';
@@ -357,7 +357,7 @@ export interface ComboboxNameSelector<T> {
 export interface ComboBoxGroup<T> {	
 	header: TemplateResult;
 	items: Array<T>;
-  }
+}
 
 
 export default ComboboxElement;

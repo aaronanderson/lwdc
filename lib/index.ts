@@ -1,5 +1,6 @@
 export * from './lwdc-action-bar';
 export * from './lwdc-banner';
+export * from './lwdc-breadcrumbs';
 export * from './lwdc-button';
 export * from './lwdc-card';
 export * from './lwdc-checkbox';
