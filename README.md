@@ -2,11 +2,11 @@
 
 # lwdc
 
-Provides [LitElement](https://lit-element.polymer-project.org/) web components for [Workday Canvas Kit](https://github.com/Workday/canvas-kit) UI components. 
+Provides [Lit](https://lit.dev/) web components for [Workday Canvas Kit](https://github.com/Workday/canvas-kit) UI components. 
 
 The purposes of these components are:
 
-* Fully leverage the modern native web platform including [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [HTML Templates](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) via LitElement eliminating the need for complicated and archaic VDOM frameworks
+* Fully leverage the modern native web platform including [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [HTML Templates](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) via Lit eliminating the need for complicated and archaic VDOM frameworks
 
 * Wrap the Canvas Kit CSS components to reduce boilerplate code and typos
 
@@ -22,7 +22,7 @@ New collaborators or contributors are welcome.
 
 ## Styling
 
-Logically each Canvas Kit component should be wrapped as a LitElement web component. However some of the Canvas Kit component utilize descendant CSS selectors that are unable to pierce web component shadow DOMs.  For example, [error.scss](https://github.com/Workday/canvas-kit/blob/master/modules/common/css/lib/errors.scss) defines `wdc-form-error` at the form field level and has descendant selectors for text and select inputs. There are three potential solutions to this issue:
+Logically each Canvas Kit component should be wrapped as a Lit web component. However some of the Canvas Kit component utilize descendant CSS selectors that are unable to pierce web component shadow DOMs.  For example, [error.scss](https://github.com/Workday/canvas-kit/blob/master/modules/common/css/lib/errors.scss) defines `wdc-form-error` at the form field level and has descendant selectors for text and select inputs. There are three potential solutions to this issue:
 
 * Add CSS selectors to parent elements for [::slotted](https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted) and [::part](https://developer.mozilla.org/en-US/docs/Web/CSS/::part)
 
@@ -36,7 +36,7 @@ The form related web components are added to the Light DOM and their styles are 
 
 ## Browser Support
 
-The LitElement components utilize two experimental browser features:
+The Lit components utilize two experimental browser features:
 
 * [Constructable Stylesheets](https://developers.google.com/web/updates/2019/02/constructable-stylesheets)
 
