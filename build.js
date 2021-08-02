@@ -2,6 +2,7 @@ const esbuild = require("esbuild");
 const path = require("path");
 const sassPlugin = require("esbuild-sass-plugin").sassPlugin;
 //const postCssPlugin = require("esbuild-plugin-postcss2").default;
+const postcss_svg = require('postcss-inline-svg');
 const postcss = require("postcss");
 
 esbuild.build({
@@ -63,7 +64,8 @@ esbuild.build({
          path.resolve('node_modules'),
        ],
        async transform(source, resolveDir) {
-         const {css} = await postcss([require('postcss-inline-svg')]).process(source);
+         const {css} = await postcss([postcss_svg({paths:['wc']})]).process(source);
+         //console.log(css);
          return css;
        }
 
