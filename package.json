@@ -1,6 +1,6 @@
 {
   "name": "@aaronanderson/lwdc",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "description": "Workday Canvas Kit LitElement Web Components",
   "main": "wc/index.js",
   "module": "wc/index.js",
