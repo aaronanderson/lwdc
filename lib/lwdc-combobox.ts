@@ -119,7 +119,7 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 		if (changedProperties.has("width") && this.width) {
 			this.style.setProperty('--lwdc-combobox-width', this.width);
 		}
-		if (changedProperties.has("width") && this.height) {
+		if (changedProperties.has("height") && this.height) {
 			this.style.setProperty('--lwdc-combobox-height', this.height);
 		}
 		if (changedProperties.has("selectedWidth") && this.selectedWidth) {

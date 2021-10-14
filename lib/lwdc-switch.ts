@@ -57,6 +57,11 @@ export class SwitchElement extends FormBaseElement(LitElement) {
 	handleChange(e: any) {
 		this.checked = e.target.checked;
 		this._internals.setFormValue(this.checked);
+		this.dispatchEvent(new CustomEvent(`lwdc-switch-change`, {
+			detail: {
+				checked: this.checked
+			}
+		}));
 		this.checkValidity();
 	}
 
