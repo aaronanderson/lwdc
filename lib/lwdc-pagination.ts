@@ -84,9 +84,7 @@ export class PaginationElement extends LitElement {
     let buttonType = page === this.currentPage ? ButtonType.iconSquareFilled : ButtonType.iconSquare;
     return html `
     <li class="lwdc-pagination-page-list-item">
-      <lwdc-button ?page-selected=${page === this.currentPage} .type=${buttonType} .size=${ButtonSize.small} @click=${() => pagination.pageChange(page)}>
-      ${page}
-      </lwdc-button>
+      <lwdc-button ?page-selected=${page === this.currentPage} .type=${buttonType} .size=${ButtonSize.small} @click=${() => pagination.pageChange(page)}><div>${page}<div></lwdc-button>
     </li>`;
   }
 

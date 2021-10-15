@@ -138,7 +138,7 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 				<div class="lwdc-combobox-input-container">
 
 					<div class="wdc-form-textinput">
-						<input formnovalidate type="search" placeholder=${ifDefined(this.placeholder)} ?disabled=${this.disabled} @input=${this.handleInput} @keydown=${this.handleKeydown}></input>
+						<input formnovalidate type="text" placeholder=${ifDefined(this.placeholder)} ?disabled=${this.disabled} @input=${this.handleInput} @keydown=${this.handleKeydown}></input>
 						<lwdc-button class="lwdc-combobox-reset-button" .type=${ButtonType.plain} .size=${ButtonSize.small} ?hidden=${ifDefined(this.selected.size ==  0)} @click=${this.handleReset}>
 							<lwdc-icon .icon=${xIcon} .size=${16}></lwd-icon>
 						</lwdc-button>
@@ -186,13 +186,13 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 
 	get optionsTemplate(){
 		if (this.filtered && !this.isGroup){
-			return repeat(this.filtered as Array<T>, (o: T, index) => 
+			return repeat(this.filtered as Array<T>, (o: T)=> o, (o: T, index) => 
 				html `<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`
 			);
 		} else {
-			return repeat(this.filtered as Array<ComboBoxGroup<T>>, (c: ComboBoxGroup<T>, index) => [
+			return repeat(this.filtered as Array<ComboBoxGroup<T>>, (o: ComboBoxGroup<T>)=> o, (c: ComboBoxGroup<T>, index) => [
 				c.header,
-				repeat(c.items, (o: T, index) => 
+				repeat(c.items, (o: T)=> o, (o: T, index) => 
 				html `<lwdc-menu-item ?selected=${this.selected.has(o)} @click=${() => this.handleClick(o)}>${this.nameSelector(o)}</lwdc-menu-item>`
 			)			
 			]);		
@@ -210,7 +210,7 @@ export class ComboboxElement<T> extends FormBaseElement(LitElement) {
 			return html`<div class=${classMap(menuClass)}>
 							<div class="wdc-card-body">
 								<ul id="selected" role="listbox" tabindex="0" >
-									${repeat(this._options,  (o: T, index) => {
+									${repeat(this._options, (o: T)=> o, (o: T, index) => {
 										return this.selected.has(o) ? html`<li><span class="wdc-menu-item-label">${this.nameSelector(o)}</span></li>` : null;
 									})}
 								</ul>

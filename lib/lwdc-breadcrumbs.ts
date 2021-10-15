@@ -126,7 +126,7 @@ export class BreadcrumbsElement<T> extends LitElement {
 
 	get defaultTemplate(){
 		const currentIndex = this.current? Number(this.current): this.links.length-1;
-		return repeat(this.links, (l: T, index: number) => {			
+		return repeat(this.links, (l: T)=> l, (l: T, index: number) => {			
 			const isCurrent = index == currentIndex;			
 			return html `					
 			<li class="lwdc-breadcrumbs-list-item">

@@ -48,6 +48,7 @@ button {
   font-size: 13px !important;
   font-weight: 400 !important;
   color: $wdc-color-type-hint !important;
+  box-shadow: none !important;;
 }
 
 lwdc-button[page-selected] button{
