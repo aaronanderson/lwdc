@@ -32,6 +32,7 @@ const textTypeOptions = {
 	DateTimeLocal: 'datetime-local',
 	Time: 'time',
 	Month: 'month',
+	Week: 'week',
 	Color: 'color',
 	
   };

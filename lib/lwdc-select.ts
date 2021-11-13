@@ -86,7 +86,7 @@ export class SelectElement<T> extends FormBaseElement(LitElement) {
 				entry: this.selected
 			}
 		}));
-    this.checkValidity();
+    	this.checkValidity();
   }
 
 

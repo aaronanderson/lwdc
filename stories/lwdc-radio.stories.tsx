@@ -28,15 +28,15 @@ export const radioStory = () => {
 radioStory.storyName = 'Default';
 radioStory.parameters = { layout: 'centered' };
 
-
+const radioChange= (e: CustomEvent)=> console.log("radio change", e.detail?.entry);
 export const radioGroupStory = () => {
 	return html`<div class="wdc-form wdc-form-label-position-left">
 					<lwdc-form-field group="contact" label="Radio Group">
 
-							<lwdc-radio  value="email" label="E-Mail" checked></lwdc-radio>
-							<lwdc-radio  value="phone" label="Phone"></lwdc-radio>
-							<lwdc-radio  value="fax"   label="Fax" disabled></lwdc-radio>
-							<lwdc-radio  value="mail" label="Mail"></lwdc-radio>
+							<lwdc-radio  value="email" label="E-Mail" checked @lwdc-radio-change=${radioChange}></lwdc-radio>
+							<lwdc-radio  value="phone" label="Phone" @lwdc-radio-change=${radioChange}></lwdc-radio>
+							<lwdc-radio  value="fax"   label="Fax" disabled @lwdc-radio-change=${radioChange}></lwdc-radio>
+							<lwdc-radio  value="mail" label="Mail" @lwdc-radio-change=${radioChange}></lwdc-radio>
 
 					</lwdc-form-field>
 				</div>

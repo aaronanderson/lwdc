@@ -70,6 +70,13 @@ export class RadioElement extends FormBaseElement(LitElement) {
 	handleChange(e: any) {
 		this.value = e.target.value;
 		this._internals.setFormValue(this.value);
+		this.dispatchEvent(new CustomEvent(`lwdc-radio-change`, {
+			//bubbles: true,
+			//composed: true,
+			detail: {
+				entry: this.value
+			}
+		}));
 		this.checkValidity();
 	}
 
