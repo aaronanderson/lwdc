@@ -49,10 +49,22 @@ export class ModalElement extends LitElement {
 	}
 
 	open() {
+		this.dispatchEvent(new CustomEvent(`lwdc-modal-open`, {
+			//bubbles: true,
+			//composed: true,
+			detail: {				
+			}
+		}));
 		this.isOpen = true;
 	}
 
 	close() {
+		this.dispatchEvent(new CustomEvent(`lwdc-modal-close`, {
+			//bubbles: true,
+			//composed: true,
+			detail: {				
+			}
+		}));
 		this.isOpen = false;
 	}
 

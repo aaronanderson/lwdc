@@ -1,6 +1,6 @@
 {
   "name": "@aaronanderson/lwdc",
-  "version": "1.0.51",
+  "version": "1.0.52",
   "description": "Workday Canvas Kit LitElement Web Components",
   "main": "wc/index.js",
   "module": "wc/index.js",
@@ -23,8 +23,8 @@
   "author": "Aaron Anderson",
   "license": "Apache-2.0",
   "dependencies": {
-    "@workday/canvas-kit-css": "^5.2.12",
-    "@workday/canvas-kit-css-fonts": "^5.2.12",
+    "@workday/canvas-kit-css": "^6.0.1",
+    "@workday/canvas-kit-css-fonts": "^6.0.1",
     "chroma-js": "^2.1.2",
     "lit": "^2.0.2",
     "lodash": "^4.17.20"
@@ -44,7 +44,7 @@
     "@types/chroma-js": "^2.1.3",
     "@types/events": "^3.0.0",
     "@types/lodash": "^4.14.164",
-    "esbuild": "^0.13.13",
+    "esbuild": "^0.13.15",
     "esbuild-sass-plugin": "1.7.0",
     "lit-html": "^1.4.1",
     "node-sass": "^6.0.0",
