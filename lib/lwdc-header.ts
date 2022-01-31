@@ -5,7 +5,7 @@ import {classMap} from  'lit/directives/class-map.js';
 
 import {colors, iconColors, gradients} from '@workday/canvas-colors-web';
 
-import depth from '@workday/canvas-depth-web/dist/ts/canvas-depth';
+import depth from '@workday/canvas-depth-web';
 
 import {lwdcTheme} from './theme';
 import chroma from 'chroma-js';

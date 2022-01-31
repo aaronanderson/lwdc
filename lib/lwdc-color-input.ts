@@ -14,7 +14,7 @@ const style = css([`${styleCSS}`] as any) as CSSResult;
 // @ts-ignore
 import pickForegroundColor from '@workday/canvas-kit-css-icon/lib/canvas-kit-css-icon.js';
 import { checkSmallIcon } from '@workday/canvas-system-icons-web';
-import { colors } from '@workday/canvas-colors-web/dist/ts/canvas-colors-hex';
+import { colors } from '@workday/canvas-colors-web';
 
 //git diff HEAD 'HEAD@{2020-09-05}' -- modules/color-picker/react/lib
 
